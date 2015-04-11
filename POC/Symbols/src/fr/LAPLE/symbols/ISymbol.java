@@ -59,16 +59,4 @@ public interface ISymbol {
      */
     public String getStudiedSymbolImage();
 
-
-    /**
-     * Used to retrieve the type of the Symbol
-     * AKA :
-     *
-     * word, letter etc..
-     *
-     * @return A String defining the type of the Symbol
-     */
-    public String getType();
-
-
 }

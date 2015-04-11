@@ -42,8 +42,4 @@ public class Katakana implements ISymbol {
         return null;
     }
 
-    @Override
-    public String getType() {
-        return type;
-    }
 }

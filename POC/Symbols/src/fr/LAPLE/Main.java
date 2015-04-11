@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ISymbol a = new Hiragana();
+        ISymbol a = new Hiragana("A", "あ");
         System.out.println(a.getStudiedLangSymbol());
         System.out.println(a.getUserLangTranscript());
 

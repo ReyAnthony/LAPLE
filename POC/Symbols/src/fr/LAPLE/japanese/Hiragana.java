@@ -15,10 +15,10 @@ public class Hiragana implements ISymbol {
 
     //Small test
     //We'll be using json files to load the symbols for the lang packages
-    public Hiragana(){
+    public Hiragana(String userLang, String japanese){
 
-        this.userLangTranscript = "A";
-        this.studiedLangSymbol  = "あ";
+        this.userLangTranscript = userLang;
+        this.studiedLangSymbol  = japanese;
 
     }
 
@@ -42,8 +42,4 @@ public class Hiragana implements ISymbol {
         return null;
     }
 
-    @Override
-    public String getType() {
-        return type;
-    }
 }
