@@ -1,11 +1,12 @@
 package fr.laple.user;
 
 /**
- * Created by anthonyrey on 12/04/2015.
+ * This class is a singleton and contains all the user related data
+ *
+ * @author anthonyrey
  */
 public class User {
 
-   //singleton
     private String name;
     private String surname;
     private char[] password;
@@ -16,6 +17,9 @@ public class User {
 
     private User(){}
 
+    /**
+     * @return An unique instance of User
+     */
     public static synchronized User getInstance()
     {
         if(userInstance == null)
@@ -23,7 +27,6 @@ public class User {
 
         return userInstance;
     }
-
 
     public String getName() {
         return name;

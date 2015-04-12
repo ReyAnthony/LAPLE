@@ -1,7 +1,10 @@
 package fr.laple.language;
 
 /**
- * Created by anthonyrey on 11/04/2015.
+ * This interface is to be implemented by a LapleLanguagePlugin class. It will ensure that the software can have the needed informations from the language plugin
+ *
+ * @author anthonyrey
+ *
  */
 public interface ILanguagePlugin {
 

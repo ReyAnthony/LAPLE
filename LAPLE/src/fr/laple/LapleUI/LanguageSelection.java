@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by anthonyrey on 11/04/2015.
+ * This class is a prompt for selecting avalaible languages. It uses entry points from language plugins to determine the language list
+ * @see fr.laple.language.ILanguagePlugin
+ * @see fr.laple.lang.jp.LapleLanguagePlugin
+ * @author anthonyrey
+ *
  */
 public class LanguageSelection extends JFrame implements ActionListener{
 

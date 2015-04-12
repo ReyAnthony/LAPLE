@@ -8,7 +8,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Created by anthonyrey on 11/04/2015.
+ * This panel displays copyright informations and a link to the website
+ *
+ * @author anthonyrey
  */
 public class AboutPanel extends JPanel implements ActionListener {
 
@@ -20,7 +22,7 @@ public class AboutPanel extends JPanel implements ActionListener {
     public AboutPanel()
     {
 
-        copyrightInfos = new JLabel("<html><br/> LAPLE, Logiciel d'Apprentissage de Langues Etrangères. <br/>" +
+        copyrightInfos = new JLabel("<html><br/> LAPLE, Logiciel d'Apprentissage de Langues Etrangères. <br/><br/>" +
                 "Copyright (c) 2015 <br/>" +
                 "Anthony REY, Christian EBONGUE and Gabriel ZAAFRANI <br/><br/><br/>" +
                 "This program is free software: you can redistribute it and/or modify<br/>" +

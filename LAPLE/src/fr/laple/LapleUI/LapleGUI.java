@@ -7,7 +7,11 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 /**
- * Created by anthonyrey on 11/04/2015.
+ * This class is the main GUI for LAPLE application. It contains all the panels
+ *
+ * @see fr.laple.LapleUI.AboutPanel
+ * @see fr.laple.LapleUI.MainPanel
+ * @author anthonyrey
  */
 public class LapleGUI extends JFrame implements ActionListener, WindowListener {
 

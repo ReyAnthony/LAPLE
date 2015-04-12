@@ -1,11 +1,11 @@
 package fr.laple.LapleUI;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
- * Created by anthonyrey on 11/04/2015.
+ * This class is the main LAPLE panel. It contains the software's manual
+ *
+ * @author anthonyrey
  */
 public class MainPanel extends JPanel {
 

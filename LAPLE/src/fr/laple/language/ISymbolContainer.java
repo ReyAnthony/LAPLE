@@ -3,7 +3,9 @@ package fr.laple.language;
 import java.util.Map;
 
 /**
- * Created by anthonyrey on 11/04/2015.
+ * This interface define the minimal elements for creating a symbol container
+ *
+ * @author anthonyrey
  */
 public interface ISymbolContainer {
 

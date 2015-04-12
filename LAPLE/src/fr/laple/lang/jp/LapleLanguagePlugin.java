@@ -4,7 +4,9 @@ import fr.laple.language.ILanguagePlugin;
 import fr.laple.language.ISymbolContainer;
 
 /**
- * Created by anthonyrey on 11/04/2015.
+ * This is the entry point for a Language plugin
+ *
+ * @author anthonyrey
  */
 public class LapleLanguagePlugin implements ILanguagePlugin{
 

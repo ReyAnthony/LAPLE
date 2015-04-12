@@ -10,7 +10,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Created by anthonyrey on 12/04/2015.
+ * This class allows an user to Login to the application. It will set the informations in the User singleton the call the Language selection prompt
+ *
+ * @see fr.laple.LapleUI.LanguageSelection
+ * @see fr.laple.user.User
+ * @author anthonyrey
  */
 public class LoginPrompt extends JFrame implements ActionListener{
 

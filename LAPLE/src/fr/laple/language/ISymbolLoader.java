@@ -3,7 +3,9 @@ package fr.laple.language;
 import java.io.File;
 
 /**
- * Created by anthonyrey on 11/04/2015.
+ * This interface is to be implemented in order to define how a json file is to be read for container creation
+ *
+ * @author anthonyrey
  */
 public interface ISymbolLoader {
 

@@ -5,7 +5,9 @@ import javax.swing.*;
 import java.util.List;
 
 /**
- * Created by anthonyrey on 11/04/2015.
+ * This interface define the minimal required methods for a symbol implementation
+ *
+ * @author anthonyrey
  */
 public interface ISymbol {
 
