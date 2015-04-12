@@ -67,7 +67,7 @@ public class AboutPanel extends JPanel implements ActionListener {
 
         try {
             java.awt.Desktop.getDesktop().browse(
-                    new URI("http://www.anthonyrey.fr"));
+                    new URI("https://github.com/ReyAnthony/LAPLE"));
         } catch (IOException | URISyntaxException e1) {
 
             JOptionPane.showMessageDialog(this,

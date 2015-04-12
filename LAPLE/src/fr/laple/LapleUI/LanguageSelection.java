@@ -23,6 +23,7 @@ public class LanguageSelection extends JFrame implements ActionListener{
         this.setSize(300,100);
         this.setTitle("LAPLE - Language selection");
         this.setResizable(false);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         
         message = new JLabel("Select a language :");
         validationButton = new JButton("OK");
