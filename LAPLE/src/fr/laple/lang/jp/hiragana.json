@@ -1,0 +1,59 @@
+{
+    "hiragana": [
+        {
+            "userLangTranscript": "a",
+            "symbol": "あ",
+            "symbolImage": "pathToImage",
+            "animatedImage": "path",
+            "soundFile": "path",
+            "composition": [
+                "path1",
+                "path2"
+            ]
+        },
+        {
+            "userLangTranscript": "i",
+            "symbol": "い",
+            "symbolImage": "pathToImage",
+            "animatedImage": "path",
+            "soundFile": "path",
+            "composition": [
+                "path1",
+                "path2"
+            ]
+        },
+        {
+            "userLangTranscript": "u",
+            "symbol": "う",
+            "symbolImage": "pathToImage",
+            "animatedImage": "path",
+            "soundFile": "path",
+            "composition": [
+                "path1",
+                "path2"
+            ]
+        },
+        {
+            "userLangTranscript": "e",
+            "symbol": "え",
+            "symbolImage": "pathToImage",
+            "animatedImage": "path",
+            "soundFile": "path",
+            "composition": [
+                "path1",
+                "path2"
+            ]
+        }, 
+        {
+            "userLangTranscript": "o",
+            "symbol": "お",
+            "symbolImage": "pathToImage",
+            "animatedImage": "path",
+            "soundFile": "path",
+            "composition": [
+                "path1",
+                "path2"
+            ]
+        }
+    ]
+}
