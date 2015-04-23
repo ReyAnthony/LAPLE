@@ -28,7 +28,7 @@ public class ExerciseUITest extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
         panel = new JPanel();
-        question = new JLabel("Which japanese Hiragana is equal to あ ? (try a)");
+        question = new JLabel("Which romaji is equal to あ ? (try a)");
         answer = new JTextField("Enter answer here");
         ok = new JButton("Validate");
         ok.addActionListener(this);
