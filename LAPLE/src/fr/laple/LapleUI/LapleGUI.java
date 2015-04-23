@@ -1,5 +1,7 @@
 package fr.laple.LapleUI;
 
+import fr.laple.language.ILanguagePlugin;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,12 +20,16 @@ public class LapleGUI extends JFrame implements ActionListener, WindowListener {
     private JTabbedPane UIPane;
     private AboutPanel aboutPanel;
     private MainPanel mainPanel;
-    //dico de symbols
 
-    public LapleGUI(String langPath){
+    private ILanguagePlugin languagePlugin;
+
+
+    public LapleGUI(ILanguagePlugin plugin){
 
         //charger lapleLanguagePlugin via le path + classloader
         //pour recuperer les dicos de symboles du lang courant
+        this.languagePlugin = plugin;
+        languagePlugin.loadSymbolContainers(null);
         createUI();
     }
 

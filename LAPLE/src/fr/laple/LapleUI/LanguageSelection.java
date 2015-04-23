@@ -21,6 +21,7 @@ public class LanguageSelection extends JFrame implements ActionListener{
     private JComboBox choices;
     private JButton validationButton;
     private JPanel panel;
+    private LapleLanguagePlugin llp;
 
     public LanguageSelection()
     {
@@ -58,7 +59,6 @@ public class LanguageSelection extends JFrame implements ActionListener{
 
         ClassLoader loader = LanguageSelection.class.getClassLoader();
         List<String> languageList = new ArrayList<>();
-        LapleLanguagePlugin llp = null;
 
         try {
             llp = (LapleLanguagePlugin) loader.loadClass("fr.laple.lang.jp.LapleLanguagePlugin").newInstance();
@@ -79,7 +79,7 @@ public class LanguageSelection extends JFrame implements ActionListener{
 
         if(e.getSource().equals(validationButton)){
             //We need a path here, but for testing purposes ...
-            new LapleGUI((String) choices.getSelectedItem());
+            new LapleGUI(llp);
             this.dispose();
         }
 

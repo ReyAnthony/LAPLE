@@ -1,5 +1,10 @@
 package fr.laple.LapleUI;
 
+import fr.laple.Exercises.ExModeUlangTlang;
+import fr.laple.Exercises.Exercise;
+import fr.laple.Exercises.StandardExerciseSolver;
+import fr.laple.language.Symbol;
+
 import javax.swing.*;
 
 /**
@@ -22,7 +27,7 @@ public class MainPanel extends JPanel {
 
     private void createUI()
     {
-        manual.setText("LAPLE manual");
+        manual.setText("Manual");
         this.add(manual);
 
     }
