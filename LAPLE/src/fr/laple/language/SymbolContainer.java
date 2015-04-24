@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * A SymbolContainer is composed of symbols and has methods to retrieve and add symbols to it
  *
- * @anthonyrey
+ * @author anthonyrey
  */
 public class SymbolContainer {
 
