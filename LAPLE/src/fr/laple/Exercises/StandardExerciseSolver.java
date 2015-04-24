@@ -3,7 +3,9 @@ package fr.laple.Exercises;
 import fr.laple.language.Symbol;
 
 /**
- * Created by anthonyrey on 23/04/2015.
+ * This class is an implementation of IExercicesSolver, it solves by comparing answer and wanted only
+ *
+ * @author anthonyrey
  */
 public class StandardExerciseSolver implements IExerciseSolver {
     @Override

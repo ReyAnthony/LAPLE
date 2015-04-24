@@ -5,7 +5,9 @@ import fr.laple.language.Symbol;
 import javax.swing.*;
 
 /**
- * Created by anthonyrey on 23/04/2015.
+ * This class is an implementation of IExerciceMode, it correspond to User Lang TO TeachedLang
+ *
+ * @author anthonyrey
  */
 public class ExModeUlangTlang implements IExerciseMode {
 

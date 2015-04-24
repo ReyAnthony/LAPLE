@@ -3,18 +3,57 @@ package fr.laple.Exercises;
 import fr.laple.language.Symbol;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 /**
- * Created by anthonyrey on 23/04/2015.
+ * This interface is giving prototypes needed for checking modes Exercise class
+ *
+ * @author anthonyrey
  */
 public interface IExerciseMode {
 
     //Translate the Symbol to the right thing to show
+
+    /**
+     * This method returns the given Symbol in the format relative to the one needed for the question.
+     * Ex : English > Japanese => Question : A and Anwser : あ.
+     *
+     * @param wantedSymbol The symbol corresponding to the user learned symbol
+     * @return a String containing the right format of the symbol
+     */
     public String getQuestion(Symbol wantedSymbol);
+
+    /**
+     * This method returns the given Symbol in the format relative to the one needed for the answer.
+     * Ex : English > Japanese => Question : A and Anwser : あ.
+     *
+     * @param answer The symbol corresponding to one of the possible answer in QCM mode
+     * @return a String containing the right format of the symbol
+     */
     public String getAnswers(Symbol answer);
-    public Symbol createSymbolFromAnswer(String anwser);
-    public Symbol createSymbolFromAnswer(ImageIcon anwser);
+
+    /**
+     * This method returns a Symbol containing only the parameter corresponding to the needed format for answer
+     * It is a bit messy, but this helps keeping polymorphism work when using solver.
+     * Ex : English > Japanese => new Symbol(null, answer, null, null, null, null).
+     *
+     * @see fr.laple.language.Symbol
+     *
+     * @param answer The String containing user response to the exercise
+     * @return a Symbol containing the right format of the String only
+     */
+    public Symbol createSymbolFromAnswer(String answer);
+
+    /**
+     * This method returns a Symbol containing only the parameter corresponding to the needed format for answer
+     * It is a bit messy, but this helps keeping polymorphism work when using solver.
+     * Ex : English > Japanese => new Symbol(null, null, answer, null, null, null).
+     *
+     * @see fr.laple.language.Symbol
+     *
+     * @param answer The Image generated from the user drawing
+     * @return a Symbol containing the right format of the String only
+     */
+    public Symbol createSymbolFromAnswer(ImageIcon answer);
 
 
 }

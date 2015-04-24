@@ -53,7 +53,6 @@ public class ExerciseUITest extends JFrame implements ActionListener{
             Exercise exo = new Exercise(wantedSymbol, new ExModeTlangUlang(), new StandardExerciseSolver(), null);
             okNok.setText(String.valueOf(exo.solveExercice(answer.getText())));
 
-
         }
 
     }

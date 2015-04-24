@@ -4,8 +4,10 @@ import fr.laple.language.Symbol;
 
 import javax.swing.*;
 
-/**
- * Created by anthonyrey on 23/04/2015.
+ /**
+ * This class is an implementation of IExerciceMode, it correspond to Teached Lang TO UserLang
+ *
+ * @author anthonyrey
  */
 public class ExModeTlangUlang implements IExerciseMode {
 
