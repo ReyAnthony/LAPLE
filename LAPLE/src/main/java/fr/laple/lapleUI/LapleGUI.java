@@ -53,7 +53,7 @@ public class LapleGUI extends JFrame implements ActionListener, WindowListener {
         UIPane.add("Home Page" , mainPanel);
 
         UIPane.add("Lessons" , null);
-        UIPane.add("exercises" , null);
+        UIPane.add("Exercises" , null);
         UIPane.add("Statistics" , null);
         UIPane.add("User settings" , null);
 
