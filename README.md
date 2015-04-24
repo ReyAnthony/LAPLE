@@ -16,7 +16,8 @@ https://jsonp.java.net/download.html
 You will need to add them to your classpath or else the software will not compile 
 We may use maven or ant in the near future to simplify the procedure
 
-
+You will find the javadoc here :
+http://reyanthony.github.io/LAPLE/
 
 
 
