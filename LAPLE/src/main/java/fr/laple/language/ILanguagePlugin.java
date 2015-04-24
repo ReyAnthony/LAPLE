@@ -1,6 +1,5 @@
 package fr.laple.language;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +13,8 @@ import java.util.ArrayList;
 public interface ILanguagePlugin {
 
     public String getLanguageName();
-    public void loadSymbolContainers(File json);
-    public void loadLessons(File json);
+    public void loadSymbolContainers();
+    public void loadLessons();
     //public LessonContainer getLessonContainer();
     public ArrayList<SymbolContainer> getSymbolContainer();
     public String getVersion();

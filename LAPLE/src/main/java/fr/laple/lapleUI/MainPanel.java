@@ -1,4 +1,4 @@
-package fr.laple.LapleUI;
+package fr.laple.lapleUI;
 
 import javax.swing.*;
 

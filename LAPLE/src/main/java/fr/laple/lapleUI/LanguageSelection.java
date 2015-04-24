@@ -1,6 +1,6 @@
-package fr.laple.LapleUI;
+package fr.laple.lapleUI;
 
-import fr.laple.lang.jp.LapleLanguagePlugin;
+import fr.laple.language.ILanguagePlugin;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * This class is a prompt for selecting avalaible languages. It uses entry points from language plugins to determine the language list
  * @see fr.laple.language.ILanguagePlugin
- * @see fr.laple.lang.jp.LapleLanguagePlugin
  * @author anthonyrey
  *
  */
@@ -21,7 +20,7 @@ public class LanguageSelection extends JFrame implements ActionListener{
     private JComboBox choices;
     private JButton validationButton;
     private JPanel panel;
-    private LapleLanguagePlugin llp;
+    private ILanguagePlugin llp;
 
     public LanguageSelection()
     {
@@ -57,11 +56,10 @@ public class LanguageSelection extends JFrame implements ActionListener{
     private List<String> getLanguageList()
     {
 
-        ClassLoader loader = LanguageSelection.class.getClassLoader();
         List<String> languageList = new ArrayList<>();
 
         try {
-            llp = (LapleLanguagePlugin) loader.loadClass("fr.laple.lang.jp.LapleLanguagePlugin").newInstance();
+            llp = (ILanguagePlugin) getClass().getClassLoader().loadClass("fr.laple.extensions.languages.japanese.LapleLanguagePlugin").newInstance();
 
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             e.printStackTrace();

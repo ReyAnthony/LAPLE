@@ -1,13 +1,13 @@
 package fr.laple;
 
-import fr.laple.LapleUI.LoginPrompt;
-import fr.laple.LapleUI.Testing.ExerciseUITest;
+import fr.laple.lapleUI.LoginPrompt;
+import fr.laple.lapleUI.testing.ExerciseUITest;
 
 /**
  * LAPLE code entry point, it calls the Login Prompt
  *
  * @author anthonyrey
- * @see fr.laple.LapleUI.LoginPrompt
+ * @see fr.laple.lapleUI.LoginPrompt
  */
 public class Main {
 

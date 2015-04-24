@@ -1,31 +1,31 @@
-package fr.laple.Exercises;
+package fr.laple.exercises;
 
 import fr.laple.language.Symbol;
 
 import javax.swing.*;
 
- /**
- * This class is an implementation of IExerciceMode, it correspond to Teached Lang TO UserLang
+/**
+ * This class is an implementation of IExerciceMode, it correspond to User Lang TO TeachedLang
  *
  * @author anthonyrey
  */
-public class ExModeTranscriptLangUserLang implements IExerciseMode {
+public class ExModeUserLangTranscriptLang implements IExerciseMode {
 
 
     @Override
     public String getQuestion(Symbol wantedSymbol) {
-        return wantedSymbol.getSymbol();
+        return wantedSymbol.getUserLangTranscript();
     }
 
     @Override
     public String getAnswers(Symbol answer) {
 
-        return answer.getUserLangTranscript();
+        return answer.getSymbol();
     }
 
     @Override
     public Symbol createSymbolFromAnswer(String answer) {
-        return new Symbol(answer, null, null, null , null, null );
+        return new Symbol(null, answer, null, null , null, null );
     }
 
     @Override

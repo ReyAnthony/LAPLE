@@ -1,4 +1,4 @@
-package fr.laple.LapleUI;
+package fr.laple.lapleUI;
 
 import fr.laple.user.User;
 
@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 /**
  * This class allows an user to Login to the application. It will set the informations in the User singleton the call the Language selection prompt
  *
- * @see fr.laple.LapleUI.LanguageSelection
+ * @see fr.laple.lapleUI.LanguageSelection
  * @see fr.laple.user.User
  * @author anthonyrey
  */

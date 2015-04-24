@@ -1,4 +1,4 @@
-package fr.laple.LapleUI;
+package fr.laple.lapleUI;
 
 import fr.laple.language.ILanguagePlugin;
 
@@ -11,8 +11,8 @@ import java.awt.event.WindowListener;
 /**
  * This class is the main GUI for LAPLE application. It contains all the panels
  *
- * @see fr.laple.LapleUI.AboutPanel
- * @see fr.laple.LapleUI.MainPanel
+ * @see fr.laple.lapleUI.AboutPanel
+ * @see fr.laple.lapleUI.MainPanel
  * @author anthonyrey
  */
 public class LapleGUI extends JFrame implements ActionListener, WindowListener {
@@ -29,7 +29,7 @@ public class LapleGUI extends JFrame implements ActionListener, WindowListener {
         //charger lapleLanguagePlugin via le path + classloader
         //pour recuperer les dicos de symboles du lang courant
         this.languagePlugin = plugin;
-        languagePlugin.loadSymbolContainers(null);
+        languagePlugin.loadSymbolContainers();
         createUI();
     }
 
@@ -53,7 +53,7 @@ public class LapleGUI extends JFrame implements ActionListener, WindowListener {
         UIPane.add("Home Page" , mainPanel);
 
         UIPane.add("Lessons" , null);
-        UIPane.add("Exercises" , null);
+        UIPane.add("exercises" , null);
         UIPane.add("Statistics" , null);
         UIPane.add("User settings" , null);
 

@@ -1,4 +1,4 @@
-package fr.laple.Lesson;
+package fr.laple.lessons;
 
 import fr.laple.language.Symbol;
 

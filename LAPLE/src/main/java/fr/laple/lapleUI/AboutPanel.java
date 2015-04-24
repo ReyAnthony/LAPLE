@@ -1,4 +1,4 @@
-package fr.laple.LapleUI;
+package fr.laple.lapleUI;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -39,7 +39,7 @@ public class AboutPanel extends JPanel implements ActionListener {
                 "along with this program.  If not, see http://www.gnu.org/licenses. <br/><br/><br/> <html>");
 
 
-        ImageIcon image = new ImageIcon("gplv3.png");
+        ImageIcon image = new ImageIcon(getClass().getResource("/images/gplv3.png"));
         gplLogo = new JLabel(image);
         linkToWebsite = new JButton("Go to the website");
 
