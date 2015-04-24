@@ -18,6 +18,7 @@ public class SymbolLessonContainer {
 
     public Lesson getLessonTypeName(){
 
+        return null;
     }
 
 }
