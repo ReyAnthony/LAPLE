@@ -1,11 +1,12 @@
 package fr.laple.LapleUI.Testing;
 
-import fr.laple.Exercises.ExModeTlangUlang;
+import fr.laple.Exercises.ExModeTranscriptLangUserLang;
 import fr.laple.Exercises.Exercise;
 import fr.laple.Exercises.StandardExerciseSolver;
 import fr.laple.language.Symbol;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -52,8 +53,25 @@ public class ExerciseUITest extends JFrame implements ActionListener{
         if(e.getSource().equals(ok))
         {
             Symbol wantedSymbol = new Symbol("a", "あ", null, null, null, null);
-            Exercise exo = new Exercise(wantedSymbol, new ExModeTlangUlang(), new StandardExerciseSolver(), null);
-            okNok.setText(String.valueOf(exo.solveExercice(answer.getText())));
+            Exercise exo = new Exercise(wantedSymbol, new ExModeTranscriptLangUserLang(), new StandardExerciseSolver(), null);
+
+            boolean win;
+            win = exo.solveExercice(answer.getText());
+            okNok.setText(String.valueOf(win));
+
+            if(win == true)
+            {
+                okNok.setForeground(Color.green);
+            }
+            else
+            {
+                okNok.setForeground(Color.red);
+            }
+
+
+
+
+
 
         }
 

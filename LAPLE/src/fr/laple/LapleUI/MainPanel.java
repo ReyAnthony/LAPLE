@@ -1,10 +1,5 @@
 package fr.laple.LapleUI;
 
-import fr.laple.Exercises.ExModeUlangTlang;
-import fr.laple.Exercises.Exercise;
-import fr.laple.Exercises.StandardExerciseSolver;
-import fr.laple.language.Symbol;
-
 import javax.swing.*;
 
 /**

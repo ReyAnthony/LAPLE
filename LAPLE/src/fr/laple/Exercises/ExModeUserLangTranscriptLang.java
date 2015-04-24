@@ -9,7 +9,7 @@ import javax.swing.*;
  *
  * @author anthonyrey
  */
-public class ExModeUlangTlang implements IExerciseMode {
+public class ExModeUserLangTranscriptLang implements IExerciseMode {
 
 
     @Override
