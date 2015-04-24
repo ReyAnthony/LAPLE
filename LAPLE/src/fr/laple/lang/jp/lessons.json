@@ -1,34 +1,33 @@
 {
 	"lesson_type": {	
 		"hiragana": [
-			{ "name": "Lesson 1", "symbol_list": ["a","i","u","e","o"]},
-			{ "name": "Lesson 2", "symbol_list": ["ka","ki","ku","ke","ko"]},
-			{ "name": "Lesson 3", "symbol_list": ["sa","shi","su","se","so"]},
-			{ "name": "Lesson 4", "symbol_list": ["ta","chi","tsu","te","to"]},
-			{ "name": "Lesson 5", "symbol_list": ["na","ni","nu","ne","no"]},
-			{ "name": "Lesson 6", "symbol_list": ["ha","hi","fu","he","ho"]},
-			{ "name": "Lesson 7", "symbol_list": ["ma","mi","mu","me","mo"]},
-			{ "name": "Lesson 8", "symbol_list": ["ya","yu","yo"]},
-			{ "name": "Lesson 9", "symbol_list": ["la","li","lu","le","lo"]},
-			{ "name": "Lesson 10", "symbol_list": ["wa","wu","wo"]}
+			{ "learning_order": ["a","i","u","e","o",
+							   "ka","ki","ku","ke","ko",
+							   "sa","shi","su","se","so",
+							   "ta","chi","tu","te","to",
+							   "na","ni","nu","ne","no",
+							   "ha","hi","fu","he","ho",
+							   "ma","mi","mu","me","mo",
+							   "ya","yu","yo",
+							   "la","li","lu","le","lo",
+							   "wa","wo"] }
 		],
 		"katakana": [
-			{ "name": "Lesson 1", "symbol_list": ["a","i","u","e","o"]},
-			{ "name": "Lesson 2", "symbol_list": ["ka","ki","ku","ke","ko"]},
-			{ "name": "Lesson 3", "symbol_list": ["sa","shi","su","se","so"]},
-			{ "name": "Lesson 4", "symbol_list": ["ta","chi","tsu","te","to"]},
-			{ "name": "Lesson 5", "symbol_list": ["na","ni","nu","ne","no"]},
-			{ "name": "Lesson 6", "symbol_list": ["ha","hi","fu","he","ho"]},
-			{ "name": "Lesson 7", "symbol_list": ["ma","mi","mu","me","mo"]},
-			{ "name": "Lesson 8", "symbol_list": ["ya","yu","yo"]},
-			{ "name": "Lesson 9", "symbol_list": ["la","li","lu","le","lo"]},
-			{ "name": "Lesson 10", "symbol_list": ["wa","wu","wo"]}
+		  	{ "learning_order": ["a","i","u","e","o",
+							   "ka","ki","ku","ke","ko",
+							   "sa","shi","su","se","so",
+							   "ta","chi","tu","te","to",
+							   "na","ni","nu","ne","no",
+							   "ha","hi","fu","he","ho",
+							   "ma","mi","mu","me","mo",
+							   "ya","yu","yo",
+							   "la","li","lu","le","lo",
+							   "wa","wo"] }
 		],
 		"kanji": {
 			"category" : "JLPT1",
 			"list" : [
-				{ "name": "Someone", "symbol": "ren" },
-				{ "name": "Dunno", "symbol": "sais pas" }
+				{ "name": "someone", "symbol": "人" }
 			]
 		}
 	}

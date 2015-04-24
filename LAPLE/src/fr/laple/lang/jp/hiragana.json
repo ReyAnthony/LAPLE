@@ -3,56 +3,111 @@
         {
             "userLangTranscript": "a",
             "symbol": "あ",
-            "symbolImage": "pathToImage",
-            "animatedImage": "path",
-            "soundFile": "path",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
             "composition": [
-                "path1",
-                "path2"
+                "null",
+                "null"
             ]
         },
         {
             "userLangTranscript": "i",
             "symbol": "い",
-            "symbolImage": "pathToImage",
-            "animatedImage": "path",
-            "soundFile": "path",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
             "composition": [
-                "path1",
-                "path2"
+                "null",
+                "null"
             ]
         },
         {
             "userLangTranscript": "u",
             "symbol": "う",
-            "symbolImage": "pathToImage",
-            "animatedImage": "path",
-            "soundFile": "path",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
             "composition": [
-                "path1",
-                "path2"
+                "null",
+                "null"
             ]
         },
         {
             "userLangTranscript": "e",
             "symbol": "え",
-            "symbolImage": "pathToImage",
-            "animatedImage": "path",
-            "soundFile": "path",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
             "composition": [
-                "path1",
-                "path2"
+                "null",
+                "null"
             ]
-        }, 
+        },
         {
             "userLangTranscript": "o",
             "symbol": "お",
-            "symbolImage": "pathToImage",
-            "animatedImage": "path",
-            "soundFile": "path",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
             "composition": [
-                "path1",
-                "path2"
+                "null",
+                "null"
+            ]
+        },
+        {
+            "userLangTranscript": "ka",
+            "symbol": "か",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
+            "composition": [
+                "null",
+                "null"
+            ]
+        },
+        {
+            "userLangTranscript": "ki",
+            "symbol": "き",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
+            "composition": [
+                "null",
+                "null"
+            ]
+        },
+        {
+            "userLangTranscript": "ku",
+            "symbol": "く",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
+            "composition": [
+                "null",
+                "null"
+            ]
+        },
+        {
+            "userLangTranscript": "ke",
+            "symbol": "え",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
+            "composition": [
+                "null",
+                "null"
+            ]
+        },
+        {
+            "userLangTranscript": "ko",
+            "symbol": "こ",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
+            "composition": [
+                "null",
+                "null"
             ]
         }
     ]
