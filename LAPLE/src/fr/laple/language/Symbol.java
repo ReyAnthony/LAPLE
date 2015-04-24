@@ -4,7 +4,10 @@ import javax.sound.sampled.Clip;
 import javax.swing.*;
 
 /**
- * Created by anthonyrey on 23/04/2015.
+ * This class describes a symbol, which is the most important element for this software.
+ * A symbol is a generic object which act as an association, values here are equals but in different contexts.
+ *
+ * @author anthonyrey
  */
 public class Symbol {
 
@@ -15,8 +18,17 @@ public class Symbol {
     private Clip pronunciation;
     private String translation;
 
-    public Symbol(String uLangTr, String sym, ImageIcon symImage, ImageIcon animImage, Clip pronunciation, String translation )
-    {
+    /**
+     * This is the constructor to create a Symbol
+     *
+     * @param uLangTr       A string corresponding to the "western transcription" of the symbol (ex : "a")
+     * @param sym           A string containing the actual symbol (ex : "あ")
+     * @param symImage      An ImageIcon containing the image for the symbol
+     * @param animImage     An ImageIcon containing the animation for the symbol (a gif somewhat)
+     * @param pronunciation A Clip for the pronunciation of the symbol
+     * @param translation   A string containing the translation (used for words)
+     */
+    public Symbol(String uLangTr, String sym, ImageIcon symImage, ImageIcon animImage, Clip pronunciation, String translation) {
         this.userLangTranscript = uLangTr;
         this.symbol = sym;
         this.symbolImage = symImage;

@@ -4,13 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by anthonyrey on 23/04/2015.
+ * A SymbolContainer is composed of symbols and has methods to retrieve and add symbols to it
+ *
+ * @anthonyrey
  */
 public class SymbolContainer {
 
     private String type;
     private Map<String, Symbol> dictionnary;
 
+    /**
+     * Constructor for the symbol container
+     *
+     * @param type The type of the symbol container (to ditch ?)
+     */
     public SymbolContainer(String type)
     {
 

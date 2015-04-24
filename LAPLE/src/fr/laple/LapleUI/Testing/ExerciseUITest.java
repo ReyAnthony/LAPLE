@@ -10,7 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by anthonyrey on 23/04/2015.
+ * Test GUI for exercises
+ *
+ * @author anthonyrey
  */
 public class ExerciseUITest extends JFrame implements ActionListener{
 
