@@ -15,7 +15,7 @@ public interface IExerciseMode {
 
     /**
      * This method returns the given Symbol in the format relative to the one needed for the question.
-     * Ex : English > Japanese => Question : A and Anwser : あ.
+     * Ex : English to Japanese == Question : A and Anwser : あ.
      *
      * @param wantedSymbol The symbol corresponding to the user learned symbol
      * @return a String containing the right format of the symbol
@@ -24,7 +24,7 @@ public interface IExerciseMode {
 
     /**
      * This method returns the given Symbol in the format relative to the one needed for the answer.
-     * Ex : English > Japanese => Question : A and Anwser : あ.
+     * Ex : English to Japanese == Question : A and Anwser : あ.
      *
      * @param answer The symbol corresponding to one of the possible answer in QCM mode
      * @return a String containing the right format of the symbol
@@ -34,7 +34,7 @@ public interface IExerciseMode {
     /**
      * This method returns a Symbol containing only the parameter corresponding to the needed format for answer
      * It is a bit messy, but this helps keeping polymorphism work when using solver.
-     * Ex : English > Japanese => new Symbol(null, answer, null, null, null, null).
+     * Ex : English to Japanese == new Symbol(null, answer, null, null, null, null).
      *
      * @see fr.laple.language.Symbol
      *
@@ -46,7 +46,7 @@ public interface IExerciseMode {
     /**
      * This method returns a Symbol containing only the parameter corresponding to the needed format for answer
      * It is a bit messy, but this helps keeping polymorphism work when using solver.
-     * Ex : English > Japanese => new Symbol(null, null, answer, null, null, null).
+     * Ex : English to Japanese == new Symbol(null, null, answer, null, null, null).
      *
      * @see fr.laple.language.Symbol
      *
