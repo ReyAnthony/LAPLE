@@ -1,6 +1,7 @@
 package fr.laple.lapleUI;
 
 import fr.laple.language.ILanguagePlugin;
+import fr.laple.tools.ScreenTools;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +26,7 @@ public class LanguageSelection extends JFrame implements ActionListener{
     public LanguageSelection()
     {
         this.setSize(300,100);
+        this.setLocation(ScreenTools.getCenteredPoint(this.getWidth(), this.getHeight()));
         this.setTitle("LAPLE - Language selection");
         this.setResizable(false);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

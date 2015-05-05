@@ -1,6 +1,7 @@
 package fr.laple.lapleUI;
 
 import fr.laple.language.ILanguagePlugin;
+import fr.laple.tools.ScreenTools;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -38,6 +39,7 @@ public class LapleGUI extends JFrame implements ActionListener, WindowListener {
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.addWindowListener(this);
         this.setSize(560, 500);
+        this.setLocation(ScreenTools.getCenteredPoint(this.getWidth(), this.getHeight()));
         this.setTitle("LAPLE - Logiciel d'Apprentissage de Langues Etrangères");
         this.setResizable(false);
 

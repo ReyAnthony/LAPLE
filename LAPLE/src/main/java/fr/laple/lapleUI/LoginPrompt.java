@@ -1,8 +1,10 @@
 package fr.laple.lapleUI;
 
+import fr.laple.tools.ScreenTools;
 import fr.laple.user.User;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -20,7 +22,6 @@ public class LoginPrompt extends JFrame implements ActionListener{
 
     private JLabel message;
     private JButton validationButton;
-    private JButton offlineButton;
     private JButton noAccountButton;
     private JTextField loginField;
     private JPasswordField pwdField;
@@ -28,21 +29,22 @@ public class LoginPrompt extends JFrame implements ActionListener{
 
     public LoginPrompt()
     {
-        this.setSize(200,200);
+        this.setSize(400,200);
         this.setTitle("LAPLE - Login");
         this.setResizable(false);
+        this.setLocation(ScreenTools.getCenteredPoint(this.getWidth(), this.getHeight()));
+        this.setLayout(new BorderLayout());
+
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
         message = new JLabel("Login to your LAPLE account :");
         validationButton = new JButton("Log-in");
-        offlineButton = new JButton("No thanks");
         noAccountButton = new JButton("Create an account");
         loginField = new JTextField("Login");
         pwdField = new JPasswordField("Password");
         panel = new JPanel();
 
         validationButton.addActionListener(this);
-        offlineButton.addActionListener(this);
         noAccountButton.addActionListener(this);
 
         this.setContentPane(panel);
@@ -51,10 +53,11 @@ public class LoginPrompt extends JFrame implements ActionListener{
         panel.add(loginField);
         panel.add(pwdField);
         panel.add(validationButton);
-        panel.add(offlineButton);
         panel.add(noAccountButton);
 
         this.setVisible(true);
+        this.setAlwaysOnTop(true);
+        this.setAlwaysOnTop(false);
 
     }
 
@@ -91,13 +94,8 @@ public class LoginPrompt extends JFrame implements ActionListener{
         if(e.getSource().equals(validationButton))
         {
             JOptionPane.showMessageDialog(this, "Not implemented yet");
-        }
-        else if (e.getSource().equals(offlineButton)){
-
-            this.dispose();
-            setUserSettings(false);
             new LanguageSelection();
-
+            this.dispose();
         }
         else if(e.getSource().equals(noAccountButton))
         {
