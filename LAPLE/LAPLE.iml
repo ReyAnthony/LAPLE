@@ -17,5 +17,7 @@
         <jarDirectory url="file://$MODULE_DIR$/../../../Libraries" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="neuroph-adapters-2.9" level="project" />
+    <orderEntry type="library" name="slf4j-simple-1.7.12" level="project" />
   </component>
 </module>

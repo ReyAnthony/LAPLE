@@ -2,6 +2,7 @@ package fr.laple;
 
 import fr.laple.lapleUI.LoginPrompt;
 import fr.laple.lapleUI.SplashScreen;
+import fr.laple.lapleUI.testing.ExerciseUITest;
 
 /**
  * LAPLE code entry point, it calls the Login Prompt
@@ -14,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
 
         new SplashScreen();
-        //new ExerciseUITest();
+        new ExerciseUITest();
         new LoginPrompt();
     }
 }
