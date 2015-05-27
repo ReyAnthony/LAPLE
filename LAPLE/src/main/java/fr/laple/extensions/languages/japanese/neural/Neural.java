@@ -1,6 +1,9 @@
 package fr.laple.extensions.languages.japanese.neural;
 
 import org.neuroph.core.NeuralNetwork;
+import org.neuroph.imgrec.image.Image;
+import org.neuroph.imgrec.image.ImageFactory;
+import org.neuroph.ocr.OcrPlugin;
 
 import java.io.InputStream;
 
@@ -19,12 +22,10 @@ public class Neural {
         InputStream fis =  getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/neural/CharReconn.nnet");
         NeuralNetwork nnet = NeuralNetwork.load(fis);
 
-        /*
         OcrPlugin ocrPlugin = (OcrPlugin)nnet.getPlugin(OcrPlugin.class);
         Image charImage = ImageFactory.getImage(getClass().getResource("/fr/laple/extensions/languages/japanese/testSet/a_hira.png"));
         Character ch = ocrPlugin.recognizeCharacter(charImage);
         System.out.println(ch);
-        */
     }
 
 }
