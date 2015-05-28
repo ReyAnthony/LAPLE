@@ -2,7 +2,7 @@ package fr.laple.exercises;
 
 import fr.laple.language.Symbol;
 
-import javax.swing.*;
+import java.awt.*;
 
 /**
  * This interface is giving prototypes needed for checking modes Exercise class
@@ -53,7 +53,7 @@ public interface IExerciseMode {
      * @param answer The Image generated from the user drawing
      * @return a Symbol containing the right format of the String only
      */
-    public Symbol createSymbolFromAnswer(ImageIcon answer);
+    public Symbol createSymbolFromAnswer(Image answer);
 
 
 }

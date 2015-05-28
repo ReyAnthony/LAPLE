@@ -1,7 +1,7 @@
 package fr.laple.language;
 
 import javax.sound.sampled.Clip;
-import javax.swing.*;
+import java.awt.*;
 
 /**
  * This class describes a symbol, which is the most important element for this software.
@@ -13,8 +13,8 @@ public class Symbol {
 
     private String userLangTranscript;
     private String symbol;
-    private ImageIcon symbolImage;
-    private ImageIcon animatedImage;
+    private Image symbolImage;
+    private Image animatedImage;
     private Clip pronunciation;
     private String translation;
 
@@ -23,12 +23,12 @@ public class Symbol {
      *
      * @param uLangTr       A string corresponding to the "western transcription" of the symbol (ex : "a")
      * @param sym           A string containing the actual symbol (ex : "あ")
-     * @param symImage      An ImageIcon containing the image for the symbol
-     * @param animImage     An ImageIcon containing the animation for the symbol (a gif somewhat)
+     * @param symImage      An Image containing the image for the symbol
+     * @param animImage     An Image containing the animation for the symbol (a gif somewhat)
      * @param pronunciation A Clip for the pronunciation of the symbol
      * @param translation   A string containing the translation (used for words)
      */
-    public Symbol(String uLangTr, String sym, ImageIcon symImage, ImageIcon animImage, Clip pronunciation, String translation) {
+    public Symbol(String uLangTr, String sym, Image symImage, Image animImage, Clip pronunciation, String translation) {
         this.userLangTranscript = uLangTr;
         this.symbol = sym;
         this.symbolImage = symImage;
@@ -46,11 +46,11 @@ public class Symbol {
         return symbol;
     }
 
-    public ImageIcon getSymbolImage() {
+    public Image getSymbolImage() {
         return symbolImage;
     }
 
-    public ImageIcon getAnimatedImage() {
+    public Image getAnimatedImage() {
         return animatedImage;
     }
 

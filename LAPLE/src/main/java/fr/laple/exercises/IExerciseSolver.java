@@ -1,5 +1,6 @@
 package fr.laple.exercises;
 
+import fr.laple.exercises.exceptions.ExcerciseModeException;
 import fr.laple.language.Symbol;
 
 
@@ -27,6 +28,16 @@ public interface IExerciseSolver {
      * @return       True if the symbol are the same, false otherwize
      */
     public boolean solveExercise(Symbol answer, Symbol wanted, IExerciseMode mode);
+
+    /**
+     * This method is checking if the current solver is compatible with
+     * the selected mode.
+     *
+     * It will throw an ExerciseModeException if they are not compatible
+     *
+     * @param mode The selected mode
+     */
+    public void testIfModeAndSolverAreCompatible(IExerciseMode mode) throws ExcerciseModeException;
 
 
 }

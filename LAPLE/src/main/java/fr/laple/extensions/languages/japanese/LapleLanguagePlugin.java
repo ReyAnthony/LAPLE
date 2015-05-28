@@ -68,6 +68,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
 
     }
 
+    //TODO Get by name
     @Override
     public ArrayList<SymbolContainer> getSymbolContainer() {
         return symbolContainers;

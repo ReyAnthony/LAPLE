@@ -22,14 +22,6 @@
       <artifactId>neuroph-core</artifactId>
       <version>2.9</version>
     </dependency>
-    <!-- Error in the pom of imgrec, so do not forget to
-    remove the android dependency from the .m2 repo until
-    the maintainer answer to my bug report -->
-    <dependency>
-      <groupId>org.neuroph</groupId>
-      <artifactId>neuroph-imgrec</artifactId>
-      <version>2.9</version>
-    </dependency>
     <dependency>
       <groupId>org.neuroph</groupId>
       <artifactId>neuroph-ocr</artifactId>
@@ -38,7 +30,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>

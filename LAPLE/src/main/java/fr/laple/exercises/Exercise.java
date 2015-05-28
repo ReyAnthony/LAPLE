@@ -3,7 +3,7 @@ package fr.laple.exercises;
 import fr.laple.language.Symbol;
 import fr.laple.language.SymbolContainer;
 
-import javax.swing.*;
+import java.awt.*;
 
 /**
  * This class describe an Exercice
@@ -29,7 +29,7 @@ public class Exercise {
      * @param sContainer   The container related to the symbol used in the Exercice, it is used to generate wrong answers
      *                     for QCM mode.
      */
-    public Exercise(Symbol wantedSymbol, IExerciseMode mode, IExerciseSolver solver, SymbolContainer sContainer) {
+    public Exercise(Symbol wantedSymbol, IExerciseMode mode, IExerciseSolver solver, SymbolContainer sContainer) throws Exception{
         this.wantedSymbol = wantedSymbol;
         this.mode = mode;
         this.sContainer = sContainer;
@@ -58,10 +58,10 @@ public class Exercise {
      * @param image The generated image from the user drawing of the symbol
      * @return True if answer is correct, false otherwize
      */
-    public boolean solveExercice(ImageIcon image) {
+    public boolean solveExercice(Image image) {
 
-        //need neural net
-        return false;
+        Symbol s = mode.createSymbolFromAnswer(image);
+        return solver.solveExercise(s, wantedSymbol, mode);
     }
 
 }

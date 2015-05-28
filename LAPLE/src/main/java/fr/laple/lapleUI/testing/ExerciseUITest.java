@@ -53,7 +53,13 @@ public class ExerciseUITest extends JFrame implements ActionListener{
         if(e.getSource().equals(ok))
         {
             Symbol wantedSymbol = new Symbol("a", "あ", null, null, null, null);
-            Exercise exo = new Exercise(wantedSymbol, new ExModeTranscriptLangUserLang(), new StandardExerciseSolver(), null);
+            Exercise exo = null;
+
+            try {
+                exo = new Exercise(wantedSymbol, new ExModeTranscriptLangUserLang(), new StandardExerciseSolver(), null);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
 
             boolean win;
             win = exo.solveExercice(answer.getText());

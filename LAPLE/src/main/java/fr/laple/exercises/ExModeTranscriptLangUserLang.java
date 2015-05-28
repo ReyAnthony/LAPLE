@@ -2,9 +2,9 @@ package fr.laple.exercises;
 
 import fr.laple.language.Symbol;
 
-import javax.swing.*;
+import java.awt.*;
 
- /**
+/**
  * This class is an implementation of IExerciceMode, it correspond to Teached Lang TO UserLang
  *
  * @author anthonyrey
@@ -29,7 +29,7 @@ public class ExModeTranscriptLangUserLang implements IExerciseMode {
     }
 
     @Override
-    public Symbol createSymbolFromAnswer(ImageIcon anwser) {
+    public Symbol createSymbolFromAnswer(Image anwser) {
         return new Symbol(null,null,anwser,null,null,null);
     }
 }

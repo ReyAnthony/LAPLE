@@ -14,4 +14,9 @@ public class StandardExerciseSolver implements IExerciseSolver {
         //get the right answer member from symbol according to the set mode
         return mode.getAnswers(answer).equals(mode.getAnswers(wanted));
     }
+
+    @Override
+    public void testIfModeAndSolverAreCompatible(IExerciseMode mode) {
+        //Should be compatible with everthing so we won't do anything
+    }
 }
