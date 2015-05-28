@@ -46,9 +46,9 @@ public class NeuralExerciseSolver implements IExerciseSolver {
             fis.close();
 
             OcrPlugin plugin = (OcrPlugin)nnet.getPlugin(OcrPlugin.class);
-            String charRecognized = plugin.recognizeCharacter(new ImageJ2SE(image)).toString();
+            String charRecognized = plugin.recognizeCharacter(new ImageJ2SE(image)).toString().toLowerCase();
 
-            if(charRecognized.equals(wanted.toUpperCase()))
+            if(charRecognized.equals(wanted))
                 toReturn = true;
             else
                 toReturn = false;
