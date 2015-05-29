@@ -6,30 +6,24 @@ import fr.laple.extensions.languages.japanese.LapleLanguagePlugin;
 import fr.laple.extensions.languages.japanese.neural.NeuralExerciseSolver;
 import fr.laple.language.Symbol;
 import fr.laple.language.SymbolContainer;
+import fr.laple.tools.neuraNets.NeuralLapleHelper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;
 import org.neuroph.imgrec.ColorMode;
-import org.neuroph.imgrec.FractionRgbData;
-import org.neuroph.imgrec.ImageUtilities;
 import org.neuroph.imgrec.image.Dimension;
-import org.neuroph.imgrec.image.ImageJ2SE;
-import org.neuroph.nnet.learning.BackPropagation;
 import org.neuroph.ocr.OcrHelper;
 import org.neuroph.ocr.OcrPlugin;
 import org.neuroph.util.TransferFunctionType;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * Created by anthonyrey on 28/05/2015.
+ * @author anthonyrey
  */
 public class TestNeuralExercise {
 
@@ -39,50 +33,26 @@ public class TestNeuralExercise {
 
         Dimension dimension = new Dimension(130,130);
         ColorMode colorMode = ColorMode.BLACK_AND_WHITE;
-        ArrayList<String> labels = new ArrayList<>();
-        labels.add("a");
-        labels.add("e");
-        labels.add("u");
-        labels.add("i");
-        labels.add("o");
-
-        ArrayList<Integer> layerNeuronsCount = new ArrayList<>();
-
-        TransferFunctionType transfertFuncType = TransferFunctionType.SIGMOID;
-
-        NeuralNetwork net = OcrHelper.createNewNeuralNetwork("neuron", dimension, colorMode, labels,
-                layerNeuronsCount, transfertFuncType);
 
         File trainingSetPath = new File(getClass().getResource("/symbols/hira_training").getPath());
-        HashMap<String, BufferedImage> images = new HashMap<>();
+        ArrayList<String> labels = NeuralLapleHelper.getLabelsFromFiles(trainingSetPath);
 
-        for(File f : trainingSetPath.listFiles())
-        {
-            try {
-                images.put(f.getName().replace(".png", ""),
-                        ImageUtilities.resizeImage(ImageIO.read(f), dimension.getWidth(), dimension.getHeight()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        TransferFunctionType transfertFuncType = TransferFunctionType.LINEAR;
+        NeuralNetwork net = OcrHelper.createNewNeuralNetwork("neuron", dimension, colorMode, labels,
+                new ArrayList<>() , transfertFuncType);
 
-        Map<String, FractionRgbData> fractions = ImageUtilities.getFractionRgbDataForImages(images);
-        DataSet set = OcrHelper.createBlackAndWhiteTrainingSet(labels, fractions);
-        net.learn(set, new BackPropagation());
+        DataSet data = NeuralLapleHelper.createDataSetFromImageFolder(trainingSetPath, dimension);
+        NeuralLapleHelper.training(net, data);
 
-        BufferedImage testImage = null;
-        try {
-            testImage = ImageIO.read(getClass().getResource("/symbols/a_hira.bmp"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         OcrPlugin plugin = (OcrPlugin)net.getPlugin(OcrPlugin.class);
-        System.out.println(plugin.recognizeCharacterProbabilities(new ImageJ2SE(testImage)));
+        File testSetPath = new File(getClass().getResource("/symbols/hira_training2").getPath());
+        NeuralLapleHelper.testASet(testSetPath, plugin, dimension);
 
     }
 
     @Test
     public void newExercise(){
+
         LapleLanguagePlugin plugin = new LapleLanguagePlugin();
         plugin.loadSymbolContainers();
 
@@ -105,7 +75,7 @@ public class TestNeuralExercise {
         boolean answer = false;
         try {
 
-            answer = ex.solveExercice(ImageIO.read(getClass().getResource("/symbols/a_hira.bmp")));
+            answer = ex.solveExercice(ImageIO.read(getClass().getResource("/symbols/a.bmp")));
         } catch (IOException e) {
             e.printStackTrace();
         }
