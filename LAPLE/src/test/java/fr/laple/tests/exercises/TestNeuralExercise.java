@@ -34,19 +34,72 @@ public class TestNeuralExercise {
         Dimension dimension = new Dimension(130,130);
         ColorMode colorMode = ColorMode.BLACK_AND_WHITE;
 
-        File trainingSetPath = new File(getClass().getResource("/symbols/hira_training").getPath());
+        File trainingSetPath = new File(getClass().getResource("/symbols/hira_training/").getPath());
         ArrayList<String> labels = NeuralLapleHelper.getLabelsFromFiles(trainingSetPath);
+        ArrayList<Integer> layers = new ArrayList<>();
+        layers.add(100);
 
-        TransferFunctionType transfertFuncType = TransferFunctionType.LINEAR;
+        //100 pour 4 sorties
+
+        TransferFunctionType transfertFuncType = TransferFunctionType.SIGMOID;
         NeuralNetwork net = OcrHelper.createNewNeuralNetwork("neuron", dimension, colorMode, labels,
-                new ArrayList<>() , transfertFuncType);
+               layers , transfertFuncType);
 
-        DataSet data = NeuralLapleHelper.createDataSetFromImageFolder(trainingSetPath, dimension);
+        DataSet data;
+
+        //data = NeuralLapleHelper.createDataSetFromImageFolder(trainingSetPath, dimension);
+        //NeuralLapleHelper.training(net, data);
+
+        //trainingSetPath = new File(getClass().getResource("/symbols/hira_training_2/").getPath());
+        //data = NeuralLapleHelper.createDataSetFromImageFolder(trainingSetPath, dimension);
+        //NeuralLapleHelper.training(net, data);
+
+        trainingSetPath = new File(getClass().getResource("/symbols/hira_training_3/").getPath());
+        data = NeuralLapleHelper.createDataSetFromImageFolder(trainingSetPath, dimension);
         NeuralLapleHelper.training(net, data);
 
         OcrPlugin plugin = (OcrPlugin)net.getPlugin(OcrPlugin.class);
-        File testSetPath = new File(getClass().getResource("/symbols/hira_training2").getPath());
+        File testSetPath = new File(getClass().getResource("/symbols/test_set").getPath());
+
+
+        System.out.println("testing for "+testSetPath);
         NeuralLapleHelper.testASet(testSetPath, plugin, dimension);
+
+        for(File f : testSetPath.listFiles())
+        {
+            if(f.isFile())
+            {
+                Assert.assertTrue(NeuralLapleHelper.testChar(plugin, f,
+                        NeuralLapleHelper.removeExtensions(f.getName()), dimension));
+            }
+        }
+
+
+        testSetPath = new File(getClass().getResource("/symbols/hira_training").getPath());
+        NeuralLapleHelper.testASet(testSetPath, plugin, dimension);
+
+        System.out.println("testing for "+testSetPath);
+        for(File f : testSetPath.listFiles())
+        {
+            if(f.isFile())
+            {
+                Assert.assertTrue(NeuralLapleHelper.testChar(plugin, f,
+                        NeuralLapleHelper.removeExtensions(f.getName()), dimension));
+            }
+        }
+
+        testSetPath = new File(getClass().getResource("/symbols/hira_training_2").getPath());
+        NeuralLapleHelper.testASet(testSetPath, plugin, dimension);
+
+        System.out.println("testing for "+testSetPath);
+        for(File f : testSetPath.listFiles())
+        {
+            if(f.isFile())
+            {
+                Assert.assertTrue(NeuralLapleHelper.testChar(plugin, f,
+                        NeuralLapleHelper.removeExtensions(f.getName()), dimension));
+            }
+        }
 
     }
 
