@@ -1,9 +1,13 @@
-body{
+#index, #up, #got{
 	/*background-color: #212121;*/
 	background: -moz-radial-gradient(50% 46% 90deg,circle closest-corner, #FFFFFF, #242424 );
 	background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 150, from(#FFFFFF), to(#242424));
 }
 
+.bod{
+	background: -moz-radial-gradient(50% 46% 90deg,circle closest-corner, #242424, #808080);
+	background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 150, from(#242424), to(#808080));
+}
 #destroy, #userss, h4 a{
 	color:silver; 
 	text-align:right
@@ -12,5 +16,23 @@ h2{
 	color:red;
 }
 
+#download{
+	padding-top: 20%;	
+}
 
+.foot{																																																																																																																																																																																																																																											
+	padding-top:15%
+}
 
+#download [class*="col-"], footer {
+  																																																																																																																																												
+  background-color: lightgreen;																																																				
+  border: 2px solid black;
+  border-radius: 6px;
+  line-height: 40px;
+  text-align: center;
+}
+
+th, tr, td{
+	 border: 2px solid black;
+}

@@ -9,7 +9,7 @@
   </head>
 	<h1 style="color:ThreeDDarkShadow; text-align:center">LAPLE</h1>
 	
-	<body>
+	<body id="up">
 		<h2 style="color:ThreeDDarkShadow; text-align:center">Create account</h2>
 		<form id="form" method="post" action="http://localhost/private/validate_account.php?">
    	<fieldset>

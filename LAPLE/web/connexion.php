@@ -13,14 +13,14 @@
 		}
 			$req->closeCursor();
 		if(isset($_SESSION['email']) && isset($_SESSION['mdp'])){	
-			header('Location: http://localhost/private/immobilier.php');		
+			header('Location: welcome.php');		
 		}
 		else {
-			header('Location: http://localhost/private/index.php?verif=1');		
+			header('Location: index.php?verif=1');		
 		}
 	}
 	else {
-		header('Location: http://localhost/private/index.php?verif=1');		
+		header('Location: index.php?verif=1');		
 	}
 
 ?>
