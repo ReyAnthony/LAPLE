@@ -41,7 +41,7 @@ public class NeuralExerciseSolver implements IExerciseSolver {
         try {
 
             InputStream fis = getClass().getResourceAsStream(
-                    "/fr/laple/extensions/languages/japanese/neural/written_hiragana_recon.nnet");
+                    "/fr/laple/extensions/languages/japanese/neural/hiragana/a_i_u_e.nnet");
             NeuralNetwork nnet = NeuralNetwork.load(fis);
             fis.close();
 

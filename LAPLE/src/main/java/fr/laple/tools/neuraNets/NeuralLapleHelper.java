@@ -62,7 +62,7 @@ public class NeuralLapleHelper {
         else if (i == 5)
         {
             DynamicBackPropagation backprop = new DynamicBackPropagation();
-            backprop.setMaxError(0.0001);
+            backprop.setMaxError(0.00001);
             net.learn(data, backprop);
 
         }
