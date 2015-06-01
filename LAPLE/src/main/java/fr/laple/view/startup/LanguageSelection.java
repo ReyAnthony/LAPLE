@@ -1,7 +1,8 @@
-package fr.laple.view;
+package fr.laple.view.startup;
 
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.tools.ScreenTools;
+import fr.laple.view.LapleGUI;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,4 +1,4 @@
-package fr.laple.view;
+package fr.laple.view.startup;
 
 import fr.laple.tools.ScreenTools;
 
