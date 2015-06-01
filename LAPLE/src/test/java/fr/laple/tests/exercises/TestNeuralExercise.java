@@ -108,7 +108,7 @@ public class TestNeuralExercise {
             }
         }
 
-        net.save(getClass().getResource("/net/hiragana/").getPath() + "a_i_u_e_final.nnet");
+       // net.save(getClass().getResource("/net/hiragana/").getPath() + "a_i_u_e_final.nnet");
 
     }
 
