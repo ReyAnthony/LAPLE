@@ -1,7 +1,7 @@
-package fr.laple.lapleUI;
+package fr.laple.view;
 
 import fr.laple.tools.ScreenTools;
-import fr.laple.user.User;
+import fr.laple.model.user.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +14,8 @@ import java.net.URISyntaxException;
 /**
  * This class allows an user to Login to the application. It will set the informations in the User singleton the call the Language selection prompt
  *
- * @see fr.laple.lapleUI.LanguageSelection
- * @see fr.laple.user.User
+ * @see fr.laple.view.LanguageSelection
+ * @see fr.laple.model.user.User
  * @author anthonyrey
  */
 public class LoginPrompt extends JFrame implements ActionListener{

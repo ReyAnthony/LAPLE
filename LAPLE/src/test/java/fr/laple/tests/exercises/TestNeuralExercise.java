@@ -1,11 +1,11 @@
 package fr.laple.tests.exercises;
 
-import fr.laple.exercises.ExModeUserLangTranscriptLang;
-import fr.laple.exercises.Exercise;
+import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
+import fr.laple.model.exercises.Exercise;
 import fr.laple.extensions.languages.japanese.LapleLanguagePlugin;
 import fr.laple.extensions.languages.japanese.neural.NeuralExerciseSolver;
-import fr.laple.language.Symbol;
-import fr.laple.language.SymbolContainer;
+import fr.laple.model.language.Symbol;
+import fr.laple.model.language.SymbolContainer;
 import fr.laple.tools.neuraNets.NeuralLapleHelper;
 import org.junit.Assert;
 import org.junit.Test;

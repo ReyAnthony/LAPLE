@@ -1,6 +1,6 @@
-package fr.laple.lessons;
+package fr.laple.model.lessons;
 
-import fr.laple.language.Symbol;
+import fr.laple.model.language.Symbol;
 
 /**
  *  This class represent lesson.

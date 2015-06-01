@@ -1,4 +1,4 @@
-package fr.laple.lessons;
+package fr.laple.model.lessons;
 
 /**
  * Its an implementation of ILessonContainer

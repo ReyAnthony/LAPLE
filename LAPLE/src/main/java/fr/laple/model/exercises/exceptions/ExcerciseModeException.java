@@ -1,4 +1,4 @@
-package fr.laple.exercises.exceptions;
+package fr.laple.model.exercises.exceptions;
 
 /**
  * Created by anthonyrey on 28/05/2015.

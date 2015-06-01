@@ -1,6 +1,6 @@
-package fr.laple.exercises;
+package fr.laple.model.exercises;
 
-import fr.laple.language.Symbol;
+import fr.laple.model.language.Symbol;
 
 import java.awt.*;
 
@@ -36,7 +36,7 @@ public interface IExerciseMode {
      * It is a bit messy, but this helps keeping polymorphism work when using solver.
      * Ex : English to Japanese == new Symbol(null, answer, null, null, null, null).
      *
-     * @see fr.laple.language.Symbol
+     * @see fr.laple.model.language.Symbol
      *
      * @param answer The String containing user response to the exercise
      * @return a Symbol containing the right format of the String only
@@ -48,7 +48,7 @@ public interface IExerciseMode {
      * It is a bit messy, but this helps keeping polymorphism work when using solver.
      * Ex : English to Japanese == new Symbol(null, null, answer, null, null, null).
      *
-     * @see fr.laple.language.Symbol
+     * @see fr.laple.model.language.Symbol
      *
      * @param answer The Image generated from the user drawing
      * @return a Symbol containing the right format of the String only

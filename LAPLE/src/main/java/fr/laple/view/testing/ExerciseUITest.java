@@ -1,9 +1,9 @@
-package fr.laple.lapleUI.testing;
+package fr.laple.view.testing;
 
-import fr.laple.exercises.ExModeTranscriptLangUserLang;
-import fr.laple.exercises.Exercise;
-import fr.laple.exercises.StandardExerciseSolver;
-import fr.laple.language.Symbol;
+import fr.laple.model.exercises.ExModeTranscriptLangUserLang;
+import fr.laple.model.exercises.Exercise;
+import fr.laple.model.exercises.StandardExerciseSolver;
+import fr.laple.model.language.Symbol;
 
 import javax.swing.*;
 import java.awt.*;

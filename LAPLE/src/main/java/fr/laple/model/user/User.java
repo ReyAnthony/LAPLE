@@ -1,4 +1,4 @@
-package fr.laple.user;
+package fr.laple.model.user;
 
 /**
  * This class is a singleton and contains all the user related data

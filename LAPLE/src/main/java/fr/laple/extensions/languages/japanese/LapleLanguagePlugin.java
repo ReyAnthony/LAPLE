@@ -1,8 +1,8 @@
 package fr.laple.extensions.languages.japanese;
 
-import fr.laple.language.ILanguagePlugin;
-import fr.laple.language.Symbol;
-import fr.laple.language.SymbolContainer;
+import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.model.language.Symbol;
+import fr.laple.model.language.SymbolContainer;
 
 import javax.json.Json;
 import javax.json.JsonArray;

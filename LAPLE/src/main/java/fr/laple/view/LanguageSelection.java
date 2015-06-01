@@ -1,6 +1,6 @@
-package fr.laple.lapleUI;
+package fr.laple.view;
 
-import fr.laple.language.ILanguagePlugin;
+import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.tools.ScreenTools;
 
 import javax.swing.*;
@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * This class is a prompt for selecting avalaible languages. It uses entry points from language plugins to determine the language list
- * @see fr.laple.language.ILanguagePlugin
+ * @see fr.laple.model.language.ILanguagePlugin
  * @author anthonyrey
  *
  */

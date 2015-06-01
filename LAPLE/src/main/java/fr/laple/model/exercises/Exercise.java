@@ -1,7 +1,7 @@
-package fr.laple.exercises;
+package fr.laple.model.exercises;
 
-import fr.laple.language.Symbol;
-import fr.laple.language.SymbolContainer;
+import fr.laple.model.language.Symbol;
+import fr.laple.model.language.SymbolContainer;
 
 import java.awt.*;
 

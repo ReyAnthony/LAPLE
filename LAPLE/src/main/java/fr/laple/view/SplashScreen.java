@@ -1,4 +1,4 @@
-package fr.laple.lapleUI;
+package fr.laple.view;
 
 import fr.laple.tools.ScreenTools;
 

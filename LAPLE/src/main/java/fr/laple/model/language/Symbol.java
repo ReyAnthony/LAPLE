@@ -1,4 +1,4 @@
-package fr.laple.language;
+package fr.laple.model.language;
 
 import javax.sound.sampled.Clip;
 import java.awt.*;

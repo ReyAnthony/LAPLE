@@ -1,4 +1,4 @@
-package fr.laple.language;
+package fr.laple.model.language;
 
 import java.util.HashMap;
 import java.util.Map;

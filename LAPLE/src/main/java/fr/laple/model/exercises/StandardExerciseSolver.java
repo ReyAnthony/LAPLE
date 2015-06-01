@@ -1,6 +1,6 @@
-package fr.laple.exercises;
+package fr.laple.model.exercises;
 
-import fr.laple.language.Symbol;
+import fr.laple.model.language.Symbol;
 
 /**
  * This class is an implementation of IExercicesSolver, it solves by comparing answer and wanted only

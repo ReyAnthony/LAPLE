@@ -1,6 +1,6 @@
-package fr.laple.lapleUI;
+package fr.laple.view;
 
-import fr.laple.language.ILanguagePlugin;
+import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.tools.ScreenTools;
 
 import javax.swing.*;
@@ -12,8 +12,8 @@ import java.awt.event.WindowListener;
 /**
  * This class is the main GUI for LAPLE application. It contains all the panels
  *
- * @see fr.laple.lapleUI.AboutPanel
- * @see fr.laple.lapleUI.MainPanel
+ * @see fr.laple.view.AboutPanel
+ * @see fr.laple.view.MainPanel
  * @author anthonyrey
  */
 public class LapleGUI extends JFrame implements ActionListener, WindowListener {
