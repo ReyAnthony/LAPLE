@@ -1,7 +1,8 @@
-package fr.laple.controller;
+package fr.laple.controller.startup;
 
-import fr.laple.extensions.languages.PluginConfigObject;
-import fr.laple.extensions.languages.PluginLoadingException;
+import fr.laple.extensions.languages.plugins.LanguageConfigFileParser;
+import fr.laple.extensions.languages.plugins.PluginConfigObject;
+import fr.laple.extensions.languages.plugins.PluginLoadingException;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.view.LapleGUI;
 import fr.laple.view.startup.LanguageSelection;

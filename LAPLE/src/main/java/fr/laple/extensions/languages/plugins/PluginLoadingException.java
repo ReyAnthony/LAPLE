@@ -1,4 +1,4 @@
-package fr.laple.extensions.languages;
+package fr.laple.extensions.languages.plugins;
 
 /**
  * Created by anthonyrey on 02/06/2015.

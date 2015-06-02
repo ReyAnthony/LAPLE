@@ -1,18 +1,16 @@
 package fr.laple.view;
 
+import fr.laple.controller.AboutPanelController;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.awt.*;
 
 /**
  * This panel displays copyright informations and a link to the website
  *
  * @author anthonyrey
  */
-public class AboutPanel extends JPanel implements ActionListener {
+public class AboutPanel extends JPanel  {
 
 
     private JLabel copyrightInfos;
@@ -21,6 +19,8 @@ public class AboutPanel extends JPanel implements ActionListener {
 
     public AboutPanel()
     {
+        BorderLayout layout = new BorderLayout();
+        this.setLayout(layout);
 
         copyrightInfos = new JLabel("<html><br/> LAPLE, Logiciel d'Apprentissage de Langues Etrangères. <br/><br/>" +
                 "Copyright (c) 2015 <br/>" +
@@ -38,6 +38,8 @@ public class AboutPanel extends JPanel implements ActionListener {
                 "You should have received a copy of the GNU General Public License<br/>" +
                 "along with this program.  If not, see http://www.gnu.org/licenses. <br/><br/><br/> <html>");
 
+        copyrightInfos.setHorizontalAlignment(JLabel.CENTER);
+
 
         ImageIcon image = new ImageIcon(getClass().getResource("/images/gplv3.png"));
         gplLogo = new JLabel(image);
@@ -49,31 +51,15 @@ public class AboutPanel extends JPanel implements ActionListener {
 
     private void createUI()
     {
-        this.add(copyrightInfos);
-        this.add(gplLogo);
-        this.add(linkToWebsite);
-        linkToWebsite.addActionListener(this);
+        this.add(copyrightInfos, BorderLayout.CENTER);
+
+        JPanel bottom = new JPanel();
+        bottom.add(gplLogo);
+        bottom.add(linkToWebsite);
+        this.add(bottom, BorderLayout.PAGE_END);
+
+        linkToWebsite.addActionListener(new AboutPanelController(this));
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource().equals(linkToWebsite)){
-            goToWebsite();
-        }
-
-    }
-
-    private void goToWebsite()
-    {
-
-        try {
-            java.awt.Desktop.getDesktop().browse(
-                    new URI("https://github.com/ReyAnthony/LAPLE"));
-        } catch (IOException | URISyntaxException e1) {
-
-            JOptionPane.showMessageDialog(this,
-                    "Seems like there is a browser related error.. hum...");
-        }
-    }
 }

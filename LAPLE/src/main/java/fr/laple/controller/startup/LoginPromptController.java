@@ -1,4 +1,4 @@
-package fr.laple.controller;
+package fr.laple.controller.startup;
 
 import fr.laple.model.user.User;
 import fr.laple.view.startup.LanguageSelection;

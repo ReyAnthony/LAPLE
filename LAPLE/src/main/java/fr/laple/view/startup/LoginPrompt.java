@@ -1,6 +1,6 @@
 package fr.laple.view.startup;
 
-import fr.laple.controller.LoginPromptController;
+import fr.laple.controller.startup.LoginPromptController;
 import fr.laple.tools.ScreenTools;
 
 import javax.swing.*;

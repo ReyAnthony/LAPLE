@@ -1,6 +1,6 @@
 package fr.laple.view.startup;
 
-import fr.laple.controller.LanguageSelectionController;
+import fr.laple.controller.startup.LanguageSelectionController;
 import fr.laple.tools.ScreenTools;
 
 import javax.swing.*;

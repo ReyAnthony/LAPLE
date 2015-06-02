@@ -4,8 +4,7 @@ import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.tools.ScreenTools;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -16,7 +15,7 @@ import java.awt.event.WindowListener;
  * @see fr.laple.view.MainPanel
  * @author anthonyrey
  */
-public class LapleGUI extends JFrame implements ActionListener, WindowListener {
+public class LapleGUI extends JFrame implements WindowListener {
 
     private JTabbedPane UIPane;
     private AboutPanel aboutPanel;
@@ -27,8 +26,6 @@ public class LapleGUI extends JFrame implements ActionListener, WindowListener {
 
     public LapleGUI(ILanguagePlugin plugin){
 
-        //charger lapleLanguagePlugin via le path + classloader
-        //pour recuperer les dicos de symboles du lang courant
         this.languagePlugin = plugin;
         languagePlugin.loadSymbolContainers();
         createUI();
@@ -38,10 +35,11 @@ public class LapleGUI extends JFrame implements ActionListener, WindowListener {
     {
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.addWindowListener(this);
-        this.setSize(560, 500);
+        this.setSize(700, 500);
+        this.setMinimumSize(new Dimension(560,500));
         this.setLocation(ScreenTools.getCenteredPoint(this.getWidth(), this.getHeight()));
         this.setTitle("LAPLE - Logiciel d'Apprentissage de Langues Etrangères");
-        this.setResizable(false);
+        this.setResizable(true);
 
         createPanes();
         this.setVisible(true);
@@ -63,12 +61,6 @@ public class LapleGUI extends JFrame implements ActionListener, WindowListener {
         UIPane.add("About LAPLE" , aboutPanel);
 
         this.add(UIPane);
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
 
     }
 

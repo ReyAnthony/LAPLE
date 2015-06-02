@@ -1,4 +1,4 @@
-package fr.laple.extensions.languages;
+package fr.laple.extensions.languages.plugins;
 
 import java.io.File;
 import java.net.MalformedURLException;

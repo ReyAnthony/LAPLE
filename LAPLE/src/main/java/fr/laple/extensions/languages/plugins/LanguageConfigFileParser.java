@@ -1,7 +1,4 @@
-package fr.laple.controller;
-
-import fr.laple.extensions.languages.PluginConfigObject;
-import fr.laple.extensions.languages.PluginLoadingException;
+package fr.laple.extensions.languages.plugins;
 
 import javax.json.Json;
 import javax.json.JsonArray;
