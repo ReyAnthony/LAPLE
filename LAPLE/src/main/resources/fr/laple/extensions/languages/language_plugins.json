@@ -1,0 +1,9 @@
+{
+  "lang_plugins":[
+    {
+      "name":"Japanese",
+      "path":"",
+      "class":"fr.laple.extensions.languages.japanese.LapleLanguagePlugin"
+    }
+  ]
+}

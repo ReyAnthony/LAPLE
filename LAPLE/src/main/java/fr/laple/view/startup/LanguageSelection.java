@@ -1,13 +1,9 @@
 package fr.laple.view.startup;
 
-import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.controller.LanguageSelectionController;
 import fr.laple.tools.ScreenTools;
-import fr.laple.view.LapleGUI;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,16 +12,18 @@ import java.util.List;
  * @author anthonyrey
  *
  */
-public class LanguageSelection extends JFrame implements ActionListener{
+public class LanguageSelection extends JFrame{
 
     private JLabel message;
     private JComboBox choices;
     private JButton validationButton;
     private JPanel panel;
-    private ILanguagePlugin llp;
+
 
     public LanguageSelection()
     {
+        LanguageSelectionController controller = new LanguageSelectionController(this);
+
         this.setSize(300,100);
         this.setLocation(ScreenTools.getCenteredPoint(this.getWidth(), this.getHeight()));
         this.setTitle("LAPLE - Language selection");
@@ -37,7 +35,7 @@ public class LanguageSelection extends JFrame implements ActionListener{
         choices = new JComboBox();
         panel = new JPanel();
 
-        List<String> languageList = getLanguageList();
+        List<String> languageList = controller.getLanguageList();
 
         for(String s : languageList)
         {
@@ -47,7 +45,7 @@ public class LanguageSelection extends JFrame implements ActionListener{
         panel.add(message);
         panel.add(choices);
         panel.add(validationButton);
-        validationButton.addActionListener(this);
+        validationButton.addActionListener(controller);
 
         this.setContentPane(panel);
 
@@ -55,34 +53,8 @@ public class LanguageSelection extends JFrame implements ActionListener{
 
     }
 
-    //TODO this is a stub
-    private List<String> getLanguageList()
-    {
 
-        List<String> languageList = new ArrayList<>();
-
-        try {
-            llp = (ILanguagePlugin) getClass().getClassLoader().loadClass("fr.laple.extensions.languages.japanese.LapleLanguagePlugin").newInstance();
-
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-            e.printStackTrace();
-        }
-
-        languageList.add(llp.getLanguageName());
-
-
-        return languageList;
-    }
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if(e.getSource().equals(validationButton)){
-            //We need a path here, but for testing purposes ...
-            new LapleGUI(llp);
-            this.dispose();
-        }
-
+    public JComboBox getChoices() {
+        return choices;
     }
 }
