@@ -55,5 +55,12 @@ public interface IExerciseMode {
      */
     public Symbol createSymbolFromAnswer(Image answer);
 
+    /**
+     * This method returns the name of the current exercise mode
+     *
+     * @return
+     */
+    public String getModeName();
+
 
 }

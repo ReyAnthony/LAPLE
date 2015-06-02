@@ -1,4 +1,4 @@
-package fr.laple.tools;
+package fr.laple.ztools;
 
 import java.awt.*;
 

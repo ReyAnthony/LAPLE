@@ -1,6 +1,6 @@
 package fr.laple;
 
-import fr.laple.view.startup.LanguageSelection;
+import fr.laple.view.startup.LoginPrompt;
 
 /**
  * LAPLE code entry point, it calls the Login Prompt
@@ -14,7 +14,7 @@ public class Main {
 
         //new SplashScreen();
         //new ExerciseUITest();
-        //new LoginPrompt();
-        new LanguageSelection();
+        new LoginPrompt();
+
     }
 }

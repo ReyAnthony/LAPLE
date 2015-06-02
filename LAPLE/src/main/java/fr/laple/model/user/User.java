@@ -15,7 +15,8 @@ public class User {
 
     private static User userInstance;
 
-    private User(){}
+    private User(){
+    }
 
     /**
      * @return An unique instance of User

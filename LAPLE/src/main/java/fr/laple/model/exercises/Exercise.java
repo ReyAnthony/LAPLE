@@ -64,4 +64,12 @@ public class Exercise {
         return solver.solveExercise(s, wantedSymbol, mode);
     }
 
+    /**
+     * @return The String in the right format for the wanted symbol
+     */
+    public String getQuestion()
+    {
+        return mode.getQuestion(wantedSymbol);
+    }
+
 }

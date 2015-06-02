@@ -1,21 +1,23 @@
 package fr.laple.view;
 
+import fr.laple.controller.WindowController;
 import fr.laple.model.language.ILanguagePlugin;
-import fr.laple.tools.ScreenTools;
+import fr.laple.view.exercises.ExerciseView;
+import fr.laple.view.staticpanels.AboutPanel;
+import fr.laple.view.staticpanels.MainPanel;
+import fr.laple.ztools.ScreenTools;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 /**
  * This class is the main GUI for LAPLE application. It contains all the panels
  *
- * @see fr.laple.view.AboutPanel
- * @see fr.laple.view.MainPanel
+ * @see fr.laple.view.staticpanels.AboutPanel
+ * @see fr.laple.view.staticpanels.MainPanel
  * @author anthonyrey
  */
-public class LapleGUI extends JFrame implements WindowListener {
+public class LapleGUI extends JFrame {
 
     private JTabbedPane UIPane;
     private AboutPanel aboutPanel;
@@ -27,14 +29,13 @@ public class LapleGUI extends JFrame implements WindowListener {
     public LapleGUI(ILanguagePlugin plugin){
 
         this.languagePlugin = plugin;
-        languagePlugin.loadSymbolContainers();
         createUI();
     }
 
     private void createUI()
     {
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        this.addWindowListener(this);
+        this.addWindowListener(new WindowController(this));
         this.setSize(700, 500);
         this.setMinimumSize(new Dimension(560,500));
         this.setLocation(ScreenTools.getCenteredPoint(this.getWidth(), this.getHeight()));
@@ -53,7 +54,9 @@ public class LapleGUI extends JFrame implements WindowListener {
         UIPane.add("Home Page" , mainPanel);
 
         UIPane.add("Lessons" , null);
-        UIPane.add("Exercises" , null);
+
+        UIPane.add("Exercises" , new ExerciseView());
+
         UIPane.add("Statistics" , null);
         UIPane.add("User settings" , null);
 
@@ -64,46 +67,9 @@ public class LapleGUI extends JFrame implements WindowListener {
 
     }
 
-    @Override
-    public void windowOpened(WindowEvent e) {
-
+    public JTabbedPane getUIPane()
+    {
+        return UIPane;
     }
 
-    @Override
-    public void windowClosing(WindowEvent e) {
-
-        int response = JOptionPane.showConfirmDialog(this,
-                "Do you really want to quit ? ", "LAPLE",
-                JOptionPane.YES_NO_OPTION);
-        if (response == JOptionPane.OK_OPTION){
-            this.dispose();
-        }
-
-    }
-
-    @Override
-    public void windowClosed(WindowEvent e) {
-        //ugly
-        System.exit(0);
-    }
-
-    @Override
-    public void windowIconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeiconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowActivated(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeactivated(WindowEvent e) {
-
-    }
 }

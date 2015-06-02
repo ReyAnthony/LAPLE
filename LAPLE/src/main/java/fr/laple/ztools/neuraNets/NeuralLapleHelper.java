@@ -1,4 +1,4 @@
-package fr.laple.tools.neuraNets;
+package fr.laple.ztools.neuraNets;
 
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.core.data.DataSet;

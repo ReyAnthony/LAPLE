@@ -1,5 +1,7 @@
 package fr.laple.model.language;
 
+import fr.laple.model.exercises.IExerciseMode;
+
 import java.util.ArrayList;
 
 /**
@@ -13,11 +15,10 @@ import java.util.ArrayList;
 public interface ILanguagePlugin {
 
     public String getLanguageName();
-    public void loadSymbolContainers();
-    public void loadLessons();
     //public LessonContainer getLessonContainer();
     public ArrayList<SymbolContainer> getSymbolContainer();
     public String getVersion();
+    public ArrayList<IExerciseMode> getExercisesModes();
 
 
 }

@@ -1,6 +1,6 @@
-package fr.laple.controller;
+package fr.laple.controller.staticpanels;
 
-import fr.laple.view.AboutPanel;
+import fr.laple.view.staticpanels.AboutPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

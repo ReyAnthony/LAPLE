@@ -6,7 +6,7 @@ import fr.laple.extensions.languages.japanese.LapleLanguagePlugin;
 import fr.laple.extensions.languages.japanese.neural.NeuralExerciseSolver;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
-import fr.laple.tools.neuraNets.NeuralLapleHelper;
+import fr.laple.ztools.neuraNets.NeuralLapleHelper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.neuroph.core.NeuralNetwork;
@@ -118,7 +118,6 @@ public class TestNeuralExercise {
     public void newExercise(){
 
         LapleLanguagePlugin plugin = new LapleLanguagePlugin();
-        plugin.loadSymbolContainers();
 
         SymbolContainer sContainer = plugin.getSymbolContainer().get(0);
 

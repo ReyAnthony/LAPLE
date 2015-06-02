@@ -32,4 +32,9 @@ public class ExModeUserLangTranscriptLang implements IExerciseMode {
     public Symbol createSymbolFromAnswer(Image anwser) {
         return new Symbol(null,null,anwser,null,null,null);
     }
+
+    @Override
+    public String getModeName() {
+        return "User language to teached language";
+    }
 }

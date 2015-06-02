@@ -1,4 +1,4 @@
-package fr.laple.view;
+package fr.laple.view.staticpanels;
 
 import javax.swing.*;
 import java.awt.*;

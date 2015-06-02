@@ -1,5 +1,8 @@
 package fr.laple.extensions.languages.japanese;
 
+import fr.laple.model.exercises.ExModeTranscriptLangUserLang;
+import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
+import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
@@ -20,17 +23,45 @@ import java.util.ArrayList;
 public class LapleLanguagePlugin implements ILanguagePlugin{
 
     private ArrayList<SymbolContainer> symbolContainers;
+    private ArrayList<IExerciseMode> exerciseModes;
+
+    public LapleLanguagePlugin() {
+
+        loadSymbolContainers();
+        loadLessons();
+        populateExerciseModeList();
+    }
+
+    //TODO Get by name
+    @Override
+    public ArrayList<SymbolContainer> getSymbolContainer() {
+        return symbolContainers;
+    }
+
+    @Override
+    public String getVersion() {
+        return "1.0";
+    }
+
+    @Override
+    public ArrayList<IExerciseMode> getExercisesModes() {
+        return exerciseModes;
+    }
 
     @Override
     public String getLanguageName() {
         return "Japanese";
     }
 
-    @Override
-    public void loadSymbolContainers() {
+    private void populateExerciseModeList()
+    {
+        exerciseModes = new ArrayList<>();
+        exerciseModes.add(new ExModeTranscriptLangUserLang());
+        exerciseModes.add(new ExModeUserLangTranscriptLang());
+    }
 
-        //should load json file
-        //but we'll do it by hand for testing purpose
+    private void loadSymbolContainers() {
+
         symbolContainers = new ArrayList<>();
 
         try{
@@ -63,19 +94,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
 
     }
 
-    @Override
-    public void loadLessons() {
+    private void loadLessons() {
 
-    }
-
-    //TODO Get by name
-    @Override
-    public ArrayList<SymbolContainer> getSymbolContainer() {
-        return symbolContainers;
-    }
-
-    @Override
-    public String getVersion() {
-        return "1.0";
     }
 }
