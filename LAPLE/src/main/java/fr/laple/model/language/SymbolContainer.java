@@ -21,7 +21,7 @@ public class SymbolContainer {
     public SymbolContainer(String type)
     {
 
-        type = type;
+        this.type = type;
         dictionnary = new HashMap<>();
         //on le popule
 
