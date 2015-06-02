@@ -77,45 +77,38 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
        try {
            InputStream lesson = getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/lessons.json");
            JsonReader read = Json.createReader(lesson);
-          JsonObject jsonObject = read.readObject();
+           JsonObject jsonObject = read.readObject();
 
            read.close();
            lesson.close();
 
-          JsonObject objetArray = jsonObject.getJsonObject("lesson_type").getJsonArray("katakana").getJsonObject(0);
-           System.out.println("Hello");
-          JsonArray jsona = objetArray.getJsonArray("learning_order");
-           System.out.println("hello");
+           JsonObject objetArray = jsonObject.getJsonObject("lesson_type").getJsonArray("katakana").getJsonObject(0);
+
+           JsonArray jsona = objetArray.getJsonArray("learning_order");
+
            jsona.toString();
-           System.out.println("Hey");
            String val= "";
+           // get all the elements of the Array
+           symbolContainers.add(new SymbolContainer("katakana"));
            for(int i = 0;i<jsona.size();i++){
-                val+=jsona.getString(i);
+               // i use variable for stock all the array for the test.
+               val+=jsona.getString(i);
            }
-           System.out.println("test");
 
            objetArray = jsonObject.getJsonObject("lesson_type").getJsonArray("hiragana").getJsonObject(0);
-
            jsona = objetArray.getJsonArray("learning_order");
-           System.out.println("hello");
            jsona.toString();
-           System.out.println("hey");
            String val2 = "";
-           for(int i=0;i<jsona.size();i++){
-              // SymbolContainer containerSymbole = new SymbolContainer()
-              // symbolContainers.add()
-               val2+=jsona.getString(i);
+           symbolContainers.add(new SymbolContainer("hiragana"));
+           for(int i=0;i<jsona.size();i++) {
+               // i use variable for stock all the array for the test.
+               val2 += jsona.getString(i);
            }
-           System.out.println("test");
-          objetArray = jsonObject.getJsonObject("lesson_type").getJsonObject("kanji").getJsonArray("list").getJsonObject(0);
-           System.out.println("test");
-           String vael =  objetArray.getString("name");
-           String vael2 = objetArray.getString("symbol");
-           jsona = objetArray.getJsonArray("list");
-          String name = jsona.getString(0);
-          String symbole = jsona.getString(1);
-           System.out.println("test2");
-
+           // Get The Kanji Party.
+           objetArray = jsonObject.getJsonObject("lesson_type").getJsonObject("kanji").getJsonArray("list").getJsonObject(0);
+           symbolContainers.add(new SymbolContainer("hiragana"));
+           String kanjiName =  objetArray.getString("name");
+           String kanjiSymbole = objetArray.getString("symbol");
 
 
 
