@@ -1,6 +1,7 @@
 package fr.laple.model.language;
 
 import fr.laple.model.exercises.IExerciseMode;
+import fr.laple.model.exercises.IExerciseSolver;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public interface ILanguagePlugin {
     public ArrayList<SymbolContainer> getSymbolContainer();
     public String getVersion();
     public ArrayList<IExerciseMode> getExercisesModes();
+    public ArrayList<IExerciseSolver> getExercisesSolvingModes();
 
 
 }

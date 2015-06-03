@@ -60,4 +60,10 @@ public class NeuralExerciseSolver implements IExerciseSolver {
         return toReturn;
 
     }
+
+    public String toString()
+    {
+        return "Neural Exercise Solver";
+    }
+
 }

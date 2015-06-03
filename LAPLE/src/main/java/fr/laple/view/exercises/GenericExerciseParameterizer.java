@@ -1,5 +1,11 @@
 package fr.laple.view.exercises;
 
+import fr.laple.controller.exercises.ExerciseParameterizerController;
+import fr.laple.model.exercises.IExerciseMode;
+import fr.laple.model.exercises.IExerciseSolver;
+import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.model.language.SymbolContainer;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,46 +15,68 @@ import java.awt.*;
 public class GenericExerciseParameterizer extends JPanel{
 
     private JLabel questionModeMessage;
-    private JList<String> questions;
+    private JLabel symbolModeMessage;
+    private JComboBox<SymbolContainer> symbolMode;
     private JButton okButton;
-    private JComboBox<String> answers;
+    private JComboBox<IExerciseMode> questionMode;
+    private JComboBox<IExerciseSolver> answerMode;
     private JLabel answerModeMessage;
 
-    public GenericExerciseParameterizer()
+    public GenericExerciseParameterizer(ILanguagePlugin model)
     {
-        BorderLayout layout = new BorderLayout();
+
+        GridLayout layout = new GridLayout(4,1);
         this.setLayout(layout);
 
         this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
+        JPanel symbolModePanel = new JPanel();
+        symbolModeMessage = new JLabel("Select a symbol mode :");
+        symbolModeMessage.setHorizontalAlignment(JLabel.CENTER);
+        symbolModeMessage.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+        symbolMode = new JComboBox<>();
+
+
+        symbolModePanel.add(symbolModeMessage);
+        symbolModePanel.add(symbolMode);
+
         questionModeMessage = new JLabel("Select a question mode :");
         questionModeMessage.setHorizontalAlignment(JLabel.CENTER);
         questionModeMessage.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        questions = new JList<>();
 
-        DefaultListModel<String> model = new DefaultListModel<>();
-        model.add(0, "test");
-        model.add(1, "test2");
-
-        questions.setModel(model);
-        questions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        questionMode = new JComboBox<>();
+        okButton = new JButton("OK");
 
         JPanel panel = new JPanel();
         answerModeMessage = new JLabel("Select an answer mode :");
-        answers = new JComboBox<>();
-        answers.addItem("test");
-        okButton = new JButton("OK");
+        answerMode = new JComboBox<>();
 
         panel.add(answerModeMessage);
-        panel.add(answers);
+        panel.add(answerMode);
         panel.add(okButton);
 
-
-
+        this.add(symbolModePanel, BorderLayout.PAGE_START);
         this.add(questionModeMessage, BorderLayout.PAGE_START);
-        this.add(questions, BorderLayout.CENTER);
+        this.add(questionMode, BorderLayout.CENTER);
         this.add(panel, BorderLayout.PAGE_END);
 
+        ExerciseParameterizerController controller = new ExerciseParameterizerController(model, this);
+        okButton.addActionListener(controller);
+        questionMode.addItemListener(controller);
+
+    }
+
+    public JComboBox<SymbolContainer> getSymbolMode() {
+        return symbolMode;
+    }
+
+    public JComboBox<IExerciseMode> getQuestionMode() {
+        return questionMode;
+    }
+
+    public JComboBox<IExerciseSolver> getAnswerMode() {
+        return answerMode;
     }
 
 }

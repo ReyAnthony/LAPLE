@@ -45,6 +45,11 @@ public class SymbolContainer {
        dictionnary.put(s.getUserLangTranscript(), s);
     }
 
+    public String getType() {
+        return type;
+    }
 
-
+    public String toString() {
+        return this.getType();
+    }
 }

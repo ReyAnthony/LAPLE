@@ -37,4 +37,9 @@ public class ExModeTranscriptLangUserLang implements IExerciseMode {
     public String getModeName() {
         return "Teached language to user language";
     }
+
+    public String toString()
+    {
+        return this.getModeName();
+    }
 }

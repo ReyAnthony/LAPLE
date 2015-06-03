@@ -1,9 +1,8 @@
 package fr.laple.extensions.languages.japanese;
 
 
-import fr.laple.model.exercises.ExModeTranscriptLangUserLang;
-import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
-import fr.laple.model.exercises.IExerciseMode;
+import fr.laple.extensions.languages.japanese.neural.NeuralExerciseSolver;
+import fr.laple.model.exercises.*;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
@@ -27,12 +26,14 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
 
     private ArrayList<SymbolContainer> symbolContainers;
     private ArrayList<IExerciseMode> exerciseModes;
+    private ArrayList<IExerciseSolver> exerciseSolvingModes;
 
     public LapleLanguagePlugin() {
 
         loadSymbolContainers();
         loadLessons();
         populateExerciseModeList();
+        populateExerciseSolvingModesList();
     }
 
     //TODO Get by name
@@ -52,8 +53,20 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     }
 
     @Override
+    public ArrayList<IExerciseSolver> getExercisesSolvingModes() {
+        return exerciseSolvingModes;
+    }
+
+    @Override
     public String getLanguageName() {
         return "Japanese";
+    }
+
+    private void populateExerciseSolvingModesList()
+    {
+        exerciseSolvingModes = new ArrayList<>();
+        exerciseSolvingModes.add(new StandardExerciseSolver());
+        exerciseSolvingModes.add(new NeuralExerciseSolver());
     }
 
     private void populateExerciseModeList()
@@ -99,6 +112,8 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
 
     private void loadLessons() {
 
+        //TODO nothing works, as expected ..
+        /*
        try {
            InputStream lesson = getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/lessons.json");
            JsonReader read = Json.createReader(lesson);
@@ -140,7 +155,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
        }catch(Exception e){
             System.out.println("erreur e "+e.getMessage());
        }
-
+        */
     }
 
     public String readFile(String fileName) throws IOException {

@@ -1,10 +1,7 @@
 package fr.laple.view.exercises;
 
 import fr.laple.controller.exercises.ExerciseController;
-import fr.laple.extensions.languages.japanese.LapleLanguagePlugin;
-import fr.laple.model.exercises.*;
-import fr.laple.model.language.Symbol;
-import fr.laple.model.language.SymbolContainer;
+import fr.laple.model.exercises.Exercise;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,23 +16,8 @@ public class ExerciseView extends JPanel {
     private JTextField answer;
     private JButton validationButton;
 
-    public ExerciseView()
+    public ExerciseView(Exercise ex)
     {
-        LapleLanguagePlugin plugin = new LapleLanguagePlugin();
-
-        SymbolContainer sContainer = plugin.getSymbolContainer().get(0);
-
-        IExerciseMode mode = new ExModeTranscriptLangUserLang();
-        StandardExerciseSolver solver = new StandardExerciseSolver();
-
-        Symbol wantedSymbol = sContainer.getSymbol("a");
-        Exercise ex = null;
-
-        try {
-            ex = new Exercise(wantedSymbol, mode, solver, sContainer);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
@@ -61,11 +43,10 @@ public class ExerciseView extends JPanel {
         gbc.gridy = 3;
         this.add(validationButton, gbc);
 
-        ExerciseController controller = new ExerciseController(this, ex );
+        ExerciseController controller = new ExerciseController(this, ex);
         validationButton.addActionListener(controller);
 
     }
-
 
     public JLabel getSymbol() {
         return symbol;
@@ -79,7 +60,4 @@ public class ExerciseView extends JPanel {
         return answer;
     }
 
-    public void setAnswer(JTextField answer) {
-        this.answer = answer;
-    }
 }

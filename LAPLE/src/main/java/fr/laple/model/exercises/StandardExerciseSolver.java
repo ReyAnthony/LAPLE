@@ -17,6 +17,11 @@ public class StandardExerciseSolver implements IExerciseSolver {
 
     @Override
     public void testIfModeAndSolverAreCompatible(IExerciseMode mode) {
-        //Should be compatible with everthing so we won't do anything
+        //Should be compatible with everything so we won't do anything
+    }
+
+    public String toString()
+    {
+        return "Standard Exercise solver";
     }
 }
