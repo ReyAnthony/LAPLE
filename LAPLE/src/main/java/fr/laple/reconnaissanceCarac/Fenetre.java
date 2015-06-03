@@ -1,6 +1,8 @@
 package reconnaissanceCarac;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -18,8 +22,8 @@ public class Fenetre extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private Draw pan = new Draw();
 	private JPanel container= new JPanel();
-	private Valider bouton= new Valider("Valider");
-	
+	private JButton bouton= new JButton("Valider");
+	private JButton bouton2= new JButton("Reset");
 	
 	public Fenetre() throws CloneNotSupportedException {
 	// taille de la fenêtre de l'app est calculée en recupérant 
@@ -38,20 +42,39 @@ public class Fenetre extends JFrame{
 		this.setContentPane(container);
 		//bouton au nord de la panel
 		this.getContentPane().add(bouton, BorderLayout.NORTH);
+		this.getContentPane().add(bouton2, BorderLayout.SOUTH);
 		this.setVisible(true);
 		//valide l'évenement lorsque l'on clique sur le bouton
-		while(!bouton.isValidation())
-			bouton.validate();
 		
 		readWriteFile('r');
 		
-		if(pan.compareArray()){
-			pan.setResult("caractère reconnu");
-		}
-		else{
-			pan.setResult("caractère non reconnu");
-		}
-		repaint();
+		this.bouton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(pan.compareArray()){
+					pan.setResult("caractère reconnu");
+					repaint();
+				}
+				else{
+					pan.setResult("caractère non reconnu");
+					repaint();
+				}
+			}
+		});
+		
+		this.bouton2.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				pan.getPoints().clear();
+				pan.setResult("Dessiner T");
+				repaint();
+			}
+			
+		});
 	}
 	
 	//Pour écrire et lire des coordonnées à partir du fichier coodonnee
