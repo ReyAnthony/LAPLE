@@ -4,15 +4,19 @@ import fr.laple.model.exercises.Exercise;
 import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.IExerciseSolver;
 import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.view.exercises.ExerciseView;
 import fr.laple.view.exercises.GenericExerciseParameterizer;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by anthonyrey on 03/06/2015.
@@ -22,15 +26,15 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
     private ILanguagePlugin model;
     private GenericExerciseParameterizer parameterizer;
 
-    public ExerciseParameterizerController(ILanguagePlugin model, GenericExerciseParameterizer parameterizer)
-    {
+    public ExerciseParameterizerController(ILanguagePlugin model, GenericExerciseParameterizer parameterizer) {
+
         this.model = model;
         this.parameterizer = parameterizer;
         setComboBoxes();
     }
 
-    private void setComboBoxes()
-    {
+    private void setComboBoxes() {
+
         ComboBoxModel<SymbolContainer> comboModel =
                 new DefaultComboBoxModel<>(model.getSymbolContainer().toArray(new SymbolContainer[]{}));
         parameterizer.getSymbolMode().setModel(comboModel);
@@ -39,8 +43,29 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
                 new DefaultComboBoxModel<>(model.getExercisesModes().toArray(new IExerciseMode[]{}));
         parameterizer.getQuestionMode().setModel(comboModelBis);
 
+        setSolverCombo();
+
+    }
+
+    private void setSolverCombo()
+    {
+
+        ArrayList<IExerciseSolver> solvers = new ArrayList<>();
+
+        //selecting solver that are compatible with the current questionMode
+        for(IExerciseSolver solver :  model.getExercisesSolvingModes())
+        {
+            IExerciseMode selectedExerciseMode = (IExerciseMode) parameterizer.getQuestionMode().getSelectedItem();
+
+            if(solver.testIfModeAndSolverAreCompatible(selectedExerciseMode))
+            {
+                solvers.add(solver);
+            }
+
+        }
+
         ComboBoxModel<IExerciseSolver> comboModelTer = new DefaultComboBoxModel<>
-                (model.getExercisesSolvingModes().toArray(new IExerciseSolver[]{}));
+                (solvers.toArray(new IExerciseSolver[]{}));
         parameterizer.getAnswerMode().setModel(comboModelTer);
 
     }
@@ -52,16 +77,23 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
         IExerciseMode mode = (IExerciseMode) parameterizer.getQuestionMode().getSelectedItem();
         IExerciseSolver solver = (IExerciseSolver) parameterizer.getAnswerMode().getSelectedItem();
 
-        //TODO random and BDD check
+        //TODO BDD check
+
+        //Random test
+
+        ArrayList<Symbol> sym = new ArrayList<>(sc.getSymbolMap().values());
+        Collections.shuffle(sym);
 
         Exercise ex = null;
         try {
-            ex = new Exercise( sc.getSymbol("a"), mode, solver, sc);
+            ex = new Exercise( sym.get(0) , mode, solver, sc);
         } catch (Exception e1) {
             e1.printStackTrace();
         }
 
+        parameterizer.invalidate();
         parameterizer.removeAll();
+        parameterizer.setLayout(new BorderLayout());
         parameterizer.add(new ExerciseView(ex));
         parameterizer.revalidate();
         parameterizer.repaint();
@@ -70,6 +102,9 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
 
     @Override
     public void itemStateChanged(ItemEvent e) {
+
+        //we set the comboBoxes again;
+        setSolverCombo();
 
     }
 }

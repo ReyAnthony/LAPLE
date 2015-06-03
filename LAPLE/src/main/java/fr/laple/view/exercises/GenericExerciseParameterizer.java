@@ -22,8 +22,7 @@ public class GenericExerciseParameterizer extends JPanel{
     private JComboBox<IExerciseSolver> answerMode;
     private JLabel answerModeMessage;
 
-    public GenericExerciseParameterizer(ILanguagePlugin model)
-    {
+    public GenericExerciseParameterizer(ILanguagePlugin model) {
 
         GridLayout layout = new GridLayout(4,1);
         this.setLayout(layout);

@@ -3,7 +3,6 @@ package fr.laple.extensions.languages.japanese.neural;
 import fr.laple.model.exercises.ExModeTranscriptLangUserLang;
 import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.IExerciseSolver;
-import fr.laple.model.exercises.exceptions.ExcerciseModeException;
 import fr.laple.model.language.Symbol;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.imgrec.image.ImageJ2SE;
@@ -27,10 +26,12 @@ public class NeuralExerciseSolver implements IExerciseSolver {
     }
 
     @Override
-    public void testIfModeAndSolverAreCompatible(IExerciseMode mode) throws ExcerciseModeException {
+    public boolean testIfModeAndSolverAreCompatible(IExerciseMode mode) {
 
         if(mode instanceof ExModeTranscriptLangUserLang)
-           throw new ExcerciseModeException();
+           return false;
+        else
+            return true;
 
     }
 

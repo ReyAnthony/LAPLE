@@ -1,6 +1,5 @@
 package fr.laple.model.exercises;
 
-import fr.laple.model.exercises.exceptions.ExcerciseModeException;
 import fr.laple.model.language.Symbol;
 
 
@@ -33,11 +32,10 @@ public interface IExerciseSolver {
      * This method is checking if the current solver is compatible with
      * the selected mode.
      *
-     * It will throw an ExerciseModeException if they are not compatible
-     *
      * @param mode The selected mode
+     * @return False if they are not compatible, true if they are
      */
-    public void testIfModeAndSolverAreCompatible(IExerciseMode mode) throws ExcerciseModeException;
+    public boolean testIfModeAndSolverAreCompatible(IExerciseMode mode);
 
 
 }

@@ -89,7 +89,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
             hiragana.close();
 
             JsonArray jsonSymbols = jsonObject.getJsonArray("hiragana");
-            SymbolContainer hiraganaContainer = new SymbolContainer("hiragana");
+            SymbolContainer hiraganaContainer = new SymbolContainer("Hiragana");
             symbolContainers.add(hiraganaContainer);
 
             for(int i = 0; i < jsonSymbols.size(); i++)
