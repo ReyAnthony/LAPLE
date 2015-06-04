@@ -1,4 +1,4 @@
-package fr.laple.model.exercises.solvercontainers;
+package fr.laple.model.exercises.answers;
 
 import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.IExerciseSolver;
@@ -12,6 +12,7 @@ public abstract class AbstractAnswerMode {
     public abstract IExerciseSolver getSolver();
     public abstract AbstractExerciseView getCorrespondingView();
     public abstract boolean testIfAnswerAndQuestionAreCompatible(IExerciseMode mode);
+    public abstract Class getAssociatedActionListener();
 
     public String toString(){
         return "Please redefine this method";

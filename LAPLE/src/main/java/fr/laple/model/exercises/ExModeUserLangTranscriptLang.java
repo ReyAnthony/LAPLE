@@ -18,7 +18,7 @@ public class ExModeUserLangTranscriptLang implements IExerciseMode {
     }
 
     @Override
-    public String getAnswers(Symbol answer) {
+    public String getAnswer(Symbol answer) {
 
         return answer.getSymbol();
     }

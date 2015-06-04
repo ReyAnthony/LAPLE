@@ -1,4 +1,4 @@
-package fr.laple.model.exercises.solvercontainers;
+package fr.laple.model.exercises.answers;
 
 import fr.laple.extensions.languages.japanese.neural.NeuralExerciseSolver;
 import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
@@ -17,11 +17,14 @@ public class DrawingMode extends AbstractAnswerMode {
     //put drawing mode in japanese folder ?
     private IExerciseSolver solver;
     private AbstractExerciseView view;
+    private Class listener;
 
     public DrawingMode()
     {
         this.solver = new NeuralExerciseSolver();
         this.view = new FreeInputExcerciseView();
+        //TODO drawing mode
+        this.listener = null;
 
     }
 
@@ -43,6 +46,12 @@ public class DrawingMode extends AbstractAnswerMode {
         else
             return false;
     }
+
+    @Override
+    public Class getAssociatedActionListener() {
+        return listener;
+    }
+
 
     public String toString()
     {

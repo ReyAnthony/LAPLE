@@ -72,4 +72,17 @@ public class Exercise {
         return mode.getQuestion(wantedSymbol);
     }
 
+    /**
+     * @return The String in the right format for the wanted symbol
+     */
+    public String getAnwser()
+    {
+        return mode.getAnswer(wantedSymbol);
+    }
+
+    public String getInAnswerFormat(Symbol s)
+    {
+        return mode.getAnswer(s);
+    }
+
 }

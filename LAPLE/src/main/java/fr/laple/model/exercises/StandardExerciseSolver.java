@@ -12,7 +12,7 @@ public class StandardExerciseSolver implements IExerciseSolver {
     public boolean solveExercise(Symbol answer, Symbol wanted, IExerciseMode mode) {
 
         //get the right answer member from symbol according to the set mode
-        return mode.getAnswers(answer).equals(mode.getAnswers(wanted));
+        return mode.getAnswer(answer).equals(mode.getAnswer(wanted));
     }
 
     public String toString()

@@ -29,7 +29,7 @@ public interface IExerciseMode {
      * @param answer The symbol corresponding to one of the possible answer in QCM mode
      * @return a String containing the right format of the symbol
      */
-    public String getAnswers(Symbol answer);
+    public String getAnswer(Symbol answer);
 
     /**
      * This method returns a Symbol containing only the parameter corresponding to the needed format for answer

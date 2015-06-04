@@ -1,7 +1,7 @@
 package fr.laple.model.language;
 
 import fr.laple.model.exercises.IExerciseMode;
-import fr.laple.model.exercises.solvercontainers.AbstractAnswerMode;
+import fr.laple.model.exercises.answers.AbstractAnswerMode;
 
 import java.util.ArrayList;
 

@@ -1,26 +1,30 @@
-package fr.laple.model.exercises.solvercontainers;
+package fr.laple.model.exercises.answers;
 
-import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
+import fr.laple.controller.exercises.QcmInputController;
 import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.IExerciseSolver;
 import fr.laple.model.exercises.StandardExerciseSolver;
 import fr.laple.view.exercises.AbstractExerciseView;
-import fr.laple.view.exercises.FreeInputExcerciseView;
+import fr.laple.view.exercises.QCMExerciseView;
 
 /**
  * Created by anthonyrey on 04/06/2015.
  */
-public class FreeInputMode extends AbstractAnswerMode {
+public class QcmMode extends AbstractAnswerMode {
 
+    //TODO add right view
     private IExerciseSolver solver;
     private AbstractExerciseView view;
+    private Class listener;
 
-    public FreeInputMode()
+    public QcmMode()
     {
         this.solver = new StandardExerciseSolver();
-        this.view = new FreeInputExcerciseView();
+        this.view = new QCMExerciseView();
+        this.listener = QcmInputController.class;
 
     }
+
     @Override
     public IExerciseSolver getSolver() {
         return solver;
@@ -34,14 +38,17 @@ public class FreeInputMode extends AbstractAnswerMode {
     @Override
     public boolean testIfAnswerAndQuestionAreCompatible(IExerciseMode mode) {
 
-        if (mode instanceof ExModeUserLangTranscriptLang)
-            return false;
-        else
-            return true;
+        return true;
+    }
+
+    @Override
+    public Class getAssociatedActionListener() {
+        return listener;
     }
 
     public String toString()
     {
-        return "Free input";
+        return "QCM mode";
+
     }
 }

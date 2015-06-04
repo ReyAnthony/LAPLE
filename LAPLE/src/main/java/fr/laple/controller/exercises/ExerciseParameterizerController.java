@@ -3,12 +3,12 @@ package fr.laple.controller.exercises;
 import fr.laple.model.exercises.Exercise;
 import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.IExerciseSolver;
-import fr.laple.model.exercises.solvercontainers.AbstractAnswerMode;
+import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.view.exercises.AbstractExerciseView;
-import fr.laple.view.exercises.GenericExerciseParameterizer;
+import fr.laple.view.exercises.ExerciseParameterizer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,9 +25,9 @@ import java.util.Collections;
 public class ExerciseParameterizerController implements ActionListener, ItemListener{
 
     private ILanguagePlugin model;
-    private GenericExerciseParameterizer parameterizer;
+    private ExerciseParameterizer parameterizer;
 
-    public ExerciseParameterizerController(ILanguagePlugin model, GenericExerciseParameterizer parameterizer) {
+    public ExerciseParameterizerController(ILanguagePlugin model, ExerciseParameterizer parameterizer) {
 
         this.model = model;
         this.parameterizer = parameterizer;
@@ -76,9 +76,9 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
 
         SymbolContainer sc = (SymbolContainer) parameterizer.getSymbolMode().getSelectedItem();
         IExerciseMode mode = (IExerciseMode) parameterizer.getQuestionMode().getSelectedItem();
-        AbstractAnswerMode solverContainer = (AbstractAnswerMode) parameterizer.getAnswerMode().getSelectedItem();
-        IExerciseSolver solver =  solverContainer.getSolver();
-        AbstractExerciseView exView = solverContainer.getCorrespondingView();
+        AbstractAnswerMode answerMode = (AbstractAnswerMode) parameterizer.getAnswerMode().getSelectedItem();
+        IExerciseSolver solver =  answerMode.getSolver();
+        AbstractExerciseView exView = answerMode.getCorrespondingView();
 
         //TODO BDD check
 
@@ -94,15 +94,28 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
             e1.printStackTrace();
         }
 
-        ExerciseController exerciseController = new ExerciseController(exView, ex);
+        try {
 
-        parameterizer.invalidate();
-        parameterizer.removeAll();
-        parameterizer.setLayout(new BorderLayout());
-        parameterizer.add(exView);
-        exView.addActionListener(exerciseController);
-        parameterizer.revalidate();
-        parameterizer.repaint();
+            IExerciseController listener = (IExerciseController) answerMode.getAssociatedActionListener().newInstance();
+
+            parameterizer.invalidate();
+            parameterizer.removeAll();
+            parameterizer.setLayout(new BorderLayout());
+            parameterizer.add(exView);
+            exView.addActionListener(listener);
+            parameterizer.revalidate();
+            parameterizer.repaint();
+
+            listener.setExercise(ex);
+            listener.setSymbolContainer(sc);
+            listener.setView(exView);
+
+        } catch (InstantiationException e1) {
+            e1.printStackTrace();
+        } catch (IllegalAccessException e1) {
+            e1.printStackTrace();
+        }
+
 
     }
 
