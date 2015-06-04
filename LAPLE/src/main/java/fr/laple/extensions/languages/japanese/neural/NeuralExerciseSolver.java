@@ -64,7 +64,7 @@ public class NeuralExerciseSolver implements IExerciseSolver {
 
     public String toString()
     {
-        return "Neural Exercise Solver";
+        return "Neural Exercise Solver (Drawing)";
     }
 
 }

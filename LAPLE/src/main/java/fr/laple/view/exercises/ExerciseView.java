@@ -1,10 +1,8 @@
 package fr.laple.view.exercises;
 
-import fr.laple.controller.exercises.ExerciseController;
-import fr.laple.model.exercises.Exercise;
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Created by anthonyrey on 02/06/2015.
@@ -16,7 +14,7 @@ public class ExerciseView extends JPanel {
     private JTextField answer;
     private JButton validationButton;
 
-    public ExerciseView(Exercise ex)
+    public ExerciseView()
     {
 
         GridBagLayout layout = new GridBagLayout();
@@ -43,9 +41,11 @@ public class ExerciseView extends JPanel {
         gbc.gridy = 3;
         this.add(validationButton, gbc);
 
-        ExerciseController controller = new ExerciseController(this, ex);
-        validationButton.addActionListener(controller);
+    }
 
+    public void addActionListener(ActionListener al)
+    {
+        validationButton.addActionListener(al);
     }
 
     public JLabel getSymbol() {

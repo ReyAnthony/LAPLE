@@ -3,6 +3,7 @@ package fr.laple.controller.exercises;
 import fr.laple.model.exercises.Exercise;
 import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.IExerciseSolver;
+import fr.laple.model.exercises.solvercontainers.SolverContainer;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
@@ -50,22 +51,22 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
     private void setSolverCombo()
     {
 
-        ArrayList<IExerciseSolver> solvers = new ArrayList<>();
+        ArrayList<SolverContainer> solvers = new ArrayList<>();
 
         //selecting solver that are compatible with the current questionMode
-        for(IExerciseSolver solver :  model.getExercisesSolvingModes())
+        for(SolverContainer solver :  model.getExercisesSolvingModes())
         {
             IExerciseMode selectedExerciseMode = (IExerciseMode) parameterizer.getQuestionMode().getSelectedItem();
 
-            if(solver.testIfModeAndSolverAreCompatible(selectedExerciseMode))
+            if(solver.getSolver().testIfModeAndSolverAreCompatible(selectedExerciseMode))
             {
                 solvers.add(solver);
             }
 
         }
 
-        ComboBoxModel<IExerciseSolver> comboModelTer = new DefaultComboBoxModel<>
-                (solvers.toArray(new IExerciseSolver[]{}));
+        ComboBoxModel<SolverContainer> comboModelTer = new DefaultComboBoxModel<>
+                (solvers.toArray(new SolverContainer[]{}));
         parameterizer.getAnswerMode().setModel(comboModelTer);
 
     }
@@ -75,7 +76,9 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
 
         SymbolContainer sc = (SymbolContainer) parameterizer.getSymbolMode().getSelectedItem();
         IExerciseMode mode = (IExerciseMode) parameterizer.getQuestionMode().getSelectedItem();
-        IExerciseSolver solver = (IExerciseSolver) parameterizer.getAnswerMode().getSelectedItem();
+        SolverContainer solverContainer = (SolverContainer) parameterizer.getAnswerMode().getSelectedItem();
+        IExerciseSolver solver =  solverContainer.getSolver();
+        ExerciseView exView =(ExerciseView) solverContainer.getCorrespondingView();
 
         //TODO BDD check
 
@@ -91,10 +94,15 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
             e1.printStackTrace();
         }
 
+        ExerciseController exerciseController = new ExerciseController(exView, ex);
+
         parameterizer.invalidate();
         parameterizer.removeAll();
         parameterizer.setLayout(new BorderLayout());
-        parameterizer.add(new ExerciseView(ex));
+
+        parameterizer.add(exView);
+        exView.addActionListener(exerciseController);
+        
         parameterizer.revalidate();
         parameterizer.repaint();
 

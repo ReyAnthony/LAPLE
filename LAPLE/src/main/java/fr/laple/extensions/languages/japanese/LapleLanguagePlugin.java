@@ -1,8 +1,13 @@
 package fr.laple.extensions.languages.japanese;
 
 
-import fr.laple.extensions.languages.japanese.neural.NeuralExerciseSolver;
-import fr.laple.model.exercises.*;
+import fr.laple.model.exercises.ExModeTranscriptLangUserLang;
+import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
+import fr.laple.model.exercises.IExerciseMode;
+import fr.laple.model.exercises.solvercontainers.DrawingMode;
+import fr.laple.model.exercises.solvercontainers.FreeInputMode;
+import fr.laple.model.exercises.solvercontainers.QcmMode;
+import fr.laple.model.exercises.solvercontainers.SolverContainer;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
@@ -26,7 +31,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
 
     private ArrayList<SymbolContainer> symbolContainers;
     private ArrayList<IExerciseMode> exerciseModes;
-    private ArrayList<IExerciseSolver> exerciseSolvingModes;
+    private ArrayList<SolverContainer> exerciseSolvingModes;
 
     public LapleLanguagePlugin() {
 
@@ -53,7 +58,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     }
 
     @Override
-    public ArrayList<IExerciseSolver> getExercisesSolvingModes() {
+    public ArrayList<SolverContainer> getExercisesSolvingModes() {
         return exerciseSolvingModes;
     }
 
@@ -65,8 +70,10 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     private void populateExerciseSolvingModesList()
     {
         exerciseSolvingModes = new ArrayList<>();
-        exerciseSolvingModes.add(new StandardExerciseSolver());
-        exerciseSolvingModes.add(new NeuralExerciseSolver());
+        exerciseSolvingModes.add(new QcmMode());
+        exerciseSolvingModes.add(new DrawingMode());
+        exerciseSolvingModes.add(new FreeInputMode());
+
     }
 
     private void populateExerciseModeList()

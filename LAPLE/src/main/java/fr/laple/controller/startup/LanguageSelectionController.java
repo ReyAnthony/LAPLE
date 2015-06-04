@@ -40,7 +40,6 @@ public class LanguageSelectionController implements ActionListener {
         }
     }
 
-    //TODO Read a config file to know where are the files
     public List<String> getLanguageList()
     {
 
