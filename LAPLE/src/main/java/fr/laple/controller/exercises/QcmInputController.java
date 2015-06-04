@@ -26,8 +26,16 @@ public class QcmInputController implements IExerciseController {
 
         if(exercise.solveExercice(((JButton) e.getSource()).getText()))
         {
-            System.out.println("Solved");
+            new Blinker(this.view, true);
+        }
+        else
+        {
+            new Blinker(this.view, false);
+        }
 
+        for(JButton button : view.getQcmButtons())
+        {
+            button.setEnabled(false);
         }
 
 

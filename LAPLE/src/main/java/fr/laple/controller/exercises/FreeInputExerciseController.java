@@ -3,6 +3,7 @@ package fr.laple.controller.exercises;
 import fr.laple.model.exercises.Exercise;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.view.exercises.AbstractExerciseView;
+import fr.laple.view.exercises.FreeInputExerciseView;
 
 import java.awt.event.ActionEvent;
 
@@ -11,7 +12,7 @@ import java.awt.event.ActionEvent;
  */
 public class FreeInputExerciseController implements IExerciseController{
 
-    private AbstractExerciseView view;
+    private FreeInputExerciseView view;
     private Exercise exercise;
     private SymbolContainer sc;
 
@@ -21,16 +22,20 @@ public class FreeInputExerciseController implements IExerciseController{
 
         if(exercise.solveExercice(view.getAnswer().getText()))
         {
-            System.out.println("solved");
+            new Blinker(this.view, true);
 
         }
+        else
+        {
+            new Blinker(this.view, false);
+        }
 
-
+        view.getValidationButton().setEnabled(false);
     }
 
     @Override
     public void setView(AbstractExerciseView panel) {
-        this.view = panel;
+        this.view = (FreeInputExerciseView) panel;
         setTheView();
     }
 

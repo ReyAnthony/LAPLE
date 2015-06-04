@@ -80,55 +80,14 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
         LanguageDictionnaryJsonParser parser  = new LanguageDictionnaryJsonParser();
         symbolContainers.add(parser.parseFile( getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/hiragana.json")));
         symbolContainers.add(parser.parseFile(getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/katakana.json")));
+        //TODO kanji
 
     }
 
     private void loadLessons() {
 
-        //TODO nothing works, as expected ..
-        /*
-       try {
-           InputStream lesson = getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/lessons.json");
-           JsonReader read = Json.createReader(lesson);
-           JsonObject jsonObject = read.readObject();
+        //TODO need to be rewritten
 
-           read.close();
-           lesson.close();
-
-           JsonObject objetArray = jsonObject.getJsonObject("lesson_type").getJsonArray("katakana").getJsonObject(0);
-
-           JsonArray jsona = objetArray.getJsonArray("learning_order");
-
-           jsona.toString();
-           String val= "";
-           // get all the elements of the Array
-           symbolContainers.add(new SymbolContainer("katakana"));
-           for(int i = 0;i<jsona.size();i++){
-               // i use variable for stock all the array for the test.
-               val+=jsona.getString(i);
-           }
-
-           objetArray = jsonObject.getJsonObject("lesson_type").getJsonArray("hiragana").getJsonObject(0);
-           jsona = objetArray.getJsonArray("learning_order");
-           jsona.toString();
-           String val2 = "";
-           symbolContainers.add(new SymbolContainer("hiragana"));
-           for(int i=0;i<jsona.size();i++) {
-               // i use variable for stock all the array for the test.
-               val2 += jsona.getString(i);
-           }
-           // Get The Kanji Party.
-           objetArray = jsonObject.getJsonObject("lesson_type").getJsonObject("kanji").getJsonArray("list").getJsonObject(0);
-           symbolContainers.add(new SymbolContainer("hiragana"));
-           String kanjiName =  objetArray.getString("name");
-           String kanjiSymbole = objetArray.getString("symbol");
-
-
-
-       }catch(Exception e){
-            System.out.println("erreur e "+e.getMessage());
-       }
-        */
     }
 
 }

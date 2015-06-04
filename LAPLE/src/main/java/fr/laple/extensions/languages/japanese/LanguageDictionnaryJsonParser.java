@@ -20,6 +20,7 @@ public class LanguageDictionnaryJsonParser {
         JsonReader jsonReader = Json.createReader(file);
         JsonObject rootObject = jsonReader.readObject();
 
+        //TODO yaaay ugly code
         ArrayList<String> keys = new ArrayList<>(rootObject.keySet());
         String rootElem = keys.get(0);
 

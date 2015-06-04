@@ -15,5 +15,4 @@ public interface IExerciseController extends ActionListener {
     public void setExercise(Exercise e);
     public void setSymbolContainer(SymbolContainer sc);
 
-
 }

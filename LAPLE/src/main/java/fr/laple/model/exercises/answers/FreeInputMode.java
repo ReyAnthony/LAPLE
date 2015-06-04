@@ -6,7 +6,7 @@ import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.IExerciseSolver;
 import fr.laple.model.exercises.StandardExerciseSolver;
 import fr.laple.view.exercises.AbstractExerciseView;
-import fr.laple.view.exercises.FreeInputExcerciseView;
+import fr.laple.view.exercises.FreeInputExerciseView;
 
 /**
  * Created by anthonyrey on 04/06/2015.
@@ -20,7 +20,7 @@ public class FreeInputMode extends AbstractAnswerMode {
     public FreeInputMode()
     {
         this.solver = new StandardExerciseSolver();
-        this.view = new FreeInputExcerciseView();
+        this.view = new FreeInputExerciseView();
         this.listener = FreeInputExerciseController.class;
 
     }

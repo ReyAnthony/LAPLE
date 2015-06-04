@@ -5,7 +5,7 @@ import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
 import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.IExerciseSolver;
 import fr.laple.view.exercises.AbstractExerciseView;
-import fr.laple.view.exercises.FreeInputExcerciseView;
+import fr.laple.view.exercises.FreeInputExerciseView;
 
 /**
  * Created by anthonyrey on 04/06/2015.
@@ -22,7 +22,7 @@ public class DrawingMode extends AbstractAnswerMode {
     public DrawingMode()
     {
         this.solver = new NeuralExerciseSolver();
-        this.view = new FreeInputExcerciseView();
+        this.view = new FreeInputExerciseView();
         //TODO drawing mode
         this.listener = null;
 
