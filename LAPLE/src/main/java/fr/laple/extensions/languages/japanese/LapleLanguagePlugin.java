@@ -7,7 +7,7 @@ import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.solvercontainers.DrawingMode;
 import fr.laple.model.exercises.solvercontainers.FreeInputMode;
 import fr.laple.model.exercises.solvercontainers.QcmMode;
-import fr.laple.model.exercises.solvercontainers.SolverContainer;
+import fr.laple.model.exercises.solvercontainers.AbstractAnswerMode;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
@@ -31,7 +31,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
 
     private ArrayList<SymbolContainer> symbolContainers;
     private ArrayList<IExerciseMode> exerciseModes;
-    private ArrayList<SolverContainer> exerciseSolvingModes;
+    private ArrayList<AbstractAnswerMode> exerciseSolvingModes;
 
     public LapleLanguagePlugin() {
 
@@ -58,7 +58,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     }
 
     @Override
-    public ArrayList<SolverContainer> getExercisesSolvingModes() {
+    public ArrayList<AbstractAnswerMode> getExercisesSolvingModes() {
         return exerciseSolvingModes;
     }
 

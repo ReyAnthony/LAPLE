@@ -1,6 +1,5 @@
 package fr.laple.extensions.languages.japanese.neural;
 
-import fr.laple.model.exercises.ExModeTranscriptLangUserLang;
 import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.IExerciseSolver;
 import fr.laple.model.language.Symbol;
@@ -23,16 +22,6 @@ public class NeuralExerciseSolver implements IExerciseSolver {
 
         Image image = answer.getSymbolImage();
         return solveWithNeuralNet((BufferedImage) image, wanted.getUserLangTranscript());
-    }
-
-    @Override
-    public boolean testIfModeAndSolverAreCompatible(IExerciseMode mode) {
-
-        if(mode instanceof ExModeTranscriptLangUserLang)
-           return false;
-        else
-            return true;
-
     }
 
     private boolean solveWithNeuralNet(BufferedImage image, String wanted)

@@ -29,7 +29,7 @@ public class Exercise {
      * @param sContainer   The container related to the symbol used in the Exercice, it is used to generate wrong answers
      *                     for QCM mode.
      */
-    public Exercise(Symbol wantedSymbol, IExerciseMode mode, IExerciseSolver solver, SymbolContainer sContainer) throws Exception{
+    public Exercise(Symbol wantedSymbol, IExerciseMode mode, IExerciseSolver solver, SymbolContainer sContainer) {
         this.wantedSymbol = wantedSymbol;
         this.mode = mode;
         this.sContainer = sContainer;

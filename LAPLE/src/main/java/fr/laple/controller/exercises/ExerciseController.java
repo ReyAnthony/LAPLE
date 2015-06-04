@@ -1,7 +1,7 @@
 package fr.laple.controller.exercises;
 
 import fr.laple.model.exercises.Exercise;
-import fr.laple.view.exercises.ExerciseView;
+import fr.laple.view.exercises.AbstractExerciseView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,10 +11,10 @@ import java.awt.event.ActionListener;
  */
 public class ExerciseController implements ActionListener {
 
-    private ExerciseView view;
+    private AbstractExerciseView view;
     private Exercise exercise;
 
-    public ExerciseController(ExerciseView view, Exercise exercise)
+    public ExerciseController(AbstractExerciseView view, Exercise exercise)
     {
         this.view = view;
         this.exercise = exercise;

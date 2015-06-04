@@ -15,12 +15,6 @@ public class StandardExerciseSolver implements IExerciseSolver {
         return mode.getAnswers(answer).equals(mode.getAnswers(wanted));
     }
 
-    @Override
-    public boolean testIfModeAndSolverAreCompatible(IExerciseMode mode) {
-        //Should be compatible with everything so we won't do anything
-        return true;
-    }
-
     public String toString()
     {
         return "Standard Exercise solver";

@@ -7,14 +7,14 @@ import java.awt.event.ActionListener;
 /**
  * Created by anthonyrey on 02/06/2015.
  */
-public class ExerciseView extends JPanel {
+public class FreeInputExcerciseView extends AbstractExerciseView {
 
     private JLabel question;
     private JLabel symbol;
     private JTextField answer;
     private JButton validationButton;
 
-    public ExerciseView()
+    public FreeInputExcerciseView()
     {
 
         GridBagLayout layout = new GridBagLayout();

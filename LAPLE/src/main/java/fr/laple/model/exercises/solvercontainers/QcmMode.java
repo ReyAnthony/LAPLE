@@ -1,24 +1,24 @@
 package fr.laple.model.exercises.solvercontainers;
 
+import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.IExerciseSolver;
 import fr.laple.model.exercises.StandardExerciseSolver;
-import fr.laple.view.exercises.ExerciseView;
-
-import javax.swing.*;
+import fr.laple.view.exercises.AbstractExerciseView;
+import fr.laple.view.exercises.FreeInputExcerciseView;
 
 /**
  * Created by anthonyrey on 04/06/2015.
  */
-public class QcmMode extends SolverContainer {
+public class QcmMode extends AbstractAnswerMode {
 
     //TODO add right view
     private IExerciseSolver solver;
-    private JPanel view;
+    private AbstractExerciseView view;
 
     public QcmMode()
     {
         this.solver = new StandardExerciseSolver();
-        this.view = new ExerciseView();
+        this.view = new FreeInputExcerciseView();
 
     }
 
@@ -28,8 +28,14 @@ public class QcmMode extends SolverContainer {
     }
 
     @Override
-    public JPanel getCorrespondingView() {
+    public AbstractExerciseView getCorrespondingView() {
         return view;
+    }
+
+    @Override
+    public boolean testIfAnswerAndQuestionAreCompatible(IExerciseMode mode) {
+
+        return true;
     }
 
     public String toString()

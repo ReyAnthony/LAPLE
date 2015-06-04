@@ -28,14 +28,4 @@ public interface IExerciseSolver {
      */
     public boolean solveExercise(Symbol answer, Symbol wanted, IExerciseMode mode);
 
-    /**
-     * This method is checking if the current solver is compatible with
-     * the selected mode.
-     *
-     * @param mode The selected mode
-     * @return False if they are not compatible, true if they are
-     */
-    public boolean testIfModeAndSolverAreCompatible(IExerciseMode mode);
-
-
 }

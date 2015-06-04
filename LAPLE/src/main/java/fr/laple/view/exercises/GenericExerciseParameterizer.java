@@ -2,7 +2,7 @@ package fr.laple.view.exercises;
 
 import fr.laple.controller.exercises.ExerciseParameterizerController;
 import fr.laple.model.exercises.IExerciseMode;
-import fr.laple.model.exercises.solvercontainers.SolverContainer;
+import fr.laple.model.exercises.solvercontainers.AbstractAnswerMode;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.SymbolContainer;
 
@@ -19,7 +19,7 @@ public class GenericExerciseParameterizer extends JPanel{
     private JComboBox<SymbolContainer> symbolMode;
     private JButton okButton;
     private JComboBox<IExerciseMode> questionMode;
-    private JComboBox<SolverContainer> answerMode;
+    private JComboBox<AbstractAnswerMode> answerMode;
     private JLabel answerModeMessage;
 
     public GenericExerciseParameterizer(ILanguagePlugin model) {
@@ -73,7 +73,7 @@ public class GenericExerciseParameterizer extends JPanel{
         return questionMode;
     }
 
-    public JComboBox<SolverContainer> getAnswerMode() {
+    public JComboBox<AbstractAnswerMode> getAnswerMode() {
         return answerMode;
     }
 
