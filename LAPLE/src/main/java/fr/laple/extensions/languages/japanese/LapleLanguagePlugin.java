@@ -4,22 +4,13 @@ package fr.laple.extensions.languages.japanese;
 import fr.laple.model.exercises.ExModeTranscriptLangUserLang;
 import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
 import fr.laple.model.exercises.IExerciseMode;
+import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.exercises.answers.DrawingMode;
 import fr.laple.model.exercises.answers.FreeInputMode;
 import fr.laple.model.exercises.answers.QcmMode;
-import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.language.ILanguagePlugin;
-import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -86,34 +77,9 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     private void loadSymbolContainers() {
 
         symbolContainers = new ArrayList<>();
-
-        try{
-
-            InputStream hiragana = getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/hiragana.json");
-            JsonReader jsonReader = Json.createReader(hiragana);
-            JsonObject jsonObject = jsonReader.readObject();
-            jsonReader.close();
-            hiragana.close();
-
-            JsonArray jsonSymbols = jsonObject.getJsonArray("hiragana");
-            SymbolContainer hiraganaContainer = new SymbolContainer("Hiragana");
-            symbolContainers.add(hiraganaContainer);
-
-            for(int i = 0; i < jsonSymbols.size(); i++)
-            {
-                JsonObject current = jsonSymbols.getJsonObject(i);
-
-                String userLangTranscript = current.getString("userLangTranscript");
-                String gottenSymbol = current.getString("symbol");
-                //need the others one
-
-                Symbol symbol = new Symbol(userLangTranscript, gottenSymbol, null, null, null , null);
-                hiraganaContainer.addSymbol(symbol);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        LanguageDictionnaryJsonParser parser  = new LanguageDictionnaryJsonParser();
+        symbolContainers.add(parser.parseFile( getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/hiragana.json")));
+        symbolContainers.add(parser.parseFile(getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/katakana.json")));
 
     }
 
@@ -165,20 +131,4 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
         */
     }
 
-    public String readFile(String fileName) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(fileName));
-        try {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append("\n");
-                line = br.readLine();
-            }
-            return sb.toString();
-        } finally {
-            br.close();
-        }
-    }
 }

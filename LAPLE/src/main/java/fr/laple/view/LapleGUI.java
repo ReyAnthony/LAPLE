@@ -36,11 +36,11 @@ public class LapleGUI extends JFrame {
     {
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowController(this));
-        this.setSize(700, 500);
+        this.setSize(560, 500);
         this.setMinimumSize(new Dimension(560,500));
         this.setLocation(ScreenTools.getCenteredPoint(this.getWidth(), this.getHeight()));
         this.setTitle("LAPLE - Logiciel d'Apprentissage de Langues Etrangères");
-        this.setResizable(true);
+        this.setResizable(false);
 
         createPanes();
         this.setVisible(true);
