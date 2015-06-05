@@ -60,7 +60,10 @@ public abstract class AbstractExerciseController implements ActionListener {
         this.sc = sc;
     }
 
-    public abstract void setTheView();
+    public void setTheView()
+    {
+        view.getCounterLabel().setText("Exercises Left : "+exerciseQueue.size());
+    }
 
     public Exercise getExercise() {
         return exercise;

@@ -27,6 +27,7 @@ public class FreeInputExerciseController extends AbstractExerciseController {
 
     public void setTheView()
     {
+        super.setTheView();
         getView().getSymbol().setText(getExercise().getQuestion());
     }
 }

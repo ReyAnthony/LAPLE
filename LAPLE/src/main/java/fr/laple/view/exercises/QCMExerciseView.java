@@ -43,6 +43,9 @@ public class QCMExerciseView extends AbstractExerciseView {
 
         this.add(question, gbc);
         gbc.gridy = 1;
+        gbc.gridx = 1;
+        this.add(getCounterLabel());
+        gbc.gridx = 0;
         this.add(symbol, gbc);
         gbc.gridy = 2;
         this.add(qcm, gbc);
@@ -77,7 +80,7 @@ public class QCMExerciseView extends AbstractExerciseView {
 
     @Override
     public void resetTheView() {
-        for(JButton b : qcmButtons )
+        for(JButton b : qcmButtons)
             b.setEnabled(true);
 
         this.getNextButton().setVisible(false);

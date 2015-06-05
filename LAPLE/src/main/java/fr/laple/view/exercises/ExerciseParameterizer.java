@@ -21,6 +21,7 @@ public class ExerciseParameterizer extends JPanel{
     private JComboBox<IExerciseMode> questionMode;
     private JComboBox<AbstractAnswerMode> answerMode;
     private JLabel answerModeMessage;
+    private JSpinner exerciseCountSelector;
 
     public ExerciseParameterizer(ILanguagePlugin model) {
 
@@ -43,6 +44,10 @@ public class ExerciseParameterizer extends JPanel{
         questionModeMessage.setHorizontalAlignment(JLabel.CENTER);
         questionModeMessage.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
+        exerciseCountSelector = new JSpinner();
+        exerciseCountSelector.setModel(new SpinnerNumberModel(1, 1, Integer.MAX_VALUE,1));
+
+
         questionMode = new JComboBox<>();
         okButton = new JButton("OK");
 
@@ -50,6 +55,7 @@ public class ExerciseParameterizer extends JPanel{
         answerModeMessage = new JLabel("Select an answer mode :");
         answerMode = new JComboBox<>();
 
+        panel.add(exerciseCountSelector);
         panel.add(answerModeMessage);
         panel.add(answerMode);
         panel.add(okButton);
@@ -77,4 +83,7 @@ public class ExerciseParameterizer extends JPanel{
         return answerMode;
     }
 
+    public int getExerciseCount() {
+        return (Integer) exerciseCountSelector.getValue();
+    }
 }

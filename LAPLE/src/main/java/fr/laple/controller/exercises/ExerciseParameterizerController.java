@@ -23,7 +23,7 @@ import java.util.LinkedList;
 /**
  * Created by anthonyrey on 03/06/2015.
  */
-public class ExerciseParameterizerController implements ActionListener, ItemListener, Cloneable{
+public class ExerciseParameterizerController implements ActionListener, ItemListener {
 
     private ILanguagePlugin model;
     private ExerciseParameterizer parameterizer;
@@ -90,14 +90,14 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
         LinkedList<Exercise> exercises = new LinkedList<>();
 
         //TODO selector for ex count
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < parameterizer.getExerciseCount(); i++)
         {
             Exercise ex = new Exercise( sym.get(i) , mode, solver, sc);
             exercises.push(ex);
         }
 
 
-        AbstractExerciseController listener = (AbstractExerciseController) answerMode.getAssociatedActionListener();
+        AbstractExerciseController listener = answerMode.getAssociatedActionListener();
 
         parameterizer.invalidate();
         parameterizer.removeAll();

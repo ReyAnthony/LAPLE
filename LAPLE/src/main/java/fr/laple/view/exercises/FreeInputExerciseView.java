@@ -36,6 +36,9 @@ public class FreeInputExerciseView extends AbstractExerciseView {
         this.add(question, gbc);
         gbc.gridy = 1;
         this.add(symbol, gbc);
+        gbc.gridx = 1;
+        this.add(getCounterLabel());
+        gbc.gridx = 0;
         gbc.gridy = 2;
         this.add(answer, gbc);
         gbc.gridy = 3;

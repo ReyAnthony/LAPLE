@@ -33,6 +33,7 @@ public class QcmInputController extends AbstractExerciseController {
 
     public void setTheView()
     {
+        super.setTheView();
         QCMExerciseView view = (QCMExerciseView) getView();
 
         view.getSymbol().setText(getExercise().getQuestion());
