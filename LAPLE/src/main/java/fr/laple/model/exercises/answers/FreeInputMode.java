@@ -1,5 +1,6 @@
 package fr.laple.model.exercises.answers;
 
+import fr.laple.controller.exercises.AbstractExerciseController;
 import fr.laple.controller.exercises.FreeInputExerciseController;
 import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
 import fr.laple.model.exercises.IExerciseMode;
@@ -13,25 +14,14 @@ import fr.laple.view.exercises.FreeInputExerciseView;
  */
 public class FreeInputMode extends AbstractAnswerMode {
 
-    private IExerciseSolver solver;
-    private AbstractExerciseView view;
-    private Class listener;
-
-    public FreeInputMode()
-    {
-        this.solver = new StandardExerciseSolver();
-        this.view = new FreeInputExerciseView();
-        this.listener = FreeInputExerciseController.class;
-
-    }
     @Override
     public IExerciseSolver getSolver() {
-        return solver;
+        return new StandardExerciseSolver();
     }
 
     @Override
     public AbstractExerciseView getCorrespondingView() {
-        return view;
+        return new FreeInputExerciseView();
     }
 
     @Override
@@ -44,8 +34,8 @@ public class FreeInputMode extends AbstractAnswerMode {
     }
 
     @Override
-    public Class getAssociatedActionListener() {
-        return listener;
+    public AbstractExerciseController getAssociatedActionListener() {
+        return new FreeInputExerciseController();
     }
 
 

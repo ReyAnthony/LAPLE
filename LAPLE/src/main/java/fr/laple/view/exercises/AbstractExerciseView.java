@@ -8,6 +8,14 @@ import java.awt.event.ActionListener;
  */
 public abstract class AbstractExerciseView extends JPanel {
 
+    private JButton nextButton;
+
+    public AbstractExerciseView()
+    {
+        nextButton = new JButton("Next Exercise");
+        nextButton.setVisible(false);
+    }
+
     public abstract void addActionListener(ActionListener al);
 
     public abstract JLabel getSymbol();
@@ -15,4 +23,10 @@ public abstract class AbstractExerciseView extends JPanel {
     public abstract void setSymbol(JLabel symbol);
 
     public abstract JTextField getAnswer();
+
+    public JButton getNextButton() {
+        return nextButton;
+    }
+
+    public abstract void resetTheView();
 }

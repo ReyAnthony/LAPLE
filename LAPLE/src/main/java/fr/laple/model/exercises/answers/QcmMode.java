@@ -1,5 +1,6 @@
 package fr.laple.model.exercises.answers;
 
+import fr.laple.controller.exercises.AbstractExerciseController;
 import fr.laple.controller.exercises.QcmInputController;
 import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.IExerciseSolver;
@@ -12,27 +13,15 @@ import fr.laple.view.exercises.QCMExerciseView;
  */
 public class QcmMode extends AbstractAnswerMode {
 
-    //TODO add right view
-    private IExerciseSolver solver;
-    private AbstractExerciseView view;
-    private Class listener;
-
-    public QcmMode()
-    {
-        this.solver = new StandardExerciseSolver();
-        this.view = new QCMExerciseView();
-        this.listener = QcmInputController.class;
-
-    }
 
     @Override
     public IExerciseSolver getSolver() {
-        return solver;
+        return new StandardExerciseSolver();
     }
 
     @Override
     public AbstractExerciseView getCorrespondingView() {
-        return view;
+        return new QCMExerciseView();
     }
 
     @Override
@@ -42,8 +31,8 @@ public class QcmMode extends AbstractAnswerMode {
     }
 
     @Override
-    public Class getAssociatedActionListener() {
-        return listener;
+    public AbstractExerciseController getAssociatedActionListener() {
+        return new QcmInputController();
     }
 
     public String toString()

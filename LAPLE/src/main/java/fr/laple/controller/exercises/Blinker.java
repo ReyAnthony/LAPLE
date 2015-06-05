@@ -27,6 +27,8 @@ public class Blinker extends Timer implements ActionListener {
         else
             col = Color.red;
 
+        panel.setBackground(col);
+
         this.start();
     }
 
@@ -38,5 +40,12 @@ public class Blinker extends Timer implements ActionListener {
             panel.setBackground(col);
         else
             panel.setBackground(baseCol);
+    }
+
+    public void stop()
+    {
+        super.stop();
+        this.panel.setBackground(baseCol);
+
     }
 }

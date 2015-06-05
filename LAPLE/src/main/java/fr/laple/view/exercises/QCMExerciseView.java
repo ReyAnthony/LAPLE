@@ -17,7 +17,7 @@ public class QCMExerciseView extends AbstractExerciseView {
 
     public QCMExerciseView()
     {
-
+        super();
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
         GridBagConstraints gbc = new GridBagConstraints();
@@ -46,6 +46,8 @@ public class QCMExerciseView extends AbstractExerciseView {
         this.add(symbol, gbc);
         gbc.gridy = 2;
         this.add(qcm, gbc);
+        gbc.gridy = 3;
+        this.add(this.getNextButton(), gbc);
 
     }
 
@@ -71,6 +73,14 @@ public class QCMExerciseView extends AbstractExerciseView {
     public JTextField getAnswer() {
         //non applicable
         return null;
+    }
+
+    @Override
+    public void resetTheView() {
+        for(JButton b : qcmButtons )
+            b.setEnabled(true);
+
+        this.getNextButton().setVisible(false);
     }
 
     public ArrayList<JButton> getQcmButtons() {

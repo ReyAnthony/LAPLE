@@ -1,5 +1,6 @@
 package fr.laple.model.exercises.answers;
 
+import fr.laple.controller.exercises.AbstractExerciseController;
 import fr.laple.extensions.languages.japanese.neural.NeuralExerciseSolver;
 import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
 import fr.laple.model.exercises.IExerciseMode;
@@ -15,27 +16,15 @@ public class DrawingMode extends AbstractAnswerMode {
     //todo add right view
     //TODO need less coupling with neural Solver (specific japaanese)
     //put drawing mode in japanese folder ?
-    private IExerciseSolver solver;
-    private AbstractExerciseView view;
-    private Class listener;
-
-    public DrawingMode()
-    {
-        this.solver = new NeuralExerciseSolver();
-        this.view = new FreeInputExerciseView();
-        //TODO drawing mode
-        this.listener = null;
-
-    }
 
     @Override
     public IExerciseSolver getSolver() {
-        return solver;
+        return new NeuralExerciseSolver();
     }
 
     @Override
     public AbstractExerciseView getCorrespondingView() {
-        return view;
+        return new FreeInputExerciseView();
     }
 
     @Override
@@ -48,8 +37,9 @@ public class DrawingMode extends AbstractAnswerMode {
     }
 
     @Override
-    public Class getAssociatedActionListener() {
-        return listener;
+    public AbstractExerciseController getAssociatedActionListener() {
+        //TODO drawing mode
+        return null;
     }
 
 

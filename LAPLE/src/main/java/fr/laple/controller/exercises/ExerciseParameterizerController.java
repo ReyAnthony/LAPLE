@@ -18,11 +18,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 
 /**
  * Created by anthonyrey on 03/06/2015.
  */
-public class ExerciseParameterizerController implements ActionListener, ItemListener{
+public class ExerciseParameterizerController implements ActionListener, ItemListener, Cloneable{
 
     private ILanguagePlugin model;
     private ExerciseParameterizer parameterizer;
@@ -86,35 +87,30 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
 
         ArrayList<Symbol> sym = new ArrayList<>(sc.getSymbolMap().values());
         Collections.shuffle(sym);
+        LinkedList<Exercise> exercises = new LinkedList<>();
 
-        Exercise ex = null;
-        try {
-            ex = new Exercise( sym.get(0) , mode, solver, sc);
-        } catch (Exception e1) {
-            e1.printStackTrace();
+        //TODO selector for ex count
+        for(int i = 0; i < 10; i++)
+        {
+            Exercise ex = new Exercise( sym.get(i) , mode, solver, sc);
+            exercises.push(ex);
         }
 
-        try {
 
-            IExerciseController listener = (IExerciseController) answerMode.getAssociatedActionListener().newInstance();
+        AbstractExerciseController listener = (AbstractExerciseController) answerMode.getAssociatedActionListener();
 
-            parameterizer.invalidate();
-            parameterizer.removeAll();
-            parameterizer.setLayout(new BorderLayout());
-            parameterizer.add(exView);
-            exView.addActionListener(listener);
-            parameterizer.revalidate();
-            parameterizer.repaint();
+        parameterizer.invalidate();
+        parameterizer.removeAll();
+        parameterizer.setLayout(new BorderLayout());
+        parameterizer.add(exView);
+        exView.addActionListener(listener);
+        parameterizer.revalidate();
+        parameterizer.repaint();
 
-            listener.setExercise(ex);
-            listener.setSymbolContainer(sc);
-            listener.setView(exView);
-
-        } catch (InstantiationException e1) {
-            e1.printStackTrace();
-        } catch (IllegalAccessException e1) {
-            e1.printStackTrace();
-        }
+        listener.addExercises(exercises);
+        listener.setSymbolContainer(sc);
+        listener.setView(exView);
+        listener.addModel(model);
 
 
     }
@@ -126,4 +122,6 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
         setSolverCombo();
 
     }
+
+
 }

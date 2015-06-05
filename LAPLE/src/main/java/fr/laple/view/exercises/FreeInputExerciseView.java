@@ -16,7 +16,7 @@ public class FreeInputExerciseView extends AbstractExerciseView {
 
     public FreeInputExerciseView()
     {
-
+        super();
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
         GridBagConstraints gbc = new GridBagConstraints();
@@ -40,6 +40,9 @@ public class FreeInputExerciseView extends AbstractExerciseView {
         this.add(answer, gbc);
         gbc.gridy = 3;
         this.add(validationButton, gbc);
+        gbc.gridy = 4;
+        this.add(this.getNextButton(), gbc);
+
 
     }
 
@@ -58,6 +61,14 @@ public class FreeInputExerciseView extends AbstractExerciseView {
 
     public JTextField getAnswer() {
         return answer;
+    }
+
+    @Override
+    public void resetTheView() {
+        answer.setEnabled(true);
+        this.getNextButton().setVisible(false);
+        this.getValidationButton().setEnabled(true);
+        this.getAnswer().setText("");
     }
 
     public JButton getValidationButton() {

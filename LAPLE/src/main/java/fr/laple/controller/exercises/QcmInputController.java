@@ -1,9 +1,6 @@
 package fr.laple.controller.exercises;
 
-import fr.laple.model.exercises.Exercise;
 import fr.laple.model.language.Symbol;
-import fr.laple.model.language.SymbolContainer;
-import fr.laple.view.exercises.AbstractExerciseView;
 import fr.laple.view.exercises.QCMExerciseView;
 
 import javax.swing.*;
@@ -14,65 +11,44 @@ import java.util.Collections;
 /**
  * Created by anthonyrey on 04/06/2015.
  */
-public class QcmInputController implements IExerciseController {
-
-    private QCMExerciseView view;
-    private Exercise exercise;
-    private SymbolContainer sc;
+public class QcmInputController extends AbstractExerciseController {
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        QCMExerciseView view = (QCMExerciseView) getView();
 
-        if(exercise.solveExercice(((JButton) e.getSource()).getText()))
-        {
-            new Blinker(this.view, true);
-        }
+        if (getExercise().solveExercice(((JButton) e.getSource()).getText()))
+            setBlinker(new Blinker(getView(), true));
         else
-        {
-            new Blinker(this.view, false);
-        }
+             setBlinker(new Blinker(getView(), false));
 
-        for(JButton button : view.getQcmButtons())
-        {
+        for (JButton button : view.getQcmButtons())
             button.setEnabled(false);
-        }
 
+        view.getNextButton().setVisible(true);
 
     }
 
-    @Override
-    public void setView(AbstractExerciseView panel) {
-        this.view = (QCMExerciseView) panel;
-        setTheView();
-    }
 
-    @Override
-    public void setExercise(Exercise e) {
-        this.exercise = e;
-    }
-
-    @Override
-    public void setSymbolContainer(SymbolContainer sc) {
-        this.sc = sc;
-    }
-
-    private void setTheView()
+    public void setTheView()
     {
-        view.getSymbol().setText(exercise.getQuestion());
+        QCMExerciseView view = (QCMExerciseView) getView();
+
+        view.getSymbol().setText(getExercise().getQuestion());
         ArrayList<JButton> buttons = view.getQcmButtons();
 
         //TODO BDD check
 
-        buttons.get(0).setText(exercise.getAnwser());
+        buttons.get(0).setText(getExercise().getAnwser());
 
 
-        ArrayList<Symbol> sym = new ArrayList<>(sc.getSymbolMap().values());
+        ArrayList<Symbol> sym = new ArrayList<>(getSymbolContainer().getSymbolMap().values());
         Collections.shuffle(sym);
 
-        buttons.get(1).setText(exercise.getInAnswerFormat(sym.get(0)));
-        buttons.get(2).setText(exercise.getInAnswerFormat(sym.get(1)));
-        buttons.get(3).setText(exercise.getInAnswerFormat(sym.get(2)));
+        buttons.get(1).setText(getExercise().getInAnswerFormat(sym.get(0)));
+        buttons.get(2).setText(getExercise().getInAnswerFormat(sym.get(1)));
+        buttons.get(3).setText(getExercise().getInAnswerFormat(sym.get(2)));
 
         Collections.shuffle(buttons);
     }
