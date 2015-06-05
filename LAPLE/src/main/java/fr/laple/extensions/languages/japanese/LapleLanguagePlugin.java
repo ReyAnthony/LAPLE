@@ -1,15 +1,16 @@
 package fr.laple.extensions.languages.japanese;
 
-import fr.laple.language.ILanguagePlugin;
-import fr.laple.language.Symbol;
-import fr.laple.language.SymbolContainer;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-import java.io.IOException;
-import java.io.InputStream;
+import fr.laple.model.exercises.ExModeTranscriptLangUserLang;
+import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
+import fr.laple.model.exercises.IExerciseMode;
+import fr.laple.model.exercises.answers.AbstractAnswerMode;
+import fr.laple.model.exercises.answers.DrawingMode;
+import fr.laple.model.exercises.answers.FreeInputMode;
+import fr.laple.model.exercises.answers.QcmMode;
+import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.model.language.SymbolContainer;
+
 import java.util.ArrayList;
 
 /**
@@ -20,52 +21,15 @@ import java.util.ArrayList;
 public class LapleLanguagePlugin implements ILanguagePlugin{
 
     private ArrayList<SymbolContainer> symbolContainers;
+    private ArrayList<IExerciseMode> exerciseModes;
+    private ArrayList<AbstractAnswerMode> exerciseSolvingModes;
 
-    @Override
-    public String getLanguageName() {
-        return "Japanese";
-    }
+    public LapleLanguagePlugin() {
 
-    @Override
-    public void loadSymbolContainers() {
-
-        //should load json file
-        //but we'll do it by hand for testing purpose
-        symbolContainers = new ArrayList<>();
-
-        try{
-
-            InputStream hiragana = getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/hiragana.json");
-            JsonReader jsonReader = Json.createReader(hiragana);
-            JsonObject jsonObject = jsonReader.readObject();
-            jsonReader.close();
-            hiragana.close();
-
-            JsonArray jsonSymbols = jsonObject.getJsonArray("hiragana");
-            SymbolContainer hiraganaContainer = new SymbolContainer("hiragana");
-            symbolContainers.add(hiraganaContainer);
-
-            for(int i = 0; i < jsonSymbols.size(); i++)
-            {
-                JsonObject current = jsonSymbols.getJsonObject(i);
-
-                String userLangTranscript = current.getString("userLangTranscript");
-                String gottenSymbol = current.getString("symbol");
-                //need the others one
-
-                Symbol symbol = new Symbol(userLangTranscript, gottenSymbol, null, null, null , null);
-                hiraganaContainer.addSymbol(symbol);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public void loadLessons() {
-
+        loadSymbolContainers();
+        loadLessons();
+        populateExerciseModeList();
+        populateExerciseSolvingModesList();
     }
 
     //TODO Get by name
@@ -78,4 +42,52 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     public String getVersion() {
         return "1.0";
     }
+
+    @Override
+    public ArrayList<IExerciseMode> getExercisesModes() {
+        return exerciseModes;
+    }
+
+    @Override
+    public ArrayList<AbstractAnswerMode> getExercisesSolvingModes() {
+        return exerciseSolvingModes;
+    }
+
+    @Override
+    public String getLanguageName() {
+        return "Japanese";
+    }
+
+    private void populateExerciseSolvingModesList()
+    {
+        exerciseSolvingModes = new ArrayList<>();
+        exerciseSolvingModes.add(new QcmMode());
+        exerciseSolvingModes.add(new DrawingMode());
+        exerciseSolvingModes.add(new FreeInputMode());
+
+    }
+
+    private void populateExerciseModeList()
+    {
+        exerciseModes = new ArrayList<>();
+        exerciseModes.add(new ExModeTranscriptLangUserLang());
+        exerciseModes.add(new ExModeUserLangTranscriptLang());
+    }
+
+    private void loadSymbolContainers() {
+
+        symbolContainers = new ArrayList<>();
+        LanguageDictionnaryJsonParser parser  = new LanguageDictionnaryJsonParser();
+        symbolContainers.add(parser.parseFile( getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/hiragana.json")));
+        symbolContainers.add(parser.parseFile(getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/katakana.json")));
+        //TODO kanji
+
+    }
+
+    private void loadLessons() {
+
+        //TODO need to be rewritten
+
+    }
+
 }

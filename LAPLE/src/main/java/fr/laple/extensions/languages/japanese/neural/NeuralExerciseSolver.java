@@ -1,10 +1,8 @@
 package fr.laple.extensions.languages.japanese.neural;
 
-import fr.laple.exercises.ExModeTranscriptLangUserLang;
-import fr.laple.exercises.IExerciseMode;
-import fr.laple.exercises.IExerciseSolver;
-import fr.laple.exercises.exceptions.ExcerciseModeException;
-import fr.laple.language.Symbol;
+import fr.laple.model.exercises.IExerciseMode;
+import fr.laple.model.exercises.IExerciseSolver;
+import fr.laple.model.language.Symbol;
 import org.neuroph.core.NeuralNetwork;
 import org.neuroph.imgrec.image.ImageJ2SE;
 import org.neuroph.ocr.OcrPlugin;
@@ -24,14 +22,6 @@ public class NeuralExerciseSolver implements IExerciseSolver {
 
         Image image = answer.getSymbolImage();
         return solveWithNeuralNet((BufferedImage) image, wanted.getUserLangTranscript());
-    }
-
-    @Override
-    public void testIfModeAndSolverAreCompatible(IExerciseMode mode) throws ExcerciseModeException {
-
-        if(mode instanceof ExModeTranscriptLangUserLang)
-           throw new ExcerciseModeException();
-
     }
 
     private boolean solveWithNeuralNet(BufferedImage image, String wanted)
@@ -60,4 +50,10 @@ public class NeuralExerciseSolver implements IExerciseSolver {
         return toReturn;
 
     }
+
+    public String toString()
+    {
+        return "Neural Exercise Solver (Drawing)";
+    }
+
 }

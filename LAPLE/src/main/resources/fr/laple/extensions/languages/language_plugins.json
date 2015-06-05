@@ -1,0 +1,24 @@
+{
+  "lang_plugins":[
+    {
+      "name":"Japanese",
+      "path":"",
+      "class":"fr.laple.extensions.languages.japanese.LapleLanguagePlugin"
+    },
+    {
+      "name":"Russian",
+      "path":"",
+      "class":"fr.laple.extensions.languages.japanese.LapleLanguagePlugin"
+    },
+    {
+      "name":"Chinese",
+      "path":"",
+      "class":"fr.laple.extensions.languages.japanese.LapleLanguagePlugin"
+    },
+    {
+      "name":"Hebrew",
+      "path":"",
+      "class":"fr.laple.extensions.languages.japanese.LapleLanguagePlugin"
+    }
+  ]
+}

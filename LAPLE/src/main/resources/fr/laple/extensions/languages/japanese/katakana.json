@@ -1,8 +1,8 @@
 {
-    "hiragana": [
+    "katakana": [
         {
             "userLangTranscript": "a",
-            "symbol": "あ",
+            "symbol": "ア",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -13,7 +13,7 @@
         },
         {
             "userLangTranscript": "i",
-            "symbol": "い",
+            "symbol": "イ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -24,7 +24,7 @@
         },
         {
             "userLangTranscript": "u",
-            "symbol": "う",
+            "symbol": "ウ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -35,7 +35,7 @@
         },
         {
             "userLangTranscript": "e",
-            "symbol": "え",
+            "symbol": "エ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -46,7 +46,7 @@
         },
         {
             "userLangTranscript": "o",
-            "symbol": "お",
+            "symbol": "オ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -57,7 +57,7 @@
         },
         {
             "userLangTranscript": "ka",
-            "symbol": "か",
+            "symbol": "カ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -68,7 +68,7 @@
         },
         {
             "userLangTranscript": "ki",
-            "symbol": "き",
+            "symbol": "キ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -79,7 +79,7 @@
         },
         {
             "userLangTranscript": "ku",
-            "symbol": "く",
+            "symbol": "ク",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -90,7 +90,7 @@
         },
         {
             "userLangTranscript": "ke",
-            "symbol": "け",
+            "symbol": "ケ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -101,7 +101,7 @@
         },
         {
             "userLangTranscript": "ko",
-            "symbol": "こ",
+            "symbol": "コ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -110,9 +110,9 @@
                 "null"
             ]
         },
-	   {
+	{
             "userLangTranscript": "sa",
-            "symbol": "さ",
+            "symbol": "サ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -123,7 +123,7 @@
         },
         {
             "userLangTranscript": "shi",
-            "symbol": "し",
+            "symbol": "シ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -134,7 +134,7 @@
         },
         {
             "userLangTranscript": "su",
-            "symbol": "す",
+            "symbol": "ス",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -145,7 +145,7 @@
         },
         {
             "userLangTranscript": "se",
-            "symbol": "せ",
+            "symbol": "セ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -156,7 +156,7 @@
         },
         {
             "userLangTranscript": "so",
-            "symbol": "そ",
+            "symbol": "ソ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -167,7 +167,7 @@
         },
         {
             "userLangTranscript": "ta",
-            "symbol": "た",
+            "symbol": "タ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -178,7 +178,7 @@
         },
         {
             "userLangTranscript": "chi",
-            "symbol": "ち",
+            "symbol": "チ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -189,7 +189,7 @@
         },
         {
             "userLangTranscript": "tsu",
-            "symbol": "つ",
+            "symbol": "ツ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -200,7 +200,7 @@
         },
         {
             "userLangTranscript": "te",
-            "symbol": "て",
+            "symbol": "テ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -211,7 +211,7 @@
         },
         {
             "userLangTranscript": "to",
-            "symbol": "と",
+            "symbol": "ト",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -222,7 +222,7 @@
         },
         {
             "userLangTranscript": "na",
-            "symbol": "な",
+            "symbol": "ナ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -233,7 +233,7 @@
         },
         {
             "userLangTranscript": "ni",
-            "symbol": "に",
+            "symbol": "ニ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -244,7 +244,7 @@
         },
         {
             "userLangTranscript": "nu",
-            "symbol": "ぬ",
+            "symbol": "ヌ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -255,7 +255,7 @@
         },
         {
             "userLangTranscript": "ne",
-            "symbol": "ね",
+            "symbol": "ネ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -266,7 +266,7 @@
         },
         {
             "userLangTranscript": "no",
-            "symbol": "の",
+            "symbol": "ノ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -277,7 +277,7 @@
         },
         {
             "userLangTranscript": "ha",
-            "symbol": "は",
+            "symbol": "ハ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -288,7 +288,7 @@
         },
         {
             "userLangTranscript": "hi",
-            "symbol": "ひ",
+            "symbol": "ヒ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -299,7 +299,7 @@
         },
         {
             "userLangTranscript": "fu",
-            "symbol": "ふ",
+            "symbol": "フ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -310,7 +310,7 @@
         },
         {
             "userLangTranscript": "he",
-            "symbol": "へ",
+            "symbol": "ヘ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -321,7 +321,7 @@
         },
         {
             "userLangTranscript": "ho",
-            "symbol": "ほ",
+            "symbol": "ホ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -332,7 +332,7 @@
         },
         {
             "userLangTranscript": "ma",
-            "symbol": "ま",
+            "symbol": "マ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -343,7 +343,7 @@
         },
         {
             "userLangTranscript": "mi",
-            "symbol": "み",
+            "symbol": "ミ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -354,7 +354,7 @@
         },
         {
             "userLangTranscript": "mu",
-            "symbol": "む",
+            "symbol": "ム",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -365,7 +365,7 @@
         },
         {
             "userLangTranscript": "me",
-            "symbol": "め",
+            "symbol": "メ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -376,7 +376,7 @@
         },
         {
             "userLangTranscript": "mo",
-            "symbol": "も",
+            "symbol": "モ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -387,7 +387,7 @@
         },
         {
             "userLangTranscript": "ya",
-            "symbol": "や",
+            "symbol": "ヤ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -398,7 +398,7 @@
         },
         {
             "userLangTranscript": "yu",
-            "symbol": "ゆ",
+            "symbol": "ユ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -409,7 +409,7 @@
         },
         {
             "userLangTranscript": "yo",
-            "symbol": "よ",
+            "symbol": "ヨ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -420,7 +420,7 @@
         },
         {
             "userLangTranscript": "ra",
-            "symbol": "ら",
+            "symbol": "ラ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -431,7 +431,7 @@
         },
         {
             "userLangTranscript": "ri",
-            "symbol": "り",
+            "symbol": "リ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -442,7 +442,7 @@
         },
         {
             "userLangTranscript": "ru",
-            "symbol": "る",
+            "symbol": "ル",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -453,7 +453,7 @@
         },
         {
             "userLangTranscript": "re",
-            "symbol": "れ",
+            "symbol": "レ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -464,7 +464,7 @@
         },
         {
             "userLangTranscript": "ro",
-            "symbol": "ろ",
+            "symbol": "ロ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -475,7 +475,7 @@
         },
         {
             "userLangTranscript": "wa",
-            "symbol": "わ",
+            "symbol": "ワ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -486,7 +486,7 @@
         },
         {
             "userLangTranscript": "wo",
-            "symbol": "を",
+            "symbol": "ヲ",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
@@ -497,7 +497,7 @@
         },
         {
             "userLangTranscript": "n",
-            "symbol": "ん",
+            "symbol": "ン",
             "symbolImage": "null",
             "animatedImage": "null",
             "soundFile": "null",
