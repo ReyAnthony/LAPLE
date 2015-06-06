@@ -56,8 +56,8 @@ public class QcmInputController extends AbstractExerciseController {
         //TODO fix doublon bug
         //TODO check for lenght of exercise list
 
+        Collections.shuffle(buttons);
         buttons.get(0).setText(getExercise().getAnwser());
-
 
         ArrayList<Symbol> sym = new ArrayList<>(getSymbolContainer().getSymbolMap().values());
         Collections.shuffle(sym);
@@ -66,7 +66,7 @@ public class QcmInputController extends AbstractExerciseController {
         buttons.get(2).setText(getExercise().getInAnswerFormat(sym.get(1)));
         buttons.get(3).setText(getExercise().getInAnswerFormat(sym.get(2)));
 
-        Collections.shuffle(buttons);
+
     }
 
 }
