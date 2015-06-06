@@ -20,16 +20,23 @@ public class LessonPickerController implements ActionListener{
     {
         this.model = model;
         this.view = view;
-        setComboBox();
+        setList();
 
     }
 
-    private void setComboBox()
+    private void setList()
     {
-        JComboBox<AbstractLessonContainer> lessons = view.getLessonsComboBox();
-        ComboBoxModel<AbstractLessonContainer> comboBoxModel = new DefaultComboBoxModel<>(model.getLessonContainers().toArray(new AbstractLessonContainer[]{}));
+        JList<AbstractLessonContainer> lessons = view.getLessonsList();
+        DefaultListModel<AbstractLessonContainer> listModel = new DefaultListModel<>();
 
-        lessons.setModel(comboBoxModel);
+        for(int i = 0; i < model.getLessonContainers().size(); i++)
+        {
+            listModel.add(i, model.getLessonContainers().get(i));
+        }
+
+        lessons.setModel(listModel);
+
+
 
     }
 

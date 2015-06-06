@@ -11,13 +11,15 @@ import javax.swing.*;
  */
 public class LessonPickerView extends JPanel {
 
-    private JComboBox<AbstractLessonContainer> lessons;
+    private JList<AbstractLessonContainer> lessons;
     private JButton validationButton;
 
     public LessonPickerView(ILanguagePlugin plugin)
     {
         JLabel message = new JLabel("Please select a lesson mode");
-        lessons = new JComboBox<>();
+        lessons = new JList<>();
+        lessons.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         validationButton = new JButton("Ok");
 
         this.add(message);
@@ -27,7 +29,7 @@ public class LessonPickerView extends JPanel {
 
     }
 
-    public JComboBox<AbstractLessonContainer> getLessonsComboBox()
+    public JList<AbstractLessonContainer> getLessonsList()
     {
         return lessons;
     }
