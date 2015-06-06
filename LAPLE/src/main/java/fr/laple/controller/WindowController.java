@@ -24,6 +24,7 @@ public class WindowController extends WindowAdapter {
                 JOptionPane.YES_NO_OPTION);
         if (response == JOptionPane.OK_OPTION){
             frame.dispose();
+            System.exit(0);
         }
 
     }
