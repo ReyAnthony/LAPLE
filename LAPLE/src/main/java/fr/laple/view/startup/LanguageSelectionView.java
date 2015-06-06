@@ -3,6 +3,7 @@ package fr.laple.view.startup;
 import fr.laple.ztools.ScreenTools;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * This class is a prompt for selecting avalaible languages. It uses entry points from language plugins to determine the language list
@@ -20,8 +21,8 @@ public class LanguageSelectionView extends JFrame{
 
     public LanguageSelectionView()
     {
-
-        this.setSize(300,100);
+        this.setLayout(new BorderLayout());
+        this.setSize(250,100);
         this.setLocation(ScreenTools.getCenteredPoint(this.getWidth(), this.getHeight()));
         this.setTitle("LAPLE - Language selection");
         this.setResizable(false);
