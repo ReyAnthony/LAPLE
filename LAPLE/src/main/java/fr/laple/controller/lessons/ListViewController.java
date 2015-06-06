@@ -11,12 +11,12 @@ import java.awt.event.ActionListener;
 /**
  * Created by anthonyrey on 06/06/2015.
  */
-public class ExerciseController implements ActionListener{
+public class ListViewController implements ActionListener{
 
     ILanguagePlugin model;
     ListView view;
 
-    public ExerciseController(ILanguagePlugin model, ListView view)
+    public ListViewController(ILanguagePlugin model, ListView view)
     {
         this.model = model;
         this.view = view;
@@ -26,16 +26,16 @@ public class ExerciseController implements ActionListener{
 
     private void setList()
     {
-        JList<AbstractLessonContainer> lessons = view.getLessonsList();
-        DefaultListModel<AbstractLessonContainer> listModel = new DefaultListModel<>();
+        JList<AbstractLessonContainer> list = view.getList();
+        DefaultListModel listModel = new DefaultListModel<>();
 
         for(int i = 0; i < model.getLessonContainers().size(); i++)
         {
             listModel.add(i, model.getLessonContainers().get(i));
         }
 
-        lessons.setModel(listModel);
-        view.getValidationButton().addActionListener(new ExerciseController(model, view));
+        list.setModel(listModel);
+
 
     }
 

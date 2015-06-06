@@ -1,6 +1,6 @@
 package fr.laple.controller.startup;
 
-import fr.laple.controller.GUIController;
+import fr.laple.controller.LapleGUIController;
 import fr.laple.extensions.languages.plugins.LanguageConfigFileParser;
 import fr.laple.extensions.languages.plugins.PluginConfigObject;
 import fr.laple.extensions.languages.plugins.PluginLoadingException;
@@ -74,7 +74,7 @@ public class LanguageSelectionController implements ActionListener {
                 if(pco.getName().equals(selected))
                 {
                     ILanguagePlugin plugin = (ILanguagePlugin) pco.getPlugin().newInstance();
-                    new GUIController(plugin);
+                    new LapleGUIController(plugin);
                     break;
                 }
             }
