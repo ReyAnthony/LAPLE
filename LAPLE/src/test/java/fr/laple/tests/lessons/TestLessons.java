@@ -1,6 +1,6 @@
 package fr.laple.tests.lessons;
 
-import fr.laple.model.lessons.ILessonContainer;
+import fr.laple.model.lessons.AbstractLessonContainer;
 import fr.laple.model.lessons.SymbolLessonContainer;
 import fr.laple.model.lessons.WordLessonContainer;
 import junit.framework.Assert;
@@ -14,7 +14,7 @@ public class TestLessons {
     @Test
     public void containerTypeTest()
     {
-        ILessonContainer container = new SymbolLessonContainer(null,null);
+        AbstractLessonContainer container = new SymbolLessonContainer(null,null);
         Class clazz = container.getType();
         Assert.assertTrue(clazz.equals(SymbolLessonContainer.class));
         Assert.assertFalse(clazz.equals(WordLessonContainer.class));

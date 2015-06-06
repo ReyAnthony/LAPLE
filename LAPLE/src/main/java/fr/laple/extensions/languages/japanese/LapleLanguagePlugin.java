@@ -10,7 +10,7 @@ import fr.laple.model.exercises.answers.FreeInputMode;
 import fr.laple.model.exercises.answers.QcmMode;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.SymbolContainer;
-import fr.laple.model.lessons.ILessonContainer;
+import fr.laple.model.lessons.AbstractLessonContainer;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     private ArrayList<SymbolContainer> symbolContainers;
     private ArrayList<IExerciseMode> exerciseModes;
     private ArrayList<AbstractAnswerMode> exerciseSolvingModes;
-    private ArrayList<ILessonContainer> lessonContainers;
+    private ArrayList<AbstractLessonContainer> lessonContainers;
 
     public LapleLanguagePlugin() throws ParserException {
 
@@ -55,7 +55,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     }
 
     @Override
-    public ArrayList<ILessonContainer> getLessonContainers() {
+    public ArrayList<AbstractLessonContainer> getLessonContainers() {
         return lessonContainers;
     }
 
@@ -87,15 +87,14 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
         symbolContainers.add(parser.parseFile("/fr/laple/extensions/languages/japanese/hiragana.json"));
         symbolContainers.add(parser.parseFile("/fr/laple/extensions/languages/japanese/katakana.json"));
         symbolContainers.add(parser.parseFile("/fr/laple/extensions/languages/japanese/kanji.json"));
-        //TODO kanji
 
     }
 
     private void loadLessons() throws ParserException {
-        LessonsJsonParser parser = new LessonsJsonParser(symbolContainers);
 
+        LessonsJsonParser parser = new LessonsJsonParser(symbolContainers);
         lessonContainers = parser.parseForSymbolLessons("/fr/laple/extensions/languages/japanese/lessons.json");
-        parser.parseForWordLessons("/fr/laple/extensions/languages/japanese/lessons.json");
+        lessonContainers.add(parser.parseForWordLessons("/fr/laple/extensions/languages/japanese/lessons.json"));
 
     }
 

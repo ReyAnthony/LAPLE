@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * Created by anthonyrey on 06/06/2015.
  */
-public class WordLessonContainer implements ILessonContainer {
+public class WordLessonContainer extends AbstractLessonContainer {
 
     private String lessonTypeName;
     private HashMap<String, LessonCategory> lessonCategories;
@@ -30,5 +30,10 @@ public class WordLessonContainer implements ILessonContainer {
    {
        return lessonCategories;
    }
+
+    public String toString()
+    {
+        return lessonTypeName;
+    }
 
 }

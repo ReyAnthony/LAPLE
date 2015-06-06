@@ -2,7 +2,7 @@ package fr.laple.view.lessons;
 
 import fr.laple.controller.lessons.LessonPickerController;
 import fr.laple.model.language.ILanguagePlugin;
-import fr.laple.model.lessons.ILessonContainer;
+import fr.laple.model.lessons.AbstractLessonContainer;
 
 import javax.swing.*;
 
@@ -11,23 +11,23 @@ import javax.swing.*;
  */
 public class LessonPickerView extends JPanel {
 
-    private JComboBox<ILessonContainer> lessons;
+    private JComboBox<AbstractLessonContainer> lessons;
     private JButton validationButton;
 
     public LessonPickerView(ILanguagePlugin plugin)
     {
         JLabel message = new JLabel("Please select a lesson mode");
         lessons = new JComboBox<>();
-        validationButton = new JButton();
+        validationButton = new JButton("Ok");
 
         this.add(message);
         this.add(lessons);
         this.add(validationButton);
-        validationButton.addActionListener(new LessonPickerController(plugin));
+        validationButton.addActionListener(new LessonPickerController(plugin, this));
 
     }
 
-    public JComboBox<ILessonContainer> getLessonsComboBox()
+    public JComboBox<AbstractLessonContainer> getLessonsComboBox()
     {
         return lessons;
     }

@@ -23,9 +23,9 @@ public class LessonsJsonParser {
         this.symbolContainers = sc;
     }
 
-    public ArrayList<ILessonContainer> parseForSymbolLessons(String path) throws ParserException {
+    public ArrayList<AbstractLessonContainer> parseForSymbolLessons(String path) throws ParserException {
 
-        ArrayList<ILessonContainer> lessonContainers = new ArrayList<>();
+        ArrayList<AbstractLessonContainer> lessonContainers = new ArrayList<>();
 
         try( InputStream file = getClass().getResourceAsStream(path))
         {
@@ -78,7 +78,7 @@ public class LessonsJsonParser {
 
     }
 
-    public ILessonContainer parseForWordLessons(String path) throws ParserException {
+    public AbstractLessonContainer parseForWordLessons(String path) throws ParserException {
         WordLessonContainer lessonContainer = new WordLessonContainer("Kanji");
 
         try(InputStream file = getClass().getResourceAsStream(path)){

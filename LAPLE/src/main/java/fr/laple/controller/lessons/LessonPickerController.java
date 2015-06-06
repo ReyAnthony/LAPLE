@@ -1,7 +1,7 @@
 package fr.laple.controller.lessons;
 
 import fr.laple.model.language.ILanguagePlugin;
-import fr.laple.model.lessons.ILessonContainer;
+import fr.laple.model.lessons.AbstractLessonContainer;
 import fr.laple.view.lessons.LessonPickerView;
 
 import javax.swing.*;
@@ -16,17 +16,18 @@ public class LessonPickerController implements ActionListener{
     ILanguagePlugin model;
     LessonPickerView view;
 
-    public LessonPickerController(ILanguagePlugin model)
+    public LessonPickerController(ILanguagePlugin model, LessonPickerView view)
     {
         this.model = model;
+        this.view = view;
         setComboBox();
 
     }
 
     private void setComboBox()
     {
-        JComboBox<ILessonContainer> lessons = view.getLessonsComboBox();
-        ComboBoxModel<ILessonContainer> comboBoxModel = new DefaultComboBoxModel<>(model.getLessonContainers().toArray(new ILessonContainer[]{}));
+        JComboBox<AbstractLessonContainer> lessons = view.getLessonsComboBox();
+        ComboBoxModel<AbstractLessonContainer> comboBoxModel = new DefaultComboBoxModel<>(model.getLessonContainers().toArray(new AbstractLessonContainer[]{}));
 
         lessons.setModel(comboBoxModel);
 

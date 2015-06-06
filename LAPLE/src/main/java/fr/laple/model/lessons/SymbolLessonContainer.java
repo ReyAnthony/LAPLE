@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author anthonyrey
  *
  */
-public class SymbolLessonContainer implements ILessonContainer{
+public class SymbolLessonContainer extends AbstractLessonContainer {
 
     private String lessonTypeName;
     private ArrayList<Lesson> lessons;
@@ -24,6 +24,11 @@ public class SymbolLessonContainer implements ILessonContainer{
 
     public String getLessonTypeName(){
 
+        return lessonTypeName;
+    }
+
+    public String toString()
+    {
         return lessonTypeName;
     }
 
