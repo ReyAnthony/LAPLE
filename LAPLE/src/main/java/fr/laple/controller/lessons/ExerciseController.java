@@ -2,7 +2,7 @@ package fr.laple.controller.lessons;
 
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.lessons.AbstractLessonContainer;
-import fr.laple.view.lessons.LessonPickerView;
+import fr.laple.view.lessons.ListView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,12 +11,12 @@ import java.awt.event.ActionListener;
 /**
  * Created by anthonyrey on 06/06/2015.
  */
-public class LessonPickerController implements ActionListener{
+public class ExerciseController implements ActionListener{
 
     ILanguagePlugin model;
-    LessonPickerView view;
+    ListView view;
 
-    public LessonPickerController(ILanguagePlugin model, LessonPickerView view)
+    public ExerciseController(ILanguagePlugin model, ListView view)
     {
         this.model = model;
         this.view = view;
@@ -35,8 +35,7 @@ public class LessonPickerController implements ActionListener{
         }
 
         lessons.setModel(listModel);
-
-
+        view.getValidationButton().addActionListener(new ExerciseController(model, view));
 
     }
 

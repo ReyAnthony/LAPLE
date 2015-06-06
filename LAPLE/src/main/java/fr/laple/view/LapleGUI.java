@@ -1,11 +1,5 @@
 package fr.laple.view;
 
-import fr.laple.controller.WindowController;
-import fr.laple.model.language.ILanguagePlugin;
-import fr.laple.view.exercises.ExerciseParameterizer;
-import fr.laple.view.lessons.LessonPickerView;
-import fr.laple.view.staticpanels.AboutPanel;
-import fr.laple.view.staticpanels.MainPanel;
 import fr.laple.ztools.ScreenTools;
 
 import javax.swing.*;
@@ -21,52 +15,25 @@ import java.awt.*;
 public class LapleGUI extends JFrame {
 
     private JTabbedPane UIPane;
-    private AboutPanel aboutPanel;
-    private MainPanel mainPanel;
-
-    private ILanguagePlugin languagePlugin;
 
 
-    public LapleGUI(ILanguagePlugin plugin){
+    public LapleGUI(){
 
-        this.languagePlugin = plugin;
         createUI();
     }
 
     private void createUI()
     {
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        this.addWindowListener(new WindowController(this));
         this.setSize(560, 500);
         this.setMinimumSize(new Dimension(560,500));
         this.setLocation(ScreenTools.getCenteredPoint(this.getWidth(), this.getHeight()));
         this.setTitle("LAPLE - Logiciel d'Apprentissage de Langues Etrangères");
         this.setResizable(false);
 
-        createPanes();
-        this.setVisible(true);
+        this.UIPane = new JTabbedPane();
     }
 
-    private void createPanes()
-    {
-        UIPane = new JTabbedPane();
-
-        mainPanel = new MainPanel();
-        UIPane.add("Home Page" , mainPanel);
-
-        UIPane.add("Lessons" , new LessonPickerView(languagePlugin));
-
-        UIPane.add("Exercises" , new ExerciseParameterizer(languagePlugin));
-
-        UIPane.add("Statistics" , null);
-        UIPane.add("User settings" , null);
-
-        aboutPanel = new AboutPanel();
-        UIPane.add("About LAPLE" , aboutPanel);
-
-        this.add(UIPane);
-
-    }
 
     public JTabbedPane getUIPane()
     {

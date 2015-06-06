@@ -1,6 +1,5 @@
 package fr.laple.view.startup;
 
-import fr.laple.controller.startup.LoginPromptController;
 import fr.laple.ztools.ScreenTools;
 
 import javax.swing.*;
@@ -9,7 +8,7 @@ import java.awt.*;
 /**
  * This class allows an user to Login to the application. It will set the informations in the User singleton the call the Language selection prompt
  *
- * @see LanguageSelection
+ * @see LanguageSelectionView
  * @see fr.laple.model.user.User
  * @author anthonyrey
  */
@@ -23,7 +22,6 @@ public class LoginPrompt extends JFrame{
 
     public LoginPrompt()
     {
-        LoginPromptController controller = new LoginPromptController(this);
         BorderLayout layout = new BorderLayout();
         JPanel container = new JPanel();
         container.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -55,8 +53,6 @@ public class LoginPrompt extends JFrame{
         JPanel buttons = new JPanel();
         validationButton = new JButton("Log-in");
         noAccountButton = new JButton("I do not have an account");
-        validationButton.addActionListener(controller);
-        noAccountButton.addActionListener(controller);
         buttons.add(validationButton);
         buttons.add(noAccountButton);
         add(buttons, BorderLayout.PAGE_END);

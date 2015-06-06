@@ -1,5 +1,6 @@
 package fr.laple;
 
+import fr.laple.controller.startup.LoginPromptController;
 import fr.laple.view.startup.LoginPrompt;
 import fr.laple.view.startup.SplashScreen;
 
@@ -14,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
 
         new SplashScreen();
-        new LoginPrompt();
+        new LoginPromptController();
 
     }
 }

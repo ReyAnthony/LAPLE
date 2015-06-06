@@ -1,10 +1,8 @@
 package fr.laple.view.startup;
 
-import fr.laple.controller.startup.LanguageSelectionController;
 import fr.laple.ztools.ScreenTools;
 
 import javax.swing.*;
-import java.util.List;
 
 /**
  * This class is a prompt for selecting avalaible languages. It uses entry points from language plugins to determine the language list
@@ -12,7 +10,7 @@ import java.util.List;
  * @author anthonyrey
  *
  */
-public class LanguageSelection extends JFrame{
+public class LanguageSelectionView extends JFrame{
 
     private JLabel message;
     private JComboBox choices;
@@ -20,9 +18,8 @@ public class LanguageSelection extends JFrame{
     private JPanel panel;
 
 
-    public LanguageSelection()
+    public LanguageSelectionView()
     {
-        LanguageSelectionController controller = new LanguageSelectionController(this);
 
         this.setSize(300,100);
         this.setLocation(ScreenTools.getCenteredPoint(this.getWidth(), this.getHeight()));
@@ -35,17 +32,9 @@ public class LanguageSelection extends JFrame{
         choices = new JComboBox();
         panel = new JPanel();
 
-        List<String> languageList = controller.getLanguageList();
-
-        for(String s : languageList)
-        {
-            choices.addItem(s);
-        }
-
         panel.add(message);
         panel.add(choices);
         panel.add(validationButton);
-        validationButton.addActionListener(controller);
 
         this.setContentPane(panel);
 
@@ -56,5 +45,9 @@ public class LanguageSelection extends JFrame{
 
     public JComboBox getChoices() {
         return choices;
+    }
+
+    public JButton getValidationButton() {
+        return validationButton;
     }
 }

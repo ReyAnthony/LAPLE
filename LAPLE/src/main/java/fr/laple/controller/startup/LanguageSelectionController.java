@@ -1,11 +1,11 @@
 package fr.laple.controller.startup;
 
+import fr.laple.controller.GUIController;
 import fr.laple.extensions.languages.plugins.LanguageConfigFileParser;
 import fr.laple.extensions.languages.plugins.PluginConfigObject;
 import fr.laple.extensions.languages.plugins.PluginLoadingException;
 import fr.laple.model.language.ILanguagePlugin;
-import fr.laple.view.LapleGUI;
-import fr.laple.view.startup.LanguageSelection;
+import fr.laple.view.startup.LanguageSelectionView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,15 +17,24 @@ import java.util.List;
  * Created by anthonyrey on 01/06/2015.
  */
 //TODO test the Load of plugins outside the classpath
+//TODO refactor
 public class LanguageSelectionController implements ActionListener {
 
-    private LanguageSelection langSelect;
+    private LanguageSelectionView view;
     private LanguageConfigFileParser lcfp;
 
-    public LanguageSelectionController(LanguageSelection langSelect)
+    public LanguageSelectionController()
     {
-        this.langSelect = langSelect;
+        this.view = new LanguageSelectionView();
+        this.view.getValidationButton().addActionListener(this);
         loadConfig();
+
+        List<String> languageList = getLanguageList();
+
+        for(String s : languageList)
+        {
+            view.getChoices().addItem(s);
+        }
 
     }
 
@@ -40,7 +49,7 @@ public class LanguageSelectionController implements ActionListener {
         }
     }
 
-    public List<String> getLanguageList()
+    private List<String> getLanguageList()
     {
 
         List<String> languageList = new ArrayList<>();
@@ -57,7 +66,7 @@ public class LanguageSelectionController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        String selected = ((String) langSelect.getChoices().getSelectedItem());
+        String selected = ((String) view.getChoices().getSelectedItem());
 
         try {
             for(PluginConfigObject pco : lcfp.getLanguagePluginsList())
@@ -65,7 +74,7 @@ public class LanguageSelectionController implements ActionListener {
                 if(pco.getName().equals(selected))
                 {
                     ILanguagePlugin plugin = (ILanguagePlugin) pco.getPlugin().newInstance();
-                    new LapleGUI(plugin);
+                    new GUIController(plugin);
                     break;
                 }
             }
@@ -75,12 +84,12 @@ public class LanguageSelectionController implements ActionListener {
             pluginLoadingError(e1.toString());
         }
 
-        langSelect.dispose();
+        view.dispose();
     }
 
     private void pluginLoadingError(String errorMessage)
     {
-        JOptionPane.showMessageDialog(langSelect, errorMessage, "Fatal Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(view, errorMessage, "Fatal Error", JOptionPane.ERROR_MESSAGE);
         System.exit(0);
     }
 }

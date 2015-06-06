@@ -1,7 +1,6 @@
 package fr.laple.controller.startup;
 
 import fr.laple.model.user.User;
-import fr.laple.view.startup.LanguageSelection;
 import fr.laple.view.startup.LoginPrompt;
 
 import javax.swing.*;
@@ -19,9 +18,11 @@ public class LoginPromptController implements ActionListener {
     private LoginPrompt loginPrompt;
 
 
-    public LoginPromptController(LoginPrompt loginPrompt)
+    public LoginPromptController()
     {
-        this.loginPrompt = loginPrompt;
+        this.loginPrompt = new LoginPrompt();
+        loginPrompt.getValidationButton().addActionListener(this);
+        loginPrompt.getNoAccountButton().addActionListener(this);
     }
 
     @Override
@@ -30,7 +31,7 @@ public class LoginPromptController implements ActionListener {
         if(e.getSource().equals(loginPrompt.getValidationButton()))
         {
             JOptionPane.showMessageDialog(null, "Not implemented yet");
-            new LanguageSelection();
+            new LanguageSelectionController();
             loginPrompt.dispose();
         }
         else if(e.getSource().equals(loginPrompt.getNoAccountButton()))
