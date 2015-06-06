@@ -15,6 +15,7 @@ import java.awt.*;
 public class ExerciseParameterizer extends JPanel{
 
     private JLabel questionModeMessage;
+    private JLabel countMessage;
     private JLabel symbolModeMessage;
     private JComboBox<SymbolContainer> symbolMode;
     private JButton okButton;
@@ -25,46 +26,55 @@ public class ExerciseParameterizer extends JPanel{
 
     public ExerciseParameterizer(ILanguagePlugin model) {
 
-        GridLayout layout = new GridLayout(4,1);
+        GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
+        GridBagConstraints gbc = new GridBagConstraints();
 
-        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        gbc.insets = new Insets(10,10,10,10);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.BOTH;
 
-        JPanel symbolModePanel = new JPanel();
         symbolModeMessage = new JLabel("Select a symbol mode :");
         symbolModeMessage.setHorizontalAlignment(JLabel.CENTER);
-        symbolModeMessage.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        this.add(symbolModeMessage, gbc);
 
+        gbc.gridy = 2;
         symbolMode = new JComboBox<>();
+        this.add(symbolMode, gbc);
 
-        symbolModePanel.add(symbolModeMessage);
-        symbolModePanel.add(symbolMode);
-
+        gbc.gridy = 4;
         questionModeMessage = new JLabel("Select a question mode :");
         questionModeMessage.setHorizontalAlignment(JLabel.CENTER);
-        questionModeMessage.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        this.add(questionModeMessage, gbc);
 
+        gbc.gridy = 6;
+        questionMode = new JComboBox<>();
+        this.add(questionMode, gbc);
+
+        gbc.gridy = 8;
+        answerModeMessage = new JLabel("Select an answer mode :");
+        answerModeMessage.setHorizontalAlignment(JLabel.CENTER);
+        this.add(answerModeMessage, gbc);
+
+        gbc.gridy = 10;
+        answerMode = new JComboBox<>();
+        this.add(answerMode, gbc);
+
+        gbc.gridy = 12;
+        countMessage = new JLabel("Number of exercises :");
+        countMessage.setHorizontalAlignment(JLabel.CENTER);
+        this.add(countMessage, gbc);
+
+        gbc.gridy = 14;
         //todo check max value
         exerciseCountSelector = new JSpinner();
-        exerciseCountSelector.setModel(new SpinnerNumberModel(1, 1, Integer.MAX_VALUE,1));
+        exerciseCountSelector.setModel(new SpinnerNumberModel(1, 1, 30,1));
+        this.add(exerciseCountSelector, gbc);
 
-
-        questionMode = new JComboBox<>();
+        gbc.gridy = 16;
         okButton = new JButton("OK");
-
-        JPanel panel = new JPanel();
-        answerModeMessage = new JLabel("Select an answer mode :");
-        answerMode = new JComboBox<>();
-
-        panel.add(exerciseCountSelector);
-        panel.add(answerModeMessage);
-        panel.add(answerMode);
-        panel.add(okButton);
-
-        this.add(symbolModePanel, BorderLayout.PAGE_START);
-        this.add(questionModeMessage, BorderLayout.PAGE_START);
-        this.add(questionMode, BorderLayout.CENTER);
-        this.add(panel, BorderLayout.PAGE_END);
+        this.add(okButton, gbc);
 
         ExerciseParameterizerController controller = new ExerciseParameterizerController(model, this);
         okButton.addActionListener(controller);

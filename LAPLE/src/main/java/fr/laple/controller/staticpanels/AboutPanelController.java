@@ -31,7 +31,7 @@ public class AboutPanelController implements ActionListener {
 
         try {
             java.awt.Desktop.getDesktop().browse(
-                    new URI("https://github.com/ReyAnthony/LAPLE"));
+                    new URI("http://www.laple.fr"));
         } catch (IOException | URISyntaxException e1) {
 
             JOptionPane.showMessageDialog(aboutPanel,

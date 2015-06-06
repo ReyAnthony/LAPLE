@@ -17,7 +17,7 @@ public class ListView extends JPanel {
     public ListView(ILanguagePlugin model)
     {
         this.setLayout(new BorderLayout());
-        this.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         JLabel message = new JLabel("Please select a lesson mode");
         list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

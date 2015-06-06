@@ -45,7 +45,7 @@ public class LoginPromptController implements ActionListener {
     {
         try {
             java.awt.Desktop.getDesktop().browse(
-                    new URI("https://github.com/ReyAnthony/LAPLE"));
+                    new URI("http://www.laple.fr/sign_up.php"));
         } catch (IOException | URISyntaxException e1) {
 
             JOptionPane.showMessageDialog(loginPrompt,

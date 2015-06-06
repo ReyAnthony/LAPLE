@@ -21,6 +21,8 @@ public class QCMExerciseView extends AbstractExerciseView {
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
         GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.insets = new Insets(10,10,10,10);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.BOTH;

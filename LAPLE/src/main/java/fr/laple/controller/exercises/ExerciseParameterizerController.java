@@ -11,7 +11,6 @@ import fr.laple.view.exercises.AbstractExerciseView;
 import fr.laple.view.exercises.ExerciseParameterizer;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -100,7 +99,7 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
 
         parameterizer.invalidate();
         parameterizer.removeAll();
-        parameterizer.setLayout(new BorderLayout());
+        //parameterizer.setLayout(new BorderLayout());
         parameterizer.add(exView);
         exView.addActionListener(listener);
         parameterizer.revalidate();
