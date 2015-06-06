@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class LanguageDictionnaryJsonParser {
 
-    public SymbolContainer parseFile(String path) throws ParserExeption {
+    public SymbolContainer parseFile(String path) throws ParserException {
         SymbolContainer container = null;
 
         try(InputStream file = getClass().getResourceAsStream(path)){
@@ -45,7 +45,7 @@ public class LanguageDictionnaryJsonParser {
         }
         catch(Exception e)
         {
-            throw new ParserExeption(path);
+            throw new ParserException(path);
         }
 
         return container;

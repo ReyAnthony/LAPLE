@@ -1,6 +1,6 @@
 package fr.laple.tests.exercises;
 
-import fr.laple.extensions.languages.japanese.ParserExeption;
+import fr.laple.extensions.languages.japanese.ParserException;
 import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
 import fr.laple.model.exercises.Exercise;
 import fr.laple.extensions.languages.japanese.LapleLanguagePlugin;
@@ -121,7 +121,7 @@ public class TestNeuralExercise {
         LapleLanguagePlugin plugin = null;
         try {
             plugin = new LapleLanguagePlugin();
-        } catch (ParserExeption parserExeption) {
+        } catch (ParserException parserExeption) {
             parserExeption.printStackTrace();
         }
 

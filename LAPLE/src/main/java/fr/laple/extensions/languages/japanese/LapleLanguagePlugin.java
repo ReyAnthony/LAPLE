@@ -26,7 +26,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     private ArrayList<AbstractAnswerMode> exerciseSolvingModes;
     private ArrayList<SymbolLessonContainer> symbolLessonContainers;
 
-    public LapleLanguagePlugin() throws ParserExeption {
+    public LapleLanguagePlugin() throws ParserException {
 
         loadSymbolContainers();
         loadLessons();
@@ -80,7 +80,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
         exerciseModes.add(new ExModeUserLangTranscriptLang());
     }
 
-    private void loadSymbolContainers() throws ParserExeption  {
+    private void loadSymbolContainers() throws ParserException {
 
         symbolContainers = new ArrayList<>();
         LanguageDictionnaryJsonParser parser  = new LanguageDictionnaryJsonParser();
@@ -91,12 +91,12 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
 
     }
 
-    private void loadLessons() throws ParserExeption {
+    private void loadLessons() throws ParserException {
         LessonsJsonParser parser = new LessonsJsonParser(symbolContainers);
 
-       symbolLessonContainers = parser.parseForSymbolLessons("/fr/laple/extensions/languages/japanese/lessons.json");
-         parser.parseForWordLessons("/fr/laple/extensions/languages/japanese/lessons.json");
-        System.out.println("test");
+        symbolLessonContainers = parser.parseForSymbolLessons("/fr/laple/extensions/languages/japanese/lessons.json");
+        parser.parseForWordLessons("/fr/laple/extensions/languages/japanese/lessons.json");
+
     }
 
 }

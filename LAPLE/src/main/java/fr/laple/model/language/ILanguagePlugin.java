@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public interface ILanguagePlugin {
 
     public String getLanguageName();
-    //public LessonContainer getLessonContainer();
     public ArrayList<SymbolContainer> getSymbolContainer();
     public String getVersion();
     public ArrayList<IExerciseMode> getExercisesModes() ;
