@@ -2,10 +2,7 @@ package fr.laple.extensions.languages.japanese;
 
 
 import fr.laple.model.language.SymbolContainer;
-import fr.laple.model.lessons.Lesson;
-import fr.laple.model.lessons.LessonCategory;
-import fr.laple.model.lessons.SymbolLessonContainer;
-import fr.laple.model.lessons.WordLessonContainer;
+import fr.laple.model.lessons.*;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -26,9 +23,9 @@ public class LessonsJsonParser {
         this.symbolContainers = sc;
     }
 
-    public ArrayList<SymbolLessonContainer> parseForSymbolLessons(String path) throws ParserException {
-        ArrayList<SymbolLessonContainer> lessonContainers = new ArrayList<>();
+    public ArrayList<ILessonContainer> parseForSymbolLessons(String path) throws ParserException {
 
+        ArrayList<ILessonContainer> lessonContainers = new ArrayList<>();
 
         try( InputStream file = getClass().getResourceAsStream(path))
         {
@@ -81,7 +78,7 @@ public class LessonsJsonParser {
 
     }
 
-    public WordLessonContainer parseForWordLessons(String path) throws ParserException {
+    public ILessonContainer parseForWordLessons(String path) throws ParserException {
         WordLessonContainer lessonContainer = new WordLessonContainer("Kanji");
 
         try(InputStream file = getClass().getResourceAsStream(path)){

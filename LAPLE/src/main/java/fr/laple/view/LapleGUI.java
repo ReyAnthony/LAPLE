@@ -3,6 +3,7 @@ package fr.laple.view;
 import fr.laple.controller.WindowController;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.view.exercises.ExerciseParameterizer;
+import fr.laple.view.lessons.LessonPickerView;
 import fr.laple.view.staticpanels.AboutPanel;
 import fr.laple.view.staticpanels.MainPanel;
 import fr.laple.ztools.ScreenTools;
@@ -53,7 +54,7 @@ public class LapleGUI extends JFrame {
         mainPanel = new MainPanel();
         UIPane.add("Home Page" , mainPanel);
 
-        UIPane.add("Lessons" , null);
+        UIPane.add("Lessons" , new LessonPickerView(languagePlugin));
 
         UIPane.add("Exercises" , new ExerciseParameterizer(languagePlugin));
 
