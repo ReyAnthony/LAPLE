@@ -16,6 +16,7 @@ import java.util.NoSuchElementException;
  */
 public abstract class AbstractExerciseController implements ActionListener {
 
+
     private AbstractExerciseView view;
     private Exercise exercise;
     private SymbolContainer sc;

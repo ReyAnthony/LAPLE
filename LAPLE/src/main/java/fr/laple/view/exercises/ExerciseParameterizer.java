@@ -44,6 +44,7 @@ public class ExerciseParameterizer extends JPanel{
         questionModeMessage.setHorizontalAlignment(JLabel.CENTER);
         questionModeMessage.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
+        //todo check max value
         exerciseCountSelector = new JSpinner();
         exerciseCountSelector.setModel(new SpinnerNumberModel(1, 1, Integer.MAX_VALUE,1));
 

@@ -89,7 +89,6 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
         Collections.shuffle(sym);
         LinkedList<Exercise> exercises = new LinkedList<>();
 
-        //TODO selector for ex count
         for(int i = 0; i < parameterizer.getExerciseCount(); i++)
         {
             Exercise ex = new Exercise( sym.get(i) , mode, solver, sc);

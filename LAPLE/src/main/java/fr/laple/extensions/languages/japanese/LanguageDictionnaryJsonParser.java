@@ -15,30 +15,38 @@ import java.util.ArrayList;
  */
 public class LanguageDictionnaryJsonParser {
 
-    public SymbolContainer parseFile(InputStream file)
-    {
-        JsonReader jsonReader = Json.createReader(file);
-        JsonObject rootObject = jsonReader.readObject();
+    public SymbolContainer parseFile(String path) throws ParserExeption {
+        SymbolContainer container = null;
 
-        //TODO yaaay ugly code
-        ArrayList<String> keys = new ArrayList<>(rootObject.keySet());
-        String rootElem = keys.get(0);
+        try(InputStream file = getClass().getResourceAsStream(path)){
 
-        JsonArray root = rootObject.getJsonArray(rootElem);
-        SymbolContainer container = new SymbolContainer(rootElem);
+            JsonReader jsonReader = Json.createReader(file);
+            JsonObject rootObject = jsonReader.readObject();
 
-        for(int i = 0; i < root.size(); i++)
-        {
-            JsonObject current = root.getJsonObject(i);
-            String userLangTranscript = current .getString("userLangTranscript");
-            String gottenSymbol = current.getString("symbol");
-            //need the others one
+            //TODO yaaay ugly code
+            ArrayList<String> keys = new ArrayList<>(rootObject.keySet());
+            String rootElem = keys.get(0);
 
-            Symbol symbol = new Symbol(userLangTranscript, gottenSymbol, null, null, null , null);
-            container.addSymbol(symbol);
+            JsonArray root = rootObject.getJsonArray(rootElem);
+            container = new SymbolContainer(rootElem);
+
+            for(int i = 0; i < root.size(); i++)
+            {
+                JsonObject current = root.getJsonObject(i);
+                String userLangTranscript = current .getString("userLangTranscript");
+                String gottenSymbol = current.getString("symbol");
+                //need the others one
+
+                Symbol symbol = new Symbol(userLangTranscript, gottenSymbol, null, null, null , null);
+                container.addSymbol(symbol);
+            }
+
+
         }
-
-        jsonReader.close();
+        catch(Exception e)
+        {
+            throw new ParserExeption(path);
+        }
 
         return container;
     }

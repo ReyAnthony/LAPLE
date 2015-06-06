@@ -71,7 +71,7 @@ public class LanguageSelectionController implements ActionListener {
             }
 
             //Normally we shouln't have any problems here, but more is better than less
-        } catch (InstantiationException | IllegalAccessException e1) {
+        } catch (Exception e1) {
             pluginLoadingError(e1.getMessage());
         }
 

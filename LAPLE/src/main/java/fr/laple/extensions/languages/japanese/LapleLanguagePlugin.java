@@ -10,6 +10,7 @@ import fr.laple.model.exercises.answers.FreeInputMode;
 import fr.laple.model.exercises.answers.QcmMode;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.SymbolContainer;
+import fr.laple.model.lessons.SymbolLessonContainer;
 
 import java.util.ArrayList;
 
@@ -23,8 +24,9 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     private ArrayList<SymbolContainer> symbolContainers;
     private ArrayList<IExerciseMode> exerciseModes;
     private ArrayList<AbstractAnswerMode> exerciseSolvingModes;
+    private ArrayList<SymbolLessonContainer> symbolLessonContainers;
 
-    public LapleLanguagePlugin() {
+    public LapleLanguagePlugin() throws ParserExeption {
 
         loadSymbolContainers();
         loadLessons();
@@ -32,7 +34,6 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
         populateExerciseSolvingModesList();
     }
 
-    //TODO Get by name
     @Override
     public ArrayList<SymbolContainer> getSymbolContainer() {
         return symbolContainers;
@@ -51,6 +52,11 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     @Override
     public ArrayList<AbstractAnswerMode> getExercisesSolvingModes() {
         return exerciseSolvingModes;
+    }
+
+    @Override
+    public ArrayList<SymbolLessonContainer> getSymbolLessonContainers() {
+        return symbolLessonContainers;
     }
 
     @Override
@@ -74,20 +80,23 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
         exerciseModes.add(new ExModeUserLangTranscriptLang());
     }
 
-    private void loadSymbolContainers() {
+    private void loadSymbolContainers() throws ParserExeption  {
 
         symbolContainers = new ArrayList<>();
         LanguageDictionnaryJsonParser parser  = new LanguageDictionnaryJsonParser();
-        symbolContainers.add(parser.parseFile( getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/hiragana.json")));
-        symbolContainers.add(parser.parseFile(getClass().getResourceAsStream("/fr/laple/extensions/languages/japanese/katakana.json")));
+        symbolContainers.add(parser.parseFile("/fr/laple/extensions/languages/japanese/hiragana.json"));
+        symbolContainers.add(parser.parseFile("/fr/laple/extensions/languages/japanese/katakana.json"));
+        symbolContainers.add(parser.parseFile("/fr/laple/extensions/languages/japanese/kanji.json"));
         //TODO kanji
 
     }
 
-    private void loadLessons() {
+    private void loadLessons() throws ParserExeption {
+        LessonsJsonParser parser = new LessonsJsonParser(symbolContainers);
 
-        //TODO need to be rewritten
-
+       symbolLessonContainers = parser.parseForSymbolLessons("/fr/laple/extensions/languages/japanese/lessons.json");
+         parser.parseForWordLessons("/fr/laple/extensions/languages/japanese/lessons.json");
+        System.out.println("test");
     }
 
 }

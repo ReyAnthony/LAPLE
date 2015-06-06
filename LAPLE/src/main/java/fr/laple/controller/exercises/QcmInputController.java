@@ -40,6 +40,8 @@ public class QcmInputController extends AbstractExerciseController {
         ArrayList<JButton> buttons = view.getQcmButtons();
 
         //TODO BDD check
+        //TODO fix doublon bug
+        //TODO check for lenght of exercise list
 
         buttons.get(0).setText(getExercise().getAnwser());
 
