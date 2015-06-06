@@ -10,24 +10,24 @@ import java.awt.event.ActionListener;
  */
 public class Blinker extends Timer implements ActionListener {
 
-    private JPanel panel;
+    private Component comp;
     private Color col;
     private Color baseCol;
 
-    public Blinker(JPanel panel, boolean won) {
+    public Blinker(Component c, boolean won) {
 
         super(1000, null);
         this.addActionListener(this);
-        this.panel = panel;
+        this.comp = c;
         this.setRepeats(true);
-        baseCol = new Color(this.panel.getBackground().getRGB());
+        baseCol = new Color(this.comp.getBackground().getRGB());
 
         if(won)
             col =Color.green;
         else
             col = Color.red;
 
-        panel.setBackground(col);
+        c.setBackground(col);
 
         this.start();
     }
@@ -35,17 +35,17 @@ public class Blinker extends Timer implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        Color c = new Color(panel.getBackground().getRGB());
+        Color c = new Color(this.comp.getBackground().getRGB());
         if(!c.equals(col))
-            panel.setBackground(col);
+           this.comp.setBackground(col);
         else
-            panel.setBackground(baseCol);
+           this.comp.setBackground(baseCol);
     }
 
     public void stop()
     {
         super.stop();
-        this.panel.setBackground(baseCol);
+        this.comp.setBackground(baseCol);
 
     }
 }

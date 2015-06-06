@@ -8,6 +8,7 @@ import fr.laple.view.exercises.ExerciseParameterizer;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
@@ -21,7 +22,7 @@ public abstract class AbstractExerciseController implements ActionListener {
     private Exercise exercise;
     private SymbolContainer sc;
     private LinkedList<Exercise> exerciseQueue;
-    private Blinker blinker;
+    private ArrayList<Blinker> blinkers = new ArrayList<>();
     private ILanguagePlugin model;
 
     public void setView(AbstractExerciseView panel) {
@@ -34,7 +35,10 @@ public abstract class AbstractExerciseController implements ActionListener {
 
                     setExercise(getExercises().pop());
                     setTheView();
-                    getBlinker().stop();
+                    for(Blinker b : blinkers)
+                    {
+                        b.stop();
+                    }
                     getView().resetTheView();
                 }
                 catch (NoSuchElementException exc)
@@ -55,7 +59,6 @@ public abstract class AbstractExerciseController implements ActionListener {
         this.exerciseQueue = e;
         exercise = exerciseQueue.pop();
     }
-
 
     public void setSymbolContainer(SymbolContainer sc) {
         this.sc = sc;
@@ -83,12 +86,8 @@ public abstract class AbstractExerciseController implements ActionListener {
         exercise = ex;
     }
 
-    public Blinker getBlinker() {
-        return blinker;
-    }
-
-    public void setBlinker(Blinker blinker) {
-        this.blinker = blinker;
+    public void addBlinker(Blinker blinker) {
+        blinkers.add(blinker);
     }
 
     public void addModel(ILanguagePlugin model)

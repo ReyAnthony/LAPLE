@@ -31,14 +31,13 @@ public class LapleGUIController implements ChangeListener {
 
         ui.add("Lessons",  new ListView(model) );
 
-
-        view.getUIPane().add("Exercises", new ExerciseParameterizer(model));
-        view.getUIPane().add("Statistics", null);
-        view.getUIPane().add("User settings", null);
+        ui.add("Exercises", new ExerciseParameterizer(model));
+        ui.add("Statistics", null);
+        ui.add("User settings", null);
 
         AboutPanel aboutPanel = new AboutPanel();
-        view.getUIPane().add("About LAPLE", aboutPanel);
-        view.getUIPane().addChangeListener(this);
+        ui.add("About LAPLE", aboutPanel);
+        ui.addChangeListener(this);
 
         view.add(ui);
         view.setVisible(true);
