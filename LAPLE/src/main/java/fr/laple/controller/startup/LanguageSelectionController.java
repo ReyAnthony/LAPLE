@@ -1,6 +1,7 @@
 package fr.laple.controller.startup;
 
 import fr.laple.controller.LapleGUIController;
+import fr.laple.extensions.languages.japanese.ParserException;
 import fr.laple.extensions.languages.plugins.LanguageConfigFileParser;
 import fr.laple.extensions.languages.plugins.PluginConfigObject;
 import fr.laple.extensions.languages.plugins.PluginLoadingException;
@@ -79,9 +80,10 @@ public class LanguageSelectionController implements ActionListener {
                 }
             }
 
-            //Normally we shouln't have any problems here, but more is better than less
-        } catch (InstantiationException | IllegalAccessException e1) {
-            pluginLoadingError(e1.toString());
+            /* TODO We get the parser exception here , but the exception is
+            actually thrown by getPlugin. Check this with Sananes */
+        } catch (InstantiationException | IllegalAccessException | ParserException e1) {
+            pluginLoadingError(e1.getMessage());
         }
 
         view.dispose();

@@ -1,5 +1,7 @@
 package fr.laple.extensions.languages.plugins;
 
+import fr.laple.extensions.languages.japanese.ParserException;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -55,7 +57,7 @@ public class PluginConfigObject {
 
     }
 
-    public Class getPlugin() {
+    public Class getPlugin() throws ParserException{
         return plugin;
     }
 
