@@ -7,7 +7,7 @@ import fr.laple.extensions.languages.japanese.LapleLanguagePlugin;
 import fr.laple.extensions.languages.japanese.neural.NeuralExerciseSolver;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
-import fr.laple.ztools.neuraNets.NeuralLapleHelper;
+import fr.laple.ztools.neuranets.NeuralLapleHelper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.neuroph.core.NeuralNetwork;

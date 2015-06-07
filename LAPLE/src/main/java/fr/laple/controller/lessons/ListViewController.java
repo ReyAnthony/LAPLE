@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
  */
 public class ListViewController implements ActionListener{
 
-    ILanguagePlugin model;
-    ListView view;
+    private ILanguagePlugin model;
+    private ListView view;
 
     public ListViewController(ILanguagePlugin model, ListView view)
     {
@@ -43,6 +43,7 @@ public class ListViewController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        //TODO
 
     }
 }

@@ -30,12 +30,9 @@ public class DrawingMode extends AbstractAnswerMode {
     @Override
     public boolean testIfAnswerAndQuestionAreCompatible(IExerciseMode mode) {
 
-        if (mode instanceof ExModeUserLangTranscriptLang)
-            return true;
-        else
-            return false;
-    }
+        return mode instanceof ExModeUserLangTranscriptLang;
 
+    }
     @Override
     public AbstractExerciseController getAssociatedActionListener() {
         //TODO drawing mode

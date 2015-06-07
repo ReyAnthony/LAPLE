@@ -27,10 +27,7 @@ public class FreeInputMode extends AbstractAnswerMode {
     @Override
     public boolean testIfAnswerAndQuestionAreCompatible(IExerciseMode mode) {
 
-        if (mode instanceof ExModeUserLangTranscriptLang)
-            return false;
-        else
-            return true;
+        return mode instanceof ExModeUserLangTranscriptLang;
     }
 
     @Override

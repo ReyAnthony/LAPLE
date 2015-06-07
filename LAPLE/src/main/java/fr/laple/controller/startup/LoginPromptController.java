@@ -59,12 +59,12 @@ public class LoginPromptController implements ActionListener {
         User.getInstance().setOnline(online);
 
         //Add infos of user if online
+        /*
         if(online)
         {
-
-
-
+            //TODO
         }
+        */
 
     }
 

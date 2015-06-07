@@ -16,8 +16,8 @@ import javax.swing.event.ChangeListener;
  */
 public class LapleGUIController implements ChangeListener {
 
-    LapleGUI view;
-    ILanguagePlugin model;
+    private LapleGUI view;
+    private ILanguagePlugin model;
 
     public LapleGUIController(ILanguagePlugin model)
     {
@@ -47,6 +47,7 @@ public class LapleGUIController implements ChangeListener {
     @Override
     public void stateChanged(ChangeEvent e) {
 
+        //TODO
 
     }
 }

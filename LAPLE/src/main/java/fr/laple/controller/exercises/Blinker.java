@@ -36,10 +36,11 @@ public class Blinker extends Timer implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         Color c = new Color(this.comp.getBackground().getRGB());
-        if(!c.equals(col))
-           this.comp.setBackground(col);
+        if(c.equals(col))
+            this.comp.setBackground(baseCol);
         else
-           this.comp.setBackground(baseCol);
+            this.comp.setBackground(col);
+
     }
 
     public void stop()

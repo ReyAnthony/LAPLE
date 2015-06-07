@@ -14,7 +14,7 @@ import java.awt.*;
  */
 public class LapleGUI extends JFrame {
 
-    private JTabbedPane UIPane;
+    private JTabbedPane uIPane;
 
 
     public LapleGUI(){
@@ -31,13 +31,13 @@ public class LapleGUI extends JFrame {
         this.setTitle("LAPLE - Logiciel d'Apprentissage de Langues Etrangères");
         this.setResizable(false);
 
-        this.UIPane = new JTabbedPane();
+        this.uIPane = new JTabbedPane();
     }
 
 
     public JTabbedPane getUIPane()
     {
-        return UIPane;
+        return uIPane;
     }
 
 }

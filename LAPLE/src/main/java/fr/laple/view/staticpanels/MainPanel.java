@@ -69,7 +69,7 @@ public class MainPanel extends JPanel {
                         "nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate " +
                         "velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?");
 
-        manual.setLineWrap((true));
+        manual.setLineWrap(true);
         manual.setWrapStyleWord(true);
         panel.add(manual);
         add(scroll, BorderLayout.CENTER);
