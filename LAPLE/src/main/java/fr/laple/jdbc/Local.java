@@ -1,4 +1,4 @@
-package management;
+package fr.laple.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

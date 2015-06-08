@@ -2,16 +2,19 @@
 <html>
   <head>
     <meta charset="UTF-8">
-		<link rel="stylesheet" href="/private/css/style.css" />
-		<link rel="stylesheet" href="/private/css/formulaire.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/formulaire.css" />
 		<title>Accueil</title>
 		
   </head>
+  	 <div>
+      <h2><a style="color:white" class="navbar-brand" href="about2.php">About</a></h1>
+    </div>
 	<h1 style="color:ThreeDDarkShadow; text-align:center">LAPLE</h1>
 	
 	<body id="index">
 		<h2 style="color:ThreeDDarkShadow; text-align:center">Authentification</h2>
-		<form id="form" method="post" action="http://localhost/private/connexion.php">
+		<form id="form" method="post" action="connexion.php">
    	<fieldset>
     	<legend>Sign in</legend>
     		 <h6 style="color:Red"><?php if(isset($_GET['verif']) && $_GET['verif']==1)
