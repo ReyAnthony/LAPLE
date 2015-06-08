@@ -8,15 +8,10 @@ public abstract class AbstractLessonContainer {
 
     public abstract String getLessonTypeName();
 
-    public Class getType()
-    {
-        return this.getClass();
-    }
-
     @Override
     public String toString()
     {
-        return "Need to be oeverriden";
+        return "Need to be overriden";
     }
 
 

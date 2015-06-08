@@ -27,6 +27,11 @@ public class SymbolLessonContainer extends AbstractLessonContainer {
         return lessonTypeName;
     }
 
+    public ArrayList<Lesson> getLessons()
+    {
+        return lessons;
+    }
+
     public String toString()
     {
         return lessonTypeName;

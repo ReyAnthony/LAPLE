@@ -29,7 +29,7 @@ public class LapleGUIController implements ChangeListener {
 
         view.getUIPane().add("Home Page", new MainPanel());
 
-        ui.add("Lessons",  new ListView(model) );
+        ui.add("Lessons",  new ListView<>(model.getLessonContainers(), false));
 
         ui.add("Exercises", new ExerciseParameterizer(model));
         ui.add("Statistics", null);

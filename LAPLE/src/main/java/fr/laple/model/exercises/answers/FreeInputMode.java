@@ -2,10 +2,7 @@ package fr.laple.model.exercises.answers;
 
 import fr.laple.controller.exercises.AbstractExerciseController;
 import fr.laple.controller.exercises.FreeInputExerciseController;
-import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
-import fr.laple.model.exercises.IExerciseMode;
-import fr.laple.model.exercises.IExerciseSolver;
-import fr.laple.model.exercises.StandardExerciseSolver;
+import fr.laple.model.exercises.*;
 import fr.laple.view.exercises.AbstractExerciseView;
 import fr.laple.view.exercises.FreeInputExerciseView;
 
@@ -27,7 +24,7 @@ public class FreeInputMode extends AbstractAnswerMode {
     @Override
     public boolean testIfAnswerAndQuestionAreCompatible(IExerciseMode mode) {
 
-        return mode instanceof ExModeUserLangTranscriptLang;
+        return mode instanceof ExModeTranscriptLangUserLang;
     }
 
     @Override

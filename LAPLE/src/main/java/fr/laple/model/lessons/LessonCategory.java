@@ -23,4 +23,9 @@ public class LessonCategory {
     public ArrayList<Lesson> getLessons() {
         return lessons;
     }
+
+    public String toString()
+    {
+        return getCategoryName();
+    }
 }

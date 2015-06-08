@@ -83,11 +83,13 @@ public class QCMExerciseView extends AbstractExerciseView {
     @Override
     public void resetTheView() {
 
+        //TODO opacity bug
         for(JButton b : qcmButtons)
         {
             b.setEnabled(true);
             b.setOpaque(false);
         }
+
 
         this.getNextButton().setVisible(false);
     }

@@ -1,6 +1,6 @@
 package fr.laple.model.lessons;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * Created by anthonyrey on 06/06/2015.
@@ -8,25 +8,25 @@ import java.util.HashMap;
 public class WordLessonContainer extends AbstractLessonContainer {
 
     private String lessonTypeName;
-    private HashMap<String, LessonCategory> lessonCategories;
+    private ArrayList<LessonCategory> lessonCategories;
 
     public WordLessonContainer(String lessonTypeName)
     {
         this.lessonTypeName = lessonTypeName;
-        this.lessonCategories = new HashMap<>();
+        this.lessonCategories = new ArrayList<>();
 
     }
 
     public void addCategory(String name, LessonCategory category)
     {
-        lessonCategories.put(name, category);
+        lessonCategories.add(category);
     }
 
     public String getLessonTypeName() {
         return lessonTypeName;
     }
 
-    public HashMap<String, LessonCategory> getLessonCategories()
+    public ArrayList<LessonCategory> getLessonCategories()
    {
        return lessonCategories;
    }
