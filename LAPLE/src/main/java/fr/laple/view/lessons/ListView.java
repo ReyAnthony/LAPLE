@@ -39,7 +39,7 @@ public class ListView<T> extends JPanel {
         this.add(scroll, BorderLayout.CENTER);
         this.add(buttons, BorderLayout.PAGE_END);
 
-        //todo give the class for the controller so we can generalize
+        //todo give the .class to the controller so we can generalize
         ListViewController controller = new ListViewController(model, this);
         validationButton.addActionListener(controller);
         backButton.addActionListener(controller);

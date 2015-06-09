@@ -16,7 +16,6 @@ public class MainPanel extends JPanel {
 
         BorderLayout layout = new BorderLayout();
         this.setLayout(layout);
-
         manual = new JTextArea();
         manual.setEnabled(false);
 
@@ -71,6 +70,7 @@ public class MainPanel extends JPanel {
 
         manual.setLineWrap(true);
         manual.setWrapStyleWord(true);
+        manual.setMargin(new Insets(20,20,20,20));
         panel.add(manual);
         add(scroll, BorderLayout.CENTER);
 
