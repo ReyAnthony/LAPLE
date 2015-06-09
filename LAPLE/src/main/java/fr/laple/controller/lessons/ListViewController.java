@@ -1,6 +1,7 @@
 package fr.laple.controller.lessons;
 
 import fr.laple.model.lessons.*;
+import fr.laple.view.lessons.LessonView;
 import fr.laple.view.lessons.ListView;
 
 import javax.swing.*;
@@ -80,7 +81,7 @@ public class ListViewController implements ActionListener{
                 }
                 else if(selectedValue instanceof Lesson)
                 {
-                    //TODO instanciate lessons view
+                    view.add(new LessonView());
                 }
                 else if(selectedValue instanceof LessonCategory)
                 {

@@ -42,6 +42,6 @@ public class Lesson {
 
     public String toString()
     {
-        return getLessonName()+" : open "+isOpen();
+        return getLessonName()+" - open : "+isOpen();
     }
 }

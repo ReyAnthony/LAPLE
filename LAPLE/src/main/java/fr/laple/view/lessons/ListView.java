@@ -16,11 +16,18 @@ public class ListView<T> extends JPanel {
 
     public ListView(java.util.List<T> model, boolean hasBackButton)
     {
+
         this.setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         JLabel message = new JLabel("Please select a lesson mode");
+
+        JPanel scrollPanel = new JPanel();
+        scrollPanel.setLayout(new BorderLayout());
+        JScrollPane scroll = new JScrollPane(scrollPanel);
+        scroll.setHorizontalScrollBar(null);
         list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        scrollPanel.add(list, BorderLayout.CENTER);
 
         JPanel buttons = new JPanel();
         validationButton = new JButton("Ok");
@@ -29,7 +36,7 @@ public class ListView<T> extends JPanel {
         buttons.add(backButton);
 
         this.add(message, BorderLayout.PAGE_START);
-        this.add(list, BorderLayout.CENTER);
+        this.add(scroll, BorderLayout.CENTER);
         this.add(buttons, BorderLayout.PAGE_END);
 
         //todo give the class for the controller so we can generalize
