@@ -81,7 +81,10 @@ public class ListViewController implements ActionListener{
                 }
                 else if(selectedValue instanceof Lesson)
                 {
-                    view.add(new LessonView());
+                    //TODO add controller
+                    LessonView lessonView = new LessonView();
+                    new LessonController(lessonView, (Lesson) selectedValue);
+                    view.add(lessonView);
                 }
                 else if(selectedValue instanceof LessonCategory)
                 {
