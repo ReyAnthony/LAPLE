@@ -45,6 +45,7 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
         parameterizer.getQuestionMode().setModel(comboModelBis);
 
         setSolverCombo();
+        setSolverMaxValue();
 
     }
 
@@ -69,6 +70,14 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
                 (solvers.toArray(new AbstractAnswerMode[]{}));
         parameterizer.getAnswerMode().setModel(comboModelTer);
 
+    }
+
+    private void setSolverMaxValue()
+    {
+        //TODO check limit
+        SymbolContainer sc = (SymbolContainer) parameterizer.getSymbolMode().getSelectedItem();
+        JSpinner countSelector = parameterizer.getExerciseCountSelector();
+        countSelector.setModel(new SpinnerNumberModel(1, 1, sc.getSize(), 1));
     }
 
     @Override
@@ -116,8 +125,15 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
     @Override
     public void itemStateChanged(ItemEvent e) {
 
-        //we set the comboBoxes again;
-        setSolverCombo();
+        if(e.getSource().equals(parameterizer.getSymbolMode()))
+        {
+            setSolverMaxValue();
+        }
+        else if(e.getSource().equals(parameterizer.getQuestionMode()))
+        {
+            //we set the comboBoxes again;
+            setSolverCombo();
+        }
 
     }
 

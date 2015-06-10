@@ -67,9 +67,7 @@ public class ExerciseParameterizer extends JPanel{
         this.add(countMessage, gbc);
 
         gbc.gridy = 14;
-        //todo check max value
         exerciseCountSelector = new JSpinner();
-        exerciseCountSelector.setModel(new SpinnerNumberModel(1, 1, 30,1));
         this.add(exerciseCountSelector, gbc);
 
         gbc.gridy = 16;
@@ -79,6 +77,8 @@ public class ExerciseParameterizer extends JPanel{
         ExerciseParameterizerController controller = new ExerciseParameterizerController(model, this);
         okButton.addActionListener(controller);
         questionMode.addItemListener(controller);
+        symbolMode.addItemListener(controller);
+
 
     }
 
@@ -96,5 +96,9 @@ public class ExerciseParameterizer extends JPanel{
 
     public int getExerciseCount() {
         return (Integer) exerciseCountSelector.getValue();
+    }
+
+    public JSpinner getExerciseCountSelector() {
+        return exerciseCountSelector;
     }
 }

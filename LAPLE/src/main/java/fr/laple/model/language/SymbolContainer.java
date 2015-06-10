@@ -49,6 +49,11 @@ public class SymbolContainer {
         return type;
     }
 
+    public int getSize()
+    {
+        return dictionnary.size();
+    }
+
     public String toString() {
         return this.getType();
     }
