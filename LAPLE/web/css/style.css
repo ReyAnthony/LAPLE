@@ -17,13 +17,16 @@ h2{
 }
 
 #download{
-	padding-top: 20%;	
+	padding-top: 10%;	
 }
 
 .foot{																																																																																																																																																																																																																																											
 	padding-top:15%
 }
 
+#left-menu{
+	background-color: red;	
+}
 #download [class*="col-"], footer {
   																																																																																																																																												
   background-color: lightgreen;																																																				
@@ -33,6 +36,10 @@ h2{
   text-align: center;
 }
 
-th, tr, td{
+table, th, tr, td{
 	 border: 2px solid black;
+	 border-width:1px; 
+	 border-color:blue; 
+	 color:blue;
+	 background-color: #87CEEB;
 }

@@ -2,7 +2,20 @@
 	
 	ini_set("display_errors", 1);
 	require('bdd.php');
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+		<link rel="stylesheet" href="/private/css/style.css" />
+		<link rel="stylesheet" href="/private/css/formulaire.css" />
+		<title>Account</title>
+		
+  </head>
+	<h1 style="color:ThreeDDarkShadow; text-align:center">LAPLE</h1>
 	
+	<body id="got">
+<?php	
 	//initialisation du mot de passe par mail.
 	if(isset($_POST['email']) && !isset($_POST['mdp']) && !isset($_POST['name']) && !isset($_POST['password'])) {
 		$email=$_POST['email'];
@@ -20,7 +33,7 @@
 		//envoie du mail
 		
 		if($mail!=NULL) {
-			mail($mail,$subject,$message);
+			mail('chrisebongue@hotmail.fr',$subject,$message);
 			die("vérifier votre boite mail");
 		}
 		else {
@@ -43,6 +56,19 @@
 		$email=$_POST['email'];
 		$passwd=md5($_POST['password']);
 		$name=$_POST['name'];
+		if(!preg_match("#.*@.*\._{0,4}#", $email)){
+			header('Location: http://localhost/private/sign_up.php?verification=4');
+		}
+		$req = $bdd->prepare('SELECT email FROM Profile WHERE email=?');
+		$req->execute(array($email));
+		$mail=NULL;
+		while($donnee=$req->fetch()){
+			$mail=$donnee['email'];
+		}
+		
+		if($mail!=NULL){
+			header('Location: http://localhost/private/sign_up.php?verification=3');	
+		}
 		$req = $bdd->prepare('INSERT INTO Profile(name, email, mdp) VALUES(:name, :email, :mdp)');
 		$req->execute(array('name' => $name,
 									'email' => $email, 
@@ -54,3 +80,5 @@
 		header('Location: http://localhost/private/sign_up.php?verification=1');		
 	}	
 ?>
+	</body>
+</html>

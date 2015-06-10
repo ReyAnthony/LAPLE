@@ -23,7 +23,7 @@
     	    	<ul class="nav navbar-nav">
 			      <li><a class="navbar-brand" href="download.php">Download</a></li>
 			      <li><a class="navbar-brand" href="ranking.php">Ranking</a></li>
-			      <li><a class="navbar-brand" href="about.php">About</a></li>
+			      <li><a class="navbar-brand" href="about.php?connect='1'">About</a></li>
 			      <li><a class="navbar-brand" href="guide.php">LAPLE'S Guide</a></li>
 			      <li><a class="navbar-brand" href="faq.php">FAQ</a></li>
 		  		</ul><!-- /.container-fluid -->
@@ -37,18 +37,18 @@
   		<div class="row">
         	<div class="col-lg-4"><img src="media/logo.png" height="75" width="150" alt="Logo de Laple"></div>
     	<div>
-  	<div class="container-fluid" id="download">
+        <div class="row">
+        	<div style="color:white" class="col-lg-offset-2 col-lg-4">MANUEL d'utilisation"</div>
+        </div>
+       
   		<div class="row">
-        <div class="col-lg-2" id="left-menu"><a class="navbar-brand" href="welcome.php">welcome</a></div>
-        	<div class="col-lg-offset-2 col-lg-4"><a href="ressource/test.txt">Download video</a></div>
+        	<div class="col-lg-2" id="left-menu"><a class="navbar-brand" href="welcome.php">welcome</a></div>
         </div>
         <div class="row">
           <div class="col-lg-2" id="left-menu"><a class="navbar-brand" href="download.php">Download</a></div>
-        	<div class="col-lg-offset-2 col-lg-4"><a href="ressource/test.txt">Download Plugin</a></div>
         </div>
         <div class="row">
           <div class="col-lg-2" id="left-menu"><a class="navbar-brand" href="ranking.php">Ranking</a></div>
-        	<div class="col-lg-offset-2 col-lg-4"><a href="ressource/test.txt">Download other</a></div>
         </div>
         <div class="row">
           <div class="col-lg-2" id="left-menu"><a class="navbar-brand" href="guide.php">guide</a></div>
