@@ -62,4 +62,3 @@
 			<div style= "height: 60px" class="foot"><?php include('footer.php'); ?></div>
 	</body>
 </html>
-
