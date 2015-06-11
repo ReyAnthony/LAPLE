@@ -6,7 +6,7 @@ import fr.laple.model.language.SymbolContainer;
 import fr.laple.view.exercises.AbstractExerciseView;
 import fr.laple.view.exercises.ExerciseParameterizer;
 
-import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -25,29 +25,29 @@ public abstract class AbstractExerciseController implements ActionListener {
     private ArrayList<Blinker> blinkers = new ArrayList<>();
     private ILanguagePlugin model;
 
-    public void setView(AbstractExerciseView panel) {
+    public void init(AbstractExerciseView panel) {
         this.view = panel;
+        view.getParent().setEnabled(false);
         setTheView();
 
-            view.getNextButton().addActionListener(e -> {
+        view.getNextButton().addActionListener(e -> {
 
-                try{
+            try{
 
-                    setExercise(getExercises().pop());
-                    setTheView();
-                    for(Blinker b : blinkers)
-                    {
-                        b.stop();
-                    }
-                    getView().resetTheView();
-                }
-                catch (NoSuchElementException exc)
+                setExercise(getExercises().pop());
+                setTheView();
+                for(Blinker b : blinkers)
                 {
-                    finished();
+                    b.stop();
                 }
+                getView().resetTheView();
+            }
+            catch (NoSuchElementException exc)
+            {
+                finished();
+            }
 
-            });
-
+        });
     }
 
     public AbstractExerciseView getView()
@@ -97,12 +97,16 @@ public abstract class AbstractExerciseController implements ActionListener {
 
     private void finished()
     {
-        view.invalidate();
-        view.removeAll();
-        view.setLayout(new BorderLayout());
-        view.add(new ExerciseParameterizer(model));
-        view.revalidate();
-        view.repaint();
+        JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
+        tabbedPane.setEnabled(true);
+        int selected = tabbedPane.getSelectedIndex();
+        tabbedPane.remove(selected);
+
+        ExerciseParameterizer newView = new ExerciseParameterizer(model);
+
+        tabbedPane.insertTab("Exercises", null, newView, null, selected);
+        tabbedPane.setSelectedIndex(selected);
+
 
     }
 }

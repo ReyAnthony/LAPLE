@@ -8,13 +8,11 @@ import fr.laple.view.staticpanels.AboutPanel;
 import fr.laple.view.staticpanels.MainPanel;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 /**
  * Created by anthonyrey on 06/06/2015.
  */
-public class LapleGUIController implements ChangeListener {
+public class LapleGUIController {
 
     private LapleGUI view;
     private ILanguagePlugin model;
@@ -37,17 +35,10 @@ public class LapleGUIController implements ChangeListener {
 
         AboutPanel aboutPanel = new AboutPanel();
         ui.add("About LAPLE", aboutPanel);
-        ui.addChangeListener(this);
 
         view.add(ui);
         view.setVisible(true);
 
     }
 
-    @Override
-    public void stateChanged(ChangeEvent e) {
-
-        //TODO message when changing pane
-
-    }
 }

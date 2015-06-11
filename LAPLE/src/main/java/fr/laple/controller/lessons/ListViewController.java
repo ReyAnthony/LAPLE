@@ -51,15 +51,16 @@ public class ListViewController implements ActionListener{
         }
         else
         {
-            view.invalidate();
-            view.removeAll();
+
+            //TODO remove when problem with add panel fixed
             //If not set to 0, borders are cumulating
-            view.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+            //view.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 
             if(e.getSource().equals(view.getValidationButton()))
             {
                 //TODO So ugly, much completement naze, wow
-
+                //TODO do the same modification (tabs instead of modify the panel)
+                JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
 
                 if(view.getList().getSelectedValue() instanceof AbstractLessonContainer)
                 {
@@ -69,37 +70,55 @@ public class ListViewController implements ActionListener{
                     {
 
                         SymbolLessonContainer symbolLessonContainer = (SymbolLessonContainer) selectedValue;
-                        view.add(new ListView<>(symbolLessonContainer.getLessons(), true));
+                        int selected = tabbedPane.getSelectedIndex();
+                        tabbedPane.remove(selected);
+                        //view = new ListView<>(symbolLessonContainer.getLessons(), true);
+                        tabbedPane.insertTab("Lessons", null, new ListView<>(symbolLessonContainer.getLessons(), true),
+                                null, selected);
+                        tabbedPane.setSelectedIndex(selected);
+
                     }
                     else if (container instanceof WordLessonContainer)
                     {
 
                         WordLessonContainer wordLessonContainer = (WordLessonContainer) selectedValue;
-                        view.add(new ListView<>(wordLessonContainer.getLessonCategories(), true));
+                        int selected = tabbedPane.getSelectedIndex();
+                        tabbedPane.remove(selected);
+                        //view = new ListView<>(wordLessonContainer.getLessonCategories(), true);
+                        tabbedPane.insertTab("Lessons", null, new ListView<>(wordLessonContainer.getLessonCategories(), true), null, selected);
+                        tabbedPane.setSelectedIndex(selected);
                     }
 
                 }
                 else if(selectedValue instanceof Lesson)
                 {
+                    Lesson selectedLesson = (Lesson) selectedValue;
+                    int selected = tabbedPane.getSelectedIndex();
+
+                    tabbedPane.remove(selected);
                     LessonView lessonView = new LessonView();
-                    new LessonController(lessonView, (Lesson) selectedValue);
-                    view.add(lessonView);
+                    tabbedPane.insertTab("Lessons", null, lessonView, null, selected);
+                    new LessonController(lessonView, selectedLesson);
+
+                    tabbedPane.setSelectedIndex(selected);
+
                 }
                 else if(selectedValue instanceof LessonCategory)
                 {
                     LessonCategory symbolLessonContainer = (LessonCategory) selectedValue;
-                    view.add(new ListView<>(symbolLessonContainer.getLessons(), true));
+                    int selected = tabbedPane.getSelectedIndex();
+                    tabbedPane.remove(selected);
+                    //view = new ListView<>(symbolLessonContainer.getLessons(), true);
+                    tabbedPane.insertTab("Lessons", null, new ListView<>(symbolLessonContainer.getLessons(), true),
+                            null, selected);
+                    tabbedPane.setSelectedIndex(selected);
 
                 }
-
-                view.revalidate();
-                view.repaint();
-
             }
             else
             {
                 //Back to root view
-                //view.add(new ListView<>(model.getLessonContainers(), false));
+
             }
 
         }

@@ -23,8 +23,6 @@ public class LessonView extends JPanel {
         symbol.setFont(f);
 
         this.add(symbol, gbc);
-
-
     }
 
 

@@ -102,22 +102,21 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
             exercises.push(ex);
         }
 
-
         AbstractExerciseController listener = answerMode.getAssociatedActionListener();
 
-        parameterizer.invalidate();
-        parameterizer.removeAll();
-        parameterizer.add(exView);
+        //TODO must be generalized
+        JTabbedPane tabbedPane = (JTabbedPane) parameterizer.getParent();
+        int selected = tabbedPane.getSelectedIndex();
+
+        tabbedPane.remove(selected);
+        tabbedPane.insertTab("Exercises", null, exView, null, selected);
+        tabbedPane.setSelectedIndex(selected);
         exView.addActionListener(listener);
-        parameterizer.revalidate();
-        parameterizer.repaint();
 
         listener.addExercises(exercises);
         listener.setSymbolContainer(sc);
-        listener.setView(exView);
+        listener.init(exView);
         listener.addModel(model);
-
-
     }
 
     @Override

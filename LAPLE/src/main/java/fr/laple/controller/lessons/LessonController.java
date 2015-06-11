@@ -12,16 +12,16 @@ import java.awt.event.ActionListener;
 public class LessonController implements ActionListener {
 
     private Lesson model;
-    private LessonView lessonView;
+    private LessonView view;
 
-    public LessonController(LessonView lessonView, Lesson model)
+    public LessonController(LessonView view, Lesson model)
     {
 
-        this.lessonView = lessonView;
+        this.view = view;
         this.model = model;
 
-        lessonView.getSymbol().setText(model.getSymbol().getSymbol());
-
+        view.getSymbol().setText(model.getSymbol().getSymbol());
+        view.getParent().setEnabled(false);
     }
 
     @Override
