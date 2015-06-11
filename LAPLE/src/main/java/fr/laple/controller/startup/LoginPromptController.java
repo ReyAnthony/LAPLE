@@ -62,7 +62,7 @@ public class LoginPromptController implements ActionListener {
         /*
         if(online)
         {
-            //TODO
+            //TODO BDD part
         }
         */
 

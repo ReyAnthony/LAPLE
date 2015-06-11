@@ -74,7 +74,6 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
 
     private void setSolverMaxValue()
     {
-        //TODO check limit
         SymbolContainer sc = (SymbolContainer) parameterizer.getSymbolMode().getSelectedItem();
         JSpinner countSelector = parameterizer.getExerciseCountSelector();
         countSelector.setModel(new SpinnerNumberModel(1, 1, sc.getSize(), 1));
@@ -108,7 +107,6 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
 
         parameterizer.invalidate();
         parameterizer.removeAll();
-        //parameterizer.setLayout(new BorderLayout());
         parameterizer.add(exView);
         exView.addActionListener(listener);
         parameterizer.revalidate();

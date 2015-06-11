@@ -26,7 +26,6 @@ public class FreeInputExerciseView extends AbstractExerciseView {
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.BOTH;
 
-        //TODO correct
         question = new JLabel("Which symbol corresponds to :");
         symbol = new JLabel();
         symbol.setHorizontalAlignment(JLabel.CENTER);

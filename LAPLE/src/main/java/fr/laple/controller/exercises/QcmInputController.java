@@ -38,7 +38,7 @@ public class QcmInputController extends AbstractExerciseController {
             button.setOpaque(true);
         }
 
-        //TODO fix color bug
+        //TODO fix color background / transparency bug
         view.getNextButton().setVisible(true);
 
     }
@@ -53,18 +53,29 @@ public class QcmInputController extends AbstractExerciseController {
         ArrayList<JButton> buttons = view.getQcmButtons();
 
         //TODO BDD check
-        //TODO fix doublon bug
-        //TODO check for lenght of exercise list
 
         Collections.shuffle(buttons);
-        buttons.get(0).setText(getExercise().getAnwser());
+
+        String answer = getExercise().getAnwser();
+        buttons.get(0).setText(answer);
 
         ArrayList<Symbol> sym = new ArrayList<>(getSymbolContainer().getSymbolMap().values());
         Collections.shuffle(sym);
 
-        buttons.get(1).setText(getExercise().getInAnswerFormat(sym.get(0)));
-        buttons.get(2).setText(getExercise().getInAnswerFormat(sym.get(1)));
-        buttons.get(3).setText(getExercise().getInAnswerFormat(sym.get(2)));
+        int i = 1;
+        for(Symbol s : sym)
+        {
+            if(i == 4)
+                break;
+
+            if(getExercise().getInAnswerFormat(s).equals(answer))
+                continue;
+
+            buttons.get(i).setText(getExercise().getInAnswerFormat(s));
+            i++;
+
+        }
+
 
 
     }

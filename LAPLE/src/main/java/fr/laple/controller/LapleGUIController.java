@@ -47,7 +47,7 @@ public class LapleGUIController implements ChangeListener {
     @Override
     public void stateChanged(ChangeEvent e) {
 
-        //TODO
+        //TODO message when changing pane
 
     }
 }
