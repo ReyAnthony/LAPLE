@@ -120,6 +120,29 @@
 		  "name": "what"
 		}
 	  ]
+	},
+	{
+	  "category": "JLPT4",
+	  "list": [
+		{
+		  "name": "someone"
+		},
+		{
+		  "name": "safety"
+		},
+		{
+		  "name": "one"
+		},
+		{
+		  "name": "rain"
+		},
+		{
+		  "name": "to drink"
+		},
+		{
+		  "name": "what"
+		}
+	  ]
 	}
   ]
 }

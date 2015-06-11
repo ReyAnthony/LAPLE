@@ -9,6 +9,7 @@ import java.awt.*;
 public class LessonView extends JPanel {
 
     private JLabel symbol;
+    private JButton soundButton;
 
     public LessonView()
     {
@@ -17,12 +18,38 @@ public class LessonView extends JPanel {
         this.setLayout(layout);
         GridBagConstraints gbc = new GridBagConstraints();
 
+        gbc.gridy = 0;
+        gbc.gridx = 0;
+
+        JLabel text = new JLabel("Learn more about this symbol : (Click the button to hear how it sound)");
+        add(text, gbc);
+
+        gbc.gridy = 1;
+
         symbol = new JLabel();
         symbol.setHorizontalAlignment(JLabel.CENTER);
         Font f = symbol.getFont().deriveFont(200.0f);
         symbol.setFont(f);
 
+        soundButton = new JButton(" ");
+
         this.add(symbol, gbc);
+
+        gbc.gridy = 2;
+
+        this.add(soundButton, gbc);
+
+        gbc.gridy = 1;
+        gbc.gridx = 1;
+
+        //For Kanji for eg.
+        JPanel descriptionPanel = new JPanel();
+        JLabel description = new JLabel("Test, long");
+        descriptionPanel.add(description);
+
+        this.add(descriptionPanel, gbc);
+
+
     }
 
 

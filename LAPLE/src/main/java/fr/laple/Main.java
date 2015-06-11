@@ -13,15 +13,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /*
-        try {
-            UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-       */
-        new SplashScreen();
-        new LoginPromptController();
+        Runnable runnable = () -> {
 
+            new SplashScreen();
+            new LoginPromptController();
+        };
+        runnable.run();
     }
 }

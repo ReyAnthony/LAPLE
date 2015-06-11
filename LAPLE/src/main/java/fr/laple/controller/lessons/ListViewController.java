@@ -52,14 +52,9 @@ public class ListViewController implements ActionListener{
         else
         {
 
-            //TODO remove when problem with add panel fixed
-            //If not set to 0, borders are cumulating
-            //view.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-
             if(e.getSource().equals(view.getValidationButton()))
             {
                 //TODO So ugly, much completement naze, wow
-                //TODO do the same modification (tabs instead of modify the panel)
                 JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
 
                 if(view.getList().getSelectedValue() instanceof AbstractLessonContainer)
