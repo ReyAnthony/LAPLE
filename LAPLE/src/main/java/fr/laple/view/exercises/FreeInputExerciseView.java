@@ -36,17 +36,21 @@ public class FreeInputExerciseView extends AbstractExerciseView {
 
 
         this.add(question, gbc);
+        gbc.gridy = 0;
+        gbc.gridx = 1;
+        this.add(getRemainingCount(),gbc);
         gbc.gridy = 1;
+        gbc.gridx = 0;
         this.add(symbol, gbc);
-        gbc.gridx = 4;
-        this.add(getCounterLabel());
+        gbc.gridx = 1;
+        this.add(getSuccesCount(), gbc );
         gbc.gridx = 0;
         gbc.gridy = 2;
         this.add(answer, gbc);
         gbc.gridy = 3;
         this.add(validationButton, gbc);
-        gbc.gridy = 4;
-        this.add(this.getNextButton(), gbc);
+        gbc.gridx = 1;
+        this.add(getNextButton(), gbc);
 
 
     }
@@ -71,7 +75,7 @@ public class FreeInputExerciseView extends AbstractExerciseView {
     @Override
     public void resetTheView() {
         answer.setEnabled(true);
-        this.getNextButton().setVisible(false);
+        this.getNextButton().setEnabled(false);
         this.getValidationButton().setEnabled(true);
         this.getAnswer().setText("");
     }

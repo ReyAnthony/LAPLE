@@ -15,20 +15,23 @@ public class FreeInputExerciseController extends AbstractExerciseController {
         FreeInputExerciseView view = (FreeInputExerciseView) getView();
 
         if (getExercise().solveExercice(getView().getAnswer().getText()))
+        {
             addBlinker(new Blinker(getView().getAnswer(), true));
+            incrementSucesses();
+        }
         else
             addBlinker(new Blinker(getView().getAnswer(), false));
 
         view.getAnswer().setText(getExercise().getAnwser());
         view.getAnswer().setEnabled(false);
         view.getValidationButton().setEnabled(false);
-        view.getNextButton().setVisible(true);
+        view.getNextButton().setEnabled(true);
 
     }
 
-    public void setTheView()
+    public void updateTheView()
     {
-        super.setTheView();
+        super.updateTheView();
         getView().getSymbol().setText(getExercise().getQuestion());
     }
 }

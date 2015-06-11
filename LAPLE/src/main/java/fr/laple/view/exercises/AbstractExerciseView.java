@@ -9,13 +9,15 @@ import java.awt.event.ActionListener;
 public abstract class AbstractExerciseView extends JPanel {
 
     private JButton nextButton;
-    private JLabel exerciseCount;
+    private JLabel remainingCount;
+    private JLabel succesCount;
 
     public AbstractExerciseView()
     {
         nextButton = new JButton("Next Exercise");
-        nextButton.setVisible(false);
-        exerciseCount = new JLabel("Exercises left :");
+        nextButton.setEnabled(false);
+        remainingCount = new JLabel("Exercises left :");
+        succesCount = new JLabel("Suceeded : N/N");
     }
 
     public abstract void addActionListener(ActionListener al);
@@ -32,11 +34,16 @@ public abstract class AbstractExerciseView extends JPanel {
 
     public abstract void resetTheView();
 
-    public JLabel getCounterLabel() {
-        return exerciseCount;
+    public JLabel getRemainingCount() {
+        return remainingCount;
     }
 
-    public void setCounterLabel(JLabel exerciseCount) {
-        this.exerciseCount = exerciseCount;
+    public JLabel getSuccesCount() {
+        return succesCount;
     }
+
+
+
+
+
 }

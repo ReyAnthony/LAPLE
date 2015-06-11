@@ -19,7 +19,10 @@ public class QcmInputController extends AbstractExerciseController {
         QCMExerciseView view = (QCMExerciseView) getView();
 
         if (getExercise().solveExercice(((JButton) e.getSource()).getText()))
+        {
             addBlinker(new Blinker(((JButton) e.getSource()), true));
+            incrementSucesses();
+        }
         else
         {
             addBlinker(new Blinker(((JButton) e.getSource()), false));
@@ -39,14 +42,13 @@ public class QcmInputController extends AbstractExerciseController {
         }
 
         //TODO fix color background / transparency bug
-        view.getNextButton().setVisible(true);
-
+        view.getNextButton().setEnabled(true);
     }
 
 
-    public void setTheView()
+    public void updateTheView()
     {
-        super.setTheView();
+        super.updateTheView();
         QCMExerciseView view = (QCMExerciseView) getView();
 
         view.getSymbol().setText(getExercise().getQuestion());

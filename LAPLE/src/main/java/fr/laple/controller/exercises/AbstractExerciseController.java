@@ -24,18 +24,24 @@ public abstract class AbstractExerciseController implements ActionListener {
     private LinkedList<Exercise> exerciseQueue;
     private ArrayList<Blinker> blinkers = new ArrayList<>();
     private ILanguagePlugin model;
+    private int startingExerciseCount;
+    private int sucesses;
 
     public void init(AbstractExerciseView panel) {
         this.view = panel;
         view.getParent().setEnabled(false);
-        setTheView();
+        startingExerciseCount = exerciseQueue.size() +1;
+        updateTheView();
+        updateMessages();
 
         view.getNextButton().addActionListener(e -> {
 
             try{
 
                 setExercise(getExercises().pop());
-                setTheView();
+                updateTheView();
+                updateMessages();
+                
                 for(Blinker b : blinkers)
                 {
                     b.stop();
@@ -64,9 +70,16 @@ public abstract class AbstractExerciseController implements ActionListener {
         this.sc = sc;
     }
 
-    public void setTheView()
+    public void updateTheView()
     {
-        view.getCounterLabel().setText("Exercises Left : "+exerciseQueue.size());
+        view.getNextButton().setEnabled(false);
+    }
+
+    public void updateMessages()
+    {
+        view.getRemainingCount().setText("Exercises Left : "+(getExerciseCount())+"/"+ startingExerciseCount);
+        view.getSuccesCount().setText("Suceeded : " + sucesses + "/" + startingExerciseCount);
+
     }
 
     public Exercise getExercise() {
@@ -109,4 +122,16 @@ public abstract class AbstractExerciseController implements ActionListener {
 
 
     }
+
+    public void incrementSucesses()
+    {
+        sucesses++;
+    }
+
+    public int getExerciseCount()
+    {
+        return exerciseQueue.size() +1;
+    }
+
+
 }

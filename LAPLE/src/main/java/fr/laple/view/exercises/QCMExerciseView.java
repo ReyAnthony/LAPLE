@@ -44,11 +44,15 @@ public class QCMExerciseView extends AbstractExerciseView {
         }
 
         this.add(question, gbc);
+        gbc.gridy = 0;
+        gbc.gridx = 1;
+        this.add(getRemainingCount(),gbc);
         gbc.gridy = 1;
-        gbc.gridx = 4;
-        this.add(getCounterLabel());
         gbc.gridx = 0;
         this.add(symbol, gbc);
+        gbc.gridx = 1;
+        this.add(getSuccesCount(), gbc );
+        gbc.gridx = 0;
         gbc.gridy = 2;
         this.add(qcm, gbc);
         gbc.gridy = 3;
@@ -91,7 +95,7 @@ public class QCMExerciseView extends AbstractExerciseView {
         }
 
 
-        this.getNextButton().setVisible(false);
+        this.getNextButton().setEnabled(false);
     }
 
     public ArrayList<JButton> getQcmButtons() {
