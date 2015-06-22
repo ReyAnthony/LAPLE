@@ -6,19 +6,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Web extends DbAccessor{
+	private String url;
 	private String user;
 	private String passwd;
 	
 	
-    public Web(String user, String passwd) throws SQLException, ClassNotFoundException {
+    public Web(String url, String user, String passwd) throws SQLException, ClassNotFoundException {
+    	this.url=url;
     	this.user=user;
     	this.passwd=passwd;
-    	DbAccessor.connect(this.user, this.passwd);	
+    	DbAccessor.connect(this.url, this.user, this.passwd);	
     }
     
 
 	@Override
-	public ArrayList get() {
+	public ArrayList get(String[] select, String[] table, String[] condi){
 		// TODO Auto-generated method stub
 		try{
 		Statement statement = DbAccessor.getConn().createStatement();

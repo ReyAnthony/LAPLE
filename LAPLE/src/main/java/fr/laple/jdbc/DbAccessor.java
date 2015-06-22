@@ -12,7 +12,7 @@ public abstract class DbAccessor {
 	private static String passwd;
 	
 	public static void connect(String users, String passwds){
-		url="jdbc:mysql://localhost:3306/test";
+		url="jdbc:mysql://localhost:3306/laple";
 		user = users;
 		passwd=passwds;
 			try{
@@ -43,10 +43,10 @@ public abstract class DbAccessor {
 	public static void setConn(Connection con){
 		conn=con;
 	}
-	public abstract ArrayList get();
+	public abstract ArrayList get(String[] select, String[] table, String[] condi);
 
-	public abstract boolean put();
+	public abstract boolean put(String type, String table, String[] col, String[] value);
 	
-	public abstract boolean delete();
+	public abstract boolean delete(String table, String[] condi);
     
 }
