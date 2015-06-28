@@ -14,14 +14,14 @@
 		}
 			$req->closeCursor();
 		if(isset($_SESSION['email']) && isset($_SESSION['mdp'])){	
-			header('Location: welcome.php');		
+			header('Location: index.html');		
 		}
 		else {
-			header('Location: index.php?verif=1');		
+			header('Location: sign_in.php?verif=1');		
 		}
 	}
 	else {
-		header('Location: index.php?verif=1');		
+		header('Location: sing_in.php?verif=1');		
 	}
 
 ?>

@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8">
-		<link rel="stylesheet" href="/private/css/style.css" />
-		<link rel="stylesheet" href="/private/css/formulaire.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/formulaire.css" />
 	    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 	    <script src="bootstrap/js/jquery.js"></script>
 		<script src="bootstrap/js/bootstrap.js"></script>

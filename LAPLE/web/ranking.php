@@ -11,7 +11,7 @@
 		
   </head>
 
-  <body class="bod">
+  <body class="html">
   	<?php require_once('session.php'); ?>
   	<nav class="navbar navbar-default">
 		  <div class="container-fluid">
