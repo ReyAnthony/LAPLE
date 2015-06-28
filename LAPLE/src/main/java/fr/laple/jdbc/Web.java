@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Web extends DbAccessor{
-	private String url;
+	/*private String url;
 	private String user;
 	private String passwd;
 	
@@ -24,7 +24,7 @@ public class Web extends DbAccessor{
 		// TODO Auto-generated method stub
 		try{
 		Statement statement = DbAccessor.getConn().createStatement();
-	      /* Exécution d'une requête de lecture */
+	      /* Exécution d'une requête de lecture 
 	    ResultSet resultat = statement.executeQuery( "SELECT * FROM Animal;" );
 	    while ( resultat.next() ) {
 	    	int id = resultat.getInt( "id" );
@@ -40,14 +40,54 @@ public class Web extends DbAccessor{
 	}
 
 	@Override
-	public boolean put() {
+	public boolean put(String type, String table, String[] col, String[] value) {
 		// TODO Auto-generated method stub
-		return false;
+		StringBuilder sb1=new StringBuilder();
+		StringBuilder sb2=new StringBuilder();
+		for(String c: col){
+			sb1.append(c + ",");
+		}
+		int len=sb1.length();
+		sb1.delete(len-1, len);
+		for(String v: value){
+			sb2.append(v + ",");
+		}
+		len=sb2.length();
+		sb2.delete(len-1, len);
+		try{
+			Statement statement = DbAccessor.getConn().createStatement();
+		      /* Exécution d'une requête de lecture /
+			if(type.compareTo("UPDATE")!=0){
+				statement.executeQuery(type + " " + table + " ("+sb2+");");
+			}
+			else{
+			     statement.executeQuery(type + " " + table + " SET " + sb1 + " WHERE " + sb2 + ";" );
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}      
+		return true;
 	}
 
 	@Override
-	public boolean delete() {
+	public boolean delete(String table, String[] condi) {
 		// TODO Auto-generated method stub
-		return false;
+		StringBuilder sb1=new StringBuilder();
+		for(String c: condi){
+			sb1.append(c + ",");
+		}
+		int len=sb1.length();
+		sb1.delete(len-1, len);
+		try{
+			Statement statement = DbAccessor.getConn().createStatement();
+		      /* Exécution d'une requête de lecture /
+				statement.executeQuery("DELETE FROM " + table + "WHERE " + condi +";");
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}      
+		return true;
 	}
+	*/
 }

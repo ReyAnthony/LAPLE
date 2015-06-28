@@ -5,13 +5,13 @@ import java.util.Date;
 import fr.laple.model.language.Symbol;
 
 public class StatBundle {
-	Date completionDate;
-	int totalSymbol;
-	int currentSymbol;
-	Boolean success;
-	String symbolType;
-	String keySymbol;
-	String language;
+	private Date completionDate;
+	private int totalSymbol;
+	private int currentSymbol;
+	private Boolean success;
+	private String symbolType;
+	private String keySymbol;
+	private String language;
 
 	public StatBundle(Date completionDate, int totalSymbol, int currentSymbol,
 			Boolean success, String symbolType, String keySymbol,

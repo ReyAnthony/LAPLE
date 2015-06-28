@@ -3,11 +3,11 @@ package fr.laple.jdbc;
 import java.util.Date;
 
 public class SettingBundle {
-	String name;
-	char[] oldPwd;
-	char[] newPwd;
+	private String name;
+	private String oldPwd;
+	private String newPwd;
 	
-	public SettingBundle(String name, char[] oldPwd, char[] newPwd) {
+	public SettingBundle(String name, String oldPwd, String newPwd) {
 		this.name = name;
 		this.oldPwd = oldPwd;
 		this.newPwd = newPwd;
@@ -16,10 +16,10 @@ public class SettingBundle {
 	public String getName() {
 		return name;
 	}
-	public char[] getOldPwd() {
+	public String getOldPwd() {
 		return oldPwd;
 	}
-	public char[] getNewPwd() {
+	public String getNewPwd() {
 		return newPwd;
 	}
 	
