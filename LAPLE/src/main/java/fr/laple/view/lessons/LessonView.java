@@ -21,7 +21,7 @@ public class LessonView extends JPanel {
         gbc.gridy = 0;
         gbc.gridx = 0;
 
-        JLabel text = new JLabel("Learn more about this symbol : (Click the button to hear how it sound)");
+        JLabel text = new JLabel("Learn more about this symbol :");
         add(text, gbc);
 
         gbc.gridy = 1;

@@ -34,6 +34,7 @@ public class FreeInputExerciseController extends AbstractExerciseController {
     public void updateTheView()
     {
         super.updateTheView();
-        getView().getSymbol().setText(getExercise().getQuestion());
+        setFontSize();
+
     }
 }

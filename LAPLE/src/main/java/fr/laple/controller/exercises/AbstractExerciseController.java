@@ -7,6 +7,7 @@ import fr.laple.view.exercises.AbstractExerciseView;
 import fr.laple.view.exercises.ExerciseParameterizer;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -29,9 +30,12 @@ public abstract class AbstractExerciseController implements ActionListener {
     private int sucesses;
 
     public void init(AbstractExerciseView panel) {
+
         this.view = panel;
+
         view.getBackButton().addActionListener(this);
         view.getParent().setEnabled(false);
+
         startingExerciseCount = exerciseQueue.size() +1;
         updateTheView();
         updateMessages();
@@ -56,6 +60,8 @@ public abstract class AbstractExerciseController implements ActionListener {
             }
 
         });
+
+
     }
 
     public AbstractExerciseView getView()
@@ -75,6 +81,7 @@ public abstract class AbstractExerciseController implements ActionListener {
     public void updateTheView()
     {
         view.getNextButton().setEnabled(false);
+        view.getSymbol().setText(getExercise().getQuestion());
     }
 
     public void updateMessages()
@@ -142,6 +149,18 @@ public abstract class AbstractExerciseController implements ActionListener {
         {
             finished();
         }
+    }
+
+    public void setFontSize()
+    {
+        JLabel symbol = view.getSymbol();
+        String txt = symbol.getText();
+        Font f = symbol.getFont().deriveFont((float) 200 / txt.length() );
+        symbol.setFont(f);
+        symbol.setText(txt);
+        symbol.repaint();
+
+
     }
 
 

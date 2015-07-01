@@ -53,7 +53,7 @@ public class QcmInputController extends AbstractExerciseController {
         super.updateTheView();
         QCMExerciseView view = (QCMExerciseView) getView();
 
-        view.getSymbol().setText(getExercise().getQuestion());
+
         ArrayList<JButton> buttons = view.getQcmButtons();
 
         //TODO BDD check
@@ -78,7 +78,10 @@ public class QcmInputController extends AbstractExerciseController {
             buttons.get(i).setText(getExercise().getInAnswerFormat(s));
             i++;
 
+
         }
+
+        setFontSize();
 
 
 

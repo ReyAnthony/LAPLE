@@ -25,8 +25,8 @@ public class ListViewController implements ActionListener {
     }
 
     private void setList() {
-        JList<AbstractLessonContainer> list = view.getList();
-        DefaultListModel<AbstractLessonContainer> listModel = new DefaultListModel<>();
+        JList list = view.getList();
+        DefaultListModel listModel = new DefaultListModel<>();
 
         for (int i = 0; i < model.size(); i++) {
             listModel.add(i, model.get(i));
@@ -105,9 +105,6 @@ public class ListViewController implements ActionListener {
 
             int selected = tabbedPane.getSelectedIndex();
             tabbedPane.remove(selected);
-
-            view.getParent().getParent();
-
 
         }
     }

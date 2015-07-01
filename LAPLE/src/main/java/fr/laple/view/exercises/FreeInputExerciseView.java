@@ -26,14 +26,11 @@ public class FreeInputExerciseView extends AbstractExerciseView {
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.BOTH;
 
-        question = new JLabel("Which symbol corresponds to :");
+        question = new JLabel("What is the appropriate answer to :");
         symbol = new JLabel();
         symbol.setHorizontalAlignment(JLabel.CENTER);
-        Font f = symbol.getFont().deriveFont(200.0f);
-        symbol.setFont(f);
         answer = new JTextField();
         validationButton = new JButton("Ok");
-
 
         this.add(question, gbc);
         gbc.gridy = 0;
