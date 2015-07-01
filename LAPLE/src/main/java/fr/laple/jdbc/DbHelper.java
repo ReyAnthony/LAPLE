@@ -1,10 +1,14 @@
 package fr.laple.jdbc;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-
-import fr.laple.jdbc.DbAccessor;
 
 /**
  * 
@@ -14,11 +18,55 @@ import fr.laple.jdbc.DbAccessor;
  *
  */
 public class DbHelper {
+	
 	public static StatBundle bundleStat;
 	public static SettingBundle bundleSetting;
-	public static void activeConnect(){
-		DbAccessor.connect("root", "czu387");
+	public static Connection conn;
+	private static String url;
+	private static String user;
+	private static String passwd;
+	static IDbAccessor localWeb;
+	static IDbAccessor web;
+	/**
+	 * This allow to connect to database. If there is no connexion,
+	 * the connexion will be etablished to local
+	 * @param users String: Users of laple in base
+	 * @param passwds String: password of laple in base
+	 * @exception ClassNotFoundException is up if Driver jdbc not found
+	 * @exception SQLException is up if sql error or any communication to database.
+	 * In particular not connexion to network
+	 * @exception Exception if exceptions above had not been catch
+	 */
+	public static void connect(String users, String passwds) throws ClassNotFoundException, SQLException {
+		url="jdbc:mysql://www.laple.fr:3306/laple";
+		user = users;
+		passwd=passwds;
+			try{
+	    		try {
+					Class.forName( "com.mysql.jdbc.Driver" );
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    	    System.out.println("Driver O.K.");
+	    	    conn = DriverManager.getConnection(url, user, passwd);
+	    	    localWeb= new Web(url, bundleSetting.getName(), bundleSetting.getOldPwd());
+			} catch (SQLException s) {
+				// TODO Auto-generated catch block
+				System.out.println("NO connexion to network. going to connect to local");
+				url="jdbc:mysql://localhost:3306/laple";
+				try{
+		    	    conn = DriverManager.getConnection(url, user, passwd);
+		    	    localWeb=new Local(bundleSetting.getName(), bundleSetting.getOldPwd());
+				}catch (Exception e) {
+			  	      e.printStackTrace();
+				}
+			}catch (Exception e) {
+				 e.printStackTrace();
+			}
 	}
+	
+	
 
 	/**
 	 * SELECT sql
@@ -26,11 +74,14 @@ public class DbHelper {
 	 * @param tableName String: Name of table in base
 	 * @param condiTense Array of String: the where condition 
 	 * @return list ArrayList of the result of select
+	 * @throws IOException 
+	 * @throws MalformedURLException 
+	 * @throws UnsupportedEncodingException 
 	 */
-	private static ArrayList<StringBuilder> getStat(String[] tableName, String[] selectTense, String[] condiTense){
+	public static ArrayList<StringBuilder> getStat(String[] tableName, String[] selectTense, String[] condiTense) throws UnsupportedEncodingException, MalformedURLException, IOException{
 		
 		ArrayList<StringBuilder> list= new ArrayList<StringBuilder>();
-		list=DbAccessor.get(selectTense, tableName, condiTense);
+		list=localWeb.get(selectTense, tableName, condiTense);
 		for(StringBuilder l: list){
 			System.out.println(l);
 		}
@@ -45,8 +96,8 @@ public class DbHelper {
 	 * @param condiTense Array of Array String: It's Where. Example: {{"col1 = val1"},{"AND"}, {"col2 = val2"}}
 	 * @return 0 if update success
 	 */
-	private static int addStat(String tableName, String[] colTense, String[][] condiTense){
-		DbAccessor.put(tableName, colTense, condiTense);
+	public static int addStat(String tableName, String[] colTense, String[][] condiTense){
+		localWeb.put(tableName, colTense, condiTense);
 		return 0;
 	}
 
@@ -57,15 +108,15 @@ public class DbHelper {
 	 * @param colTense Array of String: column to be insert 
 	 * @return 1 if add success
 	 */
-	private static int addStat(String tableName, String[] colTense, String[] insertTense){
-		DbAccessor.put(tableName,colTense, insertTense);
+	public static int addStat(String tableName, String[] colTense, String[] insertTense){
+		localWeb.put(tableName,colTense, insertTense);
 		return 0;
 	}
 
 	//to do
-	private static boolean deleteStat(){
+	public static boolean deleteStat(){
 		String[][] condi={{"typeDico", "LIKE", "'Hiragana'"}};
-		return DbAccessor.delete("Dico", condi);
+		return localWeb.delete("Dico", condi);
 	}
 	public static String updateSetting(){
 		String table="Profile";
@@ -73,12 +124,12 @@ public class DbHelper {
 		String newPwd="'"+encode(bundleSetting.getNewPwd())+"'";
 		String oldPwd="'"+encode(bundleSetting.getOldPwd())+"'";
 		String[] col={"mdp="+ newPwd};
-		String[][] condi={{"name", "LIKE", name}, {"AND"}, {"mdp", "LIKE", oldPwd}};
+		String[][] condi={{"pseudo", "LIKE", name}, {"AND"}, {"mdp", "LIKE", oldPwd}};
 		addStat(table, col, condi);
 		return null;
 	}
 	
-	public static String updateStat(StatBundle bundleStat){
+	public static String updateStat(StatBundle bundleStat) throws UnsupportedEncodingException, MalformedURLException, IOException{
 		//recupère le trynumber
 		String[] tableName={"Dico D", "Symbol S"};
 		String[] selectTense={"numberSuccess", "tryNumber"};

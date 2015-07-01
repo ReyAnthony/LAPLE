@@ -1,12 +1,18 @@
 package fr.laple.jdbc;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Web extends DbAccessor{
-	/*private String url;
+public class Web implements IDbAccessor{
+	private static String url;
 	private String user;
 	private String passwd;
 	
@@ -14,17 +20,21 @@ public class Web extends DbAccessor{
     public Web(String url, String user, String passwd) throws SQLException, ClassNotFoundException {
     	this.url=url;
     	this.user=user;
-    	this.passwd=passwd;
-    	DbAccessor.connect(this.url, this.user, this.passwd);	
+    	this.passwd=passwd;	
     }
     
 
 	@Override
-	public ArrayList get(String[] select, String[] table, String[] condi){
+	public ArrayList<StringBuilder> get(String[] select, String[] table, String[] condi) throws UnsupportedEncodingException, MalformedURLException, IOException{
+		String url = "http://localhost/statistic/allStat?token=74c2496da8577bba89f881dbb6f2b549f55158cf9ea90fa2dba3a5d992deae10"+
+					"&offset=1&limit=1&language=japanese";
+		 
+        BufferedReader input = new BufferedReader(new InputStreamReader(new URL(url).openStream(), "UTF-8"));
+        
 		// TODO Auto-generated method stub
-		try{
+		/*try{
 		Statement statement = DbAccessor.getConn().createStatement();
-	      /* Exécution d'une requête de lecture 
+	      // Exécution d'une requête de lecture 
 	    ResultSet resultat = statement.executeQuery( "SELECT * FROM Animal;" );
 	    while ( resultat.next() ) {
 	    	int id = resultat.getInt( "id" );
@@ -35,14 +45,15 @@ public class Web extends DbAccessor{
 	    	}
 		}catch (Exception e) {
 			e.printStackTrace();
-		}   
+		}   */
 		return null;
+		
 	}
-
+	//json
 	@Override
-	public boolean put(String type, String table, String[] col, String[] value) {
+	public boolean put(String table, String[] colo, String[] value) {
 		// TODO Auto-generated method stub
-		StringBuilder sb1=new StringBuilder();
+		/*StringBuilder sb1=new StringBuilder();
 		StringBuilder sb2=new StringBuilder();
 		for(String c: col){
 			sb1.append(c + ",");
@@ -56,7 +67,7 @@ public class Web extends DbAccessor{
 		sb2.delete(len-1, len);
 		try{
 			Statement statement = DbAccessor.getConn().createStatement();
-		      /* Exécution d'une requête de lecture /
+		      // Exécution d'une requête de lecture 
 			if(type.compareTo("UPDATE")!=0){
 				statement.executeQuery(type + " " + table + " ("+sb2+");");
 			}
@@ -66,14 +77,15 @@ public class Web extends DbAccessor{
 		}catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		}      
+		}      */
 		return true;
+		
 	}
-
+	//json
 	@Override
-	public boolean delete(String table, String[] condi) {
+	public boolean put(String table, String[] col, String[][] value) {
 		// TODO Auto-generated method stub
-		StringBuilder sb1=new StringBuilder();
+		/*StringBuilder sb1=new StringBuilder();
 		for(String c: condi){
 			sb1.append(c + ",");
 		}
@@ -81,13 +93,19 @@ public class Web extends DbAccessor{
 		sb1.delete(len-1, len);
 		try{
 			Statement statement = DbAccessor.getConn().createStatement();
-		      /* Exécution d'une requête de lecture /
+		      // Exécution d'une requête de lecture
 				statement.executeQuery("DELETE FROM " + table + "WHERE " + condi +";");
 		}catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		}      
+		} */     
 		return true;
 	}
-	*/
+
+
+	@Override
+	public boolean delete(String table, String[][] condi) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

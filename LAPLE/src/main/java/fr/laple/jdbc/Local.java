@@ -7,19 +7,26 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public final class Local extends DbAccessor{
-/*	private String user;
+public class Local implements IDbAccessor{
+	private final String user;
 	private String passwd;
 	
 	
     public Local(String user, String passwd) throws SQLException, ClassNotFoundException {
     	this.user=user;
-    	this.passwd=passwd;
-    	DbAccessor.connect(this.user, this.passwd);	
+    	this.passwd=passwd;	
     }
     
+    
 
-	@Override
+    /**
+	 * Equivalent to select about request sql
+	 * @param select array of string: Fields to display
+	 * @param table String: Name of table in base
+	 * @param condi Array of String: the where condition 
+	 * @return list ArrayList of the result of select
+	 */
+    @Override
 	public ArrayList<StringBuilder> get(String[] select, String[] table, String[] condi) {
 		// TODO Auto-generated method stub
 		StringBuilder sb1=new StringBuilder();
@@ -27,10 +34,13 @@ public final class Local extends DbAccessor{
 		StringBuilder sb3=new StringBuilder();
 		StringBuilder sb4=new StringBuilder();
 		ArrayList<StringBuilder> result= new ArrayList<StringBuilder>();
+		//on transforme le tableau en chaine séparée par des virgules, afin de
+		// de respecter la syntaxe sql
 		for(String s: select){
 			sb1.append(s + ",");
 		}
 		int len=sb1.length();
+		//suppression de la virgule en fin de chaine
 		sb1.delete(len-1, len);
 		for(String t: table){
 			sb2.append(t + ",");
@@ -42,10 +52,9 @@ public final class Local extends DbAccessor{
 				sb3.append(c);
 			}
 		}
-		try{System.out.println("SELECT " + sb1 + " FROM "
-				+ sb2 + ";" );
-			Statement statement = DbAccessor.getConn().createStatement();
-		       Exécution d'une requête de lecture 
+		try{
+			Statement statement = DbHelper.conn.createStatement();
+		      /* Exécution d'une requête de lecture */
 			ResultSet resultat;
 			if(condi==null){
 				resultat = statement.executeQuery("SELECT " + sb1 + " FROM "
@@ -72,6 +81,13 @@ public final class Local extends DbAccessor{
 		return result;
 	}
 
+	/**
+	 * Equivalent to INSERT sql
+	 * @param table String: name table in database
+	 * @param colo Array of String: column to be insert
+	 * @param value Array of String: value to insert
+	 * @return true if insert success, false if not
+	 */
 	@Override
 	public boolean put(String table, String[] colo, String[] value) {
 		// TODO Auto-generated method stub
@@ -88,9 +104,9 @@ public final class Local extends DbAccessor{
 		}
 			len=sb2.length();
 			sb2.delete(len-1, len);
-		try{System.out.println("INSERT INTO "+table+ " ("+ sb1+ ") VALUES " + "("+sb2+");");
-			Statement statement = DbAccessor.getConn().createStatement();
-		      /* Exécution d'une requête de lecture 
+		try{//System.out.println("INSERT INTO "+table+ " ("+ sb1+ ") VALUES " + "("+sb2+");");
+			Statement statement = DbHelper.conn.createStatement();
+		      /* Exécution d'une requête de lecture */
 			statement.executeUpdate("INSERT INTO "+table+ " ("+ sb1+ ") VALUES " + "("+sb2+");");
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -99,6 +115,13 @@ public final class Local extends DbAccessor{
 		return true;
 	}
 	
+	/**
+	 * Equivalent to UPDATE
+	 * @param table String: name table in database
+	 * @param col Array String: it's SET. Example: {"col1='value1'","col2='value2'"}
+	 * @param value Array of Array String: It's Where. Example: {{"col1 = val1"},{"AND"}, {"col2 = val2"}}
+	 * @return true if update success, false if not
+	 */
 	@Override
 	public boolean put(String table, String[] col, String[][] value) {
 		// TODO Auto-generated method stub
@@ -118,9 +141,9 @@ public final class Local extends DbAccessor{
 			}
 			
 		}
-		try{System.out.println("UPDATE " + table +" SET " + sb1 + " WHERE " + sb2 +";");
-			Statement statement = DbAccessor.getConn().createStatement();
-		      /* Exécution d'une requête de lecture 
+		try{//System.out.println("UPDATE " + table +" SET " + sb1 + " WHERE " + sb2 +";");
+			Statement statement = DbHelper.conn.createStatement();
+		      /* Exécution d'une requête de lecture */
 			statement.executeUpdate("UPDATE " + table +" SET " + sb1 + " WHERE " + sb2 +";");
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -129,6 +152,12 @@ public final class Local extends DbAccessor{
 		return true;
 	}
 
+	/**
+	 * Delete a line on table in database
+	 * @param table String: Name table in database
+	 * @param condi: Array of Array String: It's Where. Example: {{"col1 = val1"},{"AND"}, {"col2 = val2"}}
+	 * @return true if delete success, false if not
+	 */
 	@Override
 	public boolean delete(String table, String[][] condi) {
 		// TODO Auto-generated method stub
@@ -139,9 +168,9 @@ public final class Local extends DbAccessor{
 		}
 		int len=sb1.length();
 		sb1.delete(len-1, len);
-		try{System.out.println("DELETE FROM " + table + " WHERE " + sb1 +";");
-			Statement statement = DbAccessor.getConn().createStatement();
-		      /* Exécution d'une requête de lecture 
+		try{//System.out.println("DELETE FROM " + table + " WHERE " + sb1 +";");
+			Statement statement = DbHelper.conn.createStatement();
+		      /* Exécution d'une requête de lecture */
 				statement.executeUpdate("DELETE FROM " + table + " WHERE " + sb1 +";");
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -149,9 +178,5 @@ public final class Local extends DbAccessor{
 		}      
 		return true;
 	}
-
-	*/
     
-	
-	
 }
