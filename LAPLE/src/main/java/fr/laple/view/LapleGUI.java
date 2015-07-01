@@ -31,6 +31,7 @@ public class LapleGUI extends JFrame {
         this.setTitle("LAPLE - Logiciel d'Apprentissage de Langues Etrangères");
         this.setResizable(false);
 
+
         this.uIPane = new JTabbedPane();
     }
 

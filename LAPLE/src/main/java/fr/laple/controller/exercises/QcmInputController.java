@@ -16,6 +16,8 @@ public class QcmInputController extends AbstractExerciseController {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        super.actionPerformed(e);
+
         QCMExerciseView view = (QCMExerciseView) getView();
 
         if (getExercise().solveExercice(((JButton) e.getSource()).getText()))

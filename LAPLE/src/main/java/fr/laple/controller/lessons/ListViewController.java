@@ -12,26 +12,23 @@ import java.util.List;
 /**
  * Created by anthonyrey on 06/06/2015.
  */
-public class ListViewController implements ActionListener{
+public class ListViewController implements ActionListener {
 
     private List<AbstractLessonContainer> model;
     private ListView view;
 
-    public ListViewController(List model, ListView view)
-    {
+    public ListViewController(List model, ListView view) {
         this.model = model;
         this.view = view;
         setList();
 
     }
 
-    private void setList()
-    {
+    private void setList() {
         JList<AbstractLessonContainer> list = view.getList();
         DefaultListModel<AbstractLessonContainer> listModel = new DefaultListModel<>();
 
-        for(int i = 0; i < model.size(); i++)
-        {
+        for (int i = 0; i < model.size(); i++) {
             listModel.add(i, model.get(i));
         }
 
@@ -44,25 +41,22 @@ public class ListViewController implements ActionListener{
 
         Object selectedValue = view.getList().getSelectedValue();
 
-        if(selectedValue == null)
-        {
-            JOptionPane.showMessageDialog(view, "You must select a value !");
+        if (e.getSource().equals(view.getValidationButton())) {
 
-        }
-        else
-        {
+            JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
 
-            if(e.getSource().equals(view.getValidationButton()))
-            {
-                //TODO So ugly, much completement naze, wow
-                JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
+            if (selectedValue == null) {
+                JOptionPane.showMessageDialog(view, "You must select a value !");
 
-                if(view.getList().getSelectedValue() instanceof AbstractLessonContainer)
-                {
+            } else {
+
+                //TODO Not OOP at all
+
+
+                if (view.getList().getSelectedValue() instanceof AbstractLessonContainer) {
                     AbstractLessonContainer container = (AbstractLessonContainer) selectedValue;
 
-                    if(container instanceof SymbolLessonContainer)
-                    {
+                    if (container instanceof SymbolLessonContainer) {
 
                         SymbolLessonContainer symbolLessonContainer = (SymbolLessonContainer) selectedValue;
                         int selected = tabbedPane.getSelectedIndex();
@@ -72,9 +66,7 @@ public class ListViewController implements ActionListener{
                                 null, selected);
                         tabbedPane.setSelectedIndex(selected);
 
-                    }
-                    else if (container instanceof WordLessonContainer)
-                    {
+                    } else if (container instanceof WordLessonContainer) {
 
                         WordLessonContainer wordLessonContainer = (WordLessonContainer) selectedValue;
                         int selected = tabbedPane.getSelectedIndex();
@@ -84,9 +76,7 @@ public class ListViewController implements ActionListener{
                         tabbedPane.setSelectedIndex(selected);
                     }
 
-                }
-                else if(selectedValue instanceof Lesson)
-                {
+                } else if (selectedValue instanceof Lesson) {
                     Lesson selectedLesson = (Lesson) selectedValue;
                     int selected = tabbedPane.getSelectedIndex();
 
@@ -97,9 +87,7 @@ public class ListViewController implements ActionListener{
 
                     tabbedPane.setSelectedIndex(selected);
 
-                }
-                else if(selectedValue instanceof LessonCategory)
-                {
+                } else if (selectedValue instanceof LessonCategory) {
                     LessonCategory symbolLessonContainer = (LessonCategory) selectedValue;
                     int selected = tabbedPane.getSelectedIndex();
                     tabbedPane.remove(selected);
@@ -110,13 +98,18 @@ public class ListViewController implements ActionListener{
 
                 }
             }
-            else
-            {
-                //Back to root view
 
-            }
+        } else {
+
+            JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
+
+            int selected = tabbedPane.getSelectedIndex();
+            tabbedPane.remove(selected);
+
+            view.getParent().getParent();
+
 
         }
-
     }
 }
+

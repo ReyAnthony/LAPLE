@@ -51,6 +51,8 @@ public class FreeInputExerciseView extends AbstractExerciseView {
         this.add(validationButton, gbc);
         gbc.gridx = 1;
         this.add(getNextButton(), gbc);
+        gbc.gridx = 2;
+        this.add(getBackButton(), gbc);
 
 
     }

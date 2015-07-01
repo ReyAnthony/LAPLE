@@ -11,13 +11,21 @@ public abstract class AbstractExerciseView extends JPanel {
     private JButton nextButton;
     private JLabel remainingCount;
     private JLabel succesCount;
+    private JButton backButton;
 
     public AbstractExerciseView()
     {
         nextButton = new JButton("Next Exercise");
         nextButton.setEnabled(false);
+
+        backButton = new JButton("Back");
         remainingCount = new JLabel("Exercises left :");
         succesCount = new JLabel("Suceeded : N/N");
+    }
+
+    public JButton getBackButton()
+    {
+        return backButton;
     }
 
     public abstract void addActionListener(ActionListener al);

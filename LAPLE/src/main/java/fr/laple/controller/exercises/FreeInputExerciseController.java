@@ -12,6 +12,8 @@ public class FreeInputExerciseController extends AbstractExerciseController {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        super.actionPerformed(e);
+
         FreeInputExerciseView view = (FreeInputExerciseView) getView();
 
         if (getExercise().solveExercice(getView().getAnswer().getText()))

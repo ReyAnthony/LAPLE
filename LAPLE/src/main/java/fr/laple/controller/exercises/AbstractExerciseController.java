@@ -7,6 +7,7 @@ import fr.laple.view.exercises.AbstractExerciseView;
 import fr.laple.view.exercises.ExerciseParameterizer;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -29,6 +30,7 @@ public abstract class AbstractExerciseController implements ActionListener {
 
     public void init(AbstractExerciseView panel) {
         this.view = panel;
+        view.getBackButton().addActionListener(this);
         view.getParent().setEnabled(false);
         startingExerciseCount = exerciseQueue.size() +1;
         updateTheView();
@@ -41,7 +43,7 @@ public abstract class AbstractExerciseController implements ActionListener {
                 setExercise(getExercises().pop());
                 updateTheView();
                 updateMessages();
-                
+
                 for(Blinker b : blinkers)
                 {
                     b.stop();
@@ -131,6 +133,15 @@ public abstract class AbstractExerciseController implements ActionListener {
     public int getExerciseCount()
     {
         return exerciseQueue.size() +1;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if(e.getSource().equals(view.getBackButton()))
+        {
+            finished();
+        }
     }
 
 

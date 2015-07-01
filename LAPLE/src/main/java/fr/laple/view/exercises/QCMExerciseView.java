@@ -57,6 +57,8 @@ public class QCMExerciseView extends AbstractExerciseView {
         this.add(qcm, gbc);
         gbc.gridy = 3;
         this.add(this.getNextButton(), gbc);
+        gbc.gridx = 1;
+        this.add(getBackButton(), gbc);
 
     }
 

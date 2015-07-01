@@ -79,7 +79,7 @@ public class LessonsJsonParser {
     }
 
     public AbstractLessonContainer parseForWordLessons(String path) throws ParserException {
-        WordLessonContainer lessonContainer = new WordLessonContainer("Kanji");
+        WordLessonContainer lessonContainer = new WordLessonContainer("kanji");
 
         try(InputStream file = getClass().getResourceAsStream(path)){
 
