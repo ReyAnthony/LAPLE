@@ -71,6 +71,30 @@ public class test {
             System.out.println("err"+err.getMessage());
         }
     }
+    public File[] listeRepertoire(File path, LinkedList<String> allFiles){
+        File[] list = null;
+        try {
+            if (path.isDirectory()) {
+                list = path.listFiles();
+                if (list != null) {
+                    for (int i = 0; i < list.length; i++) {
+                        listeRepertoire(list[i], allFiles);
+                    }
+                } else {
+                    System.err.println(path + " : Erreur de lecture.");
+                }
+            } else {
+                String currentFilePath = path.getAbsolutePath();
+                System.out.println(currentFilePath);
+                allFiles.add(currentFilePath);
+            }
+        }catch(Exception e){
+
+        }finally {
+            return list;
+        }
+
+    }
     public static void main(String[] args) {
        /*
         try {
