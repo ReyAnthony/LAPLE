@@ -95,6 +95,33 @@ public class test {
         }
 
     }
+    // ajout de wak a finaliser
+    public void walk( String path ) {
+
+        File root = new File( path );
+        File[] list = root.listFiles();
+
+        if (list == null) return;
+
+        for ( File f : list ) {
+            if ( f.isDirectory() ) {
+                walk( f.getAbsolutePath() );
+                System.out.println( "Dir:" + f.getAbsoluteFile() );
+            }
+            else {
+                if(f.getAbsoluteFile().toString().contains(".java")){
+                   String[] tableau =  f.getAbsoluteFile().toString().split("/");
+                   String fichier = tableau[tableau.length];
+                   Class fichierClass = fichier.getClass();
+                    //if(this.getAnnotClass()){
+
+                   //}
+                }
+                System.out.println( "File:" + f.getAbsoluteFile() );
+            }
+        }
+    }
+
     public static void main(String[] args) {
        /*
         try {
