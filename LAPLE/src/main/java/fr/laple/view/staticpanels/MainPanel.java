@@ -18,7 +18,7 @@ public class MainPanel extends JPanel {
         this.setLayout(layout);
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         manual = new JTextArea();
-        manual.setEnabled(false);
+        manual.setEditable(false);
 
         createUI();
 

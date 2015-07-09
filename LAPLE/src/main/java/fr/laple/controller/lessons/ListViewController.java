@@ -86,7 +86,7 @@ public class ListViewController implements ActionListener {
                     tabbedPane.remove(selected);
                     LessonView lessonView = new LessonView();
                     tabbedPane.insertTab("Lessons", null, lessonView, null, selected);
-                    new LessonController(lessonView, selectedLesson);
+                    new LessonController(model, lessonView, selectedLesson);
 
                     tabbedPane.setSelectedIndex(selected);
 

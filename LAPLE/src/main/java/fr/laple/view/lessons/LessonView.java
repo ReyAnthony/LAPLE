@@ -15,6 +15,7 @@ public class LessonView extends JPanel {
     private JButton soundButton;
     private JButton backButton;
     private JButton testButton;
+    private JTextArea description;
 
     public LessonView()
     {
@@ -39,7 +40,7 @@ public class LessonView extends JPanel {
         JPanel commandPanel = new JPanel();
 
         soundButton = new JButton(" Hear it ");
-        sampleDraw = new JButton("Show me how to draw it");
+        sampleDraw = new JButton("Draw it for me");
         commandPanel.add(soundButton);
         commandPanel.add(sampleDraw);
         symbolPanel.add(commandPanel, BorderLayout.PAGE_END);
@@ -57,7 +58,7 @@ public class LessonView extends JPanel {
 
         JPanel descriptionPanel = new JPanel();
         descriptionPanel.setLayout(new BorderLayout());
-        JTextArea description = new JTextArea("Here we should put the definition of the symbol");
+        description = new JTextArea("Here we should put the definition of the symbol");
         description.setLineWrap(true);
         description.setEditable(false);
         description.setWrapStyleWord(true);
@@ -93,5 +94,33 @@ public class LessonView extends JPanel {
 
     public JLabel getSymbol() {
         return symbol;
+    }
+
+    public JButton getClearButton() {
+        return clearButton;
+    }
+
+    public JButton getSampleDraw() {
+        return sampleDraw;
+    }
+
+    public JButton getValidateButton() {
+        return validateButton;
+    }
+
+    public JTextArea getDescription() {
+        return description;
+    }
+
+    public JButton getSoundButton() {
+        return soundButton;
+    }
+
+    public JButton getBackButton() {
+        return backButton;
+    }
+
+    public JButton getTestButton() {
+        return testButton;
     }
 }
