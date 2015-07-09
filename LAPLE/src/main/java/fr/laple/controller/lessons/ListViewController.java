@@ -1,5 +1,6 @@
 package fr.laple.controller.lessons;
 
+import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.lessons.*;
 import fr.laple.view.lessons.LessonView;
 import fr.laple.view.lessons.ListView;
@@ -14,12 +15,14 @@ import java.util.List;
  */
 public class ListViewController implements ActionListener {
 
-    private List<AbstractLessonContainer> model;
+    private List<AbstractLessonContainer> displayModel;
     private ListView view;
+    private ILanguagePlugin model;
 
-    public ListViewController(List model, ListView view) {
-        this.model = model;
+    public ListViewController(ILanguagePlugin model, List displayModel, ListView view) {
+        this.displayModel = displayModel;
         this.view = view;
+        this.model = model;
         setList();
 
     }
@@ -28,8 +31,8 @@ public class ListViewController implements ActionListener {
         JList list = view.getList();
         DefaultListModel listModel = new DefaultListModel<>();
 
-        for (int i = 0; i < model.size(); i++) {
-            listModel.add(i, model.get(i));
+        for (int i = 0; i < displayModel.size(); i++) {
+            listModel.add(i, displayModel.get(i));
         }
 
         list.setModel(listModel);
@@ -62,7 +65,7 @@ public class ListViewController implements ActionListener {
                         int selected = tabbedPane.getSelectedIndex();
                         tabbedPane.remove(selected);
                         //view = new ListView<>(symbolLessonContainer.getLessons(), true);
-                        tabbedPane.insertTab("Lessons", null, new ListView<>(symbolLessonContainer.getLessons(), true),
+                        tabbedPane.insertTab("Lessons", null, new ListView<>(model, symbolLessonContainer.getLessons(), true),
                                 null, selected);
                         tabbedPane.setSelectedIndex(selected);
 
@@ -72,7 +75,7 @@ public class ListViewController implements ActionListener {
                         int selected = tabbedPane.getSelectedIndex();
                         tabbedPane.remove(selected);
                         //view = new ListView<>(wordLessonContainer.getLessonCategories(), true);
-                        tabbedPane.insertTab("Lessons", null, new ListView<>(wordLessonContainer.getLessonCategories(), true), null, selected);
+                        tabbedPane.insertTab("Lessons", null, new ListView<>(model, wordLessonContainer.getLessonCategories(), true), null, selected);
                         tabbedPane.setSelectedIndex(selected);
                     }
 
@@ -92,7 +95,7 @@ public class ListViewController implements ActionListener {
                     int selected = tabbedPane.getSelectedIndex();
                     tabbedPane.remove(selected);
                     //view = new ListView<>(symbolLessonContainer.getLessons(), true);
-                    tabbedPane.insertTab("Lessons", null, new ListView<>(symbolLessonContainer.getLessons(), true),
+                    tabbedPane.insertTab("Lessons", null, new ListView<>(model, symbolLessonContainer.getLessons(), true),
                             null, selected);
                     tabbedPane.setSelectedIndex(selected);
 
@@ -105,6 +108,9 @@ public class ListViewController implements ActionListener {
 
             int selected = tabbedPane.getSelectedIndex();
             tabbedPane.remove(selected);
+            tabbedPane.insertTab("Lessons", null, new ListView<>(model, model.getLessonContainers(), false),
+                    null, selected);
+            tabbedPane.setSelectedIndex(selected);
 
         }
     }

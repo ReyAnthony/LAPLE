@@ -9,47 +9,85 @@ import java.awt.*;
 public class LessonView extends JPanel {
 
     private JLabel symbol;
+    private JButton clearButton;
+    private JButton sampleDraw;
+    private JButton validateButton;
     private JButton soundButton;
+    private JButton backButton;
+    private JButton testButton;
 
     public LessonView()
     {
 
-        GridBagLayout layout = new GridBagLayout();
+        BorderLayout layout = new BorderLayout();
         this.setLayout(layout);
-        GridBagConstraints gbc = new GridBagConstraints();
+        this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
-        gbc.gridy = 0;
-        gbc.gridx = 0;
+        JLabel text = new JLabel("Learn more about / try drawing this symbol :");
+        text.setHorizontalAlignment(JLabel.CENTER);
 
-        JLabel text = new JLabel("Learn more about this symbol :");
-        add(text, gbc);
-
-        gbc.gridy = 1;
-
+        //no need to resize as we never have words here
         symbol = new JLabel();
         symbol.setHorizontalAlignment(JLabel.CENTER);
-        Font f = symbol.getFont().deriveFont(200.0f);
+        Font f = symbol.getFont().deriveFont(150.0f);
         symbol.setFont(f);
 
-        soundButton = new JButton(" ");
+        JPanel symbolPanel = new JPanel();
+        symbolPanel.setLayout(new BorderLayout());
+        symbolPanel.add(symbol, BorderLayout.CENTER);
 
-        this.add(symbol, gbc);
+        JPanel commandPanel = new JPanel();
 
-        gbc.gridy = 2;
+        soundButton = new JButton(" Hear it ");
+        sampleDraw = new JButton("Show me how to draw it");
+        commandPanel.add(soundButton);
+        commandPanel.add(sampleDraw);
+        symbolPanel.add(commandPanel, BorderLayout.PAGE_END);
 
-        this.add(soundButton, gbc);
+        JPanel drawingPanel = new JPanel();
+        drawingPanel.setLayout(new BorderLayout());
+        drawingPanel.setBackground(Color.WHITE);
 
-        gbc.gridy = 1;
-        gbc.gridx = 1;
+        JPanel buttonPanel = new JPanel();
+        clearButton = new JButton("Clear drawing");
+        validateButton = new JButton("Validate");
+        buttonPanel.add(clearButton);
+        buttonPanel.add(validateButton);
+        drawingPanel.add(buttonPanel, BorderLayout.PAGE_END);
 
-        //For Kanji for eg.
         JPanel descriptionPanel = new JPanel();
-        JLabel description = new JLabel("Test, long");
-        descriptionPanel.add(description);
+        descriptionPanel.setLayout(new BorderLayout());
+        JTextArea description = new JTextArea("Here we should put the definition of the symbol");
+        description.setLineWrap(true);
+        description.setEditable(false);
+        description.setWrapStyleWord(true);
 
-        this.add(descriptionPanel, gbc);
+        JScrollPane scroll = new JScrollPane(descriptionPanel);
+        scroll.setHorizontalScrollBar(null);
+
+        JPanel commandPanelDraw = new JPanel();
+        commandPanelDraw.setBorder(BorderFactory.createEmptyBorder(50, 50, 20, 20));
+        backButton = new JButton("Back");
+        testButton = new JButton("Test me !");
+        commandPanelDraw.add(backButton);
+        commandPanelDraw.add(testButton);
+        descriptionPanel.add(description, BorderLayout.CENTER);
 
 
+        JPanel centralPanel = new JPanel();
+        centralPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        GridLayout gLayout = new GridLayout(2,2);
+        layout.setVgap(10);
+        centralPanel.setLayout(gLayout);
+        centralPanel.add(symbolPanel);
+        centralPanel.add(drawingPanel);
+        centralPanel.add(scroll);
+        centralPanel.add(commandPanelDraw);
+
+
+        this.add(centralPanel, BorderLayout.CENTER);
+
+        this.add(text, BorderLayout.PAGE_START);
     }
 
 

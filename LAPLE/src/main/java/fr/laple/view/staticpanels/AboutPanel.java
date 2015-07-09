@@ -21,6 +21,7 @@ public class AboutPanel extends JPanel  {
     {
         BorderLayout layout = new BorderLayout();
         this.setLayout(layout);
+        this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
         copyrightInfos = new JLabel("<html><br/> LAPLE, Logiciel d'Apprentissage de Langues Etrangères. <br/><br/>" +
                 "Copyright (c) 2015 <br/>" +

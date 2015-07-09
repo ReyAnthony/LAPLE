@@ -1,6 +1,7 @@
 package fr.laple.view.lessons;
 
 import fr.laple.controller.lessons.ListViewController;
+import fr.laple.model.language.ILanguagePlugin;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +15,7 @@ public class ListView<T> extends JPanel {
     private JButton validationButton;
     private JButton backButton;
 
-    public ListView(java.util.List<T> model, boolean hasBackButton)
+    public ListView(ILanguagePlugin model,java.util.List<T> displayModel, boolean hasBackButton)
     {
 
         this.setLayout(new BorderLayout());
@@ -40,7 +41,7 @@ public class ListView<T> extends JPanel {
         this.add(buttons, BorderLayout.PAGE_END);
 
         //todo give the .class to the controller so we can generalize
-        ListViewController controller = new ListViewController(model, this);
+        ListViewController controller = new ListViewController(model, displayModel, this);
         validationButton.addActionListener(controller);
         backButton.addActionListener(controller);
 
