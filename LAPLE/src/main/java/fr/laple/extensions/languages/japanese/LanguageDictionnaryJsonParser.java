@@ -7,6 +7,8 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.sound.sampled.*;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -16,14 +18,13 @@ import java.util.ArrayList;
 public class LanguageDictionnaryJsonParser {
 
     public SymbolContainer parseFile(String path) throws ParserException {
-        SymbolContainer container = null;
+        SymbolContainer container;
 
         try(InputStream file = getClass().getResourceAsStream(path)){
 
             JsonReader jsonReader = Json.createReader(file);
             JsonObject rootObject = jsonReader.readObject();
 
-            //TODO yaaay ugly code
             ArrayList<String> keys = new ArrayList<>(rootObject.keySet());
             String rootElem = keys.get(0);
 
@@ -35,12 +36,12 @@ public class LanguageDictionnaryJsonParser {
                 JsonObject current = root.getJsonObject(i);
                 String userLangTranscript = current .getString("userLangTranscript");
                 String gottenSymbol = current.getString("symbol");
+                Clip sound = loadSound(current.getString("soundFile"));
                 //need the others one
 
-                Symbol symbol = new Symbol(userLangTranscript, gottenSymbol, null, null, null , null);
+                Symbol symbol = new Symbol(userLangTranscript, gottenSymbol, null, null, sound , null);
                 container.addSymbol(symbol);
             }
-
             if(container.getSize() < 4)
             {
                 //TODO should throw a "dictionnaryPopulating exception");
@@ -52,10 +53,33 @@ public class LanguageDictionnaryJsonParser {
         }
         catch(Exception e)
         {
-            throw new ParserException(path);
+            throw new ParserException(e.toString() + (" while loading language file"));
         }
 
         return container;
+    }
+
+    private Clip loadSound(String path) throws ParserException {
+
+        path = "/a.wav";
+        try(InputStream file = getClass().getResourceAsStream(path)){
+
+            AudioInputStream ais = AudioSystem.getAudioInputStream(file);
+            DataLine.Info info = new DataLine.Info(Clip.class, ais.getFormat());
+            Clip clip = (Clip) AudioSystem.getLine(info);
+            clip.open(ais);
+            clip.addLineListener(event -> {
+                if (event.getType() == LineEvent.Type.STOP)
+                    //tweak not to reload the stream
+                    clip.stop();
+                    clip.setMicrosecondPosition(0);
+            });
+
+            return clip;
+
+        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+            throw new ParserException("Error loading sound at" + path);
+        }
     }
 
 }

@@ -5,6 +5,7 @@ import fr.laple.model.lessons.Lesson;
 import fr.laple.view.lessons.LessonView;
 import fr.laple.view.lessons.ListView;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +30,7 @@ public class LessonController implements ActionListener {
         view.getParent().setEnabled(false);
 
         view.getBackButton().addActionListener(this);
+        view.getSoundButton().addActionListener(this);
         view.getDescription().setText("translation : \n "+ this.lesson.getSymbol().getUserLangTranscript());
     }
 
@@ -46,6 +48,12 @@ public class LessonController implements ActionListener {
             tabbedPane.insertTab("Lessons", null, new ListView<>(model, model.getLessonContainers(), false),
                     null, selected);
             tabbedPane.setSelectedIndex(selected);
+
+        }
+        else if(e.getSource().equals(view.getSoundButton()))
+        {
+            Clip clip =  lesson.getSymbol().getPronunciation();
+            clip.start();
 
         }
     }
