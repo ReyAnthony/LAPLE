@@ -10,8 +10,6 @@ public class LessonView extends JPanel {
 
     private JLabel symbol;
     private JButton clearButton;
-    private JButton sampleDraw;
-    private JButton validateButton;
     private JButton soundButton;
     private JButton backButton;
     private JButton testButton;
@@ -40,9 +38,7 @@ public class LessonView extends JPanel {
         JPanel commandPanel = new JPanel();
 
         soundButton = new JButton(" Hear it ");
-        sampleDraw = new JButton("Draw it for me");
         commandPanel.add(soundButton);
-        commandPanel.add(sampleDraw);
         symbolPanel.add(commandPanel, BorderLayout.PAGE_END);
 
         JPanel drawingPanel = new JPanel();
@@ -51,9 +47,7 @@ public class LessonView extends JPanel {
 
         JPanel buttonPanel = new JPanel();
         clearButton = new JButton("Clear drawing");
-        validateButton = new JButton("Validate");
         buttonPanel.add(clearButton);
-        buttonPanel.add(validateButton);
         drawingPanel.add(buttonPanel, BorderLayout.PAGE_END);
 
         JPanel descriptionPanel = new JPanel();
@@ -99,15 +93,7 @@ public class LessonView extends JPanel {
     public JButton getClearButton() {
         return clearButton;
     }
-
-    public JButton getSampleDraw() {
-        return sampleDraw;
-    }
-
-    public JButton getValidateButton() {
-        return validateButton;
-    }
-
+    
     public JTextArea getDescription() {
         return description;
     }
