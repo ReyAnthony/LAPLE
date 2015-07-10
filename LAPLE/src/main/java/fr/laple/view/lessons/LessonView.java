@@ -93,7 +93,7 @@ public class LessonView extends JPanel {
     public JButton getClearButton() {
         return clearButton;
     }
-    
+
     public JTextArea getDescription() {
         return description;
     }

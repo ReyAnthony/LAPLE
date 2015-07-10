@@ -37,11 +37,12 @@ public class Lesson {
     }
 
     public boolean isOpen() {
+        
         return open;
     }
 
     public String toString()
     {
-        return getLessonName()+" - open : "+isOpen();
+        return getLessonName();
     }
 }

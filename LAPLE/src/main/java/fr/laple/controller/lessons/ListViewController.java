@@ -30,12 +30,15 @@ public class ListViewController implements ActionListener {
     private void setList() {
         JList list = view.getList();
         DefaultListModel listModel = new DefaultListModel<>();
+        list.addListSelectionListener(new MyListSelectionListener());
 
         for (int i = 0; i < displayModel.size(); i++) {
             listModel.add(i, displayModel.get(i));
+
         }
 
         list.setModel(listModel);
+        list.setCellRenderer(new ListViewCellRenderer());
     }
 
 
