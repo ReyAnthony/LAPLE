@@ -1,4 +1,4 @@
-package fr.laple.view.lessons;
+package fr.laple.view;
 
 import fr.laple.controller.lessons.ListViewController;
 import fr.laple.model.language.ILanguagePlugin;
@@ -9,13 +9,14 @@ import java.awt.*;
 /**
  * Created by anthonyrey on 06/06/2015.
  */
-public class ListView<T> extends JPanel {
+public class ListView<IListable> extends JPanel {
 
-    private JList<T> list;
+    private JList<IListable> list;
     private JButton validationButton;
     private JButton backButton;
 
-    public ListView(ILanguagePlugin model,java.util.List<T> displayModel, boolean hasBackButton)
+    //display model is mandatory because you need to know what is to be shown
+    public ListView(ILanguagePlugin model, java.util.List<IListable> displayModel, boolean hasBackButton)
     {
 
         this.setLayout(new BorderLayout());
@@ -26,6 +27,8 @@ public class ListView<T> extends JPanel {
         scrollPanel.setLayout(new BorderLayout());
         JScrollPane scroll = new JScrollPane(scrollPanel);
         scroll.setHorizontalScrollBar(null);
+
+        //type inference :)
         list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         scrollPanel.add(list, BorderLayout.CENTER);
@@ -40,7 +43,6 @@ public class ListView<T> extends JPanel {
         this.add(scroll, BorderLayout.CENTER);
         this.add(buttons, BorderLayout.PAGE_END);
 
-        //todo give the .class to the controller so we can generalize
         ListViewController controller = new ListViewController(model, displayModel, this);
         validationButton.addActionListener(controller);
         backButton.addActionListener(controller);
@@ -50,7 +52,7 @@ public class ListView<T> extends JPanel {
 
     }
 
-    public JList<T> getList()
+    public JList<IListable> getList()
     {
         return list;
     }

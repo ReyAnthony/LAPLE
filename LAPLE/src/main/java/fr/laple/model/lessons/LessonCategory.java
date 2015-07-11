@@ -1,11 +1,16 @@
 package fr.laple.model.lessons;
 
+import fr.laple.controller.lessons.IListable;
+import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.view.ListView;
+
+import javax.swing.*;
 import java.util.ArrayList;
 
 /**
  * Created by anthonyrey on 06/06/2015.
  */
-public class LessonCategory {
+public class LessonCategory implements IListable {
 
     private String categoryName;
     private ArrayList<Lesson> lessons;
@@ -27,5 +32,17 @@ public class LessonCategory {
     public String toString()
     {
         return getCategoryName();
+    }
+
+    @Override
+    public void expectedBehavior(Object selectedValue, JTabbedPane tabbedPane, ILanguagePlugin model) {
+
+        LessonCategory symbolLessonContainer = (LessonCategory) selectedValue;
+        int selected = tabbedPane.getSelectedIndex();
+        tabbedPane.remove(selected);
+        //view = new ListView<>(symbolLessonContainer.getLessons(), true);
+        tabbedPane.insertTab("Lessons", null, new ListView<>(model, symbolLessonContainer.getLessons(), true),
+                null, selected);
+        tabbedPane.setSelectedIndex(selected);
     }
 }

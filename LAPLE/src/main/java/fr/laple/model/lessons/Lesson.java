@@ -1,6 +1,12 @@
 package fr.laple.model.lessons;
 
+import fr.laple.controller.lessons.LessonController;
+import fr.laple.controller.lessons.IListable;
+import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.Symbol;
+import fr.laple.view.lessons.LessonView;
+
+import javax.swing.*;
 
 /**
  *  This class represents a Lesson.
@@ -9,7 +15,7 @@ import fr.laple.model.language.Symbol;
  *  @author anthonyrey
  *
  */
-public class Lesson {
+public class Lesson implements IListable {
 
     private String lessonName;
     private boolean open;
@@ -44,5 +50,26 @@ public class Lesson {
     public String toString()
     {
         return getLessonName();
+    }
+
+    @Override
+    public boolean isSelectable() {
+
+        return isOpen() ? true : false;
+
+    }
+
+    @Override
+    public void expectedBehavior(Object selectedValue, JTabbedPane tabbedPane, ILanguagePlugin model) {
+
+        Lesson selectedLesson = (Lesson) selectedValue;
+        int selected = tabbedPane.getSelectedIndex();
+
+        tabbedPane.remove(selected);
+        LessonView lessonView = new LessonView();
+        tabbedPane.insertTab("Lessons", null, lessonView, null, selected);
+        new LessonController(model, lessonView, selectedLesson);
+
+        tabbedPane.setSelectedIndex(selected);
     }
 }

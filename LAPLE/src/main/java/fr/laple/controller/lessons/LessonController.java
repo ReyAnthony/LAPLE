@@ -3,7 +3,7 @@ package fr.laple.controller.lessons;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.lessons.Lesson;
 import fr.laple.view.lessons.LessonView;
-import fr.laple.view.lessons.ListView;
+import fr.laple.view.ListView;
 
 import javax.sound.sampled.Clip;
 import javax.swing.*;

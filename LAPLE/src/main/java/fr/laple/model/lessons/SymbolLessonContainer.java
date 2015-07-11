@@ -1,5 +1,10 @@
 package fr.laple.model.lessons;
 
+import fr.laple.controller.lessons.IListable;
+import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.view.ListView;
+
+import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +13,7 @@ import java.util.ArrayList;
  * @author anthonyrey
  *
  */
-public class SymbolLessonContainer extends AbstractLessonContainer {
+public class SymbolLessonContainer extends AbstractLessonContainer implements IListable{
 
     private String lessonTypeName;
     private ArrayList<Lesson> lessons;
@@ -37,4 +42,15 @@ public class SymbolLessonContainer extends AbstractLessonContainer {
         return lessonTypeName;
     }
 
+    @Override
+    public void expectedBehavior(Object selectedValue, JTabbedPane tabbedPane, ILanguagePlugin model) {
+
+        SymbolLessonContainer symbolLessonContainer = (SymbolLessonContainer) selectedValue;
+        int selected = tabbedPane.getSelectedIndex();
+        tabbedPane.remove(selected);
+        //view = new ListView<>(symbolLessonContainer.getLessons(), true);
+        tabbedPane.insertTab("Lessons", null, new ListView<>(model, symbolLessonContainer.getLessons(), true),
+                null, selected);
+        tabbedPane.setSelectedIndex(selected);
+    }
 }

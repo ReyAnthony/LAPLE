@@ -3,7 +3,7 @@ package fr.laple.controller;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.view.LapleGUI;
 import fr.laple.view.exercises.ExerciseParameterizer;
-import fr.laple.view.lessons.ListView;
+import fr.laple.view.ListView;
 import fr.laple.view.staticpanels.AboutPanel;
 import fr.laple.view.staticpanels.MainPanel;
 
