@@ -8,6 +8,7 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.sound.sampled.*;
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -64,7 +65,9 @@ public class LanguageDictionnaryJsonParser {
         path = "/a.wav";
         try(InputStream file = getClass().getResourceAsStream(path)){
 
-            AudioInputStream ais = AudioSystem.getAudioInputStream(file);
+            BufferedInputStream bis = new BufferedInputStream(file);
+
+            AudioInputStream ais = AudioSystem.getAudioInputStream(bis);
             DataLine.Info info = new DataLine.Info(Clip.class, ais.getFormat());
             Clip clip = (Clip) AudioSystem.getLine(info);
             clip.open(ais);
@@ -78,7 +81,7 @@ public class LanguageDictionnaryJsonParser {
             return clip;
 
         } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
-            throw new ParserException("Error loading sound at" + path);
+            throw new ParserException(e.getMessage());
         }
     }
 
