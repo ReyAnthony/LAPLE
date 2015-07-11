@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class WordLessonContainer extends AbstractLessonContainer implements IListable {
 
     private String lessonTypeName;
-    private ArrayList<LessonCategory> lessonCategories;
+    private ArrayList<IListable> lessonCategories;
 
     public WordLessonContainer(String lessonTypeName)
     {
@@ -31,7 +31,7 @@ public class WordLessonContainer extends AbstractLessonContainer implements ILis
         return lessonTypeName;
     }
 
-    public ArrayList<LessonCategory> getLessonCategories()
+    public ArrayList<IListable> getLessonCategories()
    {
        return lessonCategories;
    }
@@ -48,7 +48,7 @@ public class WordLessonContainer extends AbstractLessonContainer implements ILis
         int selected = tabbedPane.getSelectedIndex();
         tabbedPane.remove(selected);
         //view = new ListView<>(wordLessonContainer.getLessonCategories(), true);
-        tabbedPane.insertTab("Lessons", null, new ListView<>(model, wordLessonContainer.getLessonCategories(), true), null, selected);
+        tabbedPane.insertTab("Lessons", null, new ListView(model, wordLessonContainer.getLessonCategories(), true), null, selected);
         tabbedPane.setSelectedIndex(selected);
 
     }

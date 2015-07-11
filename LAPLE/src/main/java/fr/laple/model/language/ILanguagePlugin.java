@@ -1,8 +1,8 @@
 package fr.laple.model.language;
 
+import fr.laple.controller.lessons.IListable;
 import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
-import fr.laple.model.lessons.AbstractLessonContainer;
 
 import java.util.ArrayList;
 
@@ -21,6 +21,6 @@ public interface ILanguagePlugin {
     public String getVersion();
     public ArrayList<IExerciseMode> getExercisesModes() ;
     public ArrayList<AbstractAnswerMode> getExercisesSolvingModes();
-    public ArrayList<AbstractLessonContainer> getLessonContainers();
+    public ArrayList<IListable> getLessonContainers();
 
 }

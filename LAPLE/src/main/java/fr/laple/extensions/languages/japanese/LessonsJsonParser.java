@@ -1,6 +1,7 @@
 package fr.laple.extensions.languages.japanese;
 
 
+import fr.laple.controller.lessons.IListable;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.model.lessons.*;
 
@@ -23,9 +24,9 @@ public class LessonsJsonParser {
         this.symbolContainers = sc;
     }
 
-    public ArrayList<AbstractLessonContainer> parseForSymbolLessons(String path) throws ParserException {
+    public ArrayList<IListable> parseForSymbolLessons(String path) throws ParserException {
 
-        ArrayList<AbstractLessonContainer> lessonContainers = new ArrayList<>();
+        ArrayList<IListable> lessonContainers = new ArrayList<>();
 
         try( InputStream file = getClass().getResourceAsStream(path))
         {
@@ -40,7 +41,7 @@ public class LessonsJsonParser {
                 {
                     JsonObject learningOrder = lessonTypes.getJsonObject(type);
                     JsonArray symbols = learningOrder.getJsonArray("learning_order");
-                    ArrayList<Lesson> lessons = new ArrayList<>();
+                    ArrayList<IListable> lessons = new ArrayList<>();
 
                     SymbolContainer containerForFile = null;
 
@@ -78,7 +79,7 @@ public class LessonsJsonParser {
 
     }
 
-    public AbstractLessonContainer parseForWordLessons(String path) throws ParserException {
+    public IListable parseForWordLessons(String path) throws ParserException {
         WordLessonContainer lessonContainer = new WordLessonContainer("kanji");
 
         try(InputStream file = getClass().getResourceAsStream(path)){
@@ -93,7 +94,7 @@ public class LessonsJsonParser {
                 String category = rootObj.getString("category");
                 JsonArray list = rootObj.getJsonArray("list");
 
-                ArrayList<Lesson> lessons = new ArrayList<>();
+                ArrayList<IListable> lessons = new ArrayList<>();
 
                 SymbolContainer containerForFile = null;
 

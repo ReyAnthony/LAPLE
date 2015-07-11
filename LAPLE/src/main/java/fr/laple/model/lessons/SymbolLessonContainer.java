@@ -16,13 +16,13 @@ import java.util.ArrayList;
 public class SymbolLessonContainer extends AbstractLessonContainer implements IListable{
 
     private String lessonTypeName;
-    private ArrayList<Lesson> lessons;
+    private ArrayList<IListable> lessons;
 
     /**
      * It's the constructor of Symbol lesson container
      * @param lessonTypeName String used to set the type  of the dictionary.
      */
-    public SymbolLessonContainer(String lessonTypeName, ArrayList<Lesson> lessons){
+    public SymbolLessonContainer(String lessonTypeName, ArrayList<IListable> lessons){
         this.lessonTypeName = lessonTypeName;
         this.lessons = lessons;
     }
@@ -32,7 +32,7 @@ public class SymbolLessonContainer extends AbstractLessonContainer implements IL
         return lessonTypeName;
     }
 
-    public ArrayList<Lesson> getLessons()
+    public ArrayList<IListable> getLessons()
     {
         return lessons;
     }
@@ -49,7 +49,7 @@ public class SymbolLessonContainer extends AbstractLessonContainer implements IL
         int selected = tabbedPane.getSelectedIndex();
         tabbedPane.remove(selected);
         //view = new ListView<>(symbolLessonContainer.getLessons(), true);
-        tabbedPane.insertTab("Lessons", null, new ListView<>(model, symbolLessonContainer.getLessons(), true),
+        tabbedPane.insertTab("Lessons", null, new ListView(model, symbolLessonContainer.getLessons(), true),
                 null, selected);
         tabbedPane.setSelectedIndex(selected);
     }

@@ -13,9 +13,9 @@ import java.util.ArrayList;
 public class LessonCategory implements IListable {
 
     private String categoryName;
-    private ArrayList<Lesson> lessons;
+    private ArrayList<IListable> lessons;
 
-    public LessonCategory(String name, ArrayList<Lesson> lessons)
+    public LessonCategory(String name, ArrayList<IListable> lessons)
     {
         this.categoryName = name;
         this.lessons = lessons;
@@ -25,7 +25,7 @@ public class LessonCategory implements IListable {
         return categoryName;
     }
 
-    public ArrayList<Lesson> getLessons() {
+    public ArrayList<IListable> getLessons() {
         return lessons;
     }
 
@@ -41,7 +41,7 @@ public class LessonCategory implements IListable {
         int selected = tabbedPane.getSelectedIndex();
         tabbedPane.remove(selected);
         //view = new ListView<>(symbolLessonContainer.getLessons(), true);
-        tabbedPane.insertTab("Lessons", null, new ListView<>(model, symbolLessonContainer.getLessons(), true),
+        tabbedPane.insertTab("Lessons", null, new ListView(model, symbolLessonContainer.getLessons(), true),
                 null, selected);
         tabbedPane.setSelectedIndex(selected);
     }

@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
- * Created by anthonyrey on 06/06/2015.
+ * This is a controller class for generic instances of listView
+ *
+ * @author anthonyrey
  */
 public class ListViewController implements ActionListener {
 
@@ -17,7 +19,14 @@ public class ListViewController implements ActionListener {
     private ListView view;
     private ILanguagePlugin model;
 
-    public ListViewController(ILanguagePlugin model, List displayModel, ListView view) {
+    /**
+     * This is the constructor to the ListViewController
+     *
+     * @param model A LapleModel
+     * @param displayModel The model to display in the List
+     * @param view The associated listView
+     */
+    public ListViewController(ILanguagePlugin model, List<IListable> displayModel, ListView view) {
         this.displayModel = displayModel;
         this.view = view;
         this.model = model;
@@ -25,6 +34,11 @@ public class ListViewController implements ActionListener {
 
     }
 
+    /**
+     * This method creates the model according to the display model and put it
+     * into the views's list
+     *
+     */
     private void setList() {
 
         JList<IListable> list = view.getList();
@@ -38,7 +52,6 @@ public class ListViewController implements ActionListener {
         list.setModel(listModel);
         list.setCellRenderer(new ListViewCellRenderer());
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -57,6 +70,10 @@ public class ListViewController implements ActionListener {
 
     }
 
+
+    /**
+     * Delete the current tab and create a new tab set at the root view
+     */
     private void goRootMenu()
     {
         //Go back to the main frame
@@ -64,7 +81,7 @@ public class ListViewController implements ActionListener {
 
         int selected = tabbedPane.getSelectedIndex();
         tabbedPane.remove(selected);
-        tabbedPane.insertTab("Lessons", null, new ListView<>(model, model.getLessonContainers(), false),
+        tabbedPane.insertTab("Lessons", null, new ListView(model, model.getLessonContainers(), false),
                 null, selected);
         tabbedPane.setSelectedIndex(selected);
     }

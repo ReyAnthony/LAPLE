@@ -1,6 +1,7 @@
 package fr.laple.extensions.languages.japanese;
 
 
+import fr.laple.controller.lessons.IListable;
 import fr.laple.model.exercises.ExModeTranscriptLangUserLang;
 import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
 import fr.laple.model.exercises.IExerciseMode;
@@ -10,7 +11,6 @@ import fr.laple.model.exercises.answers.FreeInputMode;
 import fr.laple.model.exercises.answers.QcmMode;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.SymbolContainer;
-import fr.laple.model.lessons.AbstractLessonContainer;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     private ArrayList<SymbolContainer> symbolContainers;
     private ArrayList<IExerciseMode> exerciseModes;
     private ArrayList<AbstractAnswerMode> exerciseSolvingModes;
-    private ArrayList<AbstractLessonContainer> lessonContainers;
+    private ArrayList<IListable> lessonContainers;
 
     public LapleLanguagePlugin() throws ParserException {
 
@@ -55,7 +55,7 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
     }
 
     @Override
-    public ArrayList<AbstractLessonContainer> getLessonContainers() {
+    public ArrayList<IListable> getLessonContainers() {
         return lessonContainers;
     }
 

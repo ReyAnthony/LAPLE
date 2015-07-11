@@ -27,7 +27,7 @@ public class LapleGUIController {
 
         view.getUIPane().add("Home Page", new MainPanel());
 
-        ui.add("Lessons",  new ListView<>(model, model.getLessonContainers(), false));
+        ui.add("Lessons",  new ListView(model, model.getLessonContainers(), false));
 
         ui.add("Exercises", new ExerciseParameterizer(model));
         ui.add("Statistics", null);
