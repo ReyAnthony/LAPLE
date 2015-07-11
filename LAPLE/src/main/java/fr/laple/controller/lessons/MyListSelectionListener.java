@@ -33,7 +33,7 @@ public class MyListSelectionListener implements ListSelectionListener{
         }
         catch(ClassCastException ex)
         {
-            System.out.println("fuck ye, ya filthy basterd");
+           //TODO transform in an object fashion
         }
 
 

@@ -37,7 +37,7 @@ public class Lesson {
     }
 
     public boolean isOpen() {
-        
+
         return open;
     }
 
