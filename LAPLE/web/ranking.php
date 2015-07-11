@@ -11,7 +11,7 @@
 		
   </head>
 
-  <body class="bod">
+  <body class="html">
   	<?php require_once('session.php'); ?>
   	<nav class="navbar navbar-default">
 		  <div class="container-fluid">
@@ -23,7 +23,7 @@
     	    	<ul class="nav navbar-nav">
 			      <li><a class="navbar-brand" href="download.php">Download</a></li>
 			      <li><a class="navbar-brand" href="ranking.php">Ranking</a></li>
-			      <li><a class="navbar-brand" href="ranking.php">About</a></li>
+			      <li><a class="navbar-brand" href="about.php">About</a></li>
 			      <li><a class="navbar-brand" href="guide.php">LAPLE'S Guide</a></li>
 			      <li><a class="navbar-brand" href="faq.php">FAQ</a></li>
 		  		</ul><!-- /.container-fluid -->
@@ -47,8 +47,9 @@
           <div class="col-lg-2"><a href="ranking.php?rang=3">Funzone</a></div>
         </div>
       </div>
-      <div>
-        <table style= "border-width:1px; border-color:black; border-style:solid; color:white">
+      <div class="row">
+        <div class="col-lg-offset-2 col-lg-2">
+          <table style= "border-width:1px; border-color:black; border-style:solid; color:white">
           <thead>
              <tr>
                 <th>Rang</th>
@@ -91,6 +92,7 @@
           </tbody> 
 
         </table>
+      </div>
     <div style= "height: 60px" class="foot"><?php include('footer.php'); ?></div>
   </body>
 </html>

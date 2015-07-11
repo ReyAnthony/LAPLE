@@ -1,3 +1,3 @@
 <?php
-	echo "Copyright ©2015 by Team LA P LE . All rights reserved";
+	echo "Copyright ©2015 by Team LAPLE . All rights reserved";
 ?>

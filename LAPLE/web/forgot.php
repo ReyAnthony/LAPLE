@@ -11,7 +11,7 @@
 	
 	<body id="got">
 		<h2 style="color:ThreeDDarkShadow; text-align:center">Change password</h2>
-		<form id="form" method="post" action="http://localhost/private/validate_account.php?">
+		<form id="form" method="post" action="validate_account.php?">
    	<fieldset>
     	<legend>New password</legend>
     		<?php

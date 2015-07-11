@@ -7,13 +7,9 @@
 		<title>Accueil</title>
 		
   </head>
-  	 <div>
-      <h2><a style="color:white" class="navbar-brand" href="about2.php">About</a></h1>
-    </div>
 	<h1 style="color:ThreeDDarkShadow; text-align:center">LAPLE</h1>
-	
+	<h2 style="color:ThreeDDarkShadow; text-align:center">Authentification</h2>
 	<body id="index">
-		<h2 style="color:ThreeDDarkShadow; text-align:center">Authentification</h2>
 		<form id="form" method="post" action="connexion.php">
    	<fieldset>
     	<legend>Sign in</legend>
