@@ -45,8 +45,6 @@ public class LanguageDictionnaryJsonParser {
             }
             if(container.getSize() < 4)
             {
-                //TODO should throw a "dictionnaryPopulating exception");
-                //message gets inhibithed anyway
                 throw new ParserException("Dico < 4");
             }
 

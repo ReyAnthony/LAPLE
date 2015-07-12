@@ -80,8 +80,6 @@ public class LanguageSelectionController implements ActionListener {
                 }
             }
 
-            /* TODO We get the parser exception here, but the exception is actually thrown by getPlugin when new instance.
-             Check this with M. Sananes */
         } catch (InstantiationException | IllegalAccessException | ParserException e1) {
             pluginLoadingError(e1.getMessage());
         }
