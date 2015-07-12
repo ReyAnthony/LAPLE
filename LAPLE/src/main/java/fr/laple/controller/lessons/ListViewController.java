@@ -1,5 +1,6 @@
 package fr.laple.controller.lessons;
 
+import fr.laple.model.IListable;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.view.ListView;
 
@@ -13,6 +14,7 @@ import java.util.List;
  *
  * @author anthonyrey
  */
+//TODO add validation when pressing enter key
 public class ListViewController implements ActionListener {
 
     private List<IListable> displayModel;
@@ -53,10 +55,14 @@ public class ListViewController implements ActionListener {
         list.setCellRenderer(new ListViewCellRenderer());
     }
 
+    /**
+     * When clicking on a button
+     * @param e The ActionEvent related object
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        IListable selectedValue = (IListable) view.getList().getSelectedValue();
+        IListable selectedValue = view.getList().getSelectedValue();
 
         if (e.getSource().equals(view.getValidationButton())) {
 

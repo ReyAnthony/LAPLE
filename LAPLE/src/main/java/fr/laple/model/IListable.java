@@ -1,4 +1,4 @@
-package fr.laple.controller.lessons;
+package fr.laple.model;
 
 import fr.laple.model.language.ILanguagePlugin;
 

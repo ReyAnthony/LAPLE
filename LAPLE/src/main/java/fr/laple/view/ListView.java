@@ -1,6 +1,6 @@
 package fr.laple.view;
 
-import fr.laple.controller.lessons.IListable;
+import fr.laple.model.IListable;
 import fr.laple.controller.lessons.ListViewController;
 import fr.laple.model.language.ILanguagePlugin;
 
@@ -29,7 +29,6 @@ public class ListView extends JPanel {
         JScrollPane scroll = new JScrollPane(scrollPanel);
         scroll.setHorizontalScrollBar(null);
 
-        //type inference :)
         list = new JList<>();
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         scrollPanel.add(list, BorderLayout.CENTER);

@@ -1,7 +1,7 @@
 package fr.laple.model.lessons;
 
 import fr.laple.controller.lessons.LessonController;
-import fr.laple.controller.lessons.IListable;
+import fr.laple.model.IListable;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.Symbol;
 import fr.laple.view.lessons.LessonView;
@@ -55,8 +55,7 @@ public class Lesson implements IListable {
     @Override
     public boolean isSelectable() {
 
-        return isOpen() ? true : false;
-
+        return isOpen();
     }
 
     @Override

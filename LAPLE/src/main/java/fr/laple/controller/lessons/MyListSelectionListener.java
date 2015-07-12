@@ -1,6 +1,6 @@
 package fr.laple.controller.lessons;
 
-import fr.laple.model.lessons.Lesson;
+import fr.laple.model.IListable;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -9,10 +9,7 @@ import javax.swing.event.ListSelectionListener;
 /**
  * Created by anthonyrey on 10/07/2015.
  */
-public class MyListSelectionListener implements ListSelectionListener{
-
-    //TODO should check if the cell renderer is the laple one, and throw an exception otherwize
-    //TODO remove the shitty if
+class MyListSelectionListener implements ListSelectionListener{
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
@@ -24,7 +21,7 @@ public class MyListSelectionListener implements ListSelectionListener{
             ListModel lm = list.getModel();
             for (int i=e.getFirstIndex(); i<=e.getLastIndex(); i++) {
                 if (list.getSelectionModel().isSelectedIndex(i)) {
-                    if (!((Lesson) lm.getElementAt(i)).isOpen()) {
+                    if (!((IListable) lm.getElementAt(i)).isSelectable()) {
                         list.removeSelectionInterval(i, i);
                     }
                 }
@@ -33,7 +30,7 @@ public class MyListSelectionListener implements ListSelectionListener{
         }
         catch(ClassCastException ex)
         {
-           //TODO transform in an object fashion
+           //Should never happen if we do not use this class elsewhere (class is default access)
         }
 
 

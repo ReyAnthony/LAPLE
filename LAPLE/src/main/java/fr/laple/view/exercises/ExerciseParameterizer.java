@@ -79,7 +79,6 @@ public class ExerciseParameterizer extends JPanel{
         questionMode.addItemListener(controller);
         symbolMode.addItemListener(controller);
 
-
     }
 
     public JComboBox<SymbolContainer> getSymbolMode() {

@@ -1,7 +1,7 @@
 package fr.laple.extensions.languages.japanese;
 
 
-import fr.laple.controller.lessons.IListable;
+import fr.laple.model.IListable;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.model.lessons.*;
 

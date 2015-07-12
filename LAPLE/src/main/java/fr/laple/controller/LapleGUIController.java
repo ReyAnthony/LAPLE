@@ -25,10 +25,8 @@ public class LapleGUIController {
         view.addWindowListener(new WindowController(view));
         JTabbedPane ui = view.getUIPane();
 
-        view.getUIPane().add("Home Page", new MainPanel());
-
+        ui.add("Home Page", new MainPanel());
         ui.add("Lessons",  new ListView(model, model.getLessonContainers(), false));
-
         ui.add("Exercises", new ExerciseParameterizer(model));
         ui.add("Statistics", null);
         ui.add("User settings", null);

@@ -12,11 +12,6 @@ import fr.laple.view.exercises.AbstractExerciseView;
  */
 public class DrawingMode extends AbstractAnswerMode {
 
-    //todo add right view
-    //TODO need less coupling with neural Solver (specific japanese)
-    //TODO put this one as japanese only and make people do their own impl?
-    //put drawing mode in japanese folder ?
-
     @Override
     public IExerciseSolver getSolver() {
         return new NeuralExerciseSolver();

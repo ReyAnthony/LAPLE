@@ -13,24 +13,27 @@ import javax.swing.*;
  */
 public class Main {
 
+    //TODO Creer et affecter la vue à l'onglet, puis creer le controlleur qui prendra une instance de la vue
+    //TODO la vue qui crée le controlleur, c'est pas extra
+
     public static void main(String[] args) {
 
         try {
-            // Set cross-platform Java L&F (also called "Metal")
+
             UIManager.setLookAndFeel(
                     UIManager.getCrossPlatformLookAndFeelClassName());
         }
         catch (UnsupportedLookAndFeelException e) {
-            // handle exception
+            //TODO exception
         }
         catch (ClassNotFoundException e) {
-            // handle exception
+            //TODO exception
         }
         catch (InstantiationException e) {
-            // handle exception
+            //TODO exception
         }
         catch (IllegalAccessException e) {
-            // handle exception
+            //TODO exception
         }
 
         Runnable runnable = () -> {

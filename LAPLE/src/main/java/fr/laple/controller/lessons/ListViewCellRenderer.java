@@ -1,6 +1,6 @@
 package fr.laple.controller.lessons;
 
-import fr.laple.model.lessons.Lesson;
+import fr.laple.model.IListable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,11 +8,7 @@ import java.awt.*;
 /**
  * Created by anthonyrey on 10/07/2015.
  */
-public class ListViewCellRenderer extends JLabel implements ListCellRenderer {
-
-    //TODO must get classes that implements something like ILapleListable
-    //This interface would then get sure that the part is currently displayable (returning open for a lesson
-    //and true for anything else
+class ListViewCellRenderer extends JLabel implements ListCellRenderer {
 
     public ListViewCellRenderer()
     {
@@ -23,15 +19,11 @@ public class ListViewCellRenderer extends JLabel implements ListCellRenderer {
     public Component getListCellRendererComponent(JList list, Object value,
                                                   int index, boolean isSelected, boolean cellHasFocus) {
 
-        //TODO to get in object fashion
+        if(((IListable) value).isSelectable())
+            this.setEnabled(true);
+        else
+            this.setEnabled(false);
 
-        if(value instanceof Lesson)
-        {
-            if(((Lesson) value).isOpen())
-                this.setEnabled(true);
-            else
-                this.setEnabled(false);
-        }
 
         Color background;
 
@@ -42,7 +34,6 @@ public class ListViewCellRenderer extends JLabel implements ListCellRenderer {
             background = Color.BLUE;
 
         }
-
 
         setBackground(background);
 

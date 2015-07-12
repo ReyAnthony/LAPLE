@@ -1,6 +1,6 @@
 package fr.laple.model.lessons;
 
-import fr.laple.controller.lessons.IListable;
+import fr.laple.model.IListable;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.view.ListView;
 

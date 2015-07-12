@@ -89,6 +89,7 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
         AbstractExerciseView exView = answerMode.getCorrespondingView();
 
         //TODO BDD check
+        //TODO replace by bdd given data
 
         //Random test
 
@@ -105,6 +106,7 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
         AbstractExerciseController listener = answerMode.getAssociatedActionListener();
 
         //TODO must be generalized
+        //TODO maybe an helper class to work with tabs  ?
         JTabbedPane tabbedPane = (JTabbedPane) parameterizer.getParent();
         int selected = tabbedPane.getSelectedIndex();
 
