@@ -1,12 +1,15 @@
 package fr.laple.controller.lessons;
 
-import fr.laple.model.IListable;
+import fr.laple.model.listable.IListable;
 import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.model.listable.RootData;
 import fr.laple.view.ListView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.util.List;
 
 /**
@@ -15,11 +18,12 @@ import java.util.List;
  * @author anthonyrey
  */
 //TODO add validation when pressing enter key
-public class ListViewController implements ActionListener {
+public class ListViewController implements ActionListener, ComponentListener {
 
     private List<IListable> displayModel;
     private ListView view;
     private ILanguagePlugin model;
+    private RootData rootData;
 
     /**
      * This is the constructor to the ListViewController
@@ -28,12 +32,13 @@ public class ListViewController implements ActionListener {
      * @param displayModel The model to display in the List
      * @param view The associated listView
      */
-    public ListViewController(ILanguagePlugin model, List<IListable> displayModel, ListView view) {
+    public ListViewController(ILanguagePlugin model, List<IListable> displayModel, ListView view, RootData rootData) {
         this.displayModel = displayModel;
         this.view = view;
         this.model = model;
+        this.rootData = rootData;
         setList();
-
+        this.view.addComponentListener(this);
     }
 
     /**
@@ -70,7 +75,7 @@ public class ListViewController implements ActionListener {
             if (selectedValue == null)
                 JOptionPane.showMessageDialog(view, "You must select a value !");
              else
-                selectedValue.expectedBehavior(selectedValue, tabbedPane, model);
+                selectedValue.expectedBehavior(tabbedPane, model, rootData);
         } else
             goRootMenu();
 
@@ -82,14 +87,45 @@ public class ListViewController implements ActionListener {
      */
     private void goRootMenu()
     {
+        //TODO fix
         //Go back to the main frame
         JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
 
         int selected = tabbedPane.getSelectedIndex();
+        String name = tabbedPane.getTitleAt(selected);
+
         tabbedPane.remove(selected);
-        tabbedPane.insertTab("Lessons", null, new ListView(model, model.getLessonContainers(), false),
-                null, selected);
+        tabbedPane.insertTab(name, null, new ListView(model, rootData.getRootModel(), false,
+                rootData.getRootTitle(), rootData), null, selected);
         tabbedPane.setSelectedIndex(selected);
+    }
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+
+        if(displayModel.size() == 1)
+        {
+
+            JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
+            IListable listable = displayModel.get(0);
+            listable.oneInListPreAction();
+            listable.expectedBehavior(tabbedPane, model, rootData);
+        }
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+
     }
 }
 

@@ -1,7 +1,8 @@
 package fr.laple.model.lessons;
 
-import fr.laple.model.IListable;
 import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.model.listable.IListable;
+import fr.laple.model.listable.RootData;
 import fr.laple.view.ListView;
 
 import javax.swing.*;
@@ -35,13 +36,12 @@ public class LessonCategory implements IListable {
     }
 
     @Override
-    public void expectedBehavior(Object selectedValue, JTabbedPane tabbedPane, ILanguagePlugin model) {
+    public void expectedBehavior(JTabbedPane tabbedPane, ILanguagePlugin model, RootData rootData)  {
 
-        LessonCategory symbolLessonContainer = (LessonCategory) selectedValue;
         int selected = tabbedPane.getSelectedIndex();
         tabbedPane.remove(selected);
         //view = new ListView<>(symbolLessonContainer.getLessons(), true);
-        tabbedPane.insertTab("Lessons", null, new ListView(model, symbolLessonContainer.getLessons(), true),
+        tabbedPane.insertTab("Lessons", null, new ListView(model, this.getLessons(), true, "Select a Lesson :", rootData),
                 null, selected);
         tabbedPane.setSelectedIndex(selected);
     }

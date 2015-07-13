@@ -1,6 +1,6 @@
 package fr.laple.model.language;
 
-import fr.laple.model.IListable;
+import fr.laple.model.listable.IListable;
 import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
 

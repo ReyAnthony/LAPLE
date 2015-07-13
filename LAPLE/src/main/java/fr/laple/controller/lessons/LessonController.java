@@ -2,6 +2,7 @@ package fr.laple.controller.lessons;
 
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.lessons.Lesson;
+import fr.laple.model.listable.RootData;
 import fr.laple.view.lessons.LessonView;
 import fr.laple.view.ListView;
 
@@ -40,12 +41,15 @@ public class LessonController implements ActionListener {
         if(e.getSource().equals(view.getBackButton()))
         {
 
+            //TODO go root
             JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
             tabbedPane.setEnabled(true);
 
             int selected = tabbedPane.getSelectedIndex();
             tabbedPane.remove(selected);
-            tabbedPane.insertTab("Lessons", null, new ListView(model, model.getLessonContainers(), false),
+            tabbedPane.insertTab("Lessons", null, new ListView(model, model.getLessonContainers(),
+                            false, "Select a Lesson category :", new RootData(model.getLessonContainers(),
+                            "Select a Lesson category :" )),
                     null, selected);
             tabbedPane.setSelectedIndex(selected);
 

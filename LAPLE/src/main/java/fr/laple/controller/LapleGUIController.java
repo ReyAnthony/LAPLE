@@ -1,13 +1,17 @@
 package fr.laple.controller;
 
+import fr.laple.model.listable.IListable;
 import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.model.listable.RootData;
 import fr.laple.view.LapleGUI;
-import fr.laple.view.exercises.ExerciseParameterizer;
 import fr.laple.view.ListView;
+import fr.laple.view.exercises.ExerciseParameterizer;
 import fr.laple.view.staticpanels.AboutPanel;
 import fr.laple.view.staticpanels.MainPanel;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by anthonyrey on 06/06/2015.
@@ -26,8 +30,16 @@ public class LapleGUIController {
         JTabbedPane ui = view.getUIPane();
 
         ui.add("Home Page", new MainPanel());
-        ui.add("Lessons",  new ListView(model, model.getLessonContainers(), false));
-        ui.add("Exercises", new ExerciseParameterizer(model));
+        ui.add("Lessons",  new ListView(model, model.getLessonContainers(), false, "Select a Lesson category :",
+                new RootData(model.getLessonContainers(), "Select a Lesson category :")));
+
+        List<IListable> exoList = new ArrayList<>();
+        exoList.add(new ExerciseParameterizer(model));
+        exoList.add(new ExerciseParameterizer(model));
+        ui.add("Exercises", new ListView(model, exoList, false, "Select an exercise mode :", new RootData(exoList,
+                "Select an exercise mode :")));
+
+        //TODO add a list of tabs, we will add new tabs with plugins
         ui.add("Statistics", null);
         ui.add("User settings", null);
 

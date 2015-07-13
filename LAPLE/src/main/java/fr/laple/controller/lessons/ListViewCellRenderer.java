@@ -1,6 +1,6 @@
 package fr.laple.controller.lessons;
 
-import fr.laple.model.IListable;
+import fr.laple.model.listable.IListable;
 
 import javax.swing.*;
 import java.awt.*;

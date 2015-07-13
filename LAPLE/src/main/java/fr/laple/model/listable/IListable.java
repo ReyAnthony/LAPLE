@@ -1,4 +1,4 @@
-package fr.laple.model;
+package fr.laple.model.listable;
 
 import fr.laple.model.language.ILanguagePlugin;
 
@@ -9,10 +9,10 @@ import javax.swing.*;
  */
 public interface IListable {
 
+    public default void oneInListPreAction(){};
     public default boolean isSelectable()
     {
         return true;
     }
-    public void expectedBehavior(Object selectedValue,JTabbedPane tabbedPane, ILanguagePlugin model);
-
+    public void expectedBehavior(JTabbedPane tabbedPane, ILanguagePlugin model, RootData roodtData);
 }

@@ -5,6 +5,8 @@ import fr.laple.model.exercises.IExerciseMode;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.model.language.SymbolContainer;
+import fr.laple.model.listable.IListable;
+import fr.laple.model.listable.RootData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,13 +14,14 @@ import java.awt.*;
 /**
  * Created by anthonyrey on 02/06/2015.
  */
-public class ExerciseParameterizer extends JPanel{
+public class ExerciseParameterizer extends JPanel implements IListable{
 
     private JLabel questionModeMessage;
     private JLabel countMessage;
     private JLabel symbolModeMessage;
     private JComboBox<SymbolContainer> symbolMode;
     private JButton okButton;
+    private JButton backButton;
     private JComboBox<IExerciseMode> questionMode;
     private JComboBox<AbstractAnswerMode> answerMode;
     private JLabel answerModeMessage;
@@ -74,6 +77,10 @@ public class ExerciseParameterizer extends JPanel{
         okButton = new JButton("OK");
         this.add(okButton, gbc);
 
+        gbc.gridy = 18;
+        backButton = new JButton("Back");
+        this.add(backButton, gbc);
+
         ExerciseParameterizerController controller = new ExerciseParameterizerController(model, this);
         okButton.addActionListener(controller);
         questionMode.addItemListener(controller);
@@ -99,5 +106,35 @@ public class ExerciseParameterizer extends JPanel{
 
     public JSpinner getExerciseCountSelector() {
         return exerciseCountSelector;
+    }
+
+    public JButton getOkButton()
+    {
+        return okButton;
+    }
+
+    public JButton getBackButton()
+    {
+        return backButton;
+    }
+
+    @Override
+    public void expectedBehavior(JTabbedPane tabbedPane, ILanguagePlugin model, RootData rootData) {
+
+        int selected = tabbedPane.getSelectedIndex();
+        tabbedPane.remove(selected);
+        tabbedPane.insertTab("Exercises", null, this, null, selected);
+        tabbedPane.setSelectedIndex(selected);
+    }
+
+    @Override
+    public void oneInListPreAction()
+    {
+        getBackButton().setVisible(false);
+    }
+
+    public String toString()
+    {
+        return "Standard exercises";
     }
 }

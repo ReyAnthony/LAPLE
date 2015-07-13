@@ -1,7 +1,8 @@
 package fr.laple.model.lessons;
 
-import fr.laple.model.IListable;
 import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.model.listable.IListable;
+import fr.laple.model.listable.RootData;
 import fr.laple.view.ListView;
 
 import javax.swing.*;
@@ -42,13 +43,13 @@ public class WordLessonContainer extends AbstractLessonContainer implements ILis
     }
 
     @Override
-    public void expectedBehavior(Object selectedValue, JTabbedPane tabbedPane, ILanguagePlugin model) {
+    public void expectedBehavior(JTabbedPane tabbedPane, ILanguagePlugin model, RootData rootData) {
 
-        WordLessonContainer wordLessonContainer = (WordLessonContainer) selectedValue;
         int selected = tabbedPane.getSelectedIndex();
         tabbedPane.remove(selected);
         //view = new ListView<>(wordLessonContainer.getLessonCategories(), true);
-        tabbedPane.insertTab("Lessons", null, new ListView(model, wordLessonContainer.getLessonCategories(), true), null, selected);
+        tabbedPane.insertTab("Lessons", null, new ListView(model, this.getLessonCategories(), true,
+                "Select a Lesson category :", rootData), null, selected);
         tabbedPane.setSelectedIndex(selected);
 
     }

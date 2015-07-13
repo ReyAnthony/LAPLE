@@ -10,7 +10,6 @@ import java.util.ArrayList;
 /**
  * Created by anthonyrey on 01/06/2015.
  */
-//TODO in a better way (factory etc..)
 public class LanguageConfigFileParser {
 
     private ArrayList<PluginConfigObject> plugins;
@@ -48,8 +47,5 @@ public class LanguageConfigFileParser {
     {
         return plugins;
     }
-
-
-
 
 }

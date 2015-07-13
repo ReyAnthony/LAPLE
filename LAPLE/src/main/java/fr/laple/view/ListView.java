@@ -1,8 +1,9 @@
 package fr.laple.view;
 
-import fr.laple.model.IListable;
 import fr.laple.controller.lessons.ListViewController;
 import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.model.listable.IListable;
+import fr.laple.model.listable.RootData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,12 +18,13 @@ public class ListView extends JPanel {
     private JButton backButton;
 
     //display model is mandatory because you need to know what is to be shown
-    public ListView(ILanguagePlugin model, java.util.List<IListable> displayModel, boolean hasBackButton)
+    public ListView(ILanguagePlugin model, java.util.List<IListable> displayModel, boolean hasBackButton, String title,
+                   RootData rootData)
     {
 
         this.setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        JLabel message = new JLabel("Please select a lesson mode");
+        JLabel message = new JLabel(title);
 
         JPanel scrollPanel = new JPanel();
         scrollPanel.setLayout(new BorderLayout());
@@ -43,7 +45,7 @@ public class ListView extends JPanel {
         this.add(scroll, BorderLayout.CENTER);
         this.add(buttons, BorderLayout.PAGE_END);
 
-        ListViewController controller = new ListViewController(model, displayModel, this);
+        ListViewController controller = new ListViewController(model, displayModel, this, rootData);
         validationButton.addActionListener(controller);
         backButton.addActionListener(controller);
 

@@ -1,7 +1,7 @@
 package fr.laple.extensions.languages.japanese;
 
 
-import fr.laple.model.IListable;
+import fr.laple.model.listable.IListable;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.model.lessons.*;
 
@@ -109,7 +109,7 @@ public class LessonsJsonParser {
                     JsonObject listObject = list.getJsonObject(j);
                     String name = listObject.getString("name");
 
-                    lessons.add(new Lesson("Kanji  "+name, true, containerForFile.getSymbol(name)));
+                    lessons.add(new Lesson("Kanji : "+name, true, containerForFile.getSymbol(name)));
 
                 }
 
