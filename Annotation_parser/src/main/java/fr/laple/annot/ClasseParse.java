@@ -1,42 +1,22 @@
 package fr.laple.annot;
 
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 
 /**
- * A goal to generate code.
- *
- * @goal generate-doc
- * @phase package
+ * Created by zaafranigabriel on 13/07/2015.
  */
-@annot(title = "Test XML",nom = "class",observation = "permet de modifier les elements de la class")
-public class Test extends AbstractMojo {
-
-    /**
-     * @parameter alias="path"
-     * @required
-     */
-    private String path;
-
-
-
-
-    @annot(title = "calc", nom = "calculatrice", observation = "permet de calculer plus facilement")
-    public void calc() {
-
-    }
-
-    @annot(title = "name", nom = "fonction nom", observation = "permet de changer le nom")
-    public void name() {
+@annot(title = "name", nom = "fonction nom", observation = "permet de changer le nom")
+public class ClasseParse {
+    @annot(title = "Test XML",nom = "class",observation = "permet de modifier les elements de la class")
+    public void calc(){
 
     }
 
@@ -56,8 +36,8 @@ public class Test extends AbstractMojo {
                 return lanot;
             for (Method me : met) {
                 for (Annotation ann : me.getAnnotations()) {
-                        annot annots = (annot) ann;
-                        lanot.add(annots);
+                    annot annots = (annot) ann;
+                    lanot.add(annots);
                 }
             }
             return lanot;
@@ -65,7 +45,6 @@ public class Test extends AbstractMojo {
             return null;
         }
     }
-
     public BufferedImage getImage(){
         Rectangle screen = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
         BufferedImage capt = null;
@@ -77,41 +56,6 @@ public class Test extends AbstractMojo {
         }
         return capt;
     }
-
-    public static void Write(String nameFile,String content){
-        try {
-            Writer write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nameFile)));
-            write.write(content);
-            write.close();
-        }catch(IOException err){
-            System.out.println("err" + err.getMessage());
-        }
-    }
-    public File[] listeRepertoire(File path, LinkedList<String> allFiles){
-        File[] list = null;
-        try {
-            if (path.isDirectory()) {
-                list = path.listFiles();
-                if (list != null) {
-                    for (int i = 0; i < list.length; i++) {
-                        listeRepertoire(list[i], allFiles);
-                    }
-                } else {
-                    System.err.println(path + " : Erreur de lecture.");
-                }
-            } else {
-                String currentFilePath = path.getAbsolutePath();
-                System.out.println(currentFilePath);
-                allFiles.add(currentFilePath);
-            }
-        }catch(Exception e){
-
-        }finally {
-            return list;
-        }
-
-    }
-    // ajout de wak a finaliser
     public void walk( String path ) {
 
         File root = new File( path );
@@ -131,12 +75,12 @@ public class Test extends AbstractMojo {
                     System.out.println(f.getAbsoluteFile().toString());
                     String[] tableau =  f.getAbsoluteFile().toString().split("/");
 
-                   String fichier = tableau[tableau.length-1];
-                   System.out.println("Le fichier --> "+fichier);
+                    String fichier = tableau[tableau.length-1];
+                    System.out.println("Le fichier --> "+fichier);
                     Class fichierClass = fichier.getClass();
                     LinkedList<annot> listeAnnot= this.getAnnotClass(fichierClass);
                     if(listeAnnot==null){
-                            System.out.println("++++++ liste est NULL *****");
+                        System.out.println("++++++ liste est NULL *****");
                     }else{
                         String[] files = fichier.split(".class");
                         System.out.println("------> file without .class ---> "+files);
@@ -172,7 +116,6 @@ public class Test extends AbstractMojo {
 
         }
     }
-
     public void writeImage(String nameFile){
         BufferedImage img = this.getImage();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -186,20 +129,10 @@ public class Test extends AbstractMojo {
 
     }
 
-    public void execute() throws MojoExecutionException, MojoFailureException {
-        System.out.println("coucou");
-       // System.out.println(this.getClass().getResource("/target/classes/fr/laple/annot/annot.class").getPath());
-        System.out.println("------>"+this.getClass().getResource(""));
-
-        System.out.println("-------> "+path+" <------");
-        try {
-
-            Test test = new Test();
-            test.walk(path);
-            System.out.println("Execute FINISH ******************");
-        }catch(Exception e){
-            System.out.println("Erreur");
-        }
+    public static void main(String[] args){
+        String variable = "/Users/zaafranigabriel/Documents/Etudes/Etude/Java/Projet annuel/LAPLENewsProject2/LAPLE5/LAPLE/Annotation_parser/target/classes/fr/laple/annot/";
+        ClasseParse test = new ClasseParse();
+        test.walk(variable);
+        System.out.println("Execute FINISH ******************");
     }
-
 }
