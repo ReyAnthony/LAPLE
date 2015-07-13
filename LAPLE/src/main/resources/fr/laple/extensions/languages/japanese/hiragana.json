@@ -4,507 +4,277 @@
             "userLangTranscript": "a",
             "symbol": "あ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "i",
             "symbol": "い",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "u",
             "symbol": "う",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "e",
             "symbol": "え",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "o",
             "symbol": "お",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ka",
             "symbol": "か",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ki",
             "symbol": "き",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ku",
             "symbol": "く",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ke",
             "symbol": "け",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ko",
             "symbol": "こ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
 	   {
             "userLangTranscript": "sa",
             "symbol": "さ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "shi",
             "symbol": "し",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "su",
             "symbol": "す",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "se",
             "symbol": "せ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "so",
             "symbol": "そ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ta",
             "symbol": "た",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "chi",
             "symbol": "ち",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "tsu",
             "symbol": "つ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "te",
             "symbol": "て",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "to",
             "symbol": "と",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"   
         },
         {
             "userLangTranscript": "na",
             "symbol": "な",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ni",
             "symbol": "に",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "nu",
             "symbol": "ぬ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"    
         },
         {
             "userLangTranscript": "ne",
             "symbol": "ね",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "no",
             "symbol": "の",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ha",
             "symbol": "は",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "hi",
             "symbol": "ひ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "fu",
             "symbol": "ふ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "he",
             "symbol": "へ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ho",
             "symbol": "ほ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ma",
             "symbol": "ま",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "mi",
             "symbol": "み",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "mu",
             "symbol": "む",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "me",
             "symbol": "め",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "mo",
             "symbol": "も",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ya",
             "symbol": "や",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "yu",
             "symbol": "ゆ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "yo",
             "symbol": "よ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ra",
             "symbol": "ら",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ri",
             "symbol": "り",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ru",
             "symbol": "る",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "re",
             "symbol": "れ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "ro",
             "symbol": "ろ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "wa",
             "symbol": "わ",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "wo",
             "symbol": "を",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         },
         {
             "userLangTranscript": "n",
             "symbol": "ん",
             "symbolImage": "null",
-            "animatedImage": "null",
-            "soundFile": "null",
-            "composition": [
-                "null",
-                "null"
-            ]
+            "animatedImage": "null"
         }
     ]
 }

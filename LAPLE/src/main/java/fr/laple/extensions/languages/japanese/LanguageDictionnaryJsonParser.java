@@ -8,7 +8,6 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.sound.sampled.*;
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -37,17 +36,17 @@ public class LanguageDictionnaryJsonParser {
                 JsonObject current = root.getJsonObject(i);
                 String userLangTranscript = current .getString("userLangTranscript");
                 String gottenSymbol = current.getString("symbol");
-                Clip sound = loadSound(current.getString("soundFile"));
-                //need the others one
+                Clip sound = loadSound
+                        ("/fr/laple/extensions/languages/japanese/sounds/"
+                                        + userLangTranscript + ".wav");
 
-                Symbol symbol = new Symbol(userLangTranscript, gottenSymbol, null, null, sound , null);
+                Symbol symbol = new Symbol(userLangTranscript, gottenSymbol, null, null, sound, null);
                 container.addSymbol(symbol);
             }
             if(container.getSize() < 4)
             {
                 throw new ParserException("Dico < 4");
             }
-
 
         }
         catch(Exception e)
@@ -58,28 +57,25 @@ public class LanguageDictionnaryJsonParser {
         return container;
     }
 
-    private Clip loadSound(String path) throws ParserException {
+    private Clip loadSound(String file) throws ParserException {
 
-        path = "/a.wav";
-        try(InputStream file = getClass().getResourceAsStream(path)){
+        try {
+            Clip sound = AudioSystem.getClip();
+            sound.open(AudioSystem.getAudioInputStream(
+                    getClass().getResource(file)));
 
-            BufferedInputStream bis = new BufferedInputStream(file);
-
-            AudioInputStream ais = AudioSystem.getAudioInputStream(bis);
-            DataLine.Info info = new DataLine.Info(Clip.class, ais.getFormat());
-            Clip clip = (Clip) AudioSystem.getLine(info);
-            clip.open(ais);
-            clip.addLineListener(event -> {
+            sound.addLineListener(event -> {
                 if (event.getType() == LineEvent.Type.STOP)
                     //tweak not to reload the stream
-                    clip.stop();
-                    clip.setMicrosecondPosition(0);
+                    sound.stop();
+                sound.setMicrosecondPosition(0);
             });
 
-            return clip;
+            return sound;
+        }
+        catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
 
-        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
-            throw new ParserException(e.getMessage());
+            throw new ParserException("Error while loading sound");
         }
     }
 
