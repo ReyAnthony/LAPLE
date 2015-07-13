@@ -18,6 +18,14 @@ import java.util.LinkedList;
 @annot(title = "Test XML",nom = "class",observation = "permet de modifier les elements de la class")
 public class Test extends AbstractMojo {
 
+    /**
+     * @parameter alias="path"
+     * @required
+     */
+    private String path;
+
+
+
     @annot(title = "calc", nom = "calculatrice", observation = "permet de calculer plus facilement")
     public void calc() {
 
@@ -169,73 +177,14 @@ public class Test extends AbstractMojo {
     }
 
     public static void main(String[] args) {
-       /*
-        try {
-            Class aClass =  Test.class;
-            Annotation[] annot = aClass.getAnnotations();
-            for (Annotation an : annot) {
-                annot annots = (annot) an;
-                System.out.println("---->" + annots.title() + "---->" + annots.nom() + "---->" + annots.observation());
-            }
-            Method[] met = aClass.getMethods();
-            for(Method mets : met){
-               Annotation[] ann = mets.getAnnotations();
-                for(Annotation anns : ann){
-                    annot anot = (annot) anns;
-                    System.out.println("function ---->"+anot.title()+"---->"+anot.nom()+"--->"+anot.observation());
-                }
-            }
-        } catch (Exception e) {
 
-        }
-    *//*
-        Test te = new Test();
-        BufferedImage img = te.getImage();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try{
-            File outputfile = new File("/Users/zaafranigabriel/Documents/Java/Serializable/saved.png");
-
-            ImageIO.write(img, "jpg", outputfile);
-        }catch(IOException e){
-
-        }
-        byte[] bytes = baos.toByteArray();
-        // welcome Anthony
-        LinkedList<annot> lista = te.getAnnotClass(Test.class);
-        for (annot annotation : lista) {
-            System.out.println("--> " + annotation.nom() + "-->" + annotation.title() + "---->" + annotation.observation());
-        }
-        String valuesXml = "<?xml version='1.0' encoding = 'UTF-8'?>";
-        valuesXml += "<?xml-stylesheet type='text/xsl' href='fichier2.xsl'?>";
-        valuesXml += "<Parameters>";
-        try {
-            for (annot annote : lista) {
-                valuesXml += "<Doc>";
-                valuesXml += "<Etape>" + annote.title() + "</Etape>";
-                valuesXml += "<Name>" + annote.nom() + "</Name>";
-                valuesXml += "<Description>" + annote.observation() + "</Description>";
-                valuesXml += "</Doc>";
-            }
-            valuesXml+="<image>";
-            valuesXml+="/Users/zaafranigabriel/Documents/Java/Serializable/saved.png";
-            valuesXml+="</image>";
-            valuesXml+="</Parameters>";
-
-            valuesXml = valuesXml.replace("'","\"");
-            Test.Write("/Users/zaafranigabriel/Documents/Etudes/fichier.xml",valuesXml);
-        }catch(Exception e){
-
-        }
-
-    */
 
     }
 
     public void execute() throws MojoExecutionException, MojoFailureException {
         try {
             Test test = new Test();
-            test.walk("/Users/zaafranigabriel/Documents/Etudes/Etude/Java/Projet annuel/LAPLENewsProject2/" +
-                    "LAPLE5/LAPLE/Annotation_parser/src");
+            test.walk(this.path);
             System.out.println("Test");
         }catch(Exception e){
             System.out.println("Erreur");
