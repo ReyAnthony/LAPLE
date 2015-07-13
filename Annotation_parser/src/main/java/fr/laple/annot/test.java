@@ -1,5 +1,9 @@
 package fr.laple.annot;
 
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,8 +15,8 @@ import java.util.LinkedList;
 /**
  * Created by zaafranigabriel on 25/06/2015.
  */
-@annot(title = "test XML",nom = "class",observation = "permet de modifier les elements de la class")
-public class test {
+@annot(title = "Test XML",nom = "class",observation = "permet de modifier les elements de la class")
+public class Test extends AbstractMojo {
 
     @annot(title = "calc", nom = "calculatrice", observation = "permet de calculer plus facilement")
     public void calc() {
@@ -68,7 +72,7 @@ public class test {
             write.write(content);
             write.close();
         }catch(IOException err){
-            System.out.println("err"+err.getMessage());
+            System.out.println("err" + err.getMessage());
         }
     }
     public File[] listeRepertoire(File path, LinkedList<String> allFiles){
@@ -109,23 +113,65 @@ public class test {
                 System.out.println( "Dir:" + f.getAbsoluteFile() );
             }
             else {
-                if(f.getAbsoluteFile().toString().contains(".java")){
+                if(f.getAbsoluteFile().toString().contains(".class")){
                    String[] tableau =  f.getAbsoluteFile().toString().split("/");
                    String fichier = tableau[tableau.length];
                    Class fichierClass = fichier.getClass();
-                    //if(this.getAnnotClass()){
+                    LinkedList<annot> listeAnnot= this.getAnnotClass(fichierClass);
+                    if(listeAnnot==null){
 
-                   //}
+                    }else{
+                        String[] files = fichier.split(".java");
+                        this.writeXmlXSL(files[0],listeAnnot);
+                        this.writeImage(files[0]);
+                    }
                 }
                 System.out.println( "File:" + f.getAbsoluteFile() );
             }
         }
     }
 
+    public void writeXmlXSL(String nameFIle,LinkedList<annot> listeAnnot){
+        String valuesXml = "<?xml version='1.0' encoding = 'UTF-8'?>";
+        valuesXml += "<?xml-stylesheet type='text/xsl' href='fichier2.xsl'?>";
+        valuesXml += "<Parameters>";
+        try {
+            for (annot annote : listeAnnot) {
+                valuesXml += "<Doc>";
+                valuesXml += "<Etape>" + annote.title() + "</Etape>";
+                valuesXml += "<Name>" + annote.nom() + "</Name>";
+                valuesXml += "<Description>" + annote.observation() + "</Description>";
+                valuesXml += "</Doc>";
+            }
+            valuesXml+="<image>";
+            valuesXml+="/Users/zaafranigabriel/Documents/Java/Serializable/"+nameFIle+".png";
+            valuesXml+="</image>";
+            valuesXml+="</Parameters>";
+
+            valuesXml = valuesXml.replace("'","\"");
+            Test.Write("/Users/zaafranigabriel/Documents/Etudes/" + nameFIle + ".xml", valuesXml);
+        }catch(Exception e){
+
+        }
+    }
+
+    public void writeImage(String nameFile){
+        BufferedImage img = this.getImage();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try{
+            File outputfile = new File("/Users/zaafranigabriel/Documents/Java/Serializable/"+nameFile+".jpg");
+
+            ImageIO.write(img, "jpg", outputfile);
+        }catch(IOException e){
+
+        }
+
+    }
+
     public static void main(String[] args) {
        /*
         try {
-            Class aClass =  test.class;
+            Class aClass =  Test.class;
             Annotation[] annot = aClass.getAnnotations();
             for (Annotation an : annot) {
                 annot annots = (annot) an;
@@ -142,8 +188,8 @@ public class test {
         } catch (Exception e) {
 
         }
-    */
-        test te = new test();
+    *//*
+        Test te = new Test();
         BufferedImage img = te.getImage();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try{
@@ -155,7 +201,7 @@ public class test {
         }
         byte[] bytes = baos.toByteArray();
         // welcome Anthony
-        LinkedList<annot> lista = te.getAnnotClass(test.class);
+        LinkedList<annot> lista = te.getAnnotClass(Test.class);
         for (annot annotation : lista) {
             System.out.println("--> " + annotation.nom() + "-->" + annotation.title() + "---->" + annotation.observation());
         }
@@ -176,11 +222,23 @@ public class test {
             valuesXml+="</Parameters>";
 
             valuesXml = valuesXml.replace("'","\"");
-            test.Write("/Users/zaafranigabriel/Documents/Etudes/fichier.xml",valuesXml);
+            Test.Write("/Users/zaafranigabriel/Documents/Etudes/fichier.xml",valuesXml);
         }catch(Exception e){
 
         }
 
+    */
 
+    }
+
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        try {
+            Test test = new Test();
+            test.walk("/Users/zaafranigabriel/Documents/Etudes/Etude/Java/Projet annuel/LAPLENewsProject2/" +
+                    "LAPLE5/LAPLE/Annotation_parser/src");
+            System.out.println("Test");
+        }catch(Exception e){
+            System.out.println("Erreur");
+        }
     }
 }
