@@ -4,7 +4,9 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -14,12 +16,49 @@ public class LanguageConfigFileParser {
 
     private ArrayList<PluginConfigObject> plugins;
 
+    private static final String USER_PATH =  System.getProperty("user.home")+"/.laple";
+    private static final String RESOURCE_PATH = "/fr/laple/extensions/languages/";
+    private static final String USER_PATH_NOFILE = USER_PATH+RESOURCE_PATH;
+    private static final String CONFIG_FILE = "language_plugins.json";
+    private static final String FULL_USER_PATH = USER_PATH+ RESOURCE_PATH + CONFIG_FILE;
+    private static final String FUll_JAR_PATH =  RESOURCE_PATH + CONFIG_FILE;
+
     public LanguageConfigFileParser() throws LangPluginLoadingException {
 
+        try{
+
+            createFileIfNotExist();
+        }catch (IOException e)
+        {
+            e.printStackTrace();
+            throw new LangPluginLoadingException();
+        }
+
+        parseFiles();
+
+    }
+
+    private void createFileIfNotExist() throws IOException, LangPluginLoadingException {
+
+        File f = new File(FULL_USER_PATH);
+        if(!f.exists())
+        {
+            boolean success = new File(USER_PATH_NOFILE).mkdirs();
+
+            if(!success)
+                throw new LangPluginLoadingException();
+
+            Files.copy(Paths.get(this.getClass().getResource(FUll_JAR_PATH).getPath()),
+                    new FileOutputStream(FULL_USER_PATH));
+
+        }
+    }
+
+    private void parseFiles() throws LangPluginLoadingException {
         try {
             plugins = new ArrayList<>();
 
-            InputStream configFile = getClass().getResourceAsStream("/fr/laple/extensions/languages/language_plugins.json");
+            InputStream configFile = new FileInputStream(FULL_USER_PATH);
             JsonReader jsonReader = Json.createReader(configFile);
             JsonObject jsonObject = jsonReader.readObject();
             jsonReader.close();
@@ -39,8 +78,10 @@ public class LanguageConfigFileParser {
         }
         catch(Exception e)
         {
+            e.printStackTrace();
             throw new LangPluginLoadingException();
         }
+
 
     }
     public ArrayList<PluginConfigObject> getLanguagePluginsList()

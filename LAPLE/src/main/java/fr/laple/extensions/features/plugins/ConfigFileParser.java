@@ -20,8 +20,8 @@ public class ConfigFileParser {
     private static final String RESOURCE_PATH = "/fr/laple/extensions/features/";
     private static final String USER_PATH_NOFILE = USER_PATH+RESOURCE_PATH;
     private static final String CONFIG_FILE = "feature_plugins.json";
-    private static final String FUll_USER_PATH = USER_PATH+ RESOURCE_PATH + CONFIG_FILE;
-    private static final String FUll_JAR_PATH =  RESOURCE_PATH + CONFIG_FILE;
+    private static final String FULL_USER_PATH = USER_PATH+ RESOURCE_PATH + CONFIG_FILE;
+    private static final String FULL_JAR_PATH =  RESOURCE_PATH + CONFIG_FILE;
 
     public ConfigFileParser() throws FeaturePluginLoadingException {
 
@@ -37,16 +37,19 @@ public class ConfigFileParser {
 
     }
 
-    private void createFileIfNotExist() throws IOException {
+    private void createFileIfNotExist() throws IOException, FeaturePluginLoadingException {
 
-        File f = new File(FUll_USER_PATH);
+        File f = new File(FULL_USER_PATH);
         if(!f.exists())
         {
-           if (new File(USER_PATH_NOFILE).mkdirs())
-           {
-               Files.copy(Paths.get(this.getClass().getResource(FUll_JAR_PATH).getPath()) ,
-                       new FileOutputStream(FUll_USER_PATH));
-           }
+           boolean success = new File(USER_PATH_NOFILE).mkdirs();
+
+            if(!success)
+                throw new FeaturePluginLoadingException();
+
+            Files.copy(Paths.get(this.getClass().getResource(FULL_JAR_PATH).getPath()) ,
+                       new FileOutputStream(FULL_USER_PATH));
+
         }
     }
 
@@ -55,7 +58,7 @@ public class ConfigFileParser {
         try {
             plugins = new ArrayList<>();
 
-            InputStream configFile = new FileInputStream(FUll_USER_PATH);
+            InputStream configFile = new FileInputStream(FULL_USER_PATH);
 
             JsonReader jsonReader = Json.createReader(configFile);
             JsonObject jsonObject = jsonReader.readObject();
