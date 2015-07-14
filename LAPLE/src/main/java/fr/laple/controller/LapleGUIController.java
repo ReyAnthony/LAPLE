@@ -29,12 +29,13 @@ public class LapleGUIController {
         ui.add("Lessons",  new ListView(model, model.getLessonContainers(), false, "Select a Lesson category :",
                 new RootData(model.getLessonContainers(), "Select a Lesson category :")));
 
+        //get Exercise type take into account modes added by plugins
         ui.add("Exercises", new ListView(model, model.getExerciseTypes(), false, "Select an exercise mode :",
                 new RootData(model.getExerciseTypes(), "Select an exercise mode :")));
 
+        //add tabs from plugins
         model.addNewTabs(ui);
 
-        //TODO add a list of tabs, we will add new tabs with plugins
         ui.add("Statistics", null);
         ui.add("User settings", null);
 

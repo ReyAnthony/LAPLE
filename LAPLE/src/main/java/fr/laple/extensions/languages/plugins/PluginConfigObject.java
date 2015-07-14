@@ -1,5 +1,6 @@
 package fr.laple.extensions.languages.plugins;
 
+import fr.laple.extensions.PluginLoadingException;
 import fr.laple.extensions.languages.japanese.ParserException;
 
 import java.io.File;
