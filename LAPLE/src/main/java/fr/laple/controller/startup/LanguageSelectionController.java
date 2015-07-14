@@ -78,7 +78,7 @@ public class LanguageSelectionController implements ActionListener {
             {
                 if(pco.getName().equals(selected)) {
                     ILanguagePlugin plugin = (ILanguagePlugin) pco.getPlugin().newInstance();
-                    //TODO LOAD plugins according to file
+                    //TODO LOAD lang plugins
 
                     /*
                         The code here is a bit tricky :

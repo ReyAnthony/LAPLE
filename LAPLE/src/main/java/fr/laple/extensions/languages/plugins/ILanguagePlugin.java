@@ -19,6 +19,9 @@ public interface ILanguagePlugin {
 
     public ArrayList<SymbolContainer> getSymbolContainer();
     public String getVersion();
+    public String getName();
+    public String getDescription();
+    public String getDeveloper();
     public ArrayList<IExerciseMode> getExercisesModes() ;
     public ArrayList<AbstractAnswerMode> getExercisesSolvingModes();
     public ArrayList<IListable> getLessonContainers();

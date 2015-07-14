@@ -16,5 +16,7 @@ public interface IFeaturePlugin {
     public void addNewTabs(JTabbedPane ui, LapleDataModel model);
     public String getName();
     public String getDescription();
+    public String getDeveloper();
+    public String getVersion();
 
 }

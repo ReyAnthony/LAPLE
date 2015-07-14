@@ -36,4 +36,14 @@ public class SpaceLettersPlugin implements IFeaturePlugin {
     public String getDescription() {
         return "A game small \"space invader\" like game for LAPLE";
     }
+
+    @Override
+    public String getDeveloper() {
+        return "Anthony REY";
+    }
+
+    @Override
+    public String getVersion() {
+        return "14.06.15.b1";
+    }
 }

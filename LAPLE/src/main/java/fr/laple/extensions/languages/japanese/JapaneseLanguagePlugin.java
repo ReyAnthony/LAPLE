@@ -45,6 +45,21 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
     }
 
     @Override
+    public String getName() {
+        return "Japanese";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Japanese language plugin";
+    }
+
+    @Override
+    public String getDeveloper() {
+        return "Anthony REY";
+    }
+
+    @Override
     public ArrayList<IExerciseMode> getExercisesModes() {
         return exerciseModes;
     }
