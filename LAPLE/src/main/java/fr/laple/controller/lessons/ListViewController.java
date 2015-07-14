@@ -87,8 +87,6 @@ public class ListViewController implements ActionListener, ComponentListener {
      */
     private void goRootMenu()
     {
-        //TODO fix
-        //Go back to the main frame
         JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
 
         int selected = tabbedPane.getSelectedIndex();

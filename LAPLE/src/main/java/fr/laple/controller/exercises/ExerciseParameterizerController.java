@@ -82,43 +82,54 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        SymbolContainer sc = (SymbolContainer) parameterizer.getSymbolMode().getSelectedItem();
-        IExerciseMode mode = (IExerciseMode) parameterizer.getQuestionMode().getSelectedItem();
-        AbstractAnswerMode answerMode = (AbstractAnswerMode) parameterizer.getAnswerMode().getSelectedItem();
-        IExerciseSolver solver =  answerMode.getSolver();
-        AbstractExerciseView exView = answerMode.getCorrespondingView();
-
-        //TODO BDD check
-        //TODO replace by bdd given data
-
-        //Random test
-
-        ArrayList<Symbol> sym = new ArrayList<>(sc.getSymbolMap().values());
-        Collections.shuffle(sym);
-        LinkedList<Exercise> exercises = new LinkedList<>();
-
-        for(int i = 0; i < parameterizer.getExerciseCount(); i++)
+        if(e.getSource().equals(this.parameterizer.getOkButton()))
         {
-            Exercise ex = new Exercise( sym.get(i) , mode, solver, sc);
-            exercises.push(ex);
+            SymbolContainer sc = (SymbolContainer) parameterizer.getSymbolMode().getSelectedItem();
+            IExerciseMode mode = (IExerciseMode) parameterizer.getQuestionMode().getSelectedItem();
+            AbstractAnswerMode answerMode = (AbstractAnswerMode) parameterizer.getAnswerMode().getSelectedItem();
+            IExerciseSolver solver =  answerMode.getSolver();
+            AbstractExerciseView exView = answerMode.getCorrespondingView();
+
+            //TODO BDD check
+            //TODO replace by bdd given data
+
+            //Random test
+
+            ArrayList<Symbol> sym = new ArrayList<>(sc.getSymbolMap().values());
+            Collections.shuffle(sym);
+            LinkedList<Exercise> exercises = new LinkedList<>();
+
+            for(int i = 0; i < parameterizer.getExerciseCount(); i++)
+            {
+                Exercise ex = new Exercise( sym.get(i) , mode, solver, sc);
+                exercises.push(ex);
+            }
+
+            AbstractExerciseController listener = answerMode.getAssociatedActionListener();
+
+            //TODO must be generalized
+            //TODO maybe an helper class to work with tabs  ?
+            JTabbedPane tabbedPane = (JTabbedPane) parameterizer.getParent();
+            int selected = tabbedPane.getSelectedIndex();
+
+            tabbedPane.remove(selected);
+            tabbedPane.insertTab("Exercises", null, exView, null, selected);
+            tabbedPane.setSelectedIndex(selected);
+            exView.addActionListener(listener);
+
+            listener.addExercises(exercises);
+            listener.setSymbolContainer(sc);
+            listener.init(exView);
+            listener.addModel(model);
+
+
+        }
+        else if(e.getActionCommand().equals(parameterizer.getBackButton()))
+        {
+
+
         }
 
-        AbstractExerciseController listener = answerMode.getAssociatedActionListener();
-
-        //TODO must be generalized
-        //TODO maybe an helper class to work with tabs  ?
-        JTabbedPane tabbedPane = (JTabbedPane) parameterizer.getParent();
-        int selected = tabbedPane.getSelectedIndex();
-
-        tabbedPane.remove(selected);
-        tabbedPane.insertTab("Exercises", null, exView, null, selected);
-        tabbedPane.setSelectedIndex(selected);
-        exView.addActionListener(listener);
-
-        listener.addExercises(exercises);
-        listener.setSymbolContainer(sc);
-        listener.init(exView);
-        listener.addModel(model);
     }
 
     @Override

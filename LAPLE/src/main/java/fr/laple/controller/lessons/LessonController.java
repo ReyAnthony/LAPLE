@@ -41,7 +41,6 @@ public class LessonController implements ActionListener {
         if(e.getSource().equals(view.getBackButton()))
         {
 
-            //TODO go root
             JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
             tabbedPane.setEnabled(true);
 

@@ -35,7 +35,7 @@ public class LapleGUIController {
 
         List<IListable> exoList = new ArrayList<>();
         exoList.add(new ExerciseParameterizer(model));
-        exoList.add(new ExerciseParameterizer(model));
+        //exoList.add(new ExerciseParameterizer(model));
         ui.add("Exercises", new ListView(model, exoList, false, "Select an exercise mode :", new RootData(exoList,
                 "Select an exercise mode :")));
 
