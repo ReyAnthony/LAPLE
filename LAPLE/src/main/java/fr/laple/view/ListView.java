@@ -18,13 +18,13 @@ public class ListView extends JPanel {
     private JButton backButton;
 
     //display model is mandatory because you need to know what is to be shown
-    public ListView(LapleDataModel model, java.util.List<IListable> displayModel, boolean hasBackButton, String title,
+    public ListView(LapleDataModel model, java.util.List<IListable> displayModel, boolean hasBackButton,
                    RootData rootData)
     {
 
         this.setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        JLabel message = new JLabel(title);
+        JLabel message = new JLabel(rootData.getRootTitle());
 
         JPanel scrollPanel = new JPanel();
         scrollPanel.setLayout(new BorderLayout());

@@ -88,8 +88,7 @@ public class ListViewController implements ActionListener, ComponentListener {
     private void goRootMenu()
     {
         JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
-        TabTools.swapTab(tabbedPane, new ListView(model, rootData.getRootModel(), false,
-                rootData.getRootTitle(), rootData) );
+        TabTools.swapTab(tabbedPane, new ListView(model, rootData.getRootModel(), false, rootData) );
     }
 
     @Override

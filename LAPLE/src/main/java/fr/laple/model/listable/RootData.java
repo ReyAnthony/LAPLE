@@ -9,6 +9,7 @@ public class RootData {
 
     private List<IListable> rootModel;
     private String rootTitle;
+    private String rootListTitle;
 
 
     public RootData(List<IListable> rootModel, String rootTitle) {

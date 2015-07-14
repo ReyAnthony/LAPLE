@@ -125,7 +125,7 @@ public abstract class AbstractExerciseController implements ActionListener {
     {
 
         JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
-        TabTools.swapTab(tabbedPane,  new ListView(model, rootData.getRootModel(), false, "Select an exercise mode :",
+        TabTools.swapTab(tabbedPane,  new ListView(model, rootData.getRootModel(), false,
                 rootData));
         tabbedPane.setEnabled(true);
 

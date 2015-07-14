@@ -45,7 +45,7 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
 
         if(e.getSource().equals(view.getBack()))
         {
-            TabTools.swapTab(tabbedPane, new ListView(model, rootData.getRootModel(), false, "Select a setting page :",
+            TabTools.swapTab(tabbedPane, new ListView(model, rootData.getRootModel(), false,
                     rootData));
         }
     }

@@ -39,7 +39,7 @@ public class LessonCategory implements IListable {
     @Override
     public void expectedBehavior(JTabbedPane tabbedPane, LapleDataModel model, RootData rootData)  {
 
-        TabTools.swapTab(tabbedPane, new ListView(model, this.getLessons(), true, "Select a Lesson :",
+        TabTools.swapTab(tabbedPane, new ListView(model, this.getLessons(), true,
                 rootData) );
     }
 }

@@ -47,7 +47,7 @@ public class SymbolLessonContainer extends AbstractLessonContainer implements IL
     @Override
     public void expectedBehavior(JTabbedPane tabbedPane, LapleDataModel model, RootData rootData)  {
 
-        TabTools.swapTab(tabbedPane, new ListView(model, this.getLessons(), true, "Select a Lesson :",
+        TabTools.swapTab(tabbedPane, new ListView(model, this.getLessons(), true,
                 rootData));
     }
 }

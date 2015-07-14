@@ -30,11 +30,11 @@ public class LapleGUIController {
         JTabbedPane ui = view.getUIPane();
 
         ui.add("Home Page", new MainPanel());
-        ui.add("Lessons",  new ListView(model, model.getLessonContainers(), false, "Select a Lesson category :",
+        ui.add("Lessons",  new ListView(model, model.getLessonContainers(), false,
                 new RootData(model.getLessonContainers(), "Select a Lesson category :")));
 
-        //get Exercise type take into account modes added by plugins
-        ui.add("Exercises", new ListView(model, model.getExerciseTypes(), false, "Select an exercise mode :",
+        //get Exercise type take into account modes added by plugins",
+                ui.add("Exercises", new ListView(model, model.getExerciseTypes(), false,
                 new RootData(model.getExerciseTypes(), "Select an exercise mode :")));
 
         //add tabs from plugins
@@ -47,7 +47,7 @@ public class LapleGUIController {
         PluginConfigController pcc = new PluginConfigController();
         settings.add(pcc);
 
-        ui.add("User settings", new ListView(model, settings, false, "Select a settings page :",
+        ui.add("User settings", new ListView(model, settings, false,
                 new RootData(settings, "Select a settings page :")));
 
         AboutPanel aboutPanel = new AboutPanel();

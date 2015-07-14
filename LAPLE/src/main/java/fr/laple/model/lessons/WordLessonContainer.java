@@ -46,8 +46,7 @@ public class WordLessonContainer extends AbstractLessonContainer implements ILis
     @Override
     public void expectedBehavior(JTabbedPane tabbedPane, LapleDataModel model, RootData rootData) {
 
-        TabTools.swapTab(tabbedPane, new ListView(model, this.getLessonCategories(), true,
-                "Select a Lesson category :", rootData));
+        TabTools.swapTab(tabbedPane, new ListView(model, this.getLessonCategories(), true, rootData));
 
     }
 }
