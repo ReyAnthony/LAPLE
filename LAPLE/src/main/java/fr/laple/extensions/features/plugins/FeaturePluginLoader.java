@@ -1,6 +1,5 @@
 package fr.laple.extensions.features.plugins;
 
-import javax.swing.*;
 import java.io.File;
 import java.net.JarURLConnection;
 import java.net.URL;
@@ -17,16 +16,15 @@ public class FeaturePluginLoader {
     private List<IFeaturePlugin> featurePlugin;
 
     public FeaturePluginLoader() throws FeaturePluginLoadingException {
-        //TODO test
-        JFileChooser chooser = new JFileChooser();
-        featurePlugin = new ArrayList<>();
 
-        chooser.showOpenDialog(null);
+        featurePlugin = new ArrayList<IFeaturePlugin>();
 
-        File chosen = chooser.getSelectedFile();
-        loadPlugin(chosen);
+        ConfigFileParser cfp = new ConfigFileParser();
 
-
+        for(File f : cfp.getFiles())
+        {
+            loadPlugin(f);
+        }
     }
 
     private void loadPlugin(File chosen) throws FeaturePluginLoadingException
@@ -40,6 +38,8 @@ public class FeaturePluginLoader {
             featurePlugin.add((IFeaturePlugin) clazz.newInstance());
 
         } catch (Exception e) {
+
+            e.printStackTrace();
             throw new FeaturePluginLoadingException();
             //Those are not fatal, we just ignore the plugin and send a message
         }

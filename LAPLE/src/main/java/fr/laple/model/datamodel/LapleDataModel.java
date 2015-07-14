@@ -68,4 +68,5 @@ public class LapleDataModel {
             fp.addNewTabs(ui, this);
         }
     }
+
 }

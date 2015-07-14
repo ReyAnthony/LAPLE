@@ -88,6 +88,8 @@ public class LanguageSelectionController implements ActionListener {
                             then we iter over the feature (so we actually dont)
                         else
                             we really iter over them and thus they are loaded
+
+                         Résumé : one plugin error ? plugins are not used
                      */
 
                     List<IFeaturePlugin> features = new ArrayList<>();

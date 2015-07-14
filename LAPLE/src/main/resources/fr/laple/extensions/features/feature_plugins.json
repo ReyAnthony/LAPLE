@@ -1,0 +1,8 @@
+{
+  "feature_plugins":[
+    {
+      "name":"Space letters",
+      "path":"/Users/anthonyrey/Documents/Projets/Java/LAPLE/space-letters-plugin/target/space-letters-plugin-1.0-SNAPSHOT.jar"
+    }
+  ]
+}

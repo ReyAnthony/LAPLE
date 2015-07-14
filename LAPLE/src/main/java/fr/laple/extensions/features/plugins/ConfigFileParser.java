@@ -1,0 +1,86 @@
+package fr.laple.extensions.features.plugins;
+
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
+/**
+ * Created by anthonyrey on 01/06/2015.
+ */
+public class ConfigFileParser {
+
+    private ArrayList<File> plugins;
+
+    private static final String USER_PATH =  System.getProperty("user.home")+"/.laple";
+    private static final String RESOURCE_PATH = "/fr/laple/extensions/features/";
+    private static final String USER_PATH_NOFILE = USER_PATH+RESOURCE_PATH;
+    private static final String CONFIG_FILE = "feature_plugins.json";
+    private static final String FUll_USER_PATH = USER_PATH+ RESOURCE_PATH + CONFIG_FILE;
+    private static final String FUll_JAR_PATH =  RESOURCE_PATH + CONFIG_FILE;
+
+    public ConfigFileParser() throws FeaturePluginLoadingException {
+
+        try{
+
+            createFileIfNotExist();
+        }catch (IOException e)
+        {
+            throw new FeaturePluginLoadingException();
+        }
+
+        findPaths();
+
+    }
+
+    private void createFileIfNotExist() throws IOException {
+
+        File f = new File(FUll_USER_PATH);
+        if(!f.exists())
+        {
+           if (new File(USER_PATH_NOFILE).mkdirs())
+           {
+               Files.copy(Paths.get(this.getClass().getResource(FUll_JAR_PATH).getPath()) ,
+                       new FileOutputStream(FUll_USER_PATH));
+           }
+        }
+    }
+
+    private void findPaths() throws FeaturePluginLoadingException {
+
+        try {
+            plugins = new ArrayList<>();
+
+            InputStream configFile = new FileInputStream(FUll_USER_PATH);
+
+            JsonReader jsonReader = Json.createReader(configFile);
+            JsonObject jsonObject = jsonReader.readObject();
+            jsonReader.close();
+
+            JsonArray jsonSymbols = jsonObject.getJsonArray("feature_plugins");
+
+            for (int i = 0; i < jsonSymbols.size(); i++) {
+                JsonObject current = jsonSymbols.getJsonObject(i);
+
+                String path = current.getString("path");
+
+                plugins.add(new File(path));
+            }
+        }
+        catch(Exception e)
+        {
+            throw new FeaturePluginLoadingException();
+        }
+
+    }
+
+    public ArrayList<File> getFiles()
+    {
+        return plugins;
+    }
+
+}
