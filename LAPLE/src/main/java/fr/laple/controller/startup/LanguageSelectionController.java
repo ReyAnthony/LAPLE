@@ -1,11 +1,14 @@
 package fr.laple.controller.startup;
 
 import fr.laple.controller.LapleGUIController;
+import fr.laple.extensions.features.plugins.FeatureTest;
+import fr.laple.extensions.features.plugins.IFeaturePlugin;
 import fr.laple.extensions.languages.japanese.ParserException;
 import fr.laple.extensions.languages.plugins.LanguageConfigFileParser;
 import fr.laple.extensions.languages.plugins.PluginConfigObject;
 import fr.laple.extensions.languages.plugins.PluginLoadingException;
-import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.extensions.languages.plugins.ILanguagePlugin;
+import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.view.startup.LanguageSelectionView;
 
 import javax.swing.*;
@@ -75,7 +78,16 @@ public class LanguageSelectionController implements ActionListener {
                 if(pco.getName().equals(selected))
                 {
                     ILanguagePlugin plugin = (ILanguagePlugin) pco.getPlugin().newInstance();
-                    new LapleGUIController(plugin);
+                    //TODO LOAD plugins according to file
+
+                    ArrayList<IFeaturePlugin> features = new ArrayList<>();
+                    IFeaturePlugin feature = new FeatureTest();
+                    feature.instanciateExerciseModes(plugin);
+
+                    features.add(feature);
+
+                    LapleDataModel dataModel = new LapleDataModel(plugin, features);
+                    new LapleGUIController(dataModel);
                     break;
                 }
             }

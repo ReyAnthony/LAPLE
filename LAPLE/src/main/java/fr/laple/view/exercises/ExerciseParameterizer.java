@@ -1,9 +1,9 @@
 package fr.laple.view.exercises;
 
 import fr.laple.controller.exercises.ExerciseParameterizerController;
-import fr.laple.model.exercises.IExerciseMode;
+import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
-import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.extensions.languages.plugins.ILanguagePlugin;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.model.listable.IListable;
 import fr.laple.model.listable.RootData;

@@ -1,5 +1,6 @@
-package fr.laple.model.exercises;
+package fr.laple.model.exercises.solver;
 
+import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.language.Symbol;
 
 /**

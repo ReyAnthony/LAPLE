@@ -1,6 +1,6 @@
 package fr.laple.model.listable;
 
-import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.extensions.languages.plugins.ILanguagePlugin;
 
 import javax.swing.*;
 

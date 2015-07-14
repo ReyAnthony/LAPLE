@@ -1,31 +1,31 @@
-package fr.laple.model.exercises;
+package fr.laple.model.exercises.exercisemode;
 
 import fr.laple.model.language.Symbol;
 
 import java.awt.*;
 
 /**
- * This class is an implementation of IExerciceMode, it correspond to User Lang TO TeachedLang
+ * This class is an implementation of IExerciceMode, it correspond to Teached Lang TO UserLang
  *
  * @author anthonyrey
  */
-public class ExModeUserLangTranscriptLang implements IExerciseMode {
+public class ExModeTranscriptLangUserLang implements IExerciseMode {
 
 
     @Override
     public String getQuestion(Symbol wantedSymbol) {
-        return wantedSymbol.getUserLangTranscript();
+        return wantedSymbol.getSymbol();
     }
 
     @Override
     public String getAnswer(Symbol answer) {
 
-        return answer.getSymbol();
+        return answer.getUserLangTranscript();
     }
 
     @Override
     public Symbol createSymbolFromAnswer(String answer) {
-        return new Symbol(null, answer, null, null , null, null );
+        return new Symbol(answer, null, null, null , null, null );
     }
 
     @Override
@@ -35,7 +35,7 @@ public class ExModeUserLangTranscriptLang implements IExerciseMode {
 
     @Override
     public String getModeName() {
-        return "User language to teached language";
+        return "Teached language to user language";
     }
 
     public String toString()

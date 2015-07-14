@@ -1,10 +1,10 @@
 package fr.laple.controller.exercises;
 
 import fr.laple.model.exercises.Exercise;
-import fr.laple.model.exercises.IExerciseMode;
-import fr.laple.model.exercises.IExerciseSolver;
+import fr.laple.model.exercises.exercisemode.IExerciseMode;
+import fr.laple.model.exercises.solver.IExerciseSolver;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
-import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.extensions.languages.plugins.ILanguagePlugin;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.view.exercises.AbstractExerciseView;

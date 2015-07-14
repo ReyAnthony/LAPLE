@@ -2,7 +2,10 @@ package fr.laple.model.exercises.answers;
 
 import fr.laple.controller.exercises.AbstractExerciseController;
 import fr.laple.controller.exercises.FreeInputExerciseController;
-import fr.laple.model.exercises.*;
+import fr.laple.model.exercises.exercisemode.ExModeTranscriptLangUserLang;
+import fr.laple.model.exercises.exercisemode.IExerciseMode;
+import fr.laple.model.exercises.solver.IExerciseSolver;
+import fr.laple.model.exercises.solver.StandardExerciseSolver;
 import fr.laple.view.exercises.AbstractExerciseView;
 import fr.laple.view.exercises.FreeInputExerciseView;
 

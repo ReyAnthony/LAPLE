@@ -3,8 +3,6 @@ package fr.laple;
 import fr.laple.controller.startup.LoginPromptController;
 import fr.laple.view.startup.SplashScreen;
 
-import javax.swing.*;
-
 /**
  * LAPLE code entry point, it calls the Login Prompt
  *
@@ -13,11 +11,9 @@ import javax.swing.*;
  */
 public class Main {
 
-    //TODO Creer et affecter la vue à l'onglet, puis creer le controlleur qui prendra une instance de la vue
-    //TODO la vue qui crée le controlleur, c'est pas extra
-
     public static void main(String[] args) {
 
+        /*
         try {
 
             UIManager.setLookAndFeel(
@@ -35,6 +31,7 @@ public class Main {
         catch (IllegalAccessException e) {
             //TODO exception
         }
+        */
 
         Runnable runnable = () -> {
 

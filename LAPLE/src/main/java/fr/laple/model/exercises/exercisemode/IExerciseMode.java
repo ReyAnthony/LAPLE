@@ -1,4 +1,4 @@
-package fr.laple.model.exercises;
+package fr.laple.model.exercises.exercisemode;
 
 import fr.laple.model.language.Symbol;
 

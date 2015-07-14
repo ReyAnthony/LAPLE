@@ -2,9 +2,9 @@ package fr.laple.model.exercises.answers;
 
 import fr.laple.controller.exercises.AbstractExerciseController;
 import fr.laple.controller.exercises.QcmInputController;
-import fr.laple.model.exercises.IExerciseMode;
-import fr.laple.model.exercises.IExerciseSolver;
-import fr.laple.model.exercises.StandardExerciseSolver;
+import fr.laple.model.exercises.exercisemode.IExerciseMode;
+import fr.laple.model.exercises.solver.IExerciseSolver;
+import fr.laple.model.exercises.solver.StandardExerciseSolver;
 import fr.laple.view.exercises.AbstractExerciseView;
 import fr.laple.view.exercises.QCMExerciseView;
 

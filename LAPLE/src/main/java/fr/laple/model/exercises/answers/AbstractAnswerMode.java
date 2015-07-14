@@ -1,8 +1,8 @@
 package fr.laple.model.exercises.answers;
 
 import fr.laple.controller.exercises.AbstractExerciseController;
-import fr.laple.model.exercises.IExerciseMode;
-import fr.laple.model.exercises.IExerciseSolver;
+import fr.laple.model.exercises.exercisemode.IExerciseMode;
+import fr.laple.model.exercises.solver.IExerciseSolver;
 import fr.laple.view.exercises.AbstractExerciseView;
 
 /**

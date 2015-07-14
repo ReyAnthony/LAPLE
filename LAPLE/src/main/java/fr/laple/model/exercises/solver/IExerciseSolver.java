@@ -1,5 +1,6 @@
-package fr.laple.model.exercises;
+package fr.laple.model.exercises.solver;
 
+import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.language.Symbol;
 
 
@@ -18,7 +19,7 @@ public interface IExerciseSolver {
      * We will likely have a Standard implementation only comparing the String values and another using neuroph
      * to check if the drawing is equal to the wanted symbol.
      *
-     * @see fr.laple.model.exercises.IExerciseMode
+     * @see fr.laple.model.exercises.exercisemode.IExerciseMode
      *
      * @param answer The symbol containing the user answer, please be aware that only the field corresponding to answer
      *               mode is populated, so be careful and use IExercise mode implementation given in param

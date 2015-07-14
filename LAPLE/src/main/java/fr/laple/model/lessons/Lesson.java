@@ -1,7 +1,7 @@
 package fr.laple.model.lessons;
 
 import fr.laple.controller.lessons.LessonController;
-import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.extensions.languages.plugins.ILanguagePlugin;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.listable.IListable;
 import fr.laple.model.listable.RootData;

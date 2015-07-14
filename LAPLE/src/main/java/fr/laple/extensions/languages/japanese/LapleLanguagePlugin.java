@@ -2,14 +2,14 @@ package fr.laple.extensions.languages.japanese;
 
 
 import fr.laple.model.listable.IListable;
-import fr.laple.model.exercises.ExModeTranscriptLangUserLang;
-import fr.laple.model.exercises.ExModeUserLangTranscriptLang;
-import fr.laple.model.exercises.IExerciseMode;
+import fr.laple.model.exercises.exercisemode.ExModeTranscriptLangUserLang;
+import fr.laple.model.exercises.exercisemode.ExModeUserLangTranscriptLang;
+import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.exercises.answers.DrawingMode;
 import fr.laple.model.exercises.answers.FreeInputMode;
 import fr.laple.model.exercises.answers.QcmMode;
-import fr.laple.model.language.ILanguagePlugin;
+import fr.laple.extensions.languages.plugins.ILanguagePlugin;
 import fr.laple.model.language.SymbolContainer;
 
 import java.util.ArrayList;

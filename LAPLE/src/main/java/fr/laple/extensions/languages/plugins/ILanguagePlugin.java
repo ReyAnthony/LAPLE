@@ -1,7 +1,8 @@
-package fr.laple.model.language;
+package fr.laple.extensions.languages.plugins;
 
+import fr.laple.model.language.SymbolContainer;
 import fr.laple.model.listable.IListable;
-import fr.laple.model.exercises.IExerciseMode;
+import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
 
 import java.util.ArrayList;
