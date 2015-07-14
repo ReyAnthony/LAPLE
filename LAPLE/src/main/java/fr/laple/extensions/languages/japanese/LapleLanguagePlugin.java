@@ -59,11 +59,6 @@ public class LapleLanguagePlugin implements ILanguagePlugin{
         return lessonContainers;
     }
 
-    @Override
-    public String getLanguageName() {
-        return "Japanese";
-    }
-
     private void populateExerciseSolvingModesList()
     {
         exerciseSolvingModes = new ArrayList<>();
