@@ -124,10 +124,10 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
             listener.init(exView, rootData);
             listener.addModel(model);
         }
-        else if(e.getActionCommand().equals(parameterizer.getBackButton()))
+        else if(e.getSource().equals(parameterizer.getBackButton()))
         {
             JTabbedPane tabbedPane = (JTabbedPane) parameterizer.getParent();
-            TabTools.swapTab(tabbedPane,  new ListView(model, rootData.getRootModel(), true, "Select a Lesson :",
+            TabTools.swapTab(tabbedPane, new ListView(model, rootData.getRootModel(), false, "Select an exercise mode :",
                     rootData));
 
         }

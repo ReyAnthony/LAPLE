@@ -121,6 +121,7 @@ public class ExerciseParameterizer extends JPanel implements IListable{
 
         ExerciseParameterizerController controller = new ExerciseParameterizerController(model, this, rootData);
         okButton.addActionListener(controller);
+        backButton.addActionListener(controller);
         questionMode.addItemListener(controller);
         symbolMode.addItemListener(controller);
 

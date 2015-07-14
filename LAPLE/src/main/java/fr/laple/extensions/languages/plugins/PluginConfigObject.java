@@ -1,6 +1,5 @@
 package fr.laple.extensions.languages.plugins;
 
-import fr.laple.extensions.PluginLoadingException;
 import fr.laple.extensions.languages.japanese.ParserException;
 
 import java.io.File;
@@ -18,7 +17,7 @@ public class PluginConfigObject {
     private String clazz;
     private Class plugin;
 
-    public PluginConfigObject(String name, String path, String clazz) throws PluginLoadingException {
+    public PluginConfigObject(String name, String path, String clazz) throws LangPluginLoadingException {
 
         this.name = name;
         this.path = path;
@@ -26,11 +25,11 @@ public class PluginConfigObject {
         loadClass();
     }
 
-    private void loadClass() throws PluginLoadingException {
+    private void loadClass() throws LangPluginLoadingException {
 
 
         if (name.isEmpty())
-            throw new PluginLoadingException();
+            throw new LangPluginLoadingException();
 
         File f = new File(path);
 
@@ -38,7 +37,7 @@ public class PluginConfigObject {
             try {
                 plugin = getClass().getClassLoader().loadClass(clazz);
             } catch (ClassNotFoundException e) {
-                throw new PluginLoadingException();
+                throw new LangPluginLoadingException();
             }
         } else {
 
@@ -51,7 +50,7 @@ public class PluginConfigObject {
                 this.plugin = cl.loadClass(clazz);
 
             } catch (ClassNotFoundException | MalformedURLException e1) {
-                throw new PluginLoadingException();
+                throw new LangPluginLoadingException();
             }
 
         }

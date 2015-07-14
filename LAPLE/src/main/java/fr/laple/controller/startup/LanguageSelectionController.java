@@ -1,13 +1,14 @@
 package fr.laple.controller.startup;
 
 import fr.laple.controller.LapleGUIController;
-import fr.laple.extensions.features.plugins.FeatureTest;
+import fr.laple.extensions.features.plugins.FeaturePluginLoadingException;
+import fr.laple.extensions.languages.plugins.LangPluginLoadingException;
+import fr.laple.extensions.features.plugins.FeaturePluginLoader;
 import fr.laple.extensions.features.plugins.IFeaturePlugin;
 import fr.laple.extensions.languages.japanese.ParserException;
+import fr.laple.extensions.languages.plugins.ILanguagePlugin;
 import fr.laple.extensions.languages.plugins.LanguageConfigFileParser;
 import fr.laple.extensions.languages.plugins.PluginConfigObject;
-import fr.laple.extensions.PluginLoadingException;
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.view.startup.LanguageSelectionView;
 
@@ -47,7 +48,7 @@ public class LanguageSelectionController implements ActionListener {
 
         try {
             lcfp = new LanguageConfigFileParser();
-        } catch (PluginLoadingException e) {
+        } catch (LangPluginLoadingException e) {
 
             pluginLoadingError(e.getMessage());
         }
@@ -75,27 +76,46 @@ public class LanguageSelectionController implements ActionListener {
         try {
             for(PluginConfigObject pco : lcfp.getLanguagePluginsList())
             {
-                if(pco.getName().equals(selected))
-                {
+                if(pco.getName().equals(selected)) {
                     ILanguagePlugin plugin = (ILanguagePlugin) pco.getPlugin().newInstance();
                     //TODO LOAD plugins according to file
 
+                    /*
+                        The code here is a bit tricky :
+                        First we create list of IFeaturePlugin
+                        The we load all plugins from the feature plugin loader
+                        If there is an error, we print a message
+                            then we iter over the feature (so we actually dont)
+                        else
+                            we really iter over them and thus they are loaded
+                     */
 
-                    //TODO featurePlugin loader
-                    ArrayList<IFeaturePlugin> features = new ArrayList<>();
-                    IFeaturePlugin feature = new FeatureTest();
+                    List<IFeaturePlugin> features = new ArrayList<>();
 
-                    LapleDataModel dataModel = new LapleDataModel(plugin, features);
-                    feature.instanciateExerciseModes(dataModel);
-                    features.add(feature);
+                    try {
 
+                        FeaturePluginLoader fpl = new FeaturePluginLoader();
+                        features = fpl.getLoadedPlugin();
+                    } catch (FeaturePluginLoadingException e1) {
 
-                    new LapleGUIController(dataModel);
+                        pluginLoadingWarning(e1.getMessage());
+                    } finally {
+
+                        LapleDataModel dataModel = new LapleDataModel(plugin, features);
+
+                        for(IFeaturePlugin feature : features)
+                        {
+                            feature.instanciateExerciseModes(dataModel);
+                        }
+                        new LapleGUIController(dataModel);
+                    }
+
+                    //just in case ?
                     break;
                 }
             }
 
-        } catch (InstantiationException | IllegalAccessException | ParserException e1) {
+        } catch (InstantiationException | IllegalAccessException | ParserException  e1) {
             pluginLoadingError(e1.getMessage());
         }
 
@@ -106,5 +126,10 @@ public class LanguageSelectionController implements ActionListener {
     {
         JOptionPane.showMessageDialog(view, errorMessage, "Fatal Error", JOptionPane.ERROR_MESSAGE);
         System.exit(0);
+    }
+
+    private void pluginLoadingWarning(String errorMessage)
+    {
+        JOptionPane.showMessageDialog(view, errorMessage, "Warning", JOptionPane.WARNING_MESSAGE);
     }
 }

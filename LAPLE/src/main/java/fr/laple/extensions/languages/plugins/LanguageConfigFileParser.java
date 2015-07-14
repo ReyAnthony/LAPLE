@@ -1,7 +1,5 @@
 package fr.laple.extensions.languages.plugins;
 
-import fr.laple.extensions.PluginLoadingException;
-
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -16,7 +14,7 @@ public class LanguageConfigFileParser {
 
     private ArrayList<PluginConfigObject> plugins;
 
-    public LanguageConfigFileParser() throws PluginLoadingException {
+    public LanguageConfigFileParser() throws LangPluginLoadingException {
 
         try {
             plugins = new ArrayList<>();
@@ -41,7 +39,7 @@ public class LanguageConfigFileParser {
         }
         catch(Exception e)
         {
-            throw new PluginLoadingException();
+            throw new LangPluginLoadingException();
         }
 
     }
