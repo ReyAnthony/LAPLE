@@ -26,8 +26,6 @@ public class AboutPanel extends JPanel  {
         copyrightInfos = new JLabel("<html><br/> LAPLE, Logiciel d'Apprentissage de Langues Etrangères. <br/><br/>" +
                 "Copyright (c) 2015 <br/>" +
                 "Anthony REY, Christian EBONGUE and Gabriel ZAAFRANI <br/><br/>" +
-                "Special Thanks to Julien ARENSMA for finding symbols images and <br/>" +
-                "helping us out with json files populating<br/><br/>" +
                 "This program is free software: you can redistribute it and/or modify<br/>" +
                 "it under the terms of the GNU General Public License as published by<br/>" +
                 "the Free Software Foundation, either version 3 of the License, <br/>" +

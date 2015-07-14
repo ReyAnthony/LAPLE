@@ -46,7 +46,7 @@ public class FeaturePluginLoader {
 
     }
 
-    public List<IFeaturePlugin> getLoadedPlugin()
+    public List<IFeaturePlugin> getLoadedPlugins()
     {
         return featurePlugin;
     }

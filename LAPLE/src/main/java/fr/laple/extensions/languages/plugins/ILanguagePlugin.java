@@ -1,5 +1,6 @@
 package fr.laple.extensions.languages.plugins;
 
+import fr.laple.extensions.IPlugin;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.model.listable.IListable;
 import fr.laple.model.exercises.exercisemode.IExerciseMode;
@@ -15,13 +16,9 @@ import java.util.ArrayList;
  * @author anthonyrey
  *
  */
-public interface ILanguagePlugin {
+public interface ILanguagePlugin extends IPlugin{
 
     public ArrayList<SymbolContainer> getSymbolContainer();
-    public String getVersion();
-    public String getName();
-    public String getDescription();
-    public String getDeveloper();
     public ArrayList<IExerciseMode> getExercisesModes() ;
     public ArrayList<AbstractAnswerMode> getExercisesSolvingModes();
     public ArrayList<IListable> getLessonContainers();

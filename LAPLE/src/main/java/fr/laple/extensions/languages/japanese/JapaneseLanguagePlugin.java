@@ -45,6 +45,11 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
     }
 
     @Override
+    public String otherCredits() {
+        return "Julien Arensma";
+    }
+
+    @Override
     public String getName() {
         return "Japanese";
     }
@@ -106,6 +111,17 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
         lessonContainers = parser.parseForSymbolLessons("/fr/laple/extensions/languages/japanese/lessons.json");
         lessonContainers.add(parser.parseForWordLessons("/fr/laple/extensions/languages/japanese/lessons.json"));
 
+    }
+
+    public String toString()
+    {
+        return this.getName();
+    }
+
+
+    public boolean isRemovable()
+    {
+        return false;
     }
 
 }

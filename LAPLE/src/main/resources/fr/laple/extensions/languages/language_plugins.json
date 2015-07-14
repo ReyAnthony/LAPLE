@@ -4,11 +4,6 @@
       "name":"Japanese",
       "path":"",
       "class":"fr.laple.extensions.languages.japanese.JapaneseLanguagePlugin"
-    },
-    {
-      "name":"Russian",
-      "path":"",
-      "class":"fr.laple.extensions.languages.japanese.JapaneseLanguagePlugin"
     }
   ]
 }

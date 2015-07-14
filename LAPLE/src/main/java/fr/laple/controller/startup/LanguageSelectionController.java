@@ -97,7 +97,7 @@ public class LanguageSelectionController implements ActionListener {
                     try {
 
                         FeaturePluginLoader fpl = new FeaturePluginLoader();
-                        features = fpl.getLoadedPlugin();
+                        features = fpl.getLoadedPlugins();
                     } catch (FeaturePluginLoadingException e1) {
 
                         pluginLoadingWarning(e1.getMessage());

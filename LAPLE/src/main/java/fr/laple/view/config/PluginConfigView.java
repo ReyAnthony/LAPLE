@@ -1,5 +1,7 @@
 package fr.laple.view.config;
 
+import fr.laple.extensions.IPlugin;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,7 +12,7 @@ public class PluginConfigView extends JPanel {
 
     private JTextArea description;
     private JComboBox pluginTypes;
-    private JList plugins;
+    private JList<IPlugin> plugins;
     private JButton add;
     private JButton remove;
     private JButton back;
@@ -34,7 +36,7 @@ public class PluginConfigView extends JPanel {
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BorderLayout());
         leftPanel.setBorder(BorderFactory.createEmptyBorder(0,0,0,20));
-        plugins = new JList();
+        plugins = new JList<>();
         plugins.setPreferredSize(new Dimension(150,500));
         plugins.setSize(200,500);
         leftPanel.add(plugins);

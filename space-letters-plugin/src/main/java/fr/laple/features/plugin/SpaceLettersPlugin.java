@@ -34,7 +34,7 @@ public class SpaceLettersPlugin implements IFeaturePlugin {
 
     @Override
     public String getDescription() {
-        return "A game small \"space invader\" like game for LAPLE";
+        return "A small \"space invader\" like game for LAPLE";
     }
 
     @Override
@@ -45,5 +45,15 @@ public class SpaceLettersPlugin implements IFeaturePlugin {
     @Override
     public String getVersion() {
         return "14.06.15.b1";
+    }
+
+    @Override
+    public String otherCredits() {
+        return "N/A";
+    }
+
+    public String toString()
+    {
+        return getName();
     }
 }
