@@ -1,14 +1,17 @@
 package fr.laple.controller.exercises;
 
+import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.exercises.Exercise;
+import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.exercises.solver.IExerciseSolver;
-import fr.laple.model.exercises.answers.AbstractAnswerMode;
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
+import fr.laple.model.listable.RootData;
+import fr.laple.view.ListView;
 import fr.laple.view.exercises.AbstractExerciseView;
 import fr.laple.view.exercises.ExerciseParameterizer;
+import fr.laple.ztools.tabTools.TabTools;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,13 +27,15 @@ import java.util.LinkedList;
  */
 public class ExerciseParameterizerController implements ActionListener, ItemListener {
 
-    private ILanguagePlugin model;
+    private LapleDataModel model;
     private ExerciseParameterizer parameterizer;
+    private RootData rootData;
 
-    public ExerciseParameterizerController(ILanguagePlugin model, ExerciseParameterizer parameterizer) {
+    public ExerciseParameterizerController(LapleDataModel model, ExerciseParameterizer parameterizer, RootData rootData) {
 
         this.model = model;
         this.parameterizer = parameterizer;
+        this.rootData = rootData;
         setComboBoxes();
     }
 
@@ -110,23 +115,20 @@ public class ExerciseParameterizerController implements ActionListener, ItemList
             //TODO must be generalized
             //TODO maybe an helper class to work with tabs  ?
             JTabbedPane tabbedPane = (JTabbedPane) parameterizer.getParent();
-            int selected = tabbedPane.getSelectedIndex();
 
-            tabbedPane.remove(selected);
-            tabbedPane.insertTab("Exercises", null, exView, null, selected);
-            tabbedPane.setSelectedIndex(selected);
+            TabTools.swapTab(tabbedPane, exView);
             exView.addActionListener(listener);
 
             listener.addExercises(exercises);
             listener.setSymbolContainer(sc);
-            listener.init(exView);
+            listener.init(exView, rootData);
             listener.addModel(model);
-
-
         }
         else if(e.getActionCommand().equals(parameterizer.getBackButton()))
         {
-
+            JTabbedPane tabbedPane = (JTabbedPane) parameterizer.getParent();
+            TabTools.swapTab(tabbedPane,  new ListView(model, rootData.getRootModel(), true, "Select a Lesson :",
+                    rootData));
 
         }
 

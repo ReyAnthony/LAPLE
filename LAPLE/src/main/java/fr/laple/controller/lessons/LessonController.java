@@ -1,10 +1,11 @@
 package fr.laple.controller.lessons;
 
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
+import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.lessons.Lesson;
 import fr.laple.model.listable.RootData;
-import fr.laple.view.lessons.LessonView;
 import fr.laple.view.ListView;
+import fr.laple.view.lessons.LessonView;
+import fr.laple.ztools.tabTools.TabTools;
 
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -18,14 +19,16 @@ public class LessonController implements ActionListener {
 
     private Lesson lesson;
     private LessonView view;
-    private ILanguagePlugin model;
+    private LapleDataModel model;
+    private RootData rootData;
 
-    public LessonController(ILanguagePlugin model, LessonView view, Lesson lesson)
+    public LessonController(LapleDataModel model, LessonView view, Lesson lesson, RootData rootData)
     {
 
         this.view = view;
         this.lesson = lesson;
         this.model = model;
+        this.rootData = rootData;
 
         view.getSymbol().setText(this.lesson.getSymbol().getSymbol());
         view.getParent().setEnabled(false);
@@ -42,15 +45,10 @@ public class LessonController implements ActionListener {
         {
 
             JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
-            tabbedPane.setEnabled(true);
+            TabTools.swapTab(tabbedPane,  new ListView(model, model.getLessonContainers(),
+                    false, "Select a Lesson category :", rootData));
 
-            int selected = tabbedPane.getSelectedIndex();
-            tabbedPane.remove(selected);
-            tabbedPane.insertTab("Lessons", null, new ListView(model, model.getLessonContainers(),
-                            false, "Select a Lesson category :", new RootData(model.getLessonContainers(),
-                            "Select a Lesson category :" )),
-                    null, selected);
-            tabbedPane.setSelectedIndex(selected);
+            tabbedPane.setEnabled(true);
 
         }
         else if(e.getSource().equals(view.getSoundButton()))

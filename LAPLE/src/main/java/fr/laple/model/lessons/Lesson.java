@@ -1,11 +1,12 @@
 package fr.laple.model.lessons;
 
 import fr.laple.controller.lessons.LessonController;
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
+import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.listable.IListable;
 import fr.laple.model.listable.RootData;
 import fr.laple.view.lessons.LessonView;
+import fr.laple.ztools.tabTools.TabTools;
 
 import javax.swing.*;
 
@@ -60,15 +61,11 @@ public class Lesson implements IListable {
     }
 
     @Override
-    public void expectedBehavior(JTabbedPane tabbedPane, ILanguagePlugin model, RootData rootData)  {
+    public void expectedBehavior(JTabbedPane tabbedPane, LapleDataModel model, RootData rootData)  {
 
-        int selected = tabbedPane.getSelectedIndex();
-
-        tabbedPane.remove(selected);
         LessonView lessonView = new LessonView();
-        tabbedPane.insertTab("Lessons", null, lessonView, null, selected);
-        new LessonController(model, lessonView, this);
+        TabTools.swapTab(tabbedPane, lessonView);
+        new LessonController(model, lessonView, this, rootData);
 
-        tabbedPane.setSelectedIndex(selected);
     }
 }

@@ -1,7 +1,7 @@
 package fr.laple.view;
 
-import fr.laple.controller.lessons.ListViewController;
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
+import fr.laple.controller.listView.ListViewController;
+import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
 import fr.laple.model.listable.RootData;
 
@@ -18,7 +18,7 @@ public class ListView extends JPanel {
     private JButton backButton;
 
     //display model is mandatory because you need to know what is to be shown
-    public ListView(ILanguagePlugin model, java.util.List<IListable> displayModel, boolean hasBackButton, String title,
+    public ListView(LapleDataModel model, java.util.List<IListable> displayModel, boolean hasBackButton, String title,
                    RootData rootData)
     {
 

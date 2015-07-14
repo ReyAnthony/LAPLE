@@ -1,12 +1,13 @@
 package fr.laple.view.exercises;
 
 import fr.laple.controller.exercises.ExerciseParameterizerController;
-import fr.laple.model.exercises.exercisemode.IExerciseMode;
+import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
+import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.model.listable.IListable;
 import fr.laple.model.listable.RootData;
+import fr.laple.ztools.tabTools.TabTools;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +28,7 @@ public class ExerciseParameterizer extends JPanel implements IListable{
     private JLabel answerModeMessage;
     private JSpinner exerciseCountSelector;
 
-    public ExerciseParameterizer(ILanguagePlugin model) {
+    public ExerciseParameterizer(LapleDataModel model) {
 
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
@@ -81,10 +82,7 @@ public class ExerciseParameterizer extends JPanel implements IListable{
         backButton = new JButton("Back");
         this.add(backButton, gbc);
 
-        ExerciseParameterizerController controller = new ExerciseParameterizerController(model, this);
-        okButton.addActionListener(controller);
-        questionMode.addItemListener(controller);
-        symbolMode.addItemListener(controller);
+
 
     }
 
@@ -119,12 +117,14 @@ public class ExerciseParameterizer extends JPanel implements IListable{
     }
 
     @Override
-    public void expectedBehavior(JTabbedPane tabbedPane, ILanguagePlugin model, RootData rootData) {
+    public void expectedBehavior(JTabbedPane tabbedPane, LapleDataModel model, RootData rootData) {
 
-        int selected = tabbedPane.getSelectedIndex();
-        tabbedPane.remove(selected);
-        tabbedPane.insertTab("Exercises", null, this, null, selected);
-        tabbedPane.setSelectedIndex(selected);
+        ExerciseParameterizerController controller = new ExerciseParameterizerController(model, this, rootData);
+        okButton.addActionListener(controller);
+        questionMode.addItemListener(controller);
+        symbolMode.addItemListener(controller);
+
+        TabTools.swapTab(tabbedPane, this);
     }
 
     @Override

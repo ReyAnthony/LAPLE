@@ -1,6 +1,6 @@
 package fr.laple.extensions.features.plugins;
 
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
+import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
 import fr.laple.model.listable.RootData;
 import fr.laple.view.ListView;
@@ -18,11 +18,12 @@ public class FeatureTest implements IFeaturePlugin {
     ArrayList<IListable> features;
 
     @Override
-    public void instanciateExerciseModes(ILanguagePlugin model) {
+    public void instanciateExerciseModes(LapleDataModel model) {
 
         features = new ArrayList<>();
         features.add(new ExerciseParameterizer(model));
         features.add(new ExerciseParameterizer(model));
+
     }
 
     @Override
@@ -31,7 +32,7 @@ public class FeatureTest implements IFeaturePlugin {
     }
 
     @Override
-    public void addNewTabs(JTabbedPane ui, ILanguagePlugin model) {
+    public void addNewTabs(JTabbedPane ui, LapleDataModel model) {
 
         List<IListable> exoList = new ArrayList<>();
         exoList.add(new ExerciseParameterizer(model));

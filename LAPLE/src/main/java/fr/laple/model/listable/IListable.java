@@ -1,6 +1,7 @@
 package fr.laple.model.listable;
 
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
+
+import fr.laple.model.datamodel.LapleDataModel;
 
 import javax.swing.*;
 
@@ -14,5 +15,5 @@ public interface IListable {
     {
         return true;
     }
-    public void expectedBehavior(JTabbedPane tabbedPane, ILanguagePlugin model, RootData roodtData);
+    public void expectedBehavior(JTabbedPane tabbedPane, LapleDataModel model, RootData rootData);
 }

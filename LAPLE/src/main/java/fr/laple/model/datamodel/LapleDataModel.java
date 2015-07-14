@@ -16,7 +16,7 @@ import java.util.List;
  * Created by anthonyrey on 14/07/2015.
  */
 //TODO throw exceptions
-public class LapleDataModel implements ILanguagePlugin {
+public class LapleDataModel {
 
     private ILanguagePlugin languagePlugin;
     private List<IFeaturePlugin> features;
@@ -50,7 +50,7 @@ public class LapleDataModel implements ILanguagePlugin {
     public ArrayList<IListable> getExerciseTypes() {
 
         ArrayList<IListable> toReturn = new ArrayList<>();
-        toReturn.add(new ExerciseParameterizer(this.languagePlugin));
+        toReturn.add(new ExerciseParameterizer(this));
 
         for(IFeaturePlugin fp : features)
         {
@@ -65,7 +65,7 @@ public class LapleDataModel implements ILanguagePlugin {
 
         for(IFeaturePlugin fp : features)
         {
-            fp.addNewTabs(ui, languagePlugin);
+            fp.addNewTabs(ui, this);
         }
     }
 }

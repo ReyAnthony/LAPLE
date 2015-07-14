@@ -1,9 +1,10 @@
-package fr.laple.controller.lessons;
+package fr.laple.controller.listView;
 
+import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
 import fr.laple.model.listable.RootData;
 import fr.laple.view.ListView;
+import fr.laple.ztools.tabTools.TabTools;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,12 +18,11 @@ import java.util.List;
  *
  * @author anthonyrey
  */
-//TODO add validation when pressing enter key
 public class ListViewController implements ActionListener, ComponentListener {
 
     private List<IListable> displayModel;
     private ListView view;
-    private ILanguagePlugin model;
+    private LapleDataModel model;
     private RootData rootData;
 
     /**
@@ -32,7 +32,7 @@ public class ListViewController implements ActionListener, ComponentListener {
      * @param displayModel The model to display in the List
      * @param view The associated listView
      */
-    public ListViewController(ILanguagePlugin model, List<IListable> displayModel, ListView view, RootData rootData) {
+    public ListViewController(LapleDataModel model, List<IListable> displayModel, ListView view, RootData rootData) {
         this.displayModel = displayModel;
         this.view = view;
         this.model = model;
@@ -88,14 +88,8 @@ public class ListViewController implements ActionListener, ComponentListener {
     private void goRootMenu()
     {
         JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
-
-        int selected = tabbedPane.getSelectedIndex();
-        String name = tabbedPane.getTitleAt(selected);
-
-        tabbedPane.remove(selected);
-        tabbedPane.insertTab(name, null, new ListView(model, rootData.getRootModel(), false,
-                rootData.getRootTitle(), rootData), null, selected);
-        tabbedPane.setSelectedIndex(selected);
+        TabTools.swapTab(tabbedPane, new ListView(model, rootData.getRootModel(), false,
+                rootData.getRootTitle(), rootData) );
     }
 
     @Override
@@ -113,11 +107,13 @@ public class ListViewController implements ActionListener, ComponentListener {
 
         if(displayModel.size() == 1)
         {
-
+            //TODO fix, bug , because is lauhed even when not shown an get the selected tab which is not the right one
+            /*
             JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
             IListable listable = displayModel.get(0);
             listable.oneInListPreAction();
             listable.expectedBehavior(tabbedPane, model, rootData);
+            */
         }
     }
 

@@ -1,6 +1,6 @@
 package fr.laple.extensions.features.plugins;
 
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
+import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
 
 import javax.swing.*;
@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 public interface IFeaturePlugin {
 
-    public void instanciateExerciseModes(ILanguagePlugin model);
+    public void instanciateExerciseModes(LapleDataModel model);
     public ArrayList<IListable> getExerciseTypes();
-    public void addNewTabs(JTabbedPane ui, ILanguagePlugin model);
+    public void addNewTabs(JTabbedPane ui, LapleDataModel model);
 
 }

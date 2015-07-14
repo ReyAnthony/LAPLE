@@ -19,14 +19,14 @@ import java.util.ArrayList;
  *
  * @author anthonyrey
  */
-public class LapleLanguagePlugin implements ILanguagePlugin{
+public class JapaneseLanguagePlugin implements ILanguagePlugin{
 
     private ArrayList<SymbolContainer> symbolContainers;
     private ArrayList<IExerciseMode> exerciseModes;
     private ArrayList<AbstractAnswerMode> exerciseSolvingModes;
     private ArrayList<IListable> lessonContainers;
 
-    public LapleLanguagePlugin() throws ParserException {
+    public JapaneseLanguagePlugin() throws ParserException {
 
         loadSymbolContainers();
         loadLessons();

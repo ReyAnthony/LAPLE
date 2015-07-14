@@ -1,10 +1,12 @@
 package fr.laple.controller.exercises;
 
+import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.exercises.Exercise;
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
 import fr.laple.model.language.SymbolContainer;
+import fr.laple.model.listable.RootData;
+import fr.laple.view.ListView;
 import fr.laple.view.exercises.AbstractExerciseView;
-import fr.laple.view.exercises.ExerciseParameterizer;
+import fr.laple.ztools.tabTools.TabTools;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,13 +27,15 @@ public abstract class AbstractExerciseController implements ActionListener {
     private SymbolContainer sc;
     private LinkedList<Exercise> exerciseQueue;
     private ArrayList<Blinker> blinkers = new ArrayList<>();
-    private ILanguagePlugin model;
+    private LapleDataModel model;
     private int startingExerciseCount;
     private int sucesses;
+    private RootData rootData;
 
-    public void init(AbstractExerciseView panel) {
+    public void init(AbstractExerciseView panel, RootData rootData) {
 
         this.view = panel;
+        this.rootData = rootData;
 
         view.getBackButton().addActionListener(this);
         view.getParent().setEnabled(false);
@@ -112,23 +116,18 @@ public abstract class AbstractExerciseController implements ActionListener {
         blinkers.add(blinker);
     }
 
-    public void addModel(ILanguagePlugin model)
+    public void addModel(LapleDataModel model)
     {
         this.model = model;
     }
 
     private void finished()
     {
+
         JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
+        TabTools.swapTab(tabbedPane,  new ListView(model, rootData.getRootModel(), false, "Select an exercise mode :",
+                rootData));
         tabbedPane.setEnabled(true);
-        int selected = tabbedPane.getSelectedIndex();
-        tabbedPane.remove(selected);
-
-        ExerciseParameterizer newView = new ExerciseParameterizer(model);
-
-        tabbedPane.insertTab("Exercises", null, newView, null, selected);
-        tabbedPane.setSelectedIndex(selected);
-
 
     }
 

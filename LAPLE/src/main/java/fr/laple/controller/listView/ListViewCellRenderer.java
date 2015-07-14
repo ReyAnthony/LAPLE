@@ -1,4 +1,4 @@
-package fr.laple.controller.lessons;
+package fr.laple.controller.listView;
 
 import fr.laple.model.listable.IListable;
 

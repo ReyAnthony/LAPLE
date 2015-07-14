@@ -84,9 +84,10 @@ public class LanguageSelectionController implements ActionListener {
                     //TODO featurePlugin loader
                     ArrayList<IFeaturePlugin> features = new ArrayList<>();
                     IFeaturePlugin feature = new FeatureTest();
-                    feature.instanciateExerciseModes(plugin);
-                    features.add(feature);
+
                     LapleDataModel dataModel = new LapleDataModel(plugin, features);
+                    feature.instanciateExerciseModes(dataModel);
+                    features.add(feature);
 
 
                     new LapleGUIController(dataModel);
