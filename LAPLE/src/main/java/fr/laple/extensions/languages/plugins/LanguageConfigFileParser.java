@@ -4,7 +4,11 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -21,16 +25,15 @@ public class LanguageConfigFileParser {
     private static final String USER_PATH_NOFILE = USER_PATH+RESOURCE_PATH;
     private static final String CONFIG_FILE = "language_plugins.json";
     private static final String FULL_USER_PATH = USER_PATH+ RESOURCE_PATH + CONFIG_FILE;
-    private static final String FUll_JAR_PATH =  RESOURCE_PATH + CONFIG_FILE;
+    private static final String FULL_JAR_PATH =  RESOURCE_PATH + CONFIG_FILE;
 
     public LanguageConfigFileParser() throws LangPluginLoadingException {
 
         try{
 
             createFileIfNotExist();
-        }catch (IOException e)
+        }catch (IOException | URISyntaxException e)
         {
-            e.printStackTrace();
             throw new LangPluginLoadingException();
         }
 
@@ -38,18 +41,17 @@ public class LanguageConfigFileParser {
 
     }
 
-    private void createFileIfNotExist() throws IOException, LangPluginLoadingException {
+    private void createFileIfNotExist() throws IOException, LangPluginLoadingException, URISyntaxException {
 
-        File f = new File(FULL_USER_PATH);
-        if(!f.exists())
+        if(!new File(FULL_USER_PATH).exists())
         {
-            boolean success = new File(USER_PATH_NOFILE).mkdirs();
+            if(!new File(USER_PATH_NOFILE).exists())
+            {
+               if(!new File(USER_PATH_NOFILE).mkdirs())
+                    throw new LangPluginLoadingException();
+            }
 
-            if(!success)
-                throw new LangPluginLoadingException();
-
-            Files.copy(Paths.get(this.getClass().getResource(FUll_JAR_PATH).getPath()),
-                    new FileOutputStream(FULL_USER_PATH));
+            Files.copy(this.getClass().getResourceAsStream(FULL_JAR_PATH), Paths.get(new File(FULL_USER_PATH).toURI()));
 
         }
     }

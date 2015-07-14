@@ -42,13 +42,13 @@ public class ConfigFileParser {
         File f = new File(FULL_USER_PATH);
         if(!f.exists())
         {
-           boolean success = new File(USER_PATH_NOFILE).mkdirs();
+            if(!new File(USER_PATH_NOFILE).exists())
+            {
+                if(!new File(USER_PATH_NOFILE).mkdirs())
+                    throw new FeaturePluginLoadingException();
+            }
 
-            if(!success)
-                throw new FeaturePluginLoadingException();
-
-            Files.copy(Paths.get(this.getClass().getResource(FULL_JAR_PATH).getPath()) ,
-                       new FileOutputStream(FULL_USER_PATH));
+            Files.copy(this.getClass().getResourceAsStream(FULL_JAR_PATH), Paths.get(new File(FULL_USER_PATH).toURI()));
 
         }
     }
