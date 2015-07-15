@@ -23,6 +23,7 @@ public class PluginConfigView extends JPanel {
         this.setLayout(new BorderLayout());
 
         description = new JTextArea();
+        description.setLineWrap(true);
         description.setEditable(false);
 
         JPanel topPanel = new JPanel();

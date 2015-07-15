@@ -12,9 +12,9 @@ import java.util.ArrayList;
 /**
  * Created by anthonyrey on 01/06/2015.
  */
-public class ConfigFileParser {
+public class FeatureConfigFileParser {
 
-    private ArrayList<File> plugins;
+    private ArrayList<PluginDataObject> plugins;
 
     private static final String USER_PATH =  System.getProperty("user.home")+"/.laple";
     private static final String RESOURCE_PATH = "/fr/laple/extensions/features/";
@@ -23,7 +23,7 @@ public class ConfigFileParser {
     private static final String FULL_USER_PATH = USER_PATH+ RESOURCE_PATH + CONFIG_FILE;
     private static final String FULL_JAR_PATH =  RESOURCE_PATH + CONFIG_FILE;
 
-    public ConfigFileParser() throws FeaturePluginLoadingException {
+    public FeatureConfigFileParser() throws FeaturePluginLoadingException {
 
         try{
 
@@ -71,7 +71,8 @@ public class ConfigFileParser {
 
                 String path = current.getString("path");
 
-                plugins.add(new File(path));
+                PluginDataObject pdo = new PluginDataObject(new File(path), current.getString("name"));
+                plugins.add(pdo);
             }
         }
         catch(Exception e)
@@ -81,7 +82,7 @@ public class ConfigFileParser {
 
     }
 
-    public ArrayList<File> getFiles()
+    public ArrayList<PluginDataObject> getFiles()
     {
         return plugins;
     }

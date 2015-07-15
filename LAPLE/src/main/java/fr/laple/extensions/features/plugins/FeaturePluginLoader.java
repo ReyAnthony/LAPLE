@@ -1,6 +1,6 @@
 package fr.laple.extensions.features.plugins;
 
-import java.io.File;
+import javax.swing.*;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -17,31 +17,40 @@ public class FeaturePluginLoader {
 
     public FeaturePluginLoader() throws FeaturePluginLoadingException {
 
-        featurePlugin = new ArrayList<IFeaturePlugin>();
+        featurePlugin = new ArrayList<>();
 
-        ConfigFileParser cfp = new ConfigFileParser();
+        FeatureConfigFileParser cfp = new FeatureConfigFileParser();
 
-        for(File f : cfp.getFiles())
+        for(PluginDataObject f : cfp.getFiles())
         {
             loadPlugin(f);
         }
     }
 
-    private void loadPlugin(File chosen) throws FeaturePluginLoadingException
+    private void loadPlugin(PluginDataObject chosen) throws FeaturePluginLoadingException
     {
         try {
 
-            URL url = new URL("jar", "",  chosen.toURI().toURL()+"!/");
+            URL url = new URL("jar", "",  chosen.getPath().toURI().toURL()+"!/");
             JarURLConnection uc = (JarURLConnection)url.openConnection();
             URLClassLoader cl = new URLClassLoader(new URL[]{url});
             Class clazz = cl.loadClass(uc.getMainAttributes().getValue(Attributes.Name.MAIN_CLASS));
-            featurePlugin.add((IFeaturePlugin) clazz.newInstance());
+
+            IFeaturePlugin fp = (IFeaturePlugin) clazz.newInstance();
+            fp.setPath(chosen.getPathString());
+
+            featurePlugin.add(fp);
 
         } catch (Exception e) {
 
-            e.printStackTrace();
-            throw new FeaturePluginLoadingException();
-            //Those are not fatal, we just ignore the plugin and send a message
+            //If there is an error, we create a dummy plugin
+            JOptionPane.showMessageDialog(null, "There was an error loading feature \" "+ chosen.getName() + " \" ",
+                    "Error", JOptionPane.WARNING_MESSAGE  );
+
+            DummyFeaturePlugin dp = new DummyFeaturePlugin(chosen.getName());
+            dp.setPath(chosen.getPathString());
+            featurePlugin.add(dp);
+
         }
 
     }

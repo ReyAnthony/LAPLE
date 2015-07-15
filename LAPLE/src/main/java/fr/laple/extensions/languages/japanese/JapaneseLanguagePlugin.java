@@ -50,6 +50,16 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
     }
 
     @Override
+    public String getPath() {
+        return "Internal to LAPLE";
+    }
+
+    @Override
+    public void setPath(String path) {
+        //no need
+    }
+
+    @Override
     public String getName() {
         return "Japanese";
     }

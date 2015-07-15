@@ -94,30 +94,23 @@ public class LanguageSelectionController implements ActionListener {
 
                     List<IFeaturePlugin> features = new ArrayList<>();
 
-                    try {
+                    FeaturePluginLoader fpl = new FeaturePluginLoader();
+                    features = fpl.getLoadedPlugins();
 
-                        FeaturePluginLoader fpl = new FeaturePluginLoader();
-                        features = fpl.getLoadedPlugins();
-                    } catch (FeaturePluginLoadingException e1) {
+                    LapleDataModel dataModel = new LapleDataModel(plugin, features);
 
-                        pluginLoadingWarning(e1.getMessage());
-                    } finally {
-
-                        LapleDataModel dataModel = new LapleDataModel(plugin, features);
-
-                        for(IFeaturePlugin feature : features)
-                        {
-                            feature.instanciateExerciseModes(dataModel);
-                        }
-                        new LapleGUIController(dataModel);
+                    for(IFeaturePlugin feature : features)
+                    {
+                        feature.instanciateExerciseModes(dataModel);
                     }
+                    new LapleGUIController(dataModel);
 
                     //just in case ?
                     break;
                 }
             }
 
-        } catch (InstantiationException | IllegalAccessException | ParserException  e1) {
+        } catch (InstantiationException | IllegalAccessException | ParserException | FeaturePluginLoadingException e1) {
             pluginLoadingError(e1.getMessage());
         }
 
@@ -130,8 +123,4 @@ public class LanguageSelectionController implements ActionListener {
         System.exit(0);
     }
 
-    private void pluginLoadingWarning(String errorMessage)
-    {
-        JOptionPane.showMessageDialog(view, errorMessage, "Warning", JOptionPane.WARNING_MESSAGE);
-    }
 }

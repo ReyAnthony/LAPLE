@@ -69,4 +69,7 @@ public class LapleDataModel {
         }
     }
 
+    public List<IFeaturePlugin> getFeatures() {
+        return features;
+    }
 }

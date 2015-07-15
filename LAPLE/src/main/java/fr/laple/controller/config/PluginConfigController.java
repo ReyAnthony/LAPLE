@@ -1,8 +1,6 @@
 package fr.laple.controller.config;
 
 import fr.laple.extensions.IPlugin;
-import fr.laple.extensions.features.plugins.FeaturePluginLoader;
-import fr.laple.extensions.features.plugins.FeaturePluginLoadingException;
 import fr.laple.extensions.features.plugins.IFeaturePlugin;
 import fr.laple.extensions.languages.japanese.ParserException;
 import fr.laple.extensions.languages.plugins.ILanguagePlugin;
@@ -19,10 +17,12 @@ import fr.laple.ztools.tabTools.TabTools;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,16 +74,6 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
             e.printStackTrace();
         }
 
-
-        featurePlugins = new ArrayList<>();
-
-        try {
-            FeaturePluginLoader fpl = new FeaturePluginLoader();
-            featurePlugins = fpl.getLoadedPlugins();
-        } catch (FeaturePluginLoadingException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @Override
@@ -106,23 +96,47 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
             else
             {
 
-                if( !languagePlugins.remove(selectedPlugin))
+                if(selectedPlugin.isRemovable())
                 {
-                    featurePlugins.remove(selectedPlugin);
-                    updateFeaturePluginView();
+                    if( !languagePlugins.remove(selectedPlugin))
+                    {
+                        featurePlugins.remove(selectedPlugin);
+                        updateFeaturePluginView();
+                    }
+                    else
+                    {
+                        updateLanguagePluginView();
+                    }
+
+                    view.getDescription().setText("");
+                    JOptionPane.showMessageDialog(view, "Your changes will be taken into account upon next restart",
+                            "Please restart LAPLE",
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
                 else
                 {
-                    updateLanguagePluginView();
+                    JOptionPane.showMessageDialog(view, "You cannot remove this plugin, you may delete it from the config file " +
+                                    "at your own risk.",
+                        "Error",
+                        JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+        else if(e.getSource().equals(view.getAdd()))
+        {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileFilter(new FileFilter() {
+                @Override
+                public boolean accept(File f) {
+                    return f.toString().endsWith(".jar");
                 }
 
-                view.getDescription().setText("");
-                JOptionPane.showMessageDialog(view, "Your changes will be taken into account upon next restart",
-                        "Please restart LAPLE",
-                        JOptionPane.INFORMATION_MESSAGE);
-
-
-            }
+                @Override
+                public String getDescription() {
+                    return "Jar file";
+                }
+            });
+            chooser.showOpenDialog(view);
         }
     }
 
@@ -130,15 +144,16 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
     public void itemStateChanged(ItemEvent e) {
 
         if(e.getItem().equals("Language plugin"))
-        {
             updateLanguagePluginView();
-        }
         else
-        {
            updateFeaturePluginView();
-        }
 
         view.getDescription().setText("");
+
+        if(view.getPlugins().getComponentCount() > 0)
+        {
+            this.view.getPlugins().setSelectedIndex(0);
+        }
     }
 
     private void updateLanguagePluginView()
@@ -148,7 +163,6 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
             DefaultListModel<ILanguagePlugin> model = new DefaultListModel<>();
             languagePlugins.forEach(model::addElement);
             view.getPlugins().setModel(model);
-
         }
         else
         {
@@ -176,17 +190,12 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
         IPlugin selectedPlugin = ((JList<IPlugin>) e.getSource()).getSelectedValue();
         if (selectedPlugin != null) {
 
-            String desc = "Name : "+selectedPlugin.getName() +  "\nDeveloper : " + selectedPlugin.getDeveloper() +
+            String desc = "Name : "+selectedPlugin.getName() + "\nPath : "+selectedPlugin.getPath() +
+                    "\nDeveloper : " + selectedPlugin.getDeveloper() +
                     "\nOther credits : "+selectedPlugin.otherCredits() +
                     "\nVersion : " + selectedPlugin.getVersion() + "\n" + "Is removable : " + selectedPlugin.isRemovable()
                     +"\n\n"+ selectedPlugin.getDescription();
             view.getDescription().setText(desc);
-
-            if(!selectedPlugin.isRemovable())
-                view.getRemove().setEnabled(false);
-            else
-                view.getRemove().setEnabled(true);
-
         }
 
     }
@@ -207,6 +216,9 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
         //changing state manually ;)
         this.view.getPluginTypes().setSelectedIndex(1);
         this.view.getPluginTypes().setSelectedIndex(0);
+
+        featurePlugins = model.getFeatures();
+
     }
 
     @Override

@@ -10,5 +10,7 @@ public interface IPlugin {
     public String getDeveloper();
     public String getVersion();
     public String otherCredits();
+    public String getPath();
+    public void setPath(String path);
     public default boolean isRemovable(){return true;}
 }
