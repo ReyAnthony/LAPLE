@@ -1,6 +1,6 @@
-package fr.laple.extensions.languages.plugins;
+package fr.laple.extensions.plugins.languages;
 
-import fr.laple.extensions.IPlugin;
+import fr.laple.extensions.plugins.IPlugin;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.model.listable.IListable;
 import fr.laple.model.exercises.exercisemode.IExerciseMode;

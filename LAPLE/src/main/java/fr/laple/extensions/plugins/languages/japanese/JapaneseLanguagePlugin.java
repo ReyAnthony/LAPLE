@@ -1,4 +1,4 @@
-package fr.laple.extensions.languages.japanese;
+package fr.laple.extensions.plugins.languages.japanese;
 
 
 import fr.laple.model.listable.IListable;
@@ -9,9 +9,10 @@ import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.exercises.answers.DrawingMode;
 import fr.laple.model.exercises.answers.FreeInputMode;
 import fr.laple.model.exercises.answers.QcmMode;
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
+import fr.laple.extensions.plugins.languages.ILanguagePlugin;
 import fr.laple.model.language.SymbolContainer;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -50,13 +51,19 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
     }
 
     @Override
-    public String getPath() {
-        return "Internal to LAPLE";
+    public File getPath() {
+        //ok now that's pure tweaking ...
+        return new File("Internal to LAPLE");
     }
 
     @Override
-    public void setPath(String path) {
+    public void setPath(File path) {
         //no need
+    }
+
+    @Override
+    public boolean isInternal() {
+        return true;
     }
 
     @Override
@@ -128,10 +135,5 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
         return this.getName();
     }
 
-
-    public boolean isRemovable()
-    {
-        return false;
-    }
 
 }

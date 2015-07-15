@@ -1,12 +1,10 @@
 package fr.laple.controller.config;
 
-import fr.laple.extensions.IPlugin;
-import fr.laple.extensions.features.plugins.IFeaturePlugin;
-import fr.laple.extensions.languages.japanese.ParserException;
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
-import fr.laple.extensions.languages.plugins.LangPluginLoadingException;
-import fr.laple.extensions.languages.plugins.LanguageConfigFileParser;
-import fr.laple.extensions.languages.plugins.PluginConfigObject;
+import fr.laple.extensions.plugins.IPlugin;
+import fr.laple.extensions.plugins.PluginLoadingException;
+import fr.laple.extensions.plugins.features.FeatureConfigFileParser;
+import fr.laple.extensions.plugins.features.IFeaturePlugin;
+import fr.laple.extensions.plugins.languages.ILanguagePlugin;
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
 import fr.laple.model.listable.RootData;
@@ -57,14 +55,17 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
 
         languagePlugins = new ArrayList<>();
 
+        //TODO
+         /*
         try {
+
             LanguageConfigFileParser lcfp = new LanguageConfigFileParser();
             for(PluginConfigObject pco : lcfp.getLanguagePluginsList() )
             {
                 languagePlugins.add((ILanguagePlugin) pco.getPlugin().newInstance());
             }
 
-        } catch (LangPluginLoadingException e) {
+        } catch (PluginLoadingException e) {
             e.printStackTrace();
         } catch (ParserException e) {
             e.printStackTrace();
@@ -74,6 +75,7 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
             e.printStackTrace();
         }
 
+        */
     }
 
     @Override
@@ -96,11 +98,19 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
             else
             {
 
-                if(selectedPlugin.isRemovable())
+                if(!selectedPlugin.isInternal())
                 {
-                    if( !languagePlugins.remove(selectedPlugin))
+                    if(!languagePlugins.remove(selectedPlugin))
                     {
                         featurePlugins.remove(selectedPlugin);
+
+                        try {
+                            FeatureConfigFileParser fcfp = new FeatureConfigFileParser();
+                            fcfp.removePlugin((IFeaturePlugin) selectedPlugin);
+                        } catch (PluginLoadingException e1) {
+                            e1.printStackTrace();
+                        }
+
                         updateFeaturePluginView();
                     }
                     else
@@ -193,7 +203,7 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
             String desc = "Name : "+selectedPlugin.getName() + "\nPath : "+selectedPlugin.getPath() +
                     "\nDeveloper : " + selectedPlugin.getDeveloper() +
                     "\nOther credits : "+selectedPlugin.otherCredits() +
-                    "\nVersion : " + selectedPlugin.getVersion() + "\n" + "Is removable : " + selectedPlugin.isRemovable()
+                    "\nVersion : " + selectedPlugin.getVersion() + "\n" + "Is internal : " + selectedPlugin.isInternal()
                     +"\n\n"+ selectedPlugin.getDescription();
             view.getDescription().setText(desc);
         }
@@ -218,7 +228,6 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
         this.view.getPluginTypes().setSelectedIndex(0);
 
         featurePlugins = model.getFeatures();
-
     }
 
     @Override

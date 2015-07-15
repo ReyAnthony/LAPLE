@@ -1,7 +1,7 @@
 package fr.laple.model.datamodel;
 
-import fr.laple.extensions.features.plugins.IFeaturePlugin;
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
+import fr.laple.extensions.plugins.features.IFeaturePlugin;
+import fr.laple.extensions.plugins.languages.ILanguagePlugin;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.language.SymbolContainer;

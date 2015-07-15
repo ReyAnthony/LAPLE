@@ -1,4 +1,4 @@
-package fr.laple.extensions.languages.japanese;
+package fr.laple.extensions.plugins.languages.japanese;
 
 /**
  * Created by anthonyrey on 06/06/2015.

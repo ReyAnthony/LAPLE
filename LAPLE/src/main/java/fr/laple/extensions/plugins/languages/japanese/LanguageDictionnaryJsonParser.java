@@ -1,4 +1,4 @@
-package fr.laple.extensions.languages.japanese;
+package fr.laple.extensions.plugins.languages.japanese;
 
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;

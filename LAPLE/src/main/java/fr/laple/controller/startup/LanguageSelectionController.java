@@ -1,14 +1,13 @@
 package fr.laple.controller.startup;
 
 import fr.laple.controller.LapleGUIController;
-import fr.laple.extensions.features.plugins.FeaturePluginLoadingException;
-import fr.laple.extensions.languages.plugins.LangPluginLoadingException;
-import fr.laple.extensions.features.plugins.FeaturePluginLoader;
-import fr.laple.extensions.features.plugins.IFeaturePlugin;
-import fr.laple.extensions.languages.japanese.ParserException;
-import fr.laple.extensions.languages.plugins.ILanguagePlugin;
-import fr.laple.extensions.languages.plugins.LanguageConfigFileParser;
-import fr.laple.extensions.languages.plugins.PluginConfigObject;
+import fr.laple.extensions.plugins.ConfigFileParser;
+import fr.laple.extensions.plugins.IPlugin;
+import fr.laple.extensions.plugins.PluginLoader;
+import fr.laple.extensions.plugins.features.FeatureConfigFileParser;
+import fr.laple.extensions.plugins.PluginLoadingException;
+import fr.laple.extensions.plugins.features.IFeaturePlugin;
+import fr.laple.extensions.plugins.languages.ILanguagePlugin;
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.view.startup.LanguageSelectionView;
 
@@ -21,12 +20,10 @@ import java.util.List;
 /**
  * Created by anthonyrey on 01/06/2015.
  */
-//TODO test the Load of plugins outside the classpath
-//TODO refactor
 public class LanguageSelectionController implements ActionListener {
 
     private LanguageSelectionView view;
-    private LanguageConfigFileParser lcfp;
+    private PluginLoader langLoader;
 
     public LanguageSelectionController()
     {
@@ -34,9 +31,9 @@ public class LanguageSelectionController implements ActionListener {
         this.view.getValidationButton().addActionListener(this);
         loadConfig();
 
-        List<String> languageList = getLanguageList();
+        List<IPlugin> languageList = getLanguageList();
 
-        for(String s : languageList)
+        for(IPlugin s : languageList)
         {
             view.getChoices().addItem(s);
         }
@@ -47,21 +44,21 @@ public class LanguageSelectionController implements ActionListener {
     {
 
         try {
-            lcfp = new LanguageConfigFileParser();
-        } catch (LangPluginLoadingException e) {
-
-            pluginLoadingError(e.getMessage());
+           langLoader = new PluginLoader(new ConfigFileParser("/fr/laple/extensions/languages/",
+                   "language_plugins.json"));
+        } catch (PluginLoadingException e) {
+            e.printStackTrace();
         }
     }
 
-    private List<String> getLanguageList()
+    private List<IPlugin> getLanguageList()
     {
 
-        List<String> languageList = new ArrayList<>();
+        List<IPlugin> languageList = new ArrayList<>();
 
-        for(PluginConfigObject pco : lcfp.getLanguagePluginsList())
+        for(IPlugin plugin : langLoader.getDummies())
         {
-            languageList.add(pco.getName());
+            languageList.add(plugin);
         }
 
         return languageList;
@@ -71,46 +68,28 @@ public class LanguageSelectionController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        String selected = ((String) view.getChoices().getSelectedItem());
-
         try {
-            for(PluginConfigObject pco : lcfp.getLanguagePluginsList())
-            {
-                if(pco.getName().equals(selected)) {
-                    ILanguagePlugin plugin = (ILanguagePlugin) pco.getPlugin().newInstance();
-                    //TODO LOAD lang plugins
+                ILanguagePlugin plugin = (ILanguagePlugin)
+                        langLoader.getLoadedPlugins((IPlugin) view.getChoices().getSelectedItem());
 
-                    /*
-                        The code here is a bit tricky :
-                        First we create list of IFeaturePlugin
-                        The we load all plugins from the feature plugin loader
-                        If there is an error, we print a message
-                            then we iter over the feature (so we actually dont)
-                        else
-                            we really iter over them and thus they are loaded
+                List<IFeaturePlugin> features = new ArrayList<>();
 
-                         Résumé : one plugin error ? plugins are not used
-                     */
+                PluginLoader fpl = new PluginLoader(new FeatureConfigFileParser());
 
-                    List<IFeaturePlugin> features = new ArrayList<>();
-
-                    FeaturePluginLoader fpl = new FeaturePluginLoader();
-                    features = fpl.getLoadedPlugins();
-
-                    LapleDataModel dataModel = new LapleDataModel(plugin, features);
-
-                    for(IFeaturePlugin feature : features)
-                    {
-                        feature.instanciateExerciseModes(dataModel);
-                    }
-                    new LapleGUIController(dataModel);
-
-                    //just in case ?
-                    break;
+                for(IPlugin p : fpl.getLoadedPlugins())
+                {
+                    features.add((IFeaturePlugin) p);
                 }
-            }
 
-        } catch (InstantiationException | IllegalAccessException | ParserException | FeaturePluginLoadingException e1) {
+                LapleDataModel dataModel = new LapleDataModel(plugin, features);
+
+                for(IFeaturePlugin feature : features)
+                {
+                    feature.instanciateExerciseModes(dataModel);
+                }
+                new LapleGUIController(dataModel);
+
+        } catch (PluginLoadingException e1) {
             pluginLoadingError(e1.getMessage());
         }
 

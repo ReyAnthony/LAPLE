@@ -7,7 +7,7 @@ import java.awt.*;
 
 /**
  * This class is a prompt for selecting avalaible languages. It uses entry points from language plugins to determine the language list
- * @see fr.laple.extensions.languages.plugins.ILanguagePlugin
+ * @see fr.laple.extensions.plugins.languages.ILanguagePlugin
  * @author anthonyrey
  *
  */

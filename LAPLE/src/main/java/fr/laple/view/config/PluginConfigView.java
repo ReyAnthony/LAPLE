@@ -1,6 +1,6 @@
 package fr.laple.view.config;
 
-import fr.laple.extensions.IPlugin;
+import fr.laple.extensions.plugins.IPlugin;
 
 import javax.swing.*;
 import java.awt.*;

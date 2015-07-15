@@ -15,6 +15,7 @@ public abstract class AbstractAnswerMode {
     public abstract boolean testIfAnswerAndQuestionAreCompatible(IExerciseMode mode);
     public abstract AbstractExerciseController getAssociatedActionListener();
 
+    //Done before knowing about default methods
     public String toString(){
         return "Please redefine this method";
     }

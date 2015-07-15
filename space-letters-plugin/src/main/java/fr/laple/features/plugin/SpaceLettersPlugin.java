@@ -1,10 +1,11 @@
 package fr.laple.features.plugin;
 
-import fr.laple.extensions.features.plugins.IFeaturePlugin;
+import fr.laple.extensions.plugins.features.IFeaturePlugin;
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class SpaceLettersPlugin implements IFeaturePlugin {
 
-    private String path;
+    private File path;
 
     @Override
     public void instanciateExerciseModes(LapleDataModel lapleDataModel) {
@@ -56,13 +57,18 @@ public class SpaceLettersPlugin implements IFeaturePlugin {
     }
 
     @Override
-    public String getPath() {
+    public File getPath() {
         return path;
     }
 
     @Override
-    public void setPath(String s) {
-        this.path = s;
+    public void setPath(File file) {
+        this.path = file;
+    }
+
+    @Override
+    public boolean isInternal() {
+        return false;
     }
 
     public String toString()

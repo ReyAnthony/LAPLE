@@ -1,6 +1,6 @@
-package fr.laple.extensions.features.plugins;
+package fr.laple.extensions.plugins.features;
 
-import fr.laple.extensions.IPlugin;
+import fr.laple.extensions.plugins.IPlugin;
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
 

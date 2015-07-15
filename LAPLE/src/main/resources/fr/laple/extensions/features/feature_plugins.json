@@ -1,12 +1,14 @@
 {
-  "feature_plugins":[
+  "plugins":[
     {
       "name":"Space letters",
-      "path":"/Users/anthonyrey/Documents/Projets/Java/LAPLE/space-letters-plugin/target/space-letters-plugin-1.0-SNAPSHOT.jar"
+      "path":"/Users/anthonyrey/Documents/Projets/Java/LAPLE/space-letters-plugin/target/space-letters-plugin-1.0-SNAPSHOT.jar",
+      "internal":false
     },
     {
-      "name":"Test",
-      "path":"/Users/anthonyrey/Documents/Projets/Java/LAPLE/space-letters-plugin/target/space-letters-plugin-1."
+      "name":"On purpose buggy plugin",
+      "path":"/Users/anthonyrey/Documents/Projets/Java/LAPLE/space-letters-plugin/target/space-letters-plugin-1.",
+      "internal":false
     }
   ]
 }
