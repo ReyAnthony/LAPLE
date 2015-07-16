@@ -1,10 +1,12 @@
 package fr.laple.controller.config;
 
+import fr.laple.extensions.plugins.ConfigFileParser;
 import fr.laple.extensions.plugins.IPlugin;
 import fr.laple.extensions.plugins.PluginLoadingException;
 import fr.laple.extensions.plugins.PluginLoadingFatalException;
 import fr.laple.extensions.plugins.features.FeatureConfigFileParser;
 import fr.laple.extensions.plugins.features.IFeaturePlugin;
+import fr.laple.extensions.plugins.languages.ILanguagePlugin;
 import fr.laple.extensions.plugins.languages.LanguageConfigFileParser;
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
@@ -35,10 +37,9 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
     private JTabbedPane tabbedPane;
     private LapleDataModel model;
 
-    private List<IPlugin> languagePlugins;
+    private List<ILanguagePlugin> languagePlugins;
     private List<IFeaturePlugin> featurePlugins;
-
-    //TODO make listable clases not instiables ? and use a homebrew way
+    
     public PluginConfigController()
     {
         this.view = new PluginConfigView();
@@ -52,31 +53,8 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
         view.getPluginTypes().addItem("Language plugin");
         view.getPluginTypes().addItem("Feature plugin");
 
-        // LOADING plugins
 
         languagePlugins = new ArrayList<>();
-
-        //TODO
-         /*
-        try {
-
-            LanguageConfigFileParser lcfp = new LanguageConfigFileParser();
-            for(PluginConfigObject pco : lcfp.getLanguagePluginsList() )
-            {
-                languagePlugins.add((ILanguagePlugin) pco.getPlugin().newInstance());
-            }
-
-        } catch (PluginLoadingException e) {
-            e.printStackTrace();
-        } catch (ParserException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-        */
     }
 
     @Override
@@ -227,18 +205,27 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
         this.tabbedPane = tabbedPane;
         this.model = model;
 
+        featurePlugins = model.getFeatures();
+        try {
+            ConfigFileParser parser = new LanguageConfigFileParser();
+            List<IPlugin> dummies = parser.getDummies();
+
+
+            for(IPlugin plugin : dummies)
+            {
+                languagePlugins.add((ILanguagePlugin) parser.getRealPlugin(plugin, false));
+            }
+        } catch (PluginLoadingFatalException e) {
+            e.printStackTrace();
+        } catch (PluginLoadingException e) {
+            e.printStackTrace();
+        }
+
         TabTools.swapTab(tabbedPane, this.getView());
 
         //changing state manually ;)
         this.view.getPluginTypes().setSelectedIndex(1);
         this.view.getPluginTypes().setSelectedIndex(0);
-
-        featurePlugins = model.getFeatures();
-        try {
-            languagePlugins = new LanguageConfigFileParser().getDummies();
-        } catch (PluginLoadingFatalException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

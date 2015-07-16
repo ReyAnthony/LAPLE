@@ -37,7 +37,7 @@ public class PluginLoader {
 
         try {
 
-            ip = cfp.getRealPlugin(chosen);
+            ip = cfp.getRealPlugin(chosen, true);
 
         } catch (PluginLoadingException e) {
 

@@ -112,7 +112,9 @@ public class ConfigFileParser {
         }
     }
 
-    public IPlugin getRealPlugin(IPlugin chosen) throws PluginLoadingException, PluginLoadingFatalException {
+    public IPlugin getRealPlugin(IPlugin chosen, boolean withData) throws PluginLoadingException, PluginLoadingFatalException {
+
+        //with data = get the full class instance, otherwize only get superficial data
         //if internal, we get the name of the plugin : class from the LAPLE.jar manifest
         IPlugin toReturn;
 
@@ -131,6 +133,20 @@ public class ConfigFileParser {
 
                 //Class clazz = cl.loadClass(manifest.getMainAttributes().getValue(chosen.getName()));
                 toReturn = (IPlugin) clazz.newInstance();
+
+                if(!withData)
+                {
+                    String name = toReturn.getName();
+                    File path = toReturn.getPath();
+                    boolean isInternal = toReturn.isInternal();
+                    String version = toReturn.getVersion();
+                    String desc = toReturn.getDescription();
+                    String dev = toReturn.getDeveloper();
+                    String otherCredits = toReturn.otherCredits();
+
+                    toReturn = new DummyPlugin(name, path, isInternal, desc, dev, version, otherCredits);
+
+                }
 
                 //internal = no set path
 
@@ -151,6 +167,20 @@ public class ConfigFileParser {
 
                 toReturn = (IPlugin) clazz.newInstance();
                 toReturn.setPath(chosen.getPath());
+
+                if(!withData)
+                {
+                    String name = toReturn.getName();
+                    File path = toReturn.getPath();
+                    boolean isInternal = toReturn.isInternal();
+                    String version = toReturn.getVersion();
+                    String desc = toReturn.getDescription();
+                    String dev = toReturn.getDeveloper();
+                    String otherCredits = toReturn.otherCredits();
+
+                    toReturn = new DummyPlugin(name, path, isInternal, desc, dev, version, otherCredits);
+
+                }
 
 
             } catch (Exception e) {

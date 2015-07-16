@@ -20,12 +20,36 @@ public class DummyPlugin implements IPlugin, ILanguagePlugin, IFeaturePlugin {
     private String name;
     private File path;
     private boolean internal;
+    private String description;
+    private String developer;
+    private String version;
+    private String otherCredits;
 
     public DummyPlugin(String name, File path, boolean isInternal)
     {
         this.name = name;
         this.path = path;
         this.internal = isInternal;
+
+        this.description = "We were unable to load this plugin, so we only have a " +
+                "limited amount of information to display";
+        this.developer = "Unknown";
+        this.version = "Unknown";
+        this.otherCredits = "Unknown";
+    }
+
+    public DummyPlugin(String name, File path, boolean isInternal, String description, String developer,
+                       String version, String otherCredits)
+    {
+        this.name = name;
+        this.path = path;
+        this.internal = isInternal;
+
+        this.description = description;
+        this.developer = developer;
+        this.version = version;
+        this.otherCredits = otherCredits;
+
     }
 
     @Override
@@ -35,23 +59,22 @@ public class DummyPlugin implements IPlugin, ILanguagePlugin, IFeaturePlugin {
 
     @Override
     public String getDescription() {
-        return "We were unable to load this plugin, so we only have a " +
-                "limited amount of information to display";
+        return description;
     }
 
     @Override
     public String getDeveloper() {
-        return "Unknown";
+        return developer;
     }
 
     @Override
     public String getVersion() {
-        return "Unknown";
+        return version;
     }
 
     @Override
     public String otherCredits() {
-        return "Unknown";
+        return otherCredits;
     }
 
     @Override
