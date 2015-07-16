@@ -1,7 +1,5 @@
 package fr.laple.extensions.plugins;
 
-import fr.laple.extensions.plugins.features.IFeaturePlugin;
-
 import javax.json.*;
 import java.io.*;
 import java.net.JarURLConnection;
@@ -15,7 +13,7 @@ import java.util.jar.Attributes;
 /**
  * Created by anthonyrey on 15/07/2015.
  */
-public class ConfigFileParser {
+public class PluginConfigFileParser {
 
 
     protected String resourcePath;
@@ -26,7 +24,7 @@ public class ConfigFileParser {
     protected String fullUserPath;
     protected String fullJarPath;
 
-    public ConfigFileParser(String resourcePath, String configFile) throws PluginLoadingFatalException {
+    public PluginConfigFileParser(String resourcePath, String configFile) throws PluginLoadingFatalException {
 
         this.resourcePath = resourcePath;
         this.configFile = configFile;
@@ -70,7 +68,7 @@ public class ConfigFileParser {
 
     }
 
-    public void removePlugin(IFeaturePlugin plugin) throws PluginLoadingException {
+    public void removePlugin(IPlugin plugin) throws PluginLoadingException {
 
         try {
             InputStream configFile = new FileInputStream(fullUserPath);
@@ -135,18 +133,7 @@ public class ConfigFileParser {
                 toReturn = (IPlugin) clazz.newInstance();
 
                 if(!withData)
-                {
-                    String name = toReturn.getName();
-                    File path = toReturn.getPath();
-                    boolean isInternal = toReturn.isInternal();
-                    String version = toReturn.getVersion();
-                    String desc = toReturn.getDescription();
-                    String dev = toReturn.getDeveloper();
-                    String otherCredits = toReturn.otherCredits();
-
-                    toReturn = new DummyPlugin(name, path, isInternal, desc, dev, version, otherCredits);
-
-                }
+                    toReturn = getWithoutDataPlugin(toReturn);
 
                 //internal = no set path
 
@@ -169,19 +156,7 @@ public class ConfigFileParser {
                 toReturn.setPath(chosen.getPath());
 
                 if(!withData)
-                {
-                    String name = toReturn.getName();
-                    File path = toReturn.getPath();
-                    boolean isInternal = toReturn.isInternal();
-                    String version = toReturn.getVersion();
-                    String desc = toReturn.getDescription();
-                    String dev = toReturn.getDeveloper();
-                    String otherCredits = toReturn.otherCredits();
-
-                    toReturn = new DummyPlugin(name, path, isInternal, desc, dev, version, otherCredits);
-
-                }
-
+                    toReturn = getWithoutDataPlugin(toReturn);
 
             } catch (Exception e) {
 
@@ -192,6 +167,19 @@ public class ConfigFileParser {
         return toReturn;
     }
 
+    private IPlugin getWithoutDataPlugin(IPlugin plugin)
+    {
+        String name = plugin.getName();
+        File path = plugin.getPath();
+        boolean isInternal = plugin.isInternal();
+        String version = plugin.getVersion();
+        String desc = plugin.getDescription();
+        String dev = plugin.getDeveloper();
+        String otherCredits = plugin.otherCredits();
+
+        return new DummyPlugin(name, path, isInternal, desc, dev, version, otherCredits);
+
+    }
 
     public ArrayList<IPlugin> getDummies() throws PluginLoadingFatalException {
 

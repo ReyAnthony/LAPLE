@@ -1,5 +1,6 @@
 package fr.laple.model.datamodel;
 
+import fr.laple.extensions.plugins.IPlugin;
 import fr.laple.extensions.plugins.features.IFeaturePlugin;
 import fr.laple.extensions.plugins.languages.ILanguagePlugin;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
@@ -20,11 +21,14 @@ public class LapleDataModel {
 
     private ILanguagePlugin languagePlugin;
     private List<IFeaturePlugin> features;
+    private List<IPlugin> allDummyLanguagePlugins;
 
-    public LapleDataModel(ILanguagePlugin languagePlugin, List<IFeaturePlugin> features)
+    public LapleDataModel(ILanguagePlugin languagePlugin, List<IFeaturePlugin> features,
+                          List<IPlugin> allDummyLanguagePlugins)
     {
         this.languagePlugin = languagePlugin;
         this.features = features;
+        this.allDummyLanguagePlugins = allDummyLanguagePlugins;
     }
 
     public ArrayList<SymbolContainer> getSymbolContainer() {
@@ -71,5 +75,9 @@ public class LapleDataModel {
 
     public List<IFeaturePlugin> getFeatures() {
         return features;
+    }
+
+    public List<IPlugin> getAllDummyLanguagePlugins() {
+        return allDummyLanguagePlugins;
     }
 }

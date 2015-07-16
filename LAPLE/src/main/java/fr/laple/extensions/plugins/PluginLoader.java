@@ -10,9 +10,9 @@ import java.util.List;
 public class PluginLoader {
 
     private List<IPlugin> dummies;
-    private ConfigFileParser cfp;
+    private PluginConfigFileParser cfp;
 
-    public PluginLoader(ConfigFileParser cfp) throws PluginLoadingFatalException {
+    public PluginLoader(PluginConfigFileParser cfp) throws PluginLoadingFatalException {
 
         dummies = new ArrayList<>();
 
@@ -30,14 +30,14 @@ public class PluginLoader {
         dummies.add(chosen);
     }
 
-    private IPlugin loadRealPlugins(IPlugin chosen)
+    private IPlugin loadRealPlugins(IPlugin chosen, boolean withData)
     {
 
         IPlugin ip = chosen;
 
         try {
 
-            ip = cfp.getRealPlugin(chosen, true);
+            ip = cfp.getRealPlugin(chosen, withData);
 
         } catch (PluginLoadingException e) {
 
@@ -55,36 +55,25 @@ public class PluginLoader {
         return ip;
     }
 
-    /**
-     * Dummies are classes without any data but those needed by an IPlugin
-     * So you can put them in a list without taking all the heap space ..
-     * @return
-     */
-    public List<IPlugin> getDummies()
-    {
-        return dummies;
-    }
-
-
-    public List<IPlugin> getLoadedPlugins()
+    public List<IPlugin> getLoadedPlugins(boolean withData)
     {
         List<IPlugin> plugins = new ArrayList<>();
 
         for(IPlugin ip : dummies)
         {
-            plugins.add(loadRealPlugins(ip));
+            plugins.add(loadRealPlugins(ip, withData));
         }
 
         return plugins;
     }
 
-    public IPlugin getLoadedPlugins(IPlugin plugin)
+    public IPlugin getLoadedPlugins(IPlugin plugin, boolean withData)
     {
         for(IPlugin ip : dummies)
         {
             //TODO might not be enough testing
             if(plugin.getName().equals(ip.getName()))
-                return loadRealPlugins(ip);
+                return loadRealPlugins(ip, withData);
         }
 
         //if it does not work, we return the dummy

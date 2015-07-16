@@ -1,13 +1,11 @@
 package fr.laple.controller.config;
 
-import fr.laple.extensions.plugins.ConfigFileParser;
 import fr.laple.extensions.plugins.IPlugin;
 import fr.laple.extensions.plugins.PluginLoadingException;
 import fr.laple.extensions.plugins.PluginLoadingFatalException;
-import fr.laple.extensions.plugins.features.FeatureConfigFileParser;
+import fr.laple.extensions.plugins.features.FeaturePluginConfigFileParser;
 import fr.laple.extensions.plugins.features.IFeaturePlugin;
-import fr.laple.extensions.plugins.languages.ILanguagePlugin;
-import fr.laple.extensions.plugins.languages.LanguageConfigFileParser;
+import fr.laple.extensions.plugins.languages.LanguagePluginConfigFileParser;
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
 import fr.laple.model.listable.RootData;
@@ -37,9 +35,9 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
     private JTabbedPane tabbedPane;
     private LapleDataModel model;
 
-    private List<ILanguagePlugin> languagePlugins;
+    private List<IPlugin> languagePlugins;
     private List<IFeaturePlugin> featurePlugins;
-    
+
     public PluginConfigController()
     {
         this.view = new PluginConfigView();
@@ -49,12 +47,9 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
         view.getPluginTypes().addItemListener(this);
         view.getPlugins().addListSelectionListener(this);
 
-
         view.getPluginTypes().addItem("Language plugin");
         view.getPluginTypes().addItem("Feature plugin");
 
-
-        languagePlugins = new ArrayList<>();
     }
 
     @Override
@@ -84,8 +79,8 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
                         featurePlugins.remove(selectedPlugin);
 
                         try {
-                            FeatureConfigFileParser fcfp = new FeatureConfigFileParser();
-                            fcfp.removePlugin((IFeaturePlugin) selectedPlugin);
+                            FeaturePluginConfigFileParser fcfp = new FeaturePluginConfigFileParser();
+                            fcfp.removePlugin(selectedPlugin);
 
                         } catch (PluginLoadingFatalException e1) {
                             //fatal error quit (could'nt create file etc..)
@@ -99,6 +94,20 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
                     }
                     else
                     {
+                        languagePlugins.remove(selectedPlugin);
+
+                        try {
+                            LanguagePluginConfigFileParser fcfp = new LanguagePluginConfigFileParser();
+                            fcfp.removePlugin(selectedPlugin);
+
+                        } catch (PluginLoadingFatalException e1) {
+                            //fatal error quit (could'nt create file etc..)
+                            e1.printStackTrace();
+                        } catch (PluginLoadingException e1) {
+                            //could not delete
+                            e1.printStackTrace();
+                        }
+
                         updateLanguagePluginView();
                     }
 
@@ -206,20 +215,8 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
         this.model = model;
 
         featurePlugins = model.getFeatures();
-        try {
-            ConfigFileParser parser = new LanguageConfigFileParser();
-            List<IPlugin> dummies = parser.getDummies();
-
-
-            for(IPlugin plugin : dummies)
-            {
-                languagePlugins.add((ILanguagePlugin) parser.getRealPlugin(plugin, false));
-            }
-        } catch (PluginLoadingFatalException e) {
-            e.printStackTrace();
-        } catch (PluginLoadingException e) {
-            e.printStackTrace();
-        }
+        languagePlugins = new ArrayList<>();
+        languagePlugins = model.getAllDummyLanguagePlugins();
 
         TabTools.swapTab(tabbedPane, this.getView());
 
