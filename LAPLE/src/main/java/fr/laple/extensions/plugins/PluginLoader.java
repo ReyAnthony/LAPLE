@@ -12,7 +12,7 @@ public class PluginLoader {
     private List<IPlugin> dummies;
     private ConfigFileParser cfp;
 
-    public PluginLoader(ConfigFileParser cfp) throws PluginLoadingException {
+    public PluginLoader(ConfigFileParser cfp) throws PluginLoadingFatalException {
 
         dummies = new ArrayList<>();
 
@@ -24,7 +24,8 @@ public class PluginLoader {
         }
     }
 
-    private void loadDummies(IPlugin chosen) throws PluginLoadingException
+    //dummies are not really used for IFeaturePlugins
+    private void loadDummies(IPlugin chosen)
     {
         dummies.add(chosen);
     }
@@ -34,17 +35,21 @@ public class PluginLoader {
 
         IPlugin ip = chosen;
 
-        //if not internal
         try {
 
             ip = cfp.getRealPlugin(chosen);
 
-        } catch (Exception e) {
+        } catch (PluginLoadingException e) {
 
             //If there is an error when loading, we create a dummy plugin, so we can always review it later
-            JOptionPane.showMessageDialog(null, "There was an error loading feature \" " + chosen.getName() + " \" ",
+            JOptionPane.showMessageDialog(null, e.getMessage(),
                     "Error", JOptionPane.WARNING_MESSAGE);
 
+        } catch (PluginLoadingFatalException e) {
+            //if fatal
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
 
         return ip;

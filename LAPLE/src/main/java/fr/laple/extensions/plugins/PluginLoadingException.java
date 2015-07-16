@@ -5,9 +5,8 @@ package fr.laple.extensions.plugins;
  */
 public class PluginLoadingException extends Exception{
 
-    public PluginLoadingException()
+    public PluginLoadingException(String plugin, String error)
     {
-        super("Error with the feature plugin configuration file, " +
-                "check feature_plugins.json, software parameters or reinstall the software");
+        super("Error with the following plugin : " + plugin+"\n"+error );
     }
 }

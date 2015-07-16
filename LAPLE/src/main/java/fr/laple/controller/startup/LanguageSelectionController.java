@@ -1,13 +1,11 @@
 package fr.laple.controller.startup;
 
 import fr.laple.controller.LapleGUIController;
-import fr.laple.extensions.plugins.ConfigFileParser;
-import fr.laple.extensions.plugins.IPlugin;
-import fr.laple.extensions.plugins.PluginLoader;
+import fr.laple.extensions.plugins.*;
 import fr.laple.extensions.plugins.features.FeatureConfigFileParser;
-import fr.laple.extensions.plugins.PluginLoadingException;
 import fr.laple.extensions.plugins.features.IFeaturePlugin;
 import fr.laple.extensions.plugins.languages.ILanguagePlugin;
+import fr.laple.extensions.plugins.languages.LanguageConfigFileParser;
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.view.startup.LanguageSelectionView;
 
@@ -44,10 +42,9 @@ public class LanguageSelectionController implements ActionListener {
     {
 
         try {
-           langLoader = new PluginLoader(new ConfigFileParser("/fr/laple/extensions/languages/",
-                   "language_plugins.json"));
-        } catch (PluginLoadingException e) {
-            e.printStackTrace();
+           langLoader = new PluginLoader(new LanguageConfigFileParser());
+        } catch (PluginLoadingFatalException e) {
+            pluginLoadingError(e.getMessage());
         }
     }
 
@@ -89,8 +86,8 @@ public class LanguageSelectionController implements ActionListener {
                 }
                 new LapleGUIController(dataModel);
 
-        } catch (PluginLoadingException e1) {
-            pluginLoadingError(e1.getMessage());
+        } catch (PluginLoadingFatalException e1) {
+           pluginLoadingError(e1.getMessage());
         }
 
         view.dispose();

@@ -26,7 +26,7 @@ public class ConfigFileParser {
     protected String fullUserPath;
     protected String fullJarPath;
 
-    public ConfigFileParser(String resourcePath, String configFile) throws PluginLoadingException {
+    public ConfigFileParser(String resourcePath, String configFile) throws PluginLoadingFatalException {
 
         this.resourcePath = resourcePath;
         this.configFile = configFile;
@@ -42,12 +42,12 @@ public class ConfigFileParser {
             createFileIfNotExist();
         }catch (IOException e)
         {
-            throw new PluginLoadingException();
+            throw new PluginLoadingFatalException(configFile, e.getMessage());
         }
 
     }
 
-    private void createFileIfNotExist() throws IOException, PluginLoadingException {
+    private void createFileIfNotExist() throws IOException, PluginLoadingFatalException {
 
         File f = new File(fullUserPath);
         if(!f.exists())
@@ -55,7 +55,7 @@ public class ConfigFileParser {
             if(!new File(userPathNofile).exists())
             {
                 if(!new File(userPathNofile).mkdirs())
-                    throw new PluginLoadingException();
+                    throw new PluginLoadingFatalException(configFile, "Could not create "+userPathNofile);
             }
 
             Files.copy(this.getClass().getResourceAsStream(fullJarPath), Paths.get(new File(fullUserPath).toURI()));
@@ -108,20 +108,18 @@ public class ConfigFileParser {
         }
         catch(Exception e)
         {
-            throw new PluginLoadingException();
+            throw new PluginLoadingException(plugin.getName() ,e.getMessage());
         }
     }
 
-    public IPlugin getRealPlugin(IPlugin chosen) throws PluginLoadingException
-    {
+    public IPlugin getRealPlugin(IPlugin chosen) throws PluginLoadingException, PluginLoadingFatalException {
         //if internal, we get the name of the plugin : class from the LAPLE.jar manifest
         IPlugin toReturn;
 
         if(chosen.isInternal())
         {
 
-            //TODO if error on internal == fatal
-            //TODO fatal exception / non fatal
+            //if internal not loading == fatal error
 
             try {
 
@@ -138,8 +136,7 @@ public class ConfigFileParser {
 
             } catch (Exception e) {
 
-
-                throw new PluginLoadingException();
+                throw new PluginLoadingFatalException(chosen.getName(), e.getMessage() );
             }
 
         }
@@ -155,9 +152,10 @@ public class ConfigFileParser {
                 toReturn = (IPlugin) clazz.newInstance();
                 toReturn.setPath(chosen.getPath());
 
+
             } catch (Exception e) {
 
-                throw new PluginLoadingException();
+                throw new PluginLoadingException(chosen.getName() , e.getMessage());
             }
         }
 
@@ -165,7 +163,7 @@ public class ConfigFileParser {
     }
 
 
-    public ArrayList<IPlugin> getDummies() throws PluginLoadingException {
+    public ArrayList<IPlugin> getDummies() throws PluginLoadingFatalException {
 
         ArrayList<IPlugin> plugins = new ArrayList<>();
 
@@ -191,7 +189,7 @@ public class ConfigFileParser {
         }
         catch(Exception e)
         {
-            throw new PluginLoadingException();
+            throw new PluginLoadingFatalException("Dummy", e.getMessage());
         }
 
         return plugins;

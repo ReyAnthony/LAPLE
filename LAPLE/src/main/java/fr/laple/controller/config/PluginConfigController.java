@@ -2,9 +2,10 @@ package fr.laple.controller.config;
 
 import fr.laple.extensions.plugins.IPlugin;
 import fr.laple.extensions.plugins.PluginLoadingException;
+import fr.laple.extensions.plugins.PluginLoadingFatalException;
 import fr.laple.extensions.plugins.features.FeatureConfigFileParser;
 import fr.laple.extensions.plugins.features.IFeaturePlugin;
-import fr.laple.extensions.plugins.languages.ILanguagePlugin;
+import fr.laple.extensions.plugins.languages.LanguageConfigFileParser;
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
 import fr.laple.model.listable.RootData;
@@ -34,7 +35,7 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
     private JTabbedPane tabbedPane;
     private LapleDataModel model;
 
-    private List<ILanguagePlugin> languagePlugins;
+    private List<IPlugin> languagePlugins;
     private List<IFeaturePlugin> featurePlugins;
 
     //TODO make listable clases not instiables ? and use a homebrew way
@@ -107,7 +108,12 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
                         try {
                             FeatureConfigFileParser fcfp = new FeatureConfigFileParser();
                             fcfp.removePlugin((IFeaturePlugin) selectedPlugin);
+
+                        } catch (PluginLoadingFatalException e1) {
+                            //fatal error quit (could'nt create file etc..)
+                            e1.printStackTrace();
                         } catch (PluginLoadingException e1) {
+                            //could not delete
                             e1.printStackTrace();
                         }
 
@@ -170,7 +176,7 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
     {
         if(languagePlugins != null && !languagePlugins.isEmpty() )
         {
-            DefaultListModel<ILanguagePlugin> model = new DefaultListModel<>();
+            DefaultListModel<IPlugin> model = new DefaultListModel<>();
             languagePlugins.forEach(model::addElement);
             view.getPlugins().setModel(model);
         }
@@ -228,6 +234,11 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
         this.view.getPluginTypes().setSelectedIndex(0);
 
         featurePlugins = model.getFeatures();
+        try {
+            languagePlugins = new LanguageConfigFileParser().getDummies();
+        } catch (PluginLoadingFatalException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
