@@ -4,11 +4,6 @@
       "name":"Japanese",
       "path":"",
       "internal":true
-    },
-    {
-      "name":"Russian",
-      "path":"Obvisouly wrong test path",
-      "internal":false
     }
   ]
 }
