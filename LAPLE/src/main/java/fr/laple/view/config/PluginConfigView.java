@@ -25,6 +25,8 @@ public class PluginConfigView extends JPanel {
         description = new JTextArea();
         description.setLineWrap(true);
         description.setEditable(false);
+        JScrollPane scrollArea = new JScrollPane(description);
+
 
         JPanel topPanel = new JPanel();
         pluginTypes = new JComboBox();
@@ -37,15 +39,17 @@ public class PluginConfigView extends JPanel {
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BorderLayout());
         leftPanel.setBorder(BorderFactory.createEmptyBorder(0,0,0,20));
+
         plugins = new JList<>();
         plugins.setPreferredSize(new Dimension(150,500));
-        plugins.setSize(200,500);
-        leftPanel.add(plugins);
+        plugins.setSize(200, 500);
+        JScrollPane scrollList = new JScrollPane(plugins);
+        leftPanel.add(scrollList);
 
         back = new JButton("Back");
 
         this.add(topPanel, BorderLayout.PAGE_START);
-        this.add(description, BorderLayout.CENTER);
+        this.add(scrollArea, BorderLayout.CENTER);
         this.add(leftPanel, BorderLayout.LINE_START);
         this.add(back, BorderLayout.PAGE_END);
 
