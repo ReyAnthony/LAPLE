@@ -1,6 +1,7 @@
 package fr.laple.extensions.plugins.languages.japanese;
 
 
+import fr.laple.extensions.plugins.Plugins;
 import fr.laple.model.listable.IListable;
 import fr.laple.model.exercises.exercisemode.ExModeTranscriptLangUserLang;
 import fr.laple.model.exercises.exercisemode.ExModeUserLangTranscriptLang;
@@ -27,12 +28,21 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
     private ArrayList<AbstractAnswerMode> exerciseSolvingModes;
     private ArrayList<IListable> lessonContainers;
 
-    public JapaneseLanguagePlugin() throws ParserException {
+    public JapaneseLanguagePlugin()  {
 
-        loadSymbolContainers();
-        loadLessons();
-        populateExerciseModeList();
-        populateExerciseSolvingModesList();
+        try {
+
+            loadSymbolContainers();
+            loadLessons();
+            populateExerciseModeList();
+            populateExerciseSolvingModesList();
+
+        } catch (ParserException e) {
+
+            Plugins.pluginError(e.getMessage());
+        }
+
+
     }
 
     @Override

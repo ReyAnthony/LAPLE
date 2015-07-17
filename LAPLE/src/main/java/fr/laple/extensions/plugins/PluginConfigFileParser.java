@@ -230,7 +230,6 @@ public abstract class PluginConfigFileParser {
                 }
 
 
-
             } catch (ClassNotFoundException | ClassCastException | InstantiationException | IllegalAccessException e) {
                 //So the program end
                 throw new PluginLoadingFatalException(chosen.getName(), e.getMessage() );
