@@ -1,5 +1,6 @@
 package fr.laple.controller;
 
+import com.apple.eawt.Application;
 import fr.laple.controller.config.PluginConfigController;
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
@@ -25,6 +26,25 @@ public class LapleGUIController {
     {
         this.model = model;
         view = new LapleGUI();
+
+        //OSX tweak for closing
+        String osName = System.getProperty("os.name").toLowerCase();
+        boolean isMacOs = osName.startsWith("mac os x");
+        if (isMacOs)
+        {
+            Application.getApplication().setQuitHandler(
+                    (quitEvent, quitResponse) ->
+                    {
+                        int response = JOptionPane.showConfirmDialog(null,
+                                "Do you really want to quit ? ", "LAPLE",
+                                JOptionPane.YES_NO_OPTION);
+                        if (response == JOptionPane.OK_OPTION){
+                            quitResponse.performQuit();
+                        }
+
+                        quitResponse.cancelQuit();
+                    });
+        }
 
         view.addWindowListener(new WindowController(view));
         JTabbedPane ui = view.getUIPane();
