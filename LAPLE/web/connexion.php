@@ -5,22 +5,23 @@
 	if(isset($_POST['email']) && isset($_POST['password'])){
 		$email=$_POST['email'];
 		$passwd=md5($_POST['password']);
-		$req = $bdd->prepare('SELECT email, mdp FROM Profile WHERE email=? AND mdp=?');
+		$req = $bdd->prepare('SELECT pseudo, email, mdp FROM Profile WHERE email=? AND mdp=?');
 		$req->execute(array($email, $passwd));
 		while($donnee=$req->fetch()){
+			$_SESSION['name']=$donnee['pseudo'];
 			$_SESSION['email']=$donnee['email'];
 			$_SESSION['mdp']=$donnee['mdp'];
 		}
 			$req->closeCursor();
 		if(isset($_SESSION['email']) && isset($_SESSION['mdp'])){	
-			header('Location: welcome.php');		
+			header('Location: index.html');		
 		}
 		else {
-			header('Location: index.php?verif=1');		
+			header('Location: sign_in.php?verif=1');		
 		}
 	}
 	else {
-		header('Location: index.php?verif=1');		
+		header('Location: sing_in.php?verif=1');		
 	}
 
 ?>

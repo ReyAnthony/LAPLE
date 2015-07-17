@@ -10,29 +10,50 @@
 }
 #destroy, #userss, h4 a{
 	color:silver; 
-	text-align:right
+	text-align:right;
 }
+.html{
+	background: url(../img/footer_lodyas.png);
+	color:black;
+}
+
 h2{
 	color:red;
 }
 
 #download{
-	padding-top: 20%;	
+	padding-top: 10%;	
 }
 
 .foot{																																																																																																																																																																																																																																											
-	padding-top:15%
+	padding-top:15%;
+	color:red;
 }
 
+/*#left-menu{
+	background-color: red;	
+}*/
 #download [class*="col-"], footer {
   																																																																																																																																												
-  background-color: lightgreen;																																																				
+  background-color: white;	
   border: 2px solid black;
   border-radius: 6px;
   line-height: 40px;
   text-align: center;
 }
 
-th, tr, td{
-	 border: 2px solid black;
+#about [class*="col-"]{
+	font-size: 20px;																																																																																																																																											
+  background-color: gray;																																																				
+  border: 2px solid black;
+  border-radius: 6px;
+  line-height: 40px;	
+}
+
+table, th, tr, td{
+	 border: 20px solid black;
+	 border-width:2px; 
+	 border-color:blue; 
+	 color:blue;
+	 background-color: #87CEEB;
 }

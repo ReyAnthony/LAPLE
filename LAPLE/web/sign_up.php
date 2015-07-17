@@ -18,6 +18,14 @@
     			if(isset($_GET['verification']) && $_GET['verification']==1){
 					echo "Formulaire mal rempli<br>";	
 				}
+
+				if(isset($_GET['verification']) && $_GET['verification']==3){
+					echo "Email existe déjà<br>";	
+				}
+				if(isset($_GET['verification']) && $_GET['verification']==4){
+					echo "Email mal formé<br>";	
+				}
+
 			?>
 			</h5>
   			<img src="media/logo.png" height="75" width="150" alt="Logo de Laple">
