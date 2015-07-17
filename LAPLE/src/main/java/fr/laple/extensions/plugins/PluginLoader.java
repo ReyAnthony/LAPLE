@@ -1,6 +1,5 @@
 package fr.laple.extensions.plugins;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +14,8 @@ public class PluginLoader {
     public PluginLoader(PluginConfigFileParser cfp) throws PluginLoadingFatalException {
 
         dummies = new ArrayList<>();
-
-         this.cfp = cfp;
-
-        for(IPlugin p : cfp.getDummies())
-        {
-            loadDummies(p);
-        }
+        this.cfp = cfp;
+        cfp.getDummies().forEach(this::loadDummies);
     }
 
     //dummies are not really used for IFeaturePlugins
@@ -30,45 +24,39 @@ public class PluginLoader {
         dummies.add(chosen);
     }
 
-    private IPlugin loadRealPlugins(IPlugin chosen, boolean withData)
-    {
+    private IPlugin loadRealPlugins(IPlugin chosen, boolean withData) {
 
+        //a bit hard to understand due to the flow of erros
+        /*
+            if there is a non fatal error, we give the dummy plugin untouched, so that he can be fixed anyway
+            They will not be loaded as features because they lack there own data (dummies are returning empty lists)
+
+         */
         IPlugin ip = chosen;
-
         try {
-
-            ip = cfp.getRealPlugin(chosen, withData);
-
+            ip = cfp.getPlugin(chosen, withData);
         } catch (PluginLoadingException e) {
-
-            //If there is an error when loading, we create a dummy plugin, so we can always review it later
-            JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Error", JOptionPane.WARNING_MESSAGE);
-
-        } catch (PluginLoadingFatalException e) {
-            //if fatal
-            JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
+            Plugins.pluginMessage(e.getMessage());
+        } catch (PluginLoadingFatalException | PluginTypeException e) {
+            Plugins.pluginError(e.getMessage());
         }
-
         return ip;
     }
 
-    public List<IPlugin> getLoadedPlugins(boolean withData)
-    {
+    public List<IPlugin> getLoadedPlugins(boolean withData)  {
         List<IPlugin> plugins = new ArrayList<>();
 
         for(IPlugin ip : dummies)
         {
+            //if cannot get plugin from dummy, it is skipped and still is a dummy
             plugins.add(loadRealPlugins(ip, withData));
         }
 
         return plugins;
     }
 
-    public IPlugin getLoadedPlugins(IPlugin plugin, boolean withData)
-    {
+    public IPlugin getLoadedPlugins(IPlugin plugin, boolean withData) {
+
         for(IPlugin ip : dummies)
         {
             //TODO might not be enough testing

@@ -1,8 +1,10 @@
 package fr.laple.controller.config;
 
+import fr.laple.extensions.plugins.Plugins;
 import fr.laple.extensions.plugins.IPlugin;
 import fr.laple.extensions.plugins.PluginLoadingException;
 import fr.laple.extensions.plugins.PluginLoadingFatalException;
+import fr.laple.extensions.plugins.PluginTypeException;
 import fr.laple.extensions.plugins.features.FeaturePluginConfigFileParser;
 import fr.laple.extensions.plugins.features.IFeaturePlugin;
 import fr.laple.extensions.plugins.languages.LanguagePluginConfigFileParser;
@@ -65,63 +67,46 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
             IPlugin selectedPlugin = (IPlugin) view.getPlugins().getSelectedValue();
             if (selectedPlugin == null) {
 
-                //### In memoriam : Satoru Iwata ###
-                JOptionPane.showMessageDialog(view, "You must select a value to remove !", "Please understand",
-                        JOptionPane.OK_OPTION);
+                Plugins.pluginWarning("You must select a value to remove !");
             }
             else
             {
 
                 if(!selectedPlugin.isInternal())
                 {
-                    if(!languagePlugins.remove(selectedPlugin))
-                    {
-                        featurePlugins.remove(selectedPlugin);
+                    try{
 
-                        try {
+                        if(!languagePlugins.remove(selectedPlugin))
+                        {
+                            featurePlugins.remove(selectedPlugin);
+
                             FeaturePluginConfigFileParser fcfp = new FeaturePluginConfigFileParser();
                             fcfp.removePlugin(selectedPlugin);
-
-                        } catch (PluginLoadingFatalException e1) {
-                            //fatal error quit (could'nt create file etc..)
-                            e1.printStackTrace();
-                        } catch (PluginLoadingException e1) {
-                            //could not delete
-                            e1.printStackTrace();
+                            updateFeaturePluginView();
                         }
+                        else
+                        {
+                            languagePlugins.remove(selectedPlugin);
 
-                        updateFeaturePluginView();
-                    }
-                    else
-                    {
-                        languagePlugins.remove(selectedPlugin);
-
-                        try {
                             LanguagePluginConfigFileParser fcfp = new LanguagePluginConfigFileParser();
                             fcfp.removePlugin(selectedPlugin);
-
-                        } catch (PluginLoadingFatalException e1) {
-                            //fatal error quit (could'nt create file etc..)
-                            e1.printStackTrace();
-                        } catch (PluginLoadingException e1) {
-                            //could not delete
-                            e1.printStackTrace();
+                            updateLanguagePluginView();
                         }
-
-                        updateLanguagePluginView();
+                    } catch (PluginLoadingException e1) {
+                        Plugins.pluginWarning(e1.getMessage());
+                    } catch (PluginLoadingFatalException e1) {
+                        Plugins.pluginError(e1.getMessage());
                     }
 
+
                     view.getDescription().setText("");
-                    JOptionPane.showMessageDialog(view, "Your changes will be taken into account upon next restart",
-                            "Please restart LAPLE",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    Plugins.pluginMessage("Your changes will be taken into account upon next restart" +
+                            "Please restart LAPLE");
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(view, "You cannot remove this plugin, you may delete it from the config file " +
-                                    "at your own risk.",
-                        "Error",
-                        JOptionPane.WARNING_MESSAGE);
+                    Plugins.pluginWarning("You cannot remove this plugin, you may delete it from the config file " +
+                            "at your own risk.");
                 }
             }
         }
@@ -140,6 +125,45 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
                 }
             });
             chooser.showOpenDialog(view);
+
+            if(chooser.getSelectedFile() != null)
+            {
+                try
+                {
+
+                    IPlugin added = null;
+
+                    if(view.getPluginTypes().getSelectedItem().equals("Language plugin"))
+                    {
+                        LanguagePluginConfigFileParser pcfp = new LanguagePluginConfigFileParser();
+                        added = pcfp.addPlugin(chooser.getSelectedFile());
+                        model.getAllDummyLanguagePlugins().add(added);
+                        updateLanguagePluginView();
+                    }
+                    else
+                    {
+
+                        FeaturePluginConfigFileParser pcfp = new FeaturePluginConfigFileParser();
+                        added =  pcfp.addPlugin(chooser.getSelectedFile());
+                        model.getFeatures().add((IFeaturePlugin) added);
+                        updateFeaturePluginView();
+                    }
+
+                    JOptionPane.showMessageDialog(this.view, "Plugin : \"" + added.getName() + "\" added with success." +
+                            "\nPlease restart to see the changes");
+
+                }
+                catch (PluginLoadingException | PluginTypeException e1) {
+                    Plugins.pluginWarning(e1.getMessage());
+                } catch (PluginLoadingFatalException e1) {
+                    Plugins.pluginError(e1.getMessage());
+                }
+
+            }
+            else
+            {
+                Plugins.pluginWarning("Please select a file to load !");
+            }
         }
     }
 

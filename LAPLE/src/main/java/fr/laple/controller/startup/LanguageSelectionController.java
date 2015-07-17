@@ -1,9 +1,8 @@
 package fr.laple.controller.startup;
 
 import fr.laple.controller.LapleGUIController;
-import fr.laple.extensions.plugins.IPlugin;
-import fr.laple.extensions.plugins.PluginLoader;
-import fr.laple.extensions.plugins.PluginLoadingFatalException;
+import fr.laple.extensions.plugins.Plugins;
+import fr.laple.extensions.plugins.*;
 import fr.laple.extensions.plugins.features.FeaturePluginConfigFileParser;
 import fr.laple.extensions.plugins.features.IFeaturePlugin;
 import fr.laple.extensions.plugins.languages.ILanguagePlugin;
@@ -49,7 +48,7 @@ public class LanguageSelectionController implements ActionListener {
         try {
            langLoader = new PluginLoader(new LanguagePluginConfigFileParser());
         } catch (PluginLoadingFatalException e) {
-            pluginLoadingError(e.getMessage());
+            Plugins.pluginError(e.getMessage());
         }
     }
 
@@ -60,13 +59,15 @@ public class LanguageSelectionController implements ActionListener {
 
         List<IPlugin> languageList = new ArrayList<>();
 
-        for(IPlugin plugin : langLoader.getLoadedPlugins(false))
-        {
-            if(plugin.getPath().exists() || plugin.isInternal())
-                languageList.add(plugin);
+            for(IPlugin plugin : langLoader.getLoadedPlugins(false))
+            {
+                //if there is obvisouly an issue with the language plugin
+                //If there is a big problem we can't go over there anyway
+                if(plugin.getPath().exists() || plugin.isInternal())
+                    languageList.add(plugin);
 
-            allLanguagePlugins.add(plugin);
-        }
+                allLanguagePlugins.add(plugin);
+            }
 
         return languageList;
     }
@@ -97,16 +98,10 @@ public class LanguageSelectionController implements ActionListener {
                 new LapleGUIController(dataModel);
 
         } catch (PluginLoadingFatalException e1) {
-           pluginLoadingError(e1.getMessage());
+           Plugins.pluginError(e1.getMessage());
         }
 
         view.dispose();
-    }
-
-    private void pluginLoadingError(String errorMessage)
-    {
-        JOptionPane.showMessageDialog(view, errorMessage, "Fatal Error", JOptionPane.ERROR_MESSAGE);
-        System.exit(0);
     }
 
 }

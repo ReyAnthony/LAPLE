@@ -11,7 +11,7 @@ public class FeaturePluginConfigFileParser extends PluginConfigFileParser {
     //At first I thought the 2 would be really different, but they are not
     public FeaturePluginConfigFileParser() throws PluginLoadingFatalException {
 
-        super("/fr/laple/extensions/features/", "feature_plugins.json");
+        super("/fr/laple/extensions/features/", "feature_plugins.json", PluginType.FEATURE_PLUGIN);
     }
 
 }

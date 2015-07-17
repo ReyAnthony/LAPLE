@@ -1,5 +1,8 @@
 package fr.laple.extensions.plugins;
 
+import fr.laple.extensions.plugins.features.IFeaturePlugin;
+import fr.laple.extensions.plugins.languages.ILanguagePlugin;
+
 import javax.json.*;
 import java.io.*;
 import java.net.JarURLConnection;
@@ -8,13 +11,19 @@ import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.jar.Attributes;
 
 /**
  * Created by anthonyrey on 15/07/2015.
  */
-public class PluginConfigFileParser {
+public abstract class PluginConfigFileParser {
 
+    public enum PluginType
+    {
+        LANGUAGE_PLUGIN,
+        FEATURE_PLUGIN
+    }
 
     protected String resourcePath;
     protected String configFile;
@@ -24,7 +33,9 @@ public class PluginConfigFileParser {
     protected String fullUserPath;
     protected String fullJarPath;
 
-    public PluginConfigFileParser(String resourcePath, String configFile) throws PluginLoadingFatalException {
+    protected PluginType pluginType;
+
+    public PluginConfigFileParser(String resourcePath, String configFile, PluginType pluginType) throws PluginLoadingFatalException {
 
         this.resourcePath = resourcePath;
         this.configFile = configFile;
@@ -34,6 +45,8 @@ public class PluginConfigFileParser {
         fullUserPath = userPath + resourcePath + configFile;
         fullJarPath =  resourcePath + configFile;
 
+        this.pluginType = pluginType;
+
         //Will create config files if they do not exist
         try{
 
@@ -42,7 +55,6 @@ public class PluginConfigFileParser {
         {
             throw new PluginLoadingFatalException(configFile, e.getMessage());
         }
-
     }
 
     private void createFileIfNotExist() throws IOException, PluginLoadingFatalException {
@@ -62,11 +74,69 @@ public class PluginConfigFileParser {
     }
 
 
-    public void addPlugin()
-    {
+    public IPlugin addPlugin(File file) throws PluginLoadingException, PluginLoadingFatalException, PluginTypeException {
 
+        //right now if there is any issue, we throw an exception
+        String name = file.getName();
+        IPlugin plugin = new DummyPlugin(name, file, false);
+        plugin = getPlugin(plugin, false);
 
+        try (InputStream configFile = new FileInputStream(fullUserPath)) {
+
+            List<String> nameList = new ArrayList<>();
+            boolean alreadyExist = false;
+
+            JsonReader jsonReader = Json.createReader(configFile);
+            JsonObject jsonObject = jsonReader.readObject();
+            jsonReader.close();
+
+            try (JsonWriter jsonWriter = Json.createWriter(new FileOutputStream(fullUserPath))) {
+
+                JsonObjectBuilder out = Json.createObjectBuilder();
+                JsonArrayBuilder array = Json.createArrayBuilder();
+
+                JsonArray jsonSymbols = jsonObject.getJsonArray("plugins");
+
+                for (int i = 0; i < jsonSymbols.size(); i++) {
+                    JsonObject current = jsonSymbols.getJsonObject(i);
+
+                    String localPath = current.getString("path");
+                    String localName = current.getString("name");
+                    boolean internal = current.getBoolean("internal");
+
+                    array.add(Json.createObjectBuilder().add("path",
+                            localPath).add("name", localName).add("internal", internal));
+
+                    nameList.add(localName);
+
+                }
+
+                if(nameList.contains(plugin.getName()))
+                {
+                    alreadyExist = true;
+                }
+                else
+                {
+                    array.add(Json.createObjectBuilder().add("path",
+                            plugin.getPath().getPath()).add("name", plugin.getName()).add("internal", false));
+                }
+
+                out.add("plugins", array);
+                jsonWriter.writeObject(out.build());
+
+                if(alreadyExist)
+                    throw new PluginLoadingException(plugin.getName(), "This plugin already exist !");
+            }
+
+            return plugin;
+        }
+        catch(IOException e)
+        {
+            throw new PluginLoadingFatalException("Unknown", e.getMessage());
+        }
     }
+
+
 
     public void removePlugin(IPlugin plugin) throws PluginLoadingException {
 
@@ -110,7 +180,8 @@ public class PluginConfigFileParser {
         }
     }
 
-    public IPlugin getRealPlugin(IPlugin chosen, boolean withData) throws PluginLoadingException, PluginLoadingFatalException {
+    public IPlugin getPlugin(IPlugin chosen, boolean withData) throws PluginLoadingException,
+            PluginLoadingFatalException, PluginTypeException {
 
         //with data = get the full class instance, otherwize only get superficial data
         //if internal, we get the name of the plugin : class from the LAPLE.jar manifest
@@ -118,7 +189,6 @@ public class PluginConfigFileParser {
 
         if(chosen.isInternal())
         {
-
             //if internal not loading == fatal error
 
             try {
@@ -132,13 +202,15 @@ public class PluginConfigFileParser {
                 //Class clazz = cl.loadClass(manifest.getMainAttributes().getValue(chosen.getName()));
                 toReturn = (IPlugin) clazz.newInstance();
 
+                testPluginType(toReturn);
+
                 if(!withData)
                     toReturn = getWithoutDataPlugin(toReturn);
 
                 //internal = no set path
 
-            } catch (Exception e) {
-
+            } catch (ClassNotFoundException | ClassCastException | InstantiationException | IllegalAccessException e) {
+                //So the program end
                 throw new PluginLoadingFatalException(chosen.getName(), e.getMessage() );
             }
 
@@ -155,16 +227,34 @@ public class PluginConfigFileParser {
                 toReturn = (IPlugin) clazz.newInstance();
                 toReturn.setPath(chosen.getPath());
 
+                testPluginType(toReturn);
+
                 if(!withData)
                     toReturn = getWithoutDataPlugin(toReturn);
 
-            } catch (Exception e) {
-
+            } catch (ClassNotFoundException | ClassCastException | IllegalAccessException | IOException | InstantiationException e) {
+                //we continue and return the usual data
                 throw new PluginLoadingException(chosen.getName() , e.getMessage());
             }
         }
 
         return toReturn;
+    }
+
+    private void testPluginType(IPlugin plugin) throws PluginTypeException {
+
+
+        if(pluginType == PluginType.LANGUAGE_PLUGIN)
+        {
+            if(!(plugin instanceof ILanguagePlugin))
+                throw new PluginTypeException(plugin.getName());
+        }
+        else if(pluginType == PluginType.FEATURE_PLUGIN)
+        {
+            if(!(plugin instanceof IFeaturePlugin))
+                 throw new PluginTypeException(plugin.getName());
+        }
+
     }
 
     private IPlugin getWithoutDataPlugin(IPlugin plugin)
@@ -211,8 +301,5 @@ public class PluginConfigFileParser {
         }
 
         return plugins;
-
     }
-
-
 }

@@ -8,6 +8,6 @@ import fr.laple.extensions.plugins.PluginLoadingFatalException;
  */
 public class LanguagePluginConfigFileParser extends PluginConfigFileParser {
     public LanguagePluginConfigFileParser() throws PluginLoadingFatalException {
-        super("/fr/laple/extensions/languages/", "language_plugins.json");
+        super("/fr/laple/extensions/languages/", "language_plugins.json", PluginType.LANGUAGE_PLUGIN);
     }
 }
