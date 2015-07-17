@@ -101,7 +101,7 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
 
                     view.getDescription().setText("");
                     Plugins.pluginMessage("Your changes will be taken into account upon next restart" +
-                            "Please restart LAPLE");
+                            "\nPlease restart LAPLE");
                 }
                 else
                 {
