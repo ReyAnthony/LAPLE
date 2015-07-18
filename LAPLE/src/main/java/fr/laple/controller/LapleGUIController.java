@@ -15,13 +15,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by anthonyrey on 06/06/2015.
+ * This class is the main GUI controller
+ * It initialize the whole laple app (after language selection)
+ * It also manage OSX tweak for exit actions
+ *
+ * @author anthonyrey
  */
 public class LapleGUIController {
 
     private LapleGUI view;
     private LapleDataModel model;
 
+    /**
+     * Constructor for the class
+     * add a window listenner to the frame
+     * set the quit handler (osx)
+     *
+     * and init the plugins, views etc..
+     *
+     * @param model
+     */
     public LapleGUIController(LapleDataModel model)
     {
         this.model = model;

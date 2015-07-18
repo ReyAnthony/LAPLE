@@ -13,7 +13,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by anthonyrey on 10/06/2015.
+ * The LessonController to the LessonView
+ *
+ * @see fr.laple.view.lessons.LessonView
+ *
+ * @author anthonyrey
  */
 public class LessonController implements ActionListener {
 
@@ -22,6 +26,19 @@ public class LessonController implements ActionListener {
     private LapleDataModel model;
     private RootData rootData;
 
+    /**
+     * The constructor to this class
+     *
+     * @see fr.laple.model.datamodel.LapleDataModel
+     * @see fr.laple.view.lessons.LessonView
+     * @see fr.laple.model.lessons.Lesson
+     * @see fr.laple.model.listable.RootData
+     *
+     * @param model A LapleDataModel Object
+     * @param view A LessonView Object
+     * @param lesson A Lesson Object
+     * @param rootData A RootData Object
+     */
     public LessonController(LapleDataModel model, LessonView view, Lesson lesson, RootData rootData)
     {
 
@@ -38,6 +55,11 @@ public class LessonController implements ActionListener {
         view.getDescription().setText("translation : \n "+ this.lesson.getSymbol().getUserLangTranscript());
     }
 
+    /**
+     * Actions performed when clicking on soundButton or BackButton
+     *
+     * @param e An ActionEvent Object
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 

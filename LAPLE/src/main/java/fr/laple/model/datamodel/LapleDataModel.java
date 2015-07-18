@@ -7,7 +7,7 @@ import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.model.listable.IListable;
-import fr.laple.view.exercises.ExerciseParameterizer;
+import fr.laple.view.exercises.ExerciseParameterizerView;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class LapleDataModel {
     public ArrayList<IListable> getExerciseTypes() {
 
         ArrayList<IListable> toReturn = new ArrayList<>();
-        toReturn.add(new ExerciseParameterizer(this));
+        toReturn.add(new ExerciseParameterizerView(this));
 
         for(IFeaturePlugin fp : features)
         {

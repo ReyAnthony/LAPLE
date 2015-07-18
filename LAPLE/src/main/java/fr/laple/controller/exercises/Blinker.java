@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by anthonyrey on 05/06/2015.
+ * A blinker is a standalone object which takes a component and makes it blink at a fixed rate
+ *
+ * @author anthonyrey
  */
 public class Blinker extends Timer implements ActionListener {
 
@@ -14,6 +16,15 @@ public class Blinker extends Timer implements ActionListener {
     private Color col;
     private Color baseCol;
 
+    /**
+     * Constructor for the blinker class
+     *
+     * If won == true, it blinks green
+     * else it blinks red
+     *
+     * @param c The Component Object to blink
+     * @param won boolean
+     */
     public Blinker(Component c, boolean won) {
 
         super(1000, null);
@@ -32,6 +43,11 @@ public class Blinker extends Timer implements ActionListener {
         this.start();
     }
 
+    /**
+     * The action to performs (the blinking process)
+     *
+     * @param e An ActionEvent Object
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -43,6 +59,9 @@ public class Blinker extends Timer implements ActionListener {
 
     }
 
+    /**
+     * Stop the blinking and revert to default background color
+     */
     public void stop()
     {
         super.stop();

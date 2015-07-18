@@ -1,7 +1,10 @@
 package fr.laple.extensions.plugins;
 
 /**
- * Created by anthonyrey on 02/06/2015.
+ * This class is a pluginLoading Exception
+ * It is a non fatal exception
+ *
+ * @author anthonyrey
  */
 public class PluginLoadingException extends Exception{
 

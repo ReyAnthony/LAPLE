@@ -9,10 +9,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by anthonyrey on 04/06/2015.
+ * This class defines the controller for a FreeInputExercise
+ *
+ * @see fr.laple.controller.exercises.AbstractExerciseController
+ * @see fr.laple.view.exercises.AbstractExerciseView
+ * @see fr.laple.view.exercises.FreeInputExerciseView
+ * @see fr.laple.controller.exercises.FreeInputExerciseController
+ *
+ * @author anthonyrey
  */
 public class QcmInputController extends AbstractExerciseController {
 
+    /**
+     * Action performed when qcm Button is clicked
+     * Add blinkers accordingly
+     *
+     * @see fr.laple.controller.exercises.Blinker
+     *
+     * @param e An ActionEvent Object
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -47,7 +62,12 @@ public class QcmInputController extends AbstractExerciseController {
         view.getNextButton().setEnabled(true);
     }
 
-
+    /**
+     * Update the view, see the parent class as the behavior is shared
+     * Also add the new buttons and shuffle them
+     *
+     * @see fr.laple.controller.exercises.AbstractExerciseController
+     */
     public void updateTheView()
     {
         super.updateTheView();

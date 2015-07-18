@@ -17,10 +17,15 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
 /**
- * Created by anthonyrey on 15/07/2015.
+ * This class is an abstract class managing the parsing of plugin config files
+ *
+ * @author anthonyrey
  */
 public abstract class PluginConfigFileParser {
 
+    /**
+     * The type of the plugin
+     */
     public enum PluginType
     {
         LANGUAGE_PLUGIN,
@@ -37,6 +42,19 @@ public abstract class PluginConfigFileParser {
 
     protected PluginType pluginType;
 
+    /**
+     * Constructor for the PluginConfigFIleParser
+     * The class is abstract so you need to instanciate a FeaturePluginConfigFileParser or
+     * LanguagePluginConfigFileParser
+     *
+     * @see fr.laple.extensions.plugins.features.FeaturePluginConfigFileParser
+     * @see fr.laple.extensions.plugins.languages.LanguagePluginConfigFileParser
+     *
+     * @param resourcePath The path to the resource folder
+     * @param configFile The path to the config file
+     * @param pluginType The plugin type
+     * @throws PluginLoadingFatalException If there is any error
+     */
     public PluginConfigFileParser(String resourcePath, String configFile, PluginType pluginType) throws PluginLoadingFatalException {
 
         this.resourcePath = resourcePath;
@@ -59,6 +77,12 @@ public abstract class PluginConfigFileParser {
         }
     }
 
+    /**
+     * Create the config file if it does not exist
+     *
+     * @throws IOException If there is any problem with the IO
+     * @throws PluginLoadingFatalException If there is any other issue
+     */
     private void createFileIfNotExist() throws IOException, PluginLoadingFatalException {
 
         File f = new File(fullUserPath);
@@ -75,7 +99,15 @@ public abstract class PluginConfigFileParser {
         }
     }
 
-
+    /**
+     * Add a plugin te the config file
+     *
+     * @param file The file of the plugin
+     * @return The loaded plugin
+     * @throws PluginLoadingException if non fatal error
+     * @throws PluginLoadingFatalException if fatal error
+     * @throws PluginTypeException if wrong type
+     */
     public IPlugin addPlugin(File file) throws PluginLoadingException, PluginLoadingFatalException, PluginTypeException {
 
         //right now if there is any issue, we throw an exception
@@ -139,7 +171,12 @@ public abstract class PluginConfigFileParser {
     }
 
 
-
+    /**
+     * Remove the specified plugin
+     *
+     * @param plugin The plugin to remove
+     * @throws PluginLoadingException  If could not remove
+     */
     public void removePlugin(IPlugin plugin) throws PluginLoadingException {
 
         try {
@@ -182,6 +219,16 @@ public abstract class PluginConfigFileParser {
         }
     }
 
+    /**
+     * Get the plugin from a dummy (or another plugin even if useless)
+     *
+     * @param chosen The dummy
+     * @param withData Do you want the plugin with data or another dummy ?
+     * @return The plugin
+     * @throws PluginLoadingException
+     * @throws PluginLoadingFatalException
+     * @throws PluginTypeException If the type is wrong
+     */
     public IPlugin getPlugin(IPlugin chosen, boolean withData) throws PluginLoadingException,
             PluginLoadingFatalException, PluginTypeException {
 
@@ -264,6 +311,12 @@ public abstract class PluginConfigFileParser {
         return toReturn;
     }
 
+    /**
+     * Testing the plugin type
+     *
+     * @param plugin The plugin to test
+     * @throws PluginTypeException If the type is wrong
+     */
     private void testPluginType(IPlugin plugin) throws PluginTypeException {
 
 
@@ -280,6 +333,12 @@ public abstract class PluginConfigFileParser {
 
     }
 
+    /**
+     * Get a plugin without Data
+     *
+     * @param plugin The plugin we want to be stripped of it's data
+     * @return A DummyPlugin (as an IPlugin)
+     */
     private IPlugin getWithoutDataPlugin(IPlugin plugin)
     {
         String name = plugin.getName();
@@ -294,6 +353,12 @@ public abstract class PluginConfigFileParser {
 
     }
 
+    /**
+     * Get the dummies from the config file
+     *
+     * @return An arrayList of Dummy plugins (as IPlugin)
+     * @throws PluginLoadingFatalException If there is an error
+     */
     public ArrayList<IPlugin> getDummies() throws PluginLoadingFatalException {
 
         ArrayList<IPlugin> plugins = new ArrayList<>();

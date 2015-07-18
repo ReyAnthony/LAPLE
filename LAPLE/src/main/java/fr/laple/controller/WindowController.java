@@ -5,17 +5,31 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
- * Created by anthonyrey on 02/06/2015.
+ * Manage the code when exiting (DO NOT WORK ON OSX)
+ *
+ * @see fr.laple.controller.LapleGUIController for OSX
+ *
+ * @author anthonyrey
  */
 public class WindowController extends WindowAdapter {
 
     private JFrame frame;
 
+    /**
+     * Constructor to the class
+     *
+     * @param frame The frame you want to check for closing operations
+     */
     public WindowController(JFrame frame)
     {
         this.frame = frame;
     }
 
+    /**
+     * prompt response ? quit : noquit
+     *
+     * @param e A WindowEvent
+     */
     @Override
     public void windowClosing(WindowEvent e) {
 

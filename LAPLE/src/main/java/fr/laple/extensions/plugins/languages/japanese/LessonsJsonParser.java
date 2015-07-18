@@ -13,17 +13,44 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
- * Created by anthonyrey on 06/06/2015.
+ * This class parse lessons config files
+ *
+ * @author anthonyrey
  */
 public class LessonsJsonParser {
 
     private ArrayList<SymbolContainer> symbolContainers;
 
+    /**
+     * Constructor to the class
+     *
+     *@see fr.laple.model.language.SymbolContainer
+     *
+     * @param sc The symbol containers
+     */
     public LessonsJsonParser(ArrayList<SymbolContainer> sc)
     {
         this.symbolContainers = sc;
     }
 
+    /**
+     *
+     * Parse the file and create an arrayList of IListable (but to be precise, symbolLessonContainers
+     * are in the list but they implements IListable)
+     *
+     * (load hiragana and katakana)
+     *
+     * We need the SymbolContainer because Lessons have references on the symbols they use
+     *
+     * @see fr.laple.model.language.SymbolContainer
+     * @see fr.laple.model.listable.IListable
+     * @see fr.laple.model.lessons.Lesson
+     * @see fr.laple.model.lessons.SymbolLessonContainer
+     *
+     * @param path The path to the config file
+     * @return An array List of Ilistable (but really these are SymbolLessonContainers objects !)
+     * @throws ParserException if there is any error
+     */
     public ArrayList<IListable> parseForSymbolLessons(String path) throws ParserException {
 
         ArrayList<IListable> lessonContainers = new ArrayList<>();
@@ -79,6 +106,24 @@ public class LessonsJsonParser {
 
     }
 
+    /**
+     *
+     * Parse the file and create an arrayList of IListable (but to be precise, WordLessonContainers
+     * are in the list but they implements IListable)
+     *
+     * We need the SymbolContainer because Lessons have references on the symbols they use
+     *
+     *(load Kanji)
+     *
+     * @see fr.laple.model.language.SymbolContainer
+     * @see fr.laple.model.listable.IListable
+     * @see fr.laple.model.lessons.Lesson
+     * @see fr.laple.model.lessons.WordLessonContainer
+     *
+     * @param path The path to the config file
+     * @return An array List of Ilistable (but really these are WordLessonContainers objects !)
+     * @throws ParserException if there is any error
+     */
     public IListable parseForWordLessons(String path) throws ParserException {
         WordLessonContainer lessonContainer = new WordLessonContainer("kanji");
 

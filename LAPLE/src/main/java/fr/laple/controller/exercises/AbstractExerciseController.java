@@ -17,7 +17,14 @@ import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 /**
- * Created by anthonyrey on 04/06/2015.
+ * An abstract class to generalize exercises controllers
+ *
+ * @see fr.laple.view.exercises.AbstractExerciseView
+ * @see fr.laple.view.exercises.FreeInputExerciseView
+ * @see fr.laple.controller.exercises.FreeInputExerciseController
+ * @see fr.laple.controller.exercises.QcmInputController
+ *
+ * @author anthonyrey
  */
 public abstract class AbstractExerciseController implements ActionListener {
 
@@ -32,6 +39,16 @@ public abstract class AbstractExerciseController implements ActionListener {
     private int sucesses;
     private RootData rootData;
 
+    /**
+     * This method is to initialize the exercises, which are initialized after being created
+     * The referenced classes may help to understand the work flow of this class
+     *
+     * @see fr.laple.controller.exercises.ExerciseParameterizerController
+     * @see fr.laple.model.exercises.answers.AbstractAnswerMode
+     *
+     * @param panel
+     * @param rootData
+     */
     public void init(AbstractExerciseView panel, RootData rootData) {
 
         this.view = panel;
@@ -68,6 +85,11 @@ public abstract class AbstractExerciseController implements ActionListener {
 
     }
 
+    /**
+     * Accessor method
+     *
+     * @return An AbstractExerciseView Object
+     */
     public AbstractExerciseView getView()
     {
         return view;
@@ -82,18 +104,88 @@ public abstract class AbstractExerciseController implements ActionListener {
         this.sc = sc;
     }
 
+    /**
+     * Update the view or prepare the view for a next exercise to be precise
+     */
     public void updateTheView()
     {
         view.getNextButton().setEnabled(false);
         view.getSymbol().setText(getExercise().getQuestion());
     }
 
+    /**
+     * Update the messages (exercise left and success count
+     */
     public void updateMessages()
     {
         view.getRemainingCount().setText("Exercises Left : "+(getExerciseCount())+"/"+ startingExerciseCount);
         view.getSuccesCount().setText("Suceeded : " + sucesses + "/" + startingExerciseCount);
 
     }
+
+    /**
+     * If BackButton is pressed, it calls finished
+     * Other behavior are defined by the child classes
+     *
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if(e.getSource().equals(view.getBackButton()))
+        {
+            finished();
+        }
+    }
+
+    /**
+     * Swap the view, do some cleaning etc..
+     */
+    private void finished()
+    {
+
+        JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
+        TabTools.swapTab(tabbedPane,  new ListView(model, rootData.getRootModel(), false,
+                rootData));
+        tabbedPane.setEnabled(true);
+
+    }
+
+    /**
+     * We use a font to display the symbol, when it is a word, they may be too big
+     * so this method scale the symbol to a displayable size
+     *
+     */
+    protected void setFontSize()
+    {
+        JLabel symbol = view.getSymbol();
+        String txt = symbol.getText();
+        Font f = symbol.getFont().deriveFont((float) 200 / txt.length() );
+        symbol.setFont(f);
+        symbol.setText(txt);
+        symbol.repaint();
+
+    }
+
+    /**
+     * Add a blinker to the blinkers list
+     *
+     * @see fr.laple.controller.exercises.Blinker
+     *
+     * @param blinker
+     */
+    protected void addBlinker(Blinker blinker) {
+        blinkers.add(blinker);
+    }
+
+    /**
+     * Increments the success variable
+     */
+    protected void incrementSucesses()
+    {
+        sucesses++;
+    }
+
 
     public Exercise getExercise() {
         return exercise;
@@ -112,55 +204,15 @@ public abstract class AbstractExerciseController implements ActionListener {
         exercise = ex;
     }
 
-    public void addBlinker(Blinker blinker) {
-        blinkers.add(blinker);
-    }
 
     public void addModel(LapleDataModel model)
     {
         this.model = model;
     }
 
-    private void finished()
-    {
-
-        JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
-        TabTools.swapTab(tabbedPane,  new ListView(model, rootData.getRootModel(), false,
-                rootData));
-        tabbedPane.setEnabled(true);
-
-    }
-
-    public void incrementSucesses()
-    {
-        sucesses++;
-    }
-
     public int getExerciseCount()
     {
         return exerciseQueue.size() +1;
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        if(e.getSource().equals(view.getBackButton()))
-        {
-            finished();
-        }
-    }
-
-    public void setFontSize()
-    {
-        JLabel symbol = view.getSymbol();
-        String txt = symbol.getText();
-        Font f = symbol.getFont().deriveFont((float) 200 / txt.length() );
-        symbol.setFont(f);
-        symbol.setText(txt);
-        symbol.repaint();
-
-
-    }
-
 
 }

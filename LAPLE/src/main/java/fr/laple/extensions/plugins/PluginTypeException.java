@@ -1,7 +1,10 @@
 package fr.laple.extensions.plugins;
 
+
 /**
- * Created by anthonyrey on 17/07/2015.
+ * This class is a pluginType Exception
+ *
+ * @author anthonyrey
  */
 public class PluginTypeException extends Exception {
 
