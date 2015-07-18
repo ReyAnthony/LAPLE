@@ -1,0 +1,9 @@
+{
+  "plugins":[
+    {
+      "name":"Japanese",
+      "path":"",
+      "internal":true
+    }
+  ]
+}

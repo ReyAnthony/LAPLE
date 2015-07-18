@@ -1,34 +1,148 @@
 {
-	"lesson_type": {	
-		"hiragana": [
-			{ "learning_order": ["a","i","u","e","o",
-							   "ka","ki","ku","ke","ko",
-							   "sa","shi","su","se","so",
-							   "ta","chi","tu","te","to",
-							   "na","ni","nu","ne","no",
-							   "ha","hi","fu","he","ho",
-							   "ma","mi","mu","me","mo",
-							   "ya","yu","yo",
-							   "la","li","lu","le","lo",
-							   "wa","wo"] }
-		],
-		"katakana": [
-		  	{ "learning_order": ["a","i","u","e","o",
-							   "ka","ki","ku","ke","ko",
-							   "sa","shi","su","se","so",
-							   "ta","chi","tu","te","to",
-							   "na","ni","nu","ne","no",
-							   "ha","hi","fu","he","ho",
-							   "ma","mi","mu","me","mo",
-							   "ya","yu","yo",
-							   "la","li","lu","le","lo",
-							   "wa","wo"] }
-		],
-		"kanji": {
-			"category" : "JLPT1",
-			"list" : [
-				{ "name": "someone", "symbol": "人" }
-			]
+  "hiragana": {
+	"learning_order": [
+	  "a",
+	  "i",
+	  "u",
+	  "e",
+	  "o",
+	  "ka",
+	  "ki",
+	  "ku",
+	  "ke",
+	  "ko",
+	  "sa",
+	  "shi",
+	  "su",
+	  "se",
+	  "so",
+	  "ta",
+	  "chi",
+	  "tsu",
+	  "te",
+	  "to",
+	  "na",
+	  "ni",
+	  "nu",
+	  "ne",
+	  "no",
+	  "ha",
+	  "hi",
+	  "fu",
+	  "he",
+	  "ho",
+	  "ma",
+	  "mi",
+	  "mu",
+	  "me",
+	  "mo",
+	  "ya",
+	  "yu",
+	  "yo",
+	  "la",
+	  "li",
+	  "lu",
+	  "le",
+	  "lo",
+	  "wa",
+	  "wo"
+	]
+  },
+  "katakana": {
+	"learning_order": [
+	  "a",
+	  "i",
+	  "u",
+	  "e",
+	  "o",
+	  "ka",
+	  "ki",
+	  "ku",
+	  "ke",
+	  "ko",
+	  "sa",
+	  "shi",
+	  "su",
+	  "se",
+	  "so",
+	  "ta",
+	  "chi",
+	  "tsu",
+	  "te",
+	  "to",
+	  "na",
+	  "ni",
+	  "nu",
+	  "ne",
+	  "no",
+	  "ha",
+	  "hi",
+	  "fu",
+	  "he",
+	  "ho",
+	  "ma",
+	  "mi",
+	  "mu",
+	  "me",
+	  "mo",
+	  "ya",
+	  "yu",
+	  "yo",
+	  "la",
+	  "li",
+	  "lu",
+	  "le",
+	  "lo",
+	  "wa",
+	  "wo"
+	]
+  },
+  "kanji": [
+	{
+	  "category": "JLPT5",
+	  "list": [
+		{
+		  "name": "someone"
+		},
+		{
+		  "name": "safety"
+		},
+		{
+		  "name": "one"
+		},
+		{
+		  "name": "rain"
+		},
+		{
+		  "name": "to drink"
+		},
+		{
+		  "name": "what"
 		}
+	  ]
+	},
+	{
+	  "category": "JLPT4",
+	  "list": [
+		{
+		  "name": "someone"
+		},
+		{
+		  "name": "safety"
+		},
+		{
+		  "name": "one"
+		},
+		{
+		  "name": "rain"
+		},
+		{
+		  "name": "to drink"
+		},
+		{
+		  "name": "what"
+		}
+	  ]
 	}
+  ]
 }

@@ -7,13 +7,8 @@
 <html>
   <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
-		<link rel="stylesheet" href="/private/css/style.css" />
-		<link rel="stylesheet" href="/private/css/formulaire.css" />
-=======
 		<link rel="stylesheet" href="/css/style.css" />
 		<link rel="stylesheet" href="/css/formulaire.css" />
->>>>>>> feature/web
 		<title>Account</title>
 		
   </head>
@@ -62,11 +57,7 @@
 		$passwd=md5($_POST['password']);
 		$name=$_POST['name'];
 		if(!preg_match("#.*@.*\._{0,4}#", $email)){
-<<<<<<< HEAD
-			header('Location: http://localhost/private/sign_up.php?verification=4');
-=======
 			header('Location: sign_up.php?verification=4');
->>>>>>> feature/web
 		}
 		$req = $bdd->prepare('SELECT email FROM Profile WHERE email=?');
 		$req->execute(array($email));
@@ -76,17 +67,10 @@
 		}
 		
 		if($mail!=NULL){
-<<<<<<< HEAD
-			header('Location: http://localhost/private/sign_up.php?verification=3');	
-		}
-		$req = $bdd->prepare('INSERT INTO Profile(name, email, mdp) VALUES(:name, :email, :mdp)');
-		$req->execute(array('name' => $name,
-=======
 			header('Location: sign_up.php?verification=3');	
 		}
 		$req = $bdd->prepare('INSERT INTO Profile(pseudo, email, mdp) VALUES(:pseudo, :email, :mdp)');
 		$req->execute(array('pseudo' => $name,
->>>>>>> feature/web
 									'email' => $email, 
 									'mdp' => $passwd));
 		echo "Creation de compte réussi <br>";

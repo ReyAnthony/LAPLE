@@ -2,23 +2,6 @@
 <html>
   <head>
     <meta charset="UTF-8">
-<<<<<<< HEAD
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/formulaire.css" />
-	    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-	    <script src="bootstrap/js/jquery.js"></script>
-		<script src="bootstrap/js/bootstrap.js"></script>
-		<title>Accueil</title>
-		
-  </head>
-
-  <body class="bod">
-  	<?php 
-		require_once('session.php'); 
-		require('bdd.php');
-		ini_set("display_errors", 1);
-	?>
-=======
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/formulaire.css" />
       <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -33,17 +16,14 @@
           require('bdd.php');
            ini_set("display_errors", 1);
     ?>
->>>>>>> feature/web
 	
   	<nav class="navbar navbar-default">
 		  <div class="container-fluid">
 			    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
-<<<<<<< HEAD
-		      <a class="navbar-brand" href="welcome.php">Welcome</a>
-=======
+
 		      <a class="navbar-brand" href="index.html">Welcome</a>
->>>>>>> feature/web
+
 		    </div>
     	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     	    	<ul class="nav navbar-nav">
@@ -74,16 +54,6 @@
 					while($donnee0=$req0->fetch()){
 						$id_profile=$donnee0['id_profile'];
 					}
-<<<<<<< HEAD
-					$req1=$bdd->prepare('SELECT name FROM Profile WHERE email=?');
-					$req1->execute(array($email));
-					$name=NULL;
-					while($donnee1=$req1->fetch()){
-						$name=$donnee1['name'];
-					}
-
-					$request=$bdd->query('SELECT P1.name as name1, P2.name as name2, idQuestion, question, answer 
-=======
 					$req1=$bdd->prepare('SELECT pseudo FROM Profile WHERE email=?');
 					$req1->execute(array($email));
 					$name=NULL;
@@ -92,7 +62,7 @@
 					}
 
 					$request=$bdd->query('SELECT P1.pseudo as name1, P2.pseudo as name2, idQuestion, question, answer 
->>>>>>> feature/web
+
 											FROM FAQ F left join Profile P1 ON F.id_profile= P1.id_profile
 														left join Profile P2 ON F.answer_id_profile= P2.id_profile');
 
@@ -120,29 +90,20 @@
 						while($donnee0=$req0->fetch()){
 							$id_profile=$donnee0['id_profile'];
 						}
-<<<<<<< HEAD
-						$req1=$bdd->prepare('SELECT name FROM Profile WHERE email=?');
-						$req1->execute(array($email));
-						$name=NULL;
-						while($donnee1=$req1->fetch()){
-							$name=$donnee1['name'];
-=======
+
 						$req1=$bdd->prepare('SELECT pseudo FROM Profile WHERE email=?');
 						$req1->execute(array($email));
 						$name=NULL;
 						while($donnee1=$req1->fetch()){
 							$name=$donnee1['pseudo'];
->>>>>>> feature/web
+
 						}
 
 		    		 	$req = $bdd->prepare('INSERT INTO FAQ(question, id_profile) VALUES(:question, :id_profile)');
 						$req->execute(array('question' => $question,
 											'id_profile' => $id_profile));
-<<<<<<< HEAD
-						$request=$bdd->query('SELECT P1.name as name1, P2.name as name2, idQuestion, question, answer 
-=======
+
 						$request=$bdd->query('SELECT P1.pseudo as name1, P2.pseudo as name2, idQuestion, question, answer 
->>>>>>> feature/web
 											FROM FAQ F left join Profile P1 ON F.id_profile= P1.id_profile
 														left join Profile P2 ON F.answer_id_profile= P2.id_profile');
 
@@ -172,30 +133,22 @@
 						while($donnee0=$req0->fetch()){
 							$answer_id_profile=$donnee0['id_profile'];
 						}
-<<<<<<< HEAD
-						$req1=$bdd->prepare('SELECT name FROM Profile WHERE email=?');
-						$req1->execute(array($email));
-						$name=NULL;
-						while($donnee1=$req1->fetch()){
-							$name=$donnee1['name'];
-=======
+
 						$req1=$bdd->prepare('SELECT pseudo FROM Profile WHERE email=?');
 						$req1->execute(array($email));
 						$name=NULL;
 						while($donnee1=$req1->fetch()){
 							$name=$donnee1['pseudo'];
->>>>>>> feature/web
+
 						}
 
 		    		 	$req = $bdd->prepare('UPDATE FAQ SET answer=:answer, answer_id_profile=:answer_id_profile WHERE idQuestion=:idQuestion');
 						$req->execute(array('answer' => $answer,
 											'answer_id_profile' => $answer_id_profile,
 											 'idQuestion' => $idQuestion));
-<<<<<<< HEAD
-						$request=$bdd->query('SELECT P1.name as name1, P2.name as name2, idQuestion,question, answer 
-=======
+
 						$request=$bdd->query('SELECT P1.pseudo as name1, P2.pseudo as name2, idQuestion,question, answer 
->>>>>>> feature/web
+
 												FROM FAQ F left join Profile P1 ON F.id_profile= P1.id_profile
 															left join Profile P2 ON F.answer_id_profile= P2.id_profile');
 

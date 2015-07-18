@@ -1,4 +1,4 @@
-package character_recognition;
+package fr.laple.character_recognition;
 
 import java.util.ArrayList;
 

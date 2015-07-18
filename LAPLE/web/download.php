@@ -39,11 +39,7 @@
     	<div>
   	<div class="container-fluid" id="download">
   		<div class="row">
-<<<<<<< HEAD
-        <div class="col-lg-2" id="left-menu"><a class="navbar-brand" href="welcome.php">welcome</a></div>
-=======
         <div class="col-lg-2" id="left-menu"><a class="navbar-brand" href="index.html">welcome</a></div>
->>>>>>> feature/web
         	<div class="col-lg-offset-2 col-lg-4"><a href="ressource/David.mp3">Download video</a></div>
         </div>
         <div class="row">

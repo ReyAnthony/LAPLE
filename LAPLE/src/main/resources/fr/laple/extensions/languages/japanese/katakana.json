@@ -1,0 +1,280 @@
+{
+    "katakana": [
+        {
+            "userLangTranscript": "a",
+            "symbol": "ア",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "i",
+            "symbol": "イ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "u",
+            "symbol": "ウ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "e",
+            "symbol": "エ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "o",
+            "symbol": "オ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ka",
+            "symbol": "カ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ki",
+            "symbol": "キ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ku",
+            "symbol": "ク",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ke",
+            "symbol": "ケ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ko",
+            "symbol": "コ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+	    {
+            "userLangTranscript": "sa",
+            "symbol": "サ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "shi",
+            "symbol": "シ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "su",
+            "symbol": "ス",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "se",
+            "symbol": "セ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "so",
+            "symbol": "ソ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ta",
+            "symbol": "タ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "chi",
+            "symbol": "チ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "tsu",
+            "symbol": "ツ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "te",
+            "symbol": "テ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "to",
+            "symbol": "ト",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "na",
+            "symbol": "ナ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ni",
+            "symbol": "ニ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "nu",
+            "symbol": "ヌ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ne",
+            "symbol": "ネ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "no",
+            "symbol": "ノ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ha",
+            "symbol": "ハ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "hi",
+            "symbol": "ヒ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "fu",
+            "symbol": "フ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "he",
+            "symbol": "ヘ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ho",
+            "symbol": "ホ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ma",
+            "symbol": "マ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "mi",
+            "symbol": "ミ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "mu",
+            "symbol": "ム",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "me",
+            "symbol": "メ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "mo",
+            "symbol": "モ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ya",
+            "symbol": "ヤ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "yu",
+            "symbol": "ユ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "yo",
+            "symbol": "ヨ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ra",
+            "symbol": "ラ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ri",
+            "symbol": "リ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ru",
+            "symbol": "ル",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "re",
+            "symbol": "レ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "ro",
+            "symbol": "ロ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "wa",
+            "symbol": "ワ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "wo",
+            "symbol": "ヲ",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        },
+        {
+            "userLangTranscript": "n",
+            "symbol": "ン",
+            "symbolImage": "null",
+            "animatedImage": "null"
+        }
+    ]
+}

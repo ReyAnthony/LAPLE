@@ -1,0 +1,70 @@
+{
+    "kanji": [
+        {
+            "userLangTranscript": "someone",
+            "symbol": "人",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
+            "composition": [
+                "null",
+                "null"
+            ]
+        },
+        {
+            "userLangTranscript": "safety",
+            "symbol": "安",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
+            "composition": [
+                "null",
+                "null"
+            ]
+        },
+        {
+            "userLangTranscript": "one",
+            "symbol": "一",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
+            "composition": [
+                "null",
+                "null"
+            ]
+        },
+        {
+            "userLangTranscript": "rain",
+            "symbol": "雨",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
+            "composition": [
+                "null",
+                "null"
+            ]
+        },
+        {
+            "userLangTranscript": "to drink",
+            "symbol": "飲",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
+            "composition": [
+                "null",
+                "null"
+            ]
+        },
+        {
+            "userLangTranscript": "what",
+            "symbol": "何",
+            "symbolImage": "null",
+            "animatedImage": "null",
+            "soundFile": "null",
+            "composition": [
+                "null",
+                "null"
+            ]
+        }
+    ]
+}
