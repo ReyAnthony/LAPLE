@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by anthonyrey on 09/06/2015.
+ * View for lessons
+ *
+ * @author anthonyrey
  */
 public class LessonView extends JPanel {
 

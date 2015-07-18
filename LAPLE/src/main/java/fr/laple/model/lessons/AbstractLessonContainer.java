@@ -1,7 +1,9 @@
 package fr.laple.model.lessons;
 
 /**
- * Created by anthonyrey on 06/06/2015.
+ * This class is an AbstractLessonContainer
+ *
+ * @author anthonyrey
  */
 public abstract class AbstractLessonContainer {
 

@@ -10,13 +10,21 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 /**
- * Created by anthonyrey on 06/06/2015.
+ * This class contains Word Lessons
+ * @author zaafranigabriel
+ * @author anthonyrey
+ *
  */
 public class WordLessonContainer extends AbstractLessonContainer implements IListable {
 
     private String lessonTypeName;
     private ArrayList<IListable> lessonCategories;
 
+    /**
+     * Constructor for the WordLessonContainer
+     *
+     * @param lessonTypeName The lessonType
+     */
     public WordLessonContainer(String lessonTypeName)
     {
         this.lessonTypeName = lessonTypeName;
@@ -24,6 +32,14 @@ public class WordLessonContainer extends AbstractLessonContainer implements ILis
 
     }
 
+    /**
+     * Add a category to the list of categories
+     *
+     * @see fr.laple.model.lessons.LessonCategory
+     *
+     * @param name The name of the category
+     * @param category The LessonCategory
+     */
     public void addCategory(String name, LessonCategory category)
     {
         lessonCategories.add(category);

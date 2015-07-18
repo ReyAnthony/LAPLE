@@ -14,15 +14,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by anthonyrey on 14/07/2015.
+ * This class is the data model for the application
+ * It contains all the data needed by the application
+ *
+ * @author anthonyrey
  */
-//TODO throw exceptions
 public class LapleDataModel {
 
     private ILanguagePlugin languagePlugin;
     private List<IFeaturePlugin> features;
     private List<IPlugin> allDummyLanguagePlugins;
 
+    /**
+     * Constructor for LapleDataModel
+     *
+     * @param languagePlugin A language plugin
+     * @param features A list of features in config file
+     * @param allDummyLanguagePlugins A list of languages plugin in the config file
+     */
     public LapleDataModel(ILanguagePlugin languagePlugin, List<IFeaturePlugin> features,
                           List<IPlugin> allDummyLanguagePlugins)
     {
@@ -65,6 +74,10 @@ public class LapleDataModel {
 
     }
 
+    /**
+     * Call add new tab for the feature plugins
+     * @param ui
+     */
     public void addNewTabs(JTabbedPane ui) {
 
         for(IFeaturePlugin fp : features)

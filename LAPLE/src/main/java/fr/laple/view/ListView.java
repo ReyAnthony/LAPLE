@@ -9,7 +9,11 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by anthonyrey on 06/06/2015.
+ * Generic ListView for listing objects and call them (they must implements Ilistable)
+ *
+ * @see fr.laple.model.listable.IListable
+ *
+ * @author anthonyrey
  */
 public class ListView extends JPanel {
 

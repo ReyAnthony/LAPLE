@@ -10,13 +10,22 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 /**
- * Created by anthonyrey on 06/06/2015.
+ * This class represents a lesson category
+ *
+ * @author zaafranigabriel
+ * @author anthonyrey
  */
 public class LessonCategory implements IListable {
 
     private String categoryName;
     private ArrayList<IListable> lessons;
 
+    /**
+     * Constructor for the class
+     *
+     * @param name The name of the category
+     * @param lessons an ArrayList of lessons
+     */
     public LessonCategory(String name, ArrayList<IListable> lessons)
     {
         this.categoryName = name;

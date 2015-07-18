@@ -13,7 +13,8 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by anthonyrey on 02/06/2015.
+ * View for parameterizing exercises
+ * @author anthonyrey
  */
 public class ExerciseParameterizerView extends JPanel implements IListable{
 

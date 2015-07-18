@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
- * Created by anthonyrey on 04/06/2015.
+ * View for QCMExercises
+ *
+ * @author anthonyrey
  */
 public class QCMExerciseView extends AbstractExerciseView {
 
