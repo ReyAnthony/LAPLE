@@ -57,3 +57,4 @@ project
 .idea
 *.idea/*
 
+/bin/
