@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/private/css/style.css" />
-    <link rel="stylesheet" href="/private/css/formulaire.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/formulaire.css" />
       <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
       <script src="bootstrap/js/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.js"></script>
@@ -12,10 +12,14 @@
   </head>
 
   <body class="html">
+<<<<<<< HEAD
+  	<?php require_once('session.php'); ?>
+=======
   	<?php require_once('session.php'); 
           require('bdd.php');
            ini_set("display_errors", 1);
     ?>
+>>>>>>> feature/web
   	<nav class="navbar navbar-default">
 		  <div class="container-fluid">
 			    <!-- Brand and toggle get grouped for better mobile display -->
@@ -49,10 +53,17 @@
           <div class="col-lg-2"><a href="ranking.php?rang=2">Dictation</a></div>
           <div class="col-lg-2"><a href="ranking.php?rang=3">Funzone</a></div>
         </div>
+<<<<<<< HEAD
+      </div>
+      <div class="row">
+        <div class="col-lg-offset-2 col-lg-2">
+          <table style= "border-width:1px; border-color:black; border-style:solid; color:white">
+=======
       
       <div class="row">
         <div class="col-lg-offset-2 col-lg-8">
           <table style= "border-width:1px; border-color:black; border-style:solid; color:black">
+>>>>>>> feature/web
           <thead>
              <tr>
                 <th>Rang</th>
@@ -236,8 +247,11 @@
 
         </table>
       </div>
+<<<<<<< HEAD
+=======
       </div>
       </div>
+>>>>>>> feature/web
     <div style= "height: 60px" class="foot"><?php include('footer.php'); ?></div>
   </body>
 </html>

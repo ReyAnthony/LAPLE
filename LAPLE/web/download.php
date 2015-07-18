@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8">
-		<link rel="stylesheet" href="/private/css/style.css" />
-		<link rel="stylesheet" href="/private/css/formulaire.css" />
+		<link rel="stylesheet" href="/css/style.css" />
+		<link rel="stylesheet" href="/css/formulaire.css" />
 	    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 	    <script src="bootstrap/js/jquery.js"></script>
 		<script src="bootstrap/js/bootstrap.js"></script>
@@ -39,7 +39,11 @@
     	<div>
   	<div class="container-fluid" id="download">
   		<div class="row">
+<<<<<<< HEAD
+        <div class="col-lg-2" id="left-menu"><a class="navbar-brand" href="welcome.php">welcome</a></div>
+=======
         <div class="col-lg-2" id="left-menu"><a class="navbar-brand" href="index.html">welcome</a></div>
+>>>>>>> feature/web
         	<div class="col-lg-offset-2 col-lg-4"><a href="ressource/David.mp3">Download video</a></div>
         </div>
         <div class="row">

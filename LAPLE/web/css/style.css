@@ -14,7 +14,11 @@
 }
 .html{
 	background: url(../img/footer_lodyas.png);
+<<<<<<< HEAD
+	color:white;
+=======
 	color:black;
+>>>>>>> feature/web
 }
 
 h2{
@@ -51,8 +55,13 @@ h2{
 }
 
 table, th, tr, td{
+<<<<<<< HEAD
+	 border: 2px solid black;
+	 border-width:1px; 
+=======
 	 border: 20px solid black;
 	 border-width:2px; 
+>>>>>>> feature/web
 	 border-color:blue; 
 	 color:blue;
 	 background-color: #87CEEB;
