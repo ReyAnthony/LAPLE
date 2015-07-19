@@ -51,7 +51,7 @@ public class SymbolLessonContainer extends AbstractLessonContainer {
 
         ListableConverter<Lesson> converter = new ListableConverter<>();
         List<IListable> listables = converter.typeToIListable(this.getLessons());
-        
+
         TabTools.swapTab(tabbedPane, new ListView(model, listables, true,
                 rootData));
     }
