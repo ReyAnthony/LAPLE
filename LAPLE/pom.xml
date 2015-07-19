@@ -43,10 +43,36 @@
       <artifactId>javax.json</artifactId>
       <version>1.0.4</version>
     </dependency>
+    <dependency>
+      <groupId>fr.laple</groupId>
+      <artifactId>laple-annot</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>
     <plugins>
+        <plugin>
+          <groupId>fr.laple</groupId>
+          <artifactId>laple-annot</artifactId>
+          <version>1.0-SNAPSHOT</version>
+          <configuration>
+            <package>fr.laple.model.exercises.answers</package>
+            <folderExport>/Users/zaafranigabriel/Documents/Etudes/Etude/Java/folderExport/</folderExport>
+            <fileAnnotation>fr.laple.annot.Annot</fileAnnotation>
+            <takeScreenshot>true</takeScreenshot>
+            <root_path>${project.baseUri}target/laple-1.0-SNAPSHOT.jar</root_path>
+          </configuration>
+          <executions>
+            <execution>
+              <id>run-plugin-annot</id>
+              <phase>install</phase>
+              <goals>
+                <goal>generate-doc</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>

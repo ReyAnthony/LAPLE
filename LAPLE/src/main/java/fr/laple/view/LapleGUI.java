@@ -1,5 +1,6 @@
 package fr.laple.view;
 
+import fr.laple.annot.Annot;
 import fr.laple.controller.WindowController;
 import fr.laple.model.language.ILanguagePlugin;
 import fr.laple.view.exercises.ExerciseParameterizer;
@@ -17,6 +18,7 @@ import java.awt.*;
  * @see fr.laple.view.staticpanels.MainPanel
  * @author anthonyrey
  */
+
 public class LapleGUI extends JFrame {
 
     private JTabbedPane UIPane;
@@ -67,6 +69,9 @@ public class LapleGUI extends JFrame {
 
     }
 
+
+
+    @Annot(nom = "test",title = "fichier lapleGui",observation = "test observation")
     public JTabbedPane getUIPane()
     {
         return UIPane;

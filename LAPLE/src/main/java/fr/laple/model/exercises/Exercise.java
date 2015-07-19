@@ -1,5 +1,6 @@
 package fr.laple.model.exercises;
 
+import fr.laple.annot.Annot;
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
 
@@ -10,8 +11,9 @@ import java.awt.*;
  *
  * @author anthonyrey
  */
+@Annot(title = "class exercice", nom = "Exercice",observation = "ajout d'exercice")
 public class Exercise {
-
+@Annot(title = "test", nom = "gabriel", observation = "test")
     private SymbolContainer sContainer;
     private Symbol wantedSymbol;
     private IExerciseMode mode;
