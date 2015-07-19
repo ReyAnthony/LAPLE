@@ -2,12 +2,14 @@ package fr.laple.model.lessons;
 
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
+import fr.laple.model.listable.ListableConverter;
 import fr.laple.model.listable.RootData;
 import fr.laple.view.ListView;
 import fr.laple.ztools.tabTools.TabTools;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class contains Word Lessons
@@ -15,10 +17,10 @@ import java.util.ArrayList;
  * @author anthonyrey
  *
  */
-public class WordLessonContainer extends AbstractLessonContainer implements IListable {
+public class WordLessonContainer extends AbstractLessonContainer {
 
     private String lessonTypeName;
-    private ArrayList<IListable> lessonCategories;
+    private ArrayList<LessonCategory> lessonCategories;
 
     /**
      * Constructor for the WordLessonContainer
@@ -49,7 +51,7 @@ public class WordLessonContainer extends AbstractLessonContainer implements ILis
         return lessonTypeName;
     }
 
-    public ArrayList<IListable> getLessonCategories()
+    public ArrayList<LessonCategory> getLessonCategories()
    {
        return lessonCategories;
    }
@@ -62,7 +64,10 @@ public class WordLessonContainer extends AbstractLessonContainer implements ILis
     @Override
     public void expectedBehavior(JTabbedPane tabbedPane, LapleDataModel model, RootData rootData) {
 
-        TabTools.swapTab(tabbedPane, new ListView(model, this.getLessonCategories(), true, rootData));
+        ListableConverter<LessonCategory> converter = new ListableConverter<>();
+        List<IListable> listables = converter.typeToIListable(this.getLessonCategories());
+
+        TabTools.swapTab(tabbedPane, new ListView(model, listables, true, rootData));
 
     }
 }

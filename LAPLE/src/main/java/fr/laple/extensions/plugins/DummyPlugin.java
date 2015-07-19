@@ -6,6 +6,7 @@ import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.language.SymbolContainer;
+import fr.laple.model.lessons.AbstractLessonContainer;
 import fr.laple.model.listable.IListable;
 
 import javax.swing.*;
@@ -179,7 +180,7 @@ public class DummyPlugin implements IPlugin, ILanguagePlugin, IFeaturePlugin {
      * @return
      */
     @Override
-    public ArrayList<IListable> getLessonContainers() {
+    public ArrayList<AbstractLessonContainer> getLessonContainers() {
         return new ArrayList<>();
     }
 }

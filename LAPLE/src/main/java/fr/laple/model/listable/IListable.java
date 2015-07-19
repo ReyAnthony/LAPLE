@@ -15,9 +15,9 @@ import javax.swing.*;
 public interface IListable {
 
     /**
-     * @deprecated Not used anymore
+     * Done before expected behavior
      */
-    public default void oneInListPreAction(){};
+    public default void preAction(){};
 
     /**
      * Is the value selectable ?

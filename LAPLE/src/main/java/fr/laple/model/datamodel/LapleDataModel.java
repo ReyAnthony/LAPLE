@@ -6,6 +6,7 @@ import fr.laple.extensions.plugins.languages.ILanguagePlugin;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.language.SymbolContainer;
+import fr.laple.model.lessons.AbstractLessonContainer;
 import fr.laple.model.listable.IListable;
 import fr.laple.view.exercises.ExerciseParameterizerView;
 
@@ -56,7 +57,7 @@ public class LapleDataModel {
         return languagePlugin.getExercisesSolvingModes();
     }
 
-    public ArrayList<IListable> getLessonContainers() {
+    public ArrayList<AbstractLessonContainer> getLessonContainers() {
         return languagePlugin.getLessonContainers();
     }
 

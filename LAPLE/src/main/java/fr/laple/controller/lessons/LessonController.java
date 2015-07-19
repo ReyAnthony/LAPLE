@@ -67,7 +67,8 @@ public class LessonController implements ActionListener {
         {
 
             JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
-            TabTools.swapTab(tabbedPane,  new ListView(model, model.getLessonContainers(),
+
+            TabTools.swapTab(tabbedPane,  new ListView(model, rootData.getRootModel(),
                     false, rootData));
 
             tabbedPane.setEnabled(true);

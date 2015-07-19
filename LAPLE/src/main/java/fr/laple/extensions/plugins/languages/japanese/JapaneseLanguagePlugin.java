@@ -2,16 +2,16 @@ package fr.laple.extensions.plugins.languages.japanese;
 
 
 import fr.laple.extensions.plugins.Plugins;
-import fr.laple.model.listable.IListable;
-import fr.laple.model.exercises.exercisemode.ExModeTranscriptLangUserLang;
-import fr.laple.model.exercises.exercisemode.ExModeUserLangTranscriptLang;
-import fr.laple.model.exercises.exercisemode.IExerciseMode;
+import fr.laple.extensions.plugins.languages.ILanguagePlugin;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.exercises.answers.DrawingMode;
 import fr.laple.model.exercises.answers.FreeInputMode;
 import fr.laple.model.exercises.answers.QcmMode;
-import fr.laple.extensions.plugins.languages.ILanguagePlugin;
+import fr.laple.model.exercises.exercisemode.ExModeTranscriptLangUserLang;
+import fr.laple.model.exercises.exercisemode.ExModeUserLangTranscriptLang;
+import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.language.SymbolContainer;
+import fr.laple.model.lessons.AbstractLessonContainer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
     private ArrayList<SymbolContainer> symbolContainers;
     private ArrayList<IExerciseMode> exerciseModes;
     private ArrayList<AbstractAnswerMode> exerciseSolvingModes;
-    private ArrayList<IListable> lessonContainers;
+    private ArrayList<AbstractLessonContainer> lessonContainers;
 
     /**
      * Constructor for the plugin :
@@ -117,7 +117,7 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
     }
 
     @Override
-    public ArrayList<IListable> getLessonContainers() {
+    public ArrayList<AbstractLessonContainer> getLessonContainers() {
         return lessonContainers;
     }
 

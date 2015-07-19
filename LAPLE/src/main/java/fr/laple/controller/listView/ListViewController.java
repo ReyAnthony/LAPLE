@@ -110,7 +110,7 @@ public class ListViewController implements ActionListener, ComponentListener {
             /*
             JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
             IListable listable = displayModel.get(0);
-            listable.oneInListPreAction();
+            listable.preAction();
             listable.expectedBehavior(tabbedPane, model, rootData);
             */
         }

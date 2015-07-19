@@ -130,7 +130,7 @@ public class ExerciseParameterizerView extends JPanel implements IListable{
     }
 
     @Override
-    public void oneInListPreAction()
+    public void preAction()
     {
         getBackButton().setVisible(false);
     }
