@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Profile implements Cloneable, Comparable<Profile> {
 	private int idProfile=0;
+	private Boolean connected;
 	private String email="";
 	private String mdp="";
 	private String newMdp="";
@@ -59,6 +60,14 @@ public class Profile implements Cloneable, Comparable<Profile> {
 	}
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
+	}
+	
+	
+	public Boolean getConnected() {
+		return connected;
+	}
+	public void setConnected(Boolean connected) {
+		this.connected = connected;
 	}
 	@Override
 	public String toString() {

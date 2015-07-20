@@ -127,7 +127,7 @@ public class AssociateDAO extends DAO <Associate>{
 						 "nameStat, totalNumber, currentNumberEx, pseudo, email, mdp, nameLanguage FROM associate A"+
 				 		", Profile P, Language L"+
 						" WHERE A.idLanguage=L.idLanguage AND A.id_profile=P.id_profile AND A.idStatistics=S.idStatistics"+
-				 		"ORDER BY idStatistic ASC");
+				 		" ORDER BY idStatistic ASC");
 		if(result.last()){
 			profile=new Profile(result.getInt("A.id_profile"),result.getString("email"), result.getString("mdp"), result.getString("pseudo"));
 			statistics= new Statistics(result.getInt("idStatistic"), result.getString("type"), result.getString("nameStat"), result.getInt("totalNumberEx"), result.getInt("currentNumbeerEx"));

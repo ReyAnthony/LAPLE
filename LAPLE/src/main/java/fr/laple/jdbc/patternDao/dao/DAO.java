@@ -51,5 +51,5 @@ public abstract class DAO<T> {
 	   public abstract T findLastId() throws SQLException, CloneNotSupportedException;
 	   
 	   public abstract T findByCondition(T obj) throws SQLException, CloneNotSupportedException;
-
+	   
 }
