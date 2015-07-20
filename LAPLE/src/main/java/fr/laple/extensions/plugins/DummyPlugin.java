@@ -6,6 +6,7 @@ import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.language.SymbolContainer;
+import fr.laple.model.lessons.AbstractLessonContainer;
 import fr.laple.model.listable.IListable;
 
 import javax.swing.*;
@@ -13,7 +14,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Created by anthonyrey on 15/07/2015.
+ * This class is a dummyPlugin
+ * A dummy plugin is a plugin used as a substitute for any other plugin
+ *
+ * @author anthonyrey
  */
 public class DummyPlugin implements IPlugin, ILanguagePlugin, IFeaturePlugin {
 
@@ -25,6 +29,14 @@ public class DummyPlugin implements IPlugin, ILanguagePlugin, IFeaturePlugin {
     private String version;
     private String otherCredits;
 
+    /**
+     * Constructor without data
+     * When this constructor is used, unspecified data are set to unknown
+     *
+     * @param name The name of the plugin
+     * @param path The path to the plugin
+     * @param isInternal isInternal ?
+     */
     public DummyPlugin(String name, File path, boolean isInternal)
     {
         this.name = name;
@@ -38,6 +50,17 @@ public class DummyPlugin implements IPlugin, ILanguagePlugin, IFeaturePlugin {
         this.otherCredits = "Unknown";
     }
 
+    /**
+     * Constructor n2
+     *
+     * @param name The name of the plugin
+     * @param path The path to the plugin
+     * @param isInternal isInternal ?
+     * @param description The description
+     * @param developer The developer of the plugin
+     * @param version The version of the plugin
+     * @param otherCredits Other credits (like people who recorded sounds etc..)
+     */
     public DummyPlugin(String name, File path, boolean isInternal, String description, String developer,
                        String version, String otherCredits)
     {
@@ -97,38 +120,67 @@ public class DummyPlugin implements IPlugin, ILanguagePlugin, IFeaturePlugin {
         return getName();
     }
 
+    /**
+     * Not implemented
+     * @param model
+     */
     @Override
-    public void instanciateExerciseModes(LapleDataModel model) {
+    public void instanciateExerciseTypes(LapleDataModel model) {
 
     }
 
+    /**
+     * Not implemented
+     * @return
+     */
     @Override
     public ArrayList<IListable> getExerciseTypes() {
         return new ArrayList<>();
     }
 
+    /**
+     * Not implemented
+     * @param ui The tabbedPane from LapleUI
+     * @param model the DataModel
+     */
     @Override
     public void addNewTabs(JTabbedPane ui, LapleDataModel model) {
 
     }
 
+    /**
+     * Not implemented
+     * @return
+     */
     @Override
     public ArrayList<SymbolContainer> getSymbolContainer() {
         return null;
     }
 
+    /**
+     * Not implemented
+     * @return
+     */
     @Override
     public ArrayList<IExerciseMode> getExercisesModes() {
         return new ArrayList<>();
     }
 
+    /**
+     * Not implemented
+     * @return
+     */
     @Override
     public ArrayList<AbstractAnswerMode> getExercisesSolvingModes() {
         return new ArrayList<>();
     }
 
+    /**
+     * Not implemented
+     * @return
+     */
     @Override
-    public ArrayList<IListable> getLessonContainers() {
+    public ArrayList<AbstractLessonContainer> getLessonContainers() {
         return new ArrayList<>();
     }
 }

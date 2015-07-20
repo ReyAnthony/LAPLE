@@ -4,7 +4,8 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 
 /**
- * Created by anthonyrey on 04/06/2015.
+ * Abstract view for the exercises, the others are using this one as a base
+ * @author anthonyrey
  */
 public abstract class AbstractExerciseView extends JPanel {
 

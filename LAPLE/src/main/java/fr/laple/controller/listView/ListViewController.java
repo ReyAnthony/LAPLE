@@ -50,7 +50,7 @@ public class ListViewController implements ActionListener, ComponentListener {
 
         JList<IListable> list = view.getList();
         DefaultListModel<IListable> listModel = new DefaultListModel<>();
-        list.addListSelectionListener(new MyListSelectionListener());
+        list.addListSelectionListener(new ListViewSelectionListener());
 
         for (int i = 0; i < displayModel.size(); i++) {
             listModel.add(i, displayModel.get(i));
@@ -110,7 +110,7 @@ public class ListViewController implements ActionListener, ComponentListener {
             /*
             JTabbedPane tabbedPane = (JTabbedPane) view.getParent();
             IListable listable = displayModel.get(0);
-            listable.oneInListPreAction();
+            listable.preAction();
             listable.expectedBehavior(tabbedPane, model, rootData);
             */
         }

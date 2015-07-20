@@ -3,7 +3,9 @@ package fr.laple.ztools.tabTools;
 import javax.swing.*;
 
 /**
- * Created by anthonyrey on 14/07/2015.
+ * Helper Classe for JTabPane
+ *
+ * @author anthonyrey
  */
 public class TabTools {
 

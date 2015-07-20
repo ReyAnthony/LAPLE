@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Created by anthonyrey on 02/06/2015.
+ * View for freeInputExercises
+ *
+ * @author anthonyrey
  */
 public class FreeInputExerciseView extends AbstractExerciseView {
 

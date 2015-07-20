@@ -28,7 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by anthonyrey on 14/07/2015.
+ * This class is the controller for the Plugin Configuration interface
+ *
+ * @see fr.laple.view.config.PluginConfigView
+ * @author anthonyrey
  */
 public class PluginConfigController implements ActionListener, ItemListener, ListSelectionListener, IListable {
 
@@ -51,9 +54,21 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
 
         view.getPluginTypes().addItem("Language plugin");
         view.getPluginTypes().addItem("Feature plugin");
-
     }
 
+    /**
+     * This is the ActionEvent handler for this class
+     * There are 3 possible kind of actions to be called :
+     *
+     * - Back, return to the root listView
+     * - Remove, will remove the selected plugin if the conditions are matched (not internal)
+     * - Add, will add a plugin if the type is right (ie. not adding a feature to the language) and if not already added
+     *
+     * This method is throwing a lot of exceptions and handle them by itself
+     *
+     * @see fr.laple.extensions.plugins.Plugins
+     * @param e An event from the GUI
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -167,6 +182,12 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
         }
     }
 
+    /**
+     * This method is handling what to do when an item state changes
+     * (namely only the JComboBox from the view is affected)
+     *
+     * @param e
+     */
     @Override
     public void itemStateChanged(ItemEvent e) {
 
@@ -183,6 +204,10 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
         }
     }
 
+    /**
+     * Update the JList containing the plugins with the current content of the DataModel
+     * @see fr.laple.model.datamodel.LapleDataModel
+     */
     private void updateLanguagePluginView()
     {
         if(languagePlugins != null && !languagePlugins.isEmpty() )
@@ -211,6 +236,11 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
         }
     }
 
+    /**
+     * Handle what to do when the user select a plugin in the view's Jlist
+     *
+     * @param e A listSelectionEvent
+     */
     @Override
     public void valueChanged(ListSelectionEvent e) {
 
@@ -227,10 +257,22 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
 
     }
 
-    public PluginConfigView getView() {
-        return view;
-    }
-
+    /**
+     * This is an implementation of a method from the IListable interface
+     * When you press OK in the ListView, this method is called
+     *
+     * Here we fill the class variables with the values from the model
+     * add the view to the tab
+     *
+     * @see fr.laple.model.listable.IListable
+     * @see fr.laple.model.listable.RootData
+     * @see fr.laple.view.ListView
+     * @see fr.laple.view.LapleGUI
+     *
+     * @param tabbedPane The main tabbed pane from LapleGUI (view.getParent() usually)
+     * @param model      The lapleDataModel containing all the application data
+     * @param rootData   A rootDataObject containing the information to go back to the listView
+     */
     @Override
     public void expectedBehavior(JTabbedPane tabbedPane, LapleDataModel model, RootData rootData) {
 
@@ -247,6 +289,14 @@ public class PluginConfigController implements ActionListener, ItemListener, Lis
         //changing state manually ;)
         this.view.getPluginTypes().setSelectedIndex(1);
         this.view.getPluginTypes().setSelectedIndex(0);
+    }
+
+    /**
+     * Accessor method for the view
+     * @return A PluginConfigView Object
+     */
+    public PluginConfigView getView() {
+        return view;
     }
 
     @Override

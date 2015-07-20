@@ -1,7 +1,9 @@
 package fr.laple.extensions.plugins.languages.japanese;
 
 /**
- * Created by anthonyrey on 06/06/2015.
+ * An exception when parsing fail
+ *
+ * @author anthonyrey
  */
 public class ParserException extends Exception {
 

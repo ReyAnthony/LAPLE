@@ -2,12 +2,14 @@ package fr.laple.model.lessons;
 
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
+import fr.laple.model.listable.ListableConverter;
 import fr.laple.model.listable.RootData;
 import fr.laple.view.ListView;
 import fr.laple.ztools.tabTools.TabTools;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class contains Symbol Lessons
@@ -15,16 +17,16 @@ import java.util.ArrayList;
  * @author anthonyrey
  *
  */
-public class SymbolLessonContainer extends AbstractLessonContainer implements IListable{
+public class SymbolLessonContainer extends AbstractLessonContainer {
 
     private String lessonTypeName;
-    private ArrayList<IListable> lessons;
+    private ArrayList<Lesson> lessons;
 
     /**
      * It's the constructor of Symbol lesson container
      * @param lessonTypeName String used to set the type  of the dictionary.
      */
-    public SymbolLessonContainer(String lessonTypeName, ArrayList<IListable> lessons){
+    public SymbolLessonContainer(String lessonTypeName, ArrayList<Lesson> lessons){
         this.lessonTypeName = lessonTypeName;
         this.lessons = lessons;
     }
@@ -34,7 +36,7 @@ public class SymbolLessonContainer extends AbstractLessonContainer implements IL
         return lessonTypeName;
     }
 
-    public ArrayList<IListable> getLessons()
+    public ArrayList<Lesson> getLessons()
     {
         return lessons;
     }
@@ -47,7 +49,10 @@ public class SymbolLessonContainer extends AbstractLessonContainer implements IL
     @Override
     public void expectedBehavior(JTabbedPane tabbedPane, LapleDataModel model, RootData rootData)  {
 
-        TabTools.swapTab(tabbedPane, new ListView(model, this.getLessons(), true,
+        ListableConverter<Lesson> converter = new ListableConverter<>();
+        List<IListable> listables = converter.typeToIListable(this.getLessons());
+
+        TabTools.swapTab(tabbedPane, new ListView(model, listables, true,
                 rootData));
     }
 }

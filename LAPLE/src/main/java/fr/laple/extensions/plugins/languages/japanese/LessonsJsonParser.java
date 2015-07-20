@@ -1,7 +1,6 @@
 package fr.laple.extensions.plugins.languages.japanese;
 
 
-import fr.laple.model.listable.IListable;
 import fr.laple.model.language.SymbolContainer;
 import fr.laple.model.lessons.*;
 
@@ -13,20 +12,45 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
- * Created by anthonyrey on 06/06/2015.
+ * This class parse lessons config files
+ *
+ * @author anthonyrey
  */
 public class LessonsJsonParser {
 
     private ArrayList<SymbolContainer> symbolContainers;
 
+    /**
+     * Constructor to the class
+     *
+     *@see fr.laple.model.language.SymbolContainer
+     *
+     * @param sc The symbol containers
+     */
     public LessonsJsonParser(ArrayList<SymbolContainer> sc)
     {
         this.symbolContainers = sc;
     }
 
-    public ArrayList<IListable> parseForSymbolLessons(String path) throws ParserException {
+    /**
+     *
+     * Parse the file and create an arrayList of AbstractLessonContainer
+     *
+     * (load hiragana and katakana)
+     *
+     * We need the SymbolContainer because Lessons have references on the symbols they use
+     *
+     * @see fr.laple.model.language.SymbolContainer
+     * @see fr.laple.model.lessons.Lesson
+     * @see fr.laple.model.lessons.SymbolLessonContainer
+     *
+     * @param path The path to the config file
+     * @return An array List of Abstract LessonContainer
+     * @throws ParserException if there is any error
+     */
+    public ArrayList<AbstractLessonContainer> parseForSymbolLessons(String path) throws ParserException {
 
-        ArrayList<IListable> lessonContainers = new ArrayList<>();
+        ArrayList<AbstractLessonContainer> lessonContainers = new ArrayList<>();
 
         try( InputStream file = getClass().getResourceAsStream(path))
         {
@@ -41,7 +65,7 @@ public class LessonsJsonParser {
                 {
                     JsonObject learningOrder = lessonTypes.getJsonObject(type);
                     JsonArray symbols = learningOrder.getJsonArray("learning_order");
-                    ArrayList<IListable> lessons = new ArrayList<>();
+                    ArrayList<Lesson> lessons = new ArrayList<>();
 
                     SymbolContainer containerForFile = null;
 
@@ -79,7 +103,24 @@ public class LessonsJsonParser {
 
     }
 
-    public IListable parseForWordLessons(String path) throws ParserException {
+    /**
+     *
+     * Parse the file and create an arrayList of AbstractLessonContainer
+     *
+     * We need the SymbolContainer because Lessons have references on the symbols they use
+     *
+     *(load Kanji)
+     *
+     * @see fr.laple.model.language.SymbolContainer
+     * @see fr.laple.model.listable.IListable
+     * @see fr.laple.model.lessons.Lesson
+     * @see fr.laple.model.lessons.WordLessonContainer
+     *
+     * @param path The path to the config file
+     * @return An array List of AbstractLessonContainer
+     * @throws ParserException if there is any error
+     */
+    public AbstractLessonContainer parseForWordLessons(String path) throws ParserException {
         WordLessonContainer lessonContainer = new WordLessonContainer("kanji");
 
         try(InputStream file = getClass().getResourceAsStream(path)){
@@ -94,7 +135,7 @@ public class LessonsJsonParser {
                 String category = rootObj.getString("category");
                 JsonArray list = rootObj.getJsonArray("list");
 
-                ArrayList<IListable> lessons = new ArrayList<>();
+                ArrayList<Lesson> lessons = new ArrayList<>();
 
                 SymbolContainer containerForFile = null;
 

@@ -13,9 +13,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by anthonyrey on 02/06/2015.
+ * View for parameterizing exercises
+ * @author anthonyrey
  */
-public class ExerciseParameterizer extends JPanel implements IListable{
+public class ExerciseParameterizerView extends JPanel implements IListable{
 
     private JLabel questionModeMessage;
     private JLabel countMessage;
@@ -28,7 +29,7 @@ public class ExerciseParameterizer extends JPanel implements IListable{
     private JLabel answerModeMessage;
     private JSpinner exerciseCountSelector;
 
-    public ExerciseParameterizer(LapleDataModel model) {
+    public ExerciseParameterizerView(LapleDataModel model) {
 
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
@@ -129,7 +130,7 @@ public class ExerciseParameterizer extends JPanel implements IListable{
     }
 
     @Override
-    public void oneInListPreAction()
+    public void preAction()
     {
         getBackButton().setVisible(false);
     }

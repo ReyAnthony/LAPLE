@@ -1,8 +1,11 @@
 package fr.laple.controller;
 
+import com.apple.eawt.Application;
 import fr.laple.controller.config.PluginConfigController;
 import fr.laple.model.datamodel.LapleDataModel;
+import fr.laple.model.lessons.AbstractLessonContainer;
 import fr.laple.model.listable.IListable;
+import fr.laple.model.listable.ListableConverter;
 import fr.laple.model.listable.RootData;
 import fr.laple.view.LapleGUI;
 import fr.laple.view.ListView;
@@ -14,24 +17,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by anthonyrey on 06/06/2015.
+ * This class is the main GUI controller
+ * It initialize the whole laple app (after language selection)
+ * It also manage OSX tweak for exit actions
+ *
+ * @author anthonyrey
  */
 public class LapleGUIController {
 
     private LapleGUI view;
     private LapleDataModel model;
 
+    /**
+     * Constructor for the class
+     * add a window listenner to the frame
+     * set the quit handler (osx)
+     *
+     * and init the plugins, views etc..
+     *
+     * @param model
+     */
     public LapleGUIController(LapleDataModel model)
     {
         this.model = model;
         view = new LapleGUI();
 
+        //OSX tweak for closing
+        String osName = System.getProperty("os.name").toLowerCase();
+        boolean isMacOs = osName.startsWith("mac os x");
+        if (isMacOs)
+        {
+            Application.getApplication().setQuitHandler(
+                    (quitEvent, quitResponse) ->
+                    {
+                        int response = JOptionPane.showConfirmDialog(null,
+                                "Do you really want to quit ? ", "LAPLE",
+                                JOptionPane.YES_NO_OPTION);
+                        if (response == JOptionPane.OK_OPTION){
+                            quitResponse.performQuit();
+                        }
+
+                        quitResponse.cancelQuit();
+                    });
+        }
+
         view.addWindowListener(new WindowController(view));
         JTabbedPane ui = view.getUIPane();
 
         ui.add("Home Page", new MainPanel());
-        ui.add("Lessons",  new ListView(model, model.getLessonContainers(), false,
-                new RootData(model.getLessonContainers(), "Select a Lesson category :")));
+
+        ListableConverter<AbstractLessonContainer> converter = new ListableConverter<>();
+        List<IListable> listables = converter.typeToIListable(model.getLessonContainers());
+        ;
+        ui.add("Lessons",  new ListView(model, listables, false,
+                new RootData(listables, "Select a Lesson category :")));
 
         //get Exercise type take into account modes added by plugins",
                 ui.add("Exercises", new ListView(model, model.getExerciseTypes(), false,

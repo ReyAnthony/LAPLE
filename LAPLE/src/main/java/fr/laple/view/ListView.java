@@ -1,5 +1,6 @@
 package fr.laple.view;
 
+import fr.laple.annot.Annot;
 import fr.laple.controller.listView.ListViewController;
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
@@ -9,8 +10,13 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by anthonyrey on 06/06/2015.
+ * Generic ListView for listing objects and call them (they must implements Ilistable)
+ *
+ * @see fr.laple.model.listable.IListable
+ *
+ * @author anthonyrey
  */
+@Annot(title = "Generic ListView for listing objects and call them (they must implements Ilistable)",nom = "ListView",observation = "this ListView use IListable")
 public class ListView extends JPanel {
 
     private JList<IListable> list;
@@ -53,16 +59,17 @@ public class ListView extends JPanel {
             backButton.setVisible(false);
 
     }
-
+    @Annot(title = " function getList",nom = "getList()",observation = "permet de recuperer les JList de Ilistable")
     public JList<IListable> getList()
     {
         return list;
     }
 
+    @Annot(title = " function getBackButton",nom = "getBackButton()",observation = "permet de verifier si un retour en arriere est necessaire ")
     public JButton getBackButton() {
         return backButton;
     }
-
+    @Annot(title = " function getValidationButton",nom = "getValidationButton()",observation = "permet de recuperer la validation des buttons")
     public JButton getValidationButton() {
         return validationButton;
     }

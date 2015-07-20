@@ -6,23 +6,33 @@ import fr.laple.extensions.plugins.languages.ILanguagePlugin;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.language.SymbolContainer;
+import fr.laple.model.lessons.AbstractLessonContainer;
 import fr.laple.model.listable.IListable;
-import fr.laple.view.exercises.ExerciseParameterizer;
+import fr.laple.view.exercises.ExerciseParameterizerView;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by anthonyrey on 14/07/2015.
+ * This class is the data model for the application
+ * It contains all the data needed by the application
+ *
+ * @author anthonyrey
  */
-//TODO throw exceptions
 public class LapleDataModel {
 
     private ILanguagePlugin languagePlugin;
     private List<IFeaturePlugin> features;
     private List<IPlugin> allDummyLanguagePlugins;
 
+    /**
+     * Constructor for LapleDataModel
+     *
+     * @param languagePlugin A language plugin
+     * @param features A list of features in config file
+     * @param allDummyLanguagePlugins A list of languages plugin in the config file
+     */
     public LapleDataModel(ILanguagePlugin languagePlugin, List<IFeaturePlugin> features,
                           List<IPlugin> allDummyLanguagePlugins)
     {
@@ -47,14 +57,14 @@ public class LapleDataModel {
         return languagePlugin.getExercisesSolvingModes();
     }
 
-    public ArrayList<IListable> getLessonContainers() {
+    public ArrayList<AbstractLessonContainer> getLessonContainers() {
         return languagePlugin.getLessonContainers();
     }
 
     public ArrayList<IListable> getExerciseTypes() {
 
         ArrayList<IListable> toReturn = new ArrayList<>();
-        toReturn.add(new ExerciseParameterizer(this));
+        toReturn.add(new ExerciseParameterizerView(this));
 
         for(IFeaturePlugin fp : features)
         {
@@ -65,6 +75,10 @@ public class LapleDataModel {
 
     }
 
+    /**
+     * Call add new tab for the feature plugins
+     * @param ui
+     */
     public void addNewTabs(JTabbedPane ui) {
 
         for(IFeaturePlugin fp : features)

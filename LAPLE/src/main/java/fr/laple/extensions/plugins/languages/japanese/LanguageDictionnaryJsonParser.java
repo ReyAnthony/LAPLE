@@ -13,10 +13,22 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
- * Created by anthonyrey on 04/06/2015.
+ * Class for parsing language Dictionnaries of japanese language
+ * (hiragana.json etc..)
+ *
+ * @author anthonyrey
  */
 public class LanguageDictionnaryJsonParser {
 
+    /**
+     * Parse the file and instanciate the needed SymbolContainer
+     *
+     * @see fr.laple.extensions.plugins.languages.ILanguagePlugin
+     *
+     * @param path The path to the config file (specified in the ILanguagePlugin)
+     * @return An instance of symbolContainer
+     * @throws ParserException in case of any issue
+     */
     public SymbolContainer parseFile(String path) throws ParserException {
         SymbolContainer container;
 
@@ -57,6 +69,13 @@ public class LanguageDictionnaryJsonParser {
         return container;
     }
 
+    /**
+     * Load a sound file
+     *
+     * @param file The path to the file
+     * @return A Clip file
+     * @throws ParserException If there is any issue with the file
+     */
     private Clip loadSound(String file) throws ParserException {
 
         try {

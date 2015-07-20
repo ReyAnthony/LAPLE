@@ -7,10 +7,21 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 /**
- * Created by anthonyrey on 10/07/2015.
+ * This class is the SelectionListener used for the ListView class, it allows
+ *
+ * Class is default access so we cannot instanciate it elsewhere
+ *
+ * @see fr.laple.view.ListView
+ * @see fr.laple.controller.listView.ListViewSelectionListener
+ *
+ * @author anthonyrey
  */
-class MyListSelectionListener implements ListSelectionListener{
+class ListViewSelectionListener implements ListSelectionListener{
 
+    /**
+     * if value is selected and you cannot (! isSelectable()) it disable it
+     * @param e ListSelectionEvent
+     */
     @Override
     public void valueChanged(ListSelectionEvent e) {
 

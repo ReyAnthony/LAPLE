@@ -1,16 +1,17 @@
 package fr.laple.extensions.plugins.languages.japanese;
 
 
-import fr.laple.model.listable.IListable;
-import fr.laple.model.exercises.exercisemode.ExModeTranscriptLangUserLang;
-import fr.laple.model.exercises.exercisemode.ExModeUserLangTranscriptLang;
-import fr.laple.model.exercises.exercisemode.IExerciseMode;
+import fr.laple.extensions.plugins.Plugins;
+import fr.laple.extensions.plugins.languages.ILanguagePlugin;
 import fr.laple.model.exercises.answers.AbstractAnswerMode;
 import fr.laple.model.exercises.answers.DrawingMode;
 import fr.laple.model.exercises.answers.FreeInputMode;
 import fr.laple.model.exercises.answers.QcmMode;
-import fr.laple.extensions.plugins.languages.ILanguagePlugin;
+import fr.laple.model.exercises.exercisemode.ExModeTranscriptLangUserLang;
+import fr.laple.model.exercises.exercisemode.ExModeUserLangTranscriptLang;
+import fr.laple.model.exercises.exercisemode.IExerciseMode;
 import fr.laple.model.language.SymbolContainer;
+import fr.laple.model.lessons.AbstractLessonContainer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,14 +26,38 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
     private ArrayList<SymbolContainer> symbolContainers;
     private ArrayList<IExerciseMode> exerciseModes;
     private ArrayList<AbstractAnswerMode> exerciseSolvingModes;
-    private ArrayList<IListable> lessonContainers;
+    private ArrayList<AbstractLessonContainer> lessonContainers;
 
-    public JapaneseLanguagePlugin() throws ParserException {
+    /**
+     * Constructor for the plugin :
+     *
+     *  loadSymbolContainers();
+     *  loadLessons();
+     *  populateExerciseModeList();
+     *  populateExerciseSolvingModesList();
+     *
+     *  if there is any issue message then quit
+     *
+     *  @see fr.laple.extensions.plugins.Plugins
+     *  @see fr.laple.model.language.SymbolContainer
+     *  @see fr.laple.model.lessons.Lesson
+     *
+     */
+    public JapaneseLanguagePlugin()  {
 
-        loadSymbolContainers();
-        loadLessons();
-        populateExerciseModeList();
-        populateExerciseSolvingModesList();
+        try {
+
+            loadSymbolContainers();
+            loadLessons();
+            populateExerciseModeList();
+            populateExerciseSolvingModesList();
+
+        } catch (ParserException e) {
+
+            Plugins.pluginError(e.getMessage());
+        }
+
+
     }
 
     @Override
@@ -92,10 +117,19 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
     }
 
     @Override
-    public ArrayList<IListable> getLessonContainers() {
+    public ArrayList<AbstractLessonContainer> getLessonContainers() {
         return lessonContainers;
     }
 
+    /**
+     * Populate the list of solving modes
+     *
+     * @see fr.laple.model.exercises.answers.AbstractAnswerMode
+     * @see fr.laple.model.exercises.answers.QcmMode
+     * @see fr.laple.model.exercises.answers.DrawingMode
+     * @see fr.laple.model.exercises.answers.FreeInputMode
+     *
+     */
     private void populateExerciseSolvingModesList()
     {
         exerciseSolvingModes = new ArrayList<>();
@@ -105,6 +139,13 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
 
     }
 
+    /**
+     * Populate the list of Exercises Mode
+     *
+     * @see fr.laple.model.exercises.exercisemode.IExerciseMode
+     * @see fr.laple.model.exercises.exercisemode.ExModeTranscriptLangUserLang
+     * @see fr.laple.model.exercises.exercisemode.ExModeUserLangTranscriptLang
+     */
     private void populateExerciseModeList()
     {
         exerciseModes = new ArrayList<>();
@@ -112,6 +153,13 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
         exerciseModes.add(new ExModeUserLangTranscriptLang());
     }
 
+    /**
+     * Loads the symbol containers
+     *
+     * @see fr.laple.extensions.plugins.languages.japanese.LanguageDictionnaryJsonParser
+     *
+     * @throws ParserException if there is an error
+     */
     private void loadSymbolContainers() throws ParserException {
 
         symbolContainers = new ArrayList<>();
@@ -122,6 +170,13 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
 
     }
 
+    /**
+     * Loads the lessons
+     *
+     * @see fr.laple.extensions.plugins.languages.japanese.LessonsJsonParser
+     *
+     * @throws ParserException
+     */
     private void loadLessons() throws ParserException {
 
         LessonsJsonParser parser = new LessonsJsonParser(symbolContainers);
@@ -130,6 +185,9 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
 
     }
 
+    /**
+     * @return The name of the plugin
+     */
     public String toString()
     {
         return this.getName();

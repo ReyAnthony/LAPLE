@@ -4,13 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by anthonyrey on 14/07/2015.
+ * This class is a wrapper for the PluginConfigFileParser
+ *
+ * @see fr.laple.extensions.plugins.PluginConfigFileParser
+ *
+ * @author anthonyrey
  */
 public class PluginLoader {
 
     private List<IPlugin> dummies;
     private PluginConfigFileParser cfp;
 
+    /**
+     * Constructor to the Plugin Loader class
+     *
+     * @see fr.laple.extensions.plugins.features.FeaturePluginConfigFileParser
+     * @see fr.laple.extensions.plugins.languages.LanguagePluginConfigFileParser
+     *
+     * @param cfp The needed PluginConfigFileParser
+     * @throws PluginLoadingFatalException if there is any error while loading the dummies
+     */
     public PluginLoader(PluginConfigFileParser cfp) throws PluginLoadingFatalException {
 
         dummies = new ArrayList<>();
@@ -19,11 +32,24 @@ public class PluginLoader {
     }
 
     //dummies are not really used for IFeaturePlugins
+
+    /**
+     * Add the dummies to the dummies list
+     *
+     * @param chosen The dummy to add
+     */
     private void loadDummies(IPlugin chosen)
     {
         dummies.add(chosen);
     }
 
+    /**
+     * Load a real plugin from a dummy (with or without data)
+     *
+     * @param chosen The dummy plugin (as an IPlugin)
+     * @param withData With data ?
+     * @return The Plugin
+     */
     private IPlugin loadRealPlugins(IPlugin chosen, boolean withData) {
 
         //a bit hard to understand due to the flow of erros
@@ -43,6 +69,12 @@ public class PluginLoader {
         return ip;
     }
 
+    /**
+     * Get the loaded plugins (generated from the dummies)
+     *
+     * @param withData with data ?
+     * @return A List of IPlugin
+     */
     public List<IPlugin> getLoadedPlugins(boolean withData)  {
         List<IPlugin> plugins = new ArrayList<>();
 
@@ -55,6 +87,13 @@ public class PluginLoader {
         return plugins;
     }
 
+    /**
+     * Get a specific loaded plugin
+     *
+     * @param plugin The Dummy to get
+     * @param withData with data ?
+     * @return The plugin
+     */
     public IPlugin getLoadedPlugins(IPlugin plugin, boolean withData) {
 
         for(IPlugin ip : dummies)

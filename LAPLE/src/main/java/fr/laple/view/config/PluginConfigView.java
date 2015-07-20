@@ -6,7 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by anthonyrey on 14/07/2015.
+ * View for plugin configuration
+ *
+ * @author anthonyrey
  */
 public class PluginConfigView extends JPanel {
 

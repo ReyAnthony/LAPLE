@@ -11,13 +11,19 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Created by anthonyrey on 01/06/2015.
+ * Controller for the LoginPromptView
+ *
+ * @see fr.laple.view.startup.LoginPrompt
+ *
+ * @author anthonyrey
  */
 public class LoginPromptController implements ActionListener {
 
     private LoginPrompt loginPrompt;
 
-
+    /**
+     * Constructor for the class
+     */
     public LoginPromptController()
     {
         this.loginPrompt = new LoginPrompt();
@@ -25,6 +31,14 @@ public class LoginPromptController implements ActionListener {
         loginPrompt.getNoAccountButton().addActionListener(this);
     }
 
+    /**
+     * Two cases :
+     *
+     * - Validation : check your credential then connect
+     * - No account : gotToWebsite method
+     *
+     * @param e An ActionEvent Object
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -41,6 +55,9 @@ public class LoginPromptController implements ActionListener {
 
     }
 
+    /**
+     * Go to the laple website
+     */
     private void goToWebsite()
     {
         try {
@@ -54,6 +71,11 @@ public class LoginPromptController implements ActionListener {
 
     }
 
+    /**
+     * Fill the User singleton
+     *
+     * @param online Is the user online ?
+     */
     private void setUserSettings(boolean online)
     {
         User.getInstance().setOnline(online);

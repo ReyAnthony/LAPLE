@@ -3,7 +3,13 @@ package fr.laple.extensions.plugins;
 import java.io.File;
 
 /**
- * Created by anthonyrey on 15/07/2015.
+ * This interface defines an IPlugin
+ * ILanguagePlugin and IFeaturePlugin extends this inteface
+ *
+ * @see fr.laple.extensions.plugins.languages.ILanguagePlugin
+ * @see fr.laple.extensions.plugins.features.IFeaturePlugin
+ *
+ * @author anthonyrey
  */
 public interface IPlugin {
 

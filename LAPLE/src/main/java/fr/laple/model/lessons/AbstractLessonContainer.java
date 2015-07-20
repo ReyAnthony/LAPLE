@@ -1,9 +1,13 @@
 package fr.laple.model.lessons;
 
+import fr.laple.model.listable.IListable;
+
 /**
- * Created by anthonyrey on 06/06/2015.
+ * This class is an AbstractLessonContainer
+ *
+ * @author anthonyrey
  */
-public abstract class AbstractLessonContainer {
+public abstract class AbstractLessonContainer implements IListable{
 
 
     public abstract String getLessonTypeName();
