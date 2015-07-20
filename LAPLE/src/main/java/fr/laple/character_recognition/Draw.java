@@ -1,14 +1,14 @@
 package fr.laple.character_recognition;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JPanel;
-
-import java.awt.Color;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+
+import javax.swing.JPanel;
 
 public class Draw extends JPanel{
 	/**
@@ -23,17 +23,19 @@ public class Draw extends JPanel{
 	public final int cX;
 	public final int cY;
 	private String result;
+	private Image image;
 	
 
 	//list of coordinate of point
 	private ArrayList<Point> points=new ArrayList<Point>();
+	private ArrayList<Point> pointFile= new ArrayList<Point>();
 	
 	//to get coordinates of mouse
 	public MouseEvent e;
 	
 	
 	public Draw() {
-		 
+		this.image=null;
 		this.posX=-1;
 		this.posY=-1;
 		this.heightY=200;
@@ -63,7 +65,15 @@ public class Draw extends JPanel{
 		      public void mouseMoved(MouseEvent e) {}
 		    });
 	}
-
+	
+	public Image getImage(){
+		return image;
+	}
+	
+	public void setImage(Image image){
+		this.image=image;
+	}
+	
 	public String getResult() {
 		return result;
 	}
@@ -112,6 +122,14 @@ public class Draw extends JPanel{
 		this.points = points;
 	}
 	
+	public ArrayList<Point> getPointFile() {
+		return pointFile;
+	}
+
+	public void setPointFile(ArrayList<Point> pointFile) {
+		this.pointFile = pointFile;
+	}
+	
 	
 	@Override
 	public String toString() {
@@ -128,13 +146,16 @@ public class Draw extends JPanel{
 	public void paintComponent(Graphics g){
 		this.posX=this.getWidth()/4	;
 		this.posY=this.getHeight()/4;
+		int posXImage=this.posX +this.widthX+ 10;
 		g.setColor(Color.BLACK);
 		g.drawString(result, this.posX, 20);
 		g.drawRect(posX, posY, widthX, heightY);
+		g.drawRect(posXImage, posY , widthX, heightY);
 		//we get 8 square in height and 8 square in width
 		int y=0;
 		int x=0;
-		
+		int q=0;
+		int z=0;
 		for(int i=0; i<heightY; i=i+cX){
 			y=i+posY;
 			g.drawLine(posX, y, posX+widthX, y);
@@ -144,11 +165,27 @@ public class Draw extends JPanel{
 			x=posX+i;
 			g.drawLine(x, posY, x, posY+heightY);
 		}
+		
+		
+		for(int i=0; i<heightY; i=i+cX){
+			z=i+posY;
+			g.drawLine(posXImage, z, posXImage+widthX, z);
+		}
+		
+		for(int i=0; i<widthX; i=i+cY){
+			q=i + this.posX +this.widthX+ 10;
+			g.drawLine(q, posY, q, posY+heightY);
+		}
+		
 		 for(Point p : this.points)
 	      {
 	        
 	          g.fillOval(p.getMouseX(), p.getMouseY(), 10, 10);
 	      }
+		 if(this.image!=null){
+			 g.drawImage(this.image, this.posX+this.widthX+10, this.posY, this.widthX, this.heightY, null);
+		 }
+		 
 	}
 	
 }

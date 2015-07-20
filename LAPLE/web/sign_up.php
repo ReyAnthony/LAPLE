@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8">
-		<link rel="stylesheet" href="/private/css/style.css" />
-		<link rel="stylesheet" href="/private/css/formulaire.css" />
+		<link rel="stylesheet" href="/css/style.css" />
+		<link rel="stylesheet" href="/css/formulaire.css" />
 		<title>Account</title>
 		
   </head>
@@ -11,7 +11,7 @@
 	
 	<body id="up">
 		<h2 style="color:ThreeDDarkShadow; text-align:center">Create account</h2>
-		<form id="form" method="post" action="http://localhost/private/validate_account.php?">
+		<form id="form" method="post" action="validate_account.php?">
    	<fieldset>
     	<legend>Sign up</legend>
     		<h5 style="color: red"><?php 

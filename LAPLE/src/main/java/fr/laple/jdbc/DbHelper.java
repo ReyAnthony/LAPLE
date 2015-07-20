@@ -1,13 +1,28 @@
 package fr.laple.jdbc;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Set;
+
+import fr.laple.jdbc.patternDao.dao.AssociateDAO;
+import fr.laple.jdbc.patternDao.dao.DAO;
+import fr.laple.jdbc.patternDao.dao.DicoDAO;
+import fr.laple.jdbc.patternDao.dao.LanguageDAO;
+import fr.laple.jdbc.patternDao.dao.ProfileDAO;
+import fr.laple.jdbc.patternDao.dao.StatisticsDAO;
+import fr.laple.jdbc.patternDao.dao.ToBelongDAO;
+import fr.laple.jdbc.patternDao.table.Associate;
+import fr.laple.jdbc.patternDao.table.Dico;
+import fr.laple.jdbc.patternDao.table.Language;
+import fr.laple.jdbc.patternDao.table.Profile;
+import fr.laple.jdbc.patternDao.table.Statistics;
+import fr.laple.jdbc.patternDao.table.ToBelong;
 
 
 /**
@@ -18,15 +33,28 @@ import java.util.ArrayList;
  *
  */
 public class DbHelper {
+	private StatBundle bundleStat;
+	private SettingBundle bundleSetting;
+	private static String url="jdbc:mysql://www.laple.fr:3306/laple";
+	private static String user= "root";
+	private static String passwd="";
+	private static IDbAccessor localWeb;
+	private static BigDecimal allStatByStat=new BigDecimal(0.0);
+	private static BigDecimal allStat=new BigDecimal(0.0);
+	private static BigDecimal lessonStat=new BigDecimal(0.0);
+	private static BigDecimal exerciseStat=new BigDecimal(0.0);
+	private static BigDecimal funzoneLesson=new BigDecimal(0.0);
+	private static BigDecimal dictationLesson=new BigDecimal(0.0);
+	private static BigDecimal funzoneExercise=new BigDecimal(0.0);
+	private static BigDecimal dictationExercise=new BigDecimal(0.0);
+	private static BigDecimal successDicoFL=new BigDecimal(0.0); 
+	private static BigDecimal successDicoDL=new BigDecimal(0.0);
+	private static BigDecimal successDicoFE=new BigDecimal(0.0);
+	private static BigDecimal successDicoDE=new BigDecimal(0.0); 
+	private static Connection conn;
+	private static DbHelper instance= new DbHelper();
 	
-	public static StatBundle bundleStat;
-	public static SettingBundle bundleSetting;
-	public static Connection conn;
-	private static String url;
-	private static String user;
-	private static String passwd;
-	static IDbAccessor localWeb;
-	static IDbAccessor web;
+	/*************************************constructeurs singleton*****************************************************/
 	/**
 	 * This allow to connect to database. If there is no connexion,
 	 * the connexion will be etablished to local
@@ -37,144 +65,221 @@ public class DbHelper {
 	 * In particular not connexion to network
 	 * @exception Exception if exceptions above had not been catch
 	 */
-	public static void connect(String users, String passwds) throws ClassNotFoundException, SQLException {
-		url="jdbc:mysql://www.laple.fr:3306/laple";
-		user = users;
-		passwd=passwds;
-			try{
-	    		try {
-					Class.forName( "com.mysql.jdbc.Driver" );
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	    	    System.out.println("Driver O.K.");
-	    	    conn = DriverManager.getConnection(url, user, passwd);
-	    	    localWeb= new Web(url, bundleSetting.getName(), bundleSetting.getOldPwd());
-			} catch (SQLException s) {
+	private DbHelper(){		
+		try{
+    		try {
+				Class.forName( "com.mysql.jdbc.Driver" );
+			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
-				System.out.println("NO connexion to network. going to connect to local");
-				url="jdbc:mysql://localhost:3306/laple";
-				try{
-		    	    conn = DriverManager.getConnection(url, user, passwd);
-		    	    localWeb=new Local(bundleSetting.getName(), bundleSetting.getOldPwd());
-				}catch (Exception e) {
-			  	      e.printStackTrace();
-				}
-			}catch (Exception e) {
-				 e.printStackTrace();
+				e.printStackTrace();
 			}
-	}
-	
-	
-
-	/**
-	 * SELECT sql
-	 * @param selectTense array of string: Fields to display
-	 * @param tableName String: Name of table in base
-	 * @param condiTense Array of String: the where condition 
-	 * @return list ArrayList of the result of select
-	 * @throws IOException 
-	 * @throws MalformedURLException 
-	 * @throws UnsupportedEncodingException 
-	 */
-	public static ArrayList<StringBuilder> getStat(String[] tableName, String[] selectTense, String[] condiTense) throws UnsupportedEncodingException, MalformedURLException, IOException{
-		
-		ArrayList<StringBuilder> list= new ArrayList<StringBuilder>();
-		list=localWeb.get(selectTense, tableName, condiTense);
-		for(StringBuilder l: list){
-			System.out.println(l);
+    	    System.out.println("Driver O.K.");
+    	    conn = DriverManager.getConnection(url, user, passwd);
+    	    bundleSetting.setConnected(true);
+    	    localWeb= new Web();
+    	    bundleSetting.setConnected(true);
+		} catch (SQLException s) {
+			// TODO Auto-generated catch block
+			System.out.println("NO connexion to network. going to connect to local");
+			url="jdbc:mysql://localhost:3306/laple";
+			try{
+	    	    conn = DriverManager.getConnection(url, user, passwd);
+	    	    localWeb=new Local(conn);
+	    	    
+			}catch (Exception e) {
+		  	      e.printStackTrace();
+			}
+		}catch (Exception e) {
+			 e.printStackTrace();
 		}
-		 return list;
+	}
+	/****************************************instanciation unique******************************************/
+	public static DbHelper getInstance(){
+		return instance;
 	}
 	
-
-	/**
-	 * Equivalent to UPDATE
-	 * @param tableName String: name table in database
-	 * @param colTense Array String: it's SET. Example: {"col1='value1'","col2='value2'"}
-	 * @param condiTense Array of Array String: It's Where. Example: {{"col1 = val1"},{"AND"}, {"col2 = val2"}}
-	 * @return 0 if update success
-	 */
-	public static int addStat(String tableName, String[] colTense, String[][] condiTense){
-		localWeb.put(tableName, colTense, condiTense);
-		return 0;
+	/******************************************accesseurs**********************************************/
+	
+	public StatBundle getBundleStat() {
+		return bundleStat;
 	}
 
-	/**
-	 * Insert
-	 * @param insertTense array of string: value to insert
-	 * @param tableName String: Name of table in base
-	 * @param colTense Array of String: column to be insert 
-	 * @return 1 if add success
-	 */
-	public static int addStat(String tableName, String[] colTense, String[] insertTense){
-		localWeb.put(tableName,colTense, insertTense);
-		return 0;
+	public static String getUrl() {
+		return url;
 	}
-
-	//to do
-	public static boolean deleteStat(){
-		String[][] condi={{"typeDico", "LIKE", "'Hiragana'"}};
-		return localWeb.delete("Dico", condi);
+	public static void setUrl(String url) {
+		DbHelper.url = url;
 	}
-	public static String updateSetting(){
-		String table="Profile";
-		String name="'"+bundleSetting.getName()+"'";
-		String newPwd="'"+encode(bundleSetting.getNewPwd())+"'";
-		String oldPwd="'"+encode(bundleSetting.getOldPwd())+"'";
-		String[] col={"mdp="+ newPwd};
-		String[][] condi={{"pseudo", "LIKE", name}, {"AND"}, {"mdp", "LIKE", oldPwd}};
-		addStat(table, col, condi);
-		return null;
+	public static String getUser() {
+		return user;
+	}
+	public static void setUser(String user) {
+		DbHelper.user = user;
+	}
+	public static String getPasswd() {
+		return passwd;
+	}
+	public static void setPasswd(String passwd) {
+		DbHelper.passwd = passwd;
+	}
+	public static IDbAccessor getLocalWeb() {
+		return localWeb;
+	}
+	public static void setLocalWeb(IDbAccessor localWeb) {
+		DbHelper.localWeb = localWeb;
 	}
 	
-	public static String updateStat(StatBundle bundleStat) throws UnsupportedEncodingException, MalformedURLException, IOException{
-		//recupère le trynumber
-		String[] tableName={"Dico D", "Symbol S"};
-		String[] selectTense={"numberSuccess", "tryNumber"};
-		String[] condiTense={"D.idDico=S.idDico", "AND", "keySymbol=12"};
-		ArrayList<StringBuilder> list=new ArrayList<StringBuilder>();
-		list=getStat(tableName, selectTense, condiTense);
+	
+	
+	public static BigDecimal getAllStatByStat() {
+		return allStatByStat;
+	}
+	public static void setAllStatByStat(BigDecimal allStatByStat) {
+		DbHelper.allStatByStat = allStatByStat;
+	}
+	public static BigDecimal getAllStat() {
+		return allStat;
+	}
+	public static void setAllStat(BigDecimal allStat) {
+		DbHelper.allStat = allStat;
+	}
+	public static BigDecimal getLessonStat() {
+		return lessonStat;
+	}
+	public static void setLessonStat(BigDecimal lessonStat) {
+		DbHelper.lessonStat = lessonStat;
+	}
+	public static BigDecimal getExerciseStat() {
+		return exerciseStat;
+	}
+	public static void setExerciseStat(BigDecimal exerciseStat) {
+		DbHelper.exerciseStat = exerciseStat;
+	}
+	public static BigDecimal getFunzoneLesson() {
+		return funzoneLesson;
+	}
+	public static void setFunzoneLesson(BigDecimal funzoneLesson) {
+		DbHelper.funzoneLesson = funzoneLesson;
+	}
+	public static BigDecimal getDictationLesson() {
+		return dictationLesson;
+	}
+	public static void setDictationLesson(BigDecimal dictationLesson) {
+		DbHelper.dictationLesson = dictationLesson;
+	}
+	public static BigDecimal getFunzoneExercise() {
+		return funzoneExercise;
+	}
+	public static void setFunzoneExercise(BigDecimal funzoneExercise) {
+		DbHelper.funzoneExercise = funzoneExercise;
+	}
+	public static BigDecimal getDictationExercise() {
+		return dictationExercise;
+	}
+	public static void setDictationExercise(BigDecimal dictationExercise) {
+		DbHelper.dictationExercise = dictationExercise;
+	}
+	public static BigDecimal getSuccessDicoFL() {
+		return successDicoFL;
+	}
+	public static void setSuccessDicoFL(BigDecimal successDicoFL) {
+		DbHelper.successDicoFL = successDicoFL;
+	}
+	public static BigDecimal getSuccessDicoDL() {
+		return successDicoDL;
+	}
+	public static void setSuccessDicoDL(BigDecimal successDicoDL) {
+		DbHelper.successDicoDL = successDicoDL;
+	}
+	public static BigDecimal getSuccessDicoFE() {
+		return successDicoFE;
+	}
+	public static void setSuccessDicoFE(BigDecimal successDicoFE) {
+		DbHelper.successDicoFE = successDicoFE;
+	}
+	public static BigDecimal getSuccessDicoDE() {
+		return successDicoDE;
+	}
+	public static void setSuccessDicoDE(BigDecimal successDicoDE) {
+		DbHelper.successDicoDE = successDicoDE;
+	}
+	public static void setConn(Connection conn) {
+		DbHelper.conn = conn;
+	}
+	public static void setInstance(DbHelper instance) {
+		DbHelper.instance = instance;
+	}
+	public void setBundleStat(StatBundle bundleStat) {
+		this.bundleStat = bundleStat;
+	}
+
+	public SettingBundle getBundleSetting() {
+		return bundleSetting;
+	}
+
+	public void setBundleSetting(SettingBundle bundleSetting) {
+		this.bundleSetting = bundleSetting;
+	}
+
+	public static Connection getConn() {
+		return conn;
+	}
+	
+	
+	
+	/************************stat et setting
+	 * @throws SQLException 
+	 * @throws CloneNotSupportedException *********************************/
+	
+	
+	public void getSetting() throws SQLException, CloneNotSupportedException{
+		localWeb.get(this.bundleSetting, this.bundleStat);
+	}
+	
+	public void addSetting() throws SQLException{
+		localWeb.put(this.bundleSetting);
+	}
+	
+	//pour avoir les stat, on a besoin de charger le profile de l'utilisateur. Ceci nous permettra
+	//entre autre d'obtenir son id pour obtenir la stat lier à son id
+	public void getStat() throws UnsupportedEncodingException, MalformedURLException, IOException, SQLException, CloneNotSupportedException{
 		
-		String table="Dico";
-		String[] colo={"typeDico", "tryNumber"};
-		String[] insert={"'Hiragana'", "4", "1"};
-		addStat(table, colo, insert);
-		return null;
+		allStatByStat=new BigDecimal(0.0);
+		allStat=new BigDecimal(0.0);
+		lessonStat=new BigDecimal(0.0);
+		exerciseStat=new BigDecimal(0.0);
+		funzoneLesson=new BigDecimal(0.0);
+		dictationLesson=new BigDecimal(0.0);
+		funzoneExercise=new BigDecimal(0.0);
+		dictationExercise=new BigDecimal(0.0);
+		successDicoFL=new BigDecimal(0.0);
+		successDicoDL=new BigDecimal(0.0);
+		successDicoFE=new BigDecimal(0.0);
+		successDicoDL=new BigDecimal(0.0);
+		successDicoDE=new BigDecimal(0.0);
+		double[] result=localWeb.get(this.bundleStat, this.bundleSetting);
+		allStat=new BigDecimal(result[0]).setScale(2, BigDecimal.ROUND_DOWN);
+		allStatByStat=new BigDecimal(result[1]).setScale(2, BigDecimal.ROUND_DOWN);
+		lessonStat=new BigDecimal(result[2]).setScale(2, BigDecimal.ROUND_DOWN);
+		exerciseStat=new BigDecimal(result[3]).setScale(2, BigDecimal.ROUND_DOWN);
+		funzoneLesson=new BigDecimal(result[4]).setScale(2, BigDecimal.ROUND_DOWN);
+		dictationLesson=new BigDecimal(result[5]).setScale(2, BigDecimal.ROUND_DOWN);
+		funzoneExercise=new BigDecimal(result[6]).setScale(2, BigDecimal.ROUND_DOWN);
+		dictationExercise=new BigDecimal(result[7]).setScale(2, BigDecimal.ROUND_DOWN);
+		successDicoFL=new BigDecimal(result[8]).setScale(2, BigDecimal.ROUND_DOWN);
+		successDicoDL=new BigDecimal(result[9]).setScale(2, BigDecimal.ROUND_DOWN);
+		successDicoFE=new BigDecimal(result[10]).setScale(2, BigDecimal.ROUND_DOWN);
+		successDicoDE=new BigDecimal(result[11]).setScale(2, BigDecimal.ROUND_DOWN);
 	}
-	/**
-	 * This method allow to encode string to md5
-	 * @param pwd String: string to encode
-	 * @return encode string
-	 */
-	 private static String encode(String pwd){
-        byte[] key = pwd.getBytes();
-        byte[] hash = null;
-
-        try
-        {
-            hash = MessageDigest.getInstance("MD5").digest(key);
-        }
-        catch (NoSuchAlgorithmException e)
-        {
-            throw new Error("No Class encode MD5");
-        }
-
-        StringBuilder pwdEncode = new StringBuilder();
-        for (int i = 0; i < hash.length; i++)
-        {
-            String hexa = Integer.toHexString(hash[i]);
-            if (hexa.length() == 1)
-            {
-                pwdEncode.append('0');
-                pwdEncode.append(hexa.charAt(hexa.length() - 1));
-            }
-            else
-                pwdEncode.append(hexa.substring(hexa.length() - 2));
-        }
-        return pwdEncode.toString();
-    }
+	
+	
+	
+	
+	
+	public int addStat() throws SQLException, CloneNotSupportedException {
+		localWeb.put(this.bundleSetting, this.bundleStat);
+		return 1;
+	}
 }
 
 

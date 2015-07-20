@@ -1,7 +1,13 @@
 package fr.laple.character_recognition;
 
+import java.io.Serializable;
 
-public class Point{
+
+public class Point implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6040129053658018479L;
 	int mouseX;
 	int mouseY;
 	int mouseSize;

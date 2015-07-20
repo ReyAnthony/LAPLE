@@ -2,6 +2,7 @@
 	session_start();
 	$_SSESION=array();
 	session_destroy();
-	header('Location: http://localhost/private/sign_in.php');
+
+	header('Location: sign_in.php');
 ?>
 

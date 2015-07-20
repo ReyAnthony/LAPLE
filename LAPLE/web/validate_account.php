@@ -7,8 +7,8 @@
 <html>
   <head>
     <meta charset="UTF-8">
-		<link rel="stylesheet" href="/private/css/style.css" />
-		<link rel="stylesheet" href="/private/css/formulaire.css" />
+		<link rel="stylesheet" href="/css/style.css" />
+		<link rel="stylesheet" href="/css/formulaire.css" />
 		<title>Account</title>
 		
   </head>
@@ -28,7 +28,7 @@
 		$req->closeCursor();	
 		$message="Si vous n'etes pas le destinataire de ce mail, supprimer simplement le message.\r\n".
 						"Sinon copiez le lien suivant dans la barre d'adresse du navigateur: \r\n".
-						 "http://localhost/private/validate_account.php?verification=1";
+						 "http://localhost/validate_account.php?verification=1";
 		$subject='initialisation de mot de passe';
 		//envoie du mail
 		
@@ -37,7 +37,7 @@
 			die("vérifier votre boite mail");
 		}
 		else {
-			header('Location: http://localhost/private/forgot.php?verification=2');
+			header('Location: http://localhost/forgot.php?verification=2');
 		}
 	}
 	//mise à jour du nouveau mot de passe
@@ -57,7 +57,7 @@
 		$passwd=md5($_POST['password']);
 		$name=$_POST['name'];
 		if(!preg_match("#.*@.*\._{0,4}#", $email)){
-			header('Location: http://localhost/private/sign_up.php?verification=4');
+			header('Location: sign_up.php?verification=4');
 		}
 		$req = $bdd->prepare('SELECT email FROM Profile WHERE email=?');
 		$req->execute(array($email));
@@ -67,17 +67,17 @@
 		}
 		
 		if($mail!=NULL){
-			header('Location: http://localhost/private/sign_up.php?verification=3');	
+			header('Location: sign_up.php?verification=3');	
 		}
-		$req = $bdd->prepare('INSERT INTO Profile(name, email, mdp) VALUES(:name, :email, :mdp)');
-		$req->execute(array('name' => $name,
+		$req = $bdd->prepare('INSERT INTO Profile(pseudo, email, mdp) VALUES(:pseudo, :email, :mdp)');
+		$req->execute(array('pseudo' => $name,
 									'email' => $email, 
 									'mdp' => $passwd));
 		echo "Creation de compte réussi <br>";
-		echo '<a href="./index.php">Back to sign in</a>';
+		echo '<a href="./sign_in.php">Back to sign in</a>';
 	}
 	else {
-		header('Location: http://localhost/private/sign_up.php?verification=1');		
+		header('Location: sign_up.php?verification=1');		
 	}	
 ?>
 	</body>

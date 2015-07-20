@@ -10,7 +10,7 @@ public class Area {
 	
 	private int[] matrix;
 	
-	public Area() {
+	public Area(int width, int height) {
 		this.matrix = new int[X * Y];
 		for(int i=0; i<matrix.length;i++)
 			matrix[i]=VIDE;

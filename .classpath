@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="fr/laple/" kind="src" path="LAPLE/src/main/java"/>
+	<classpathentry kind="src" path="LAPLE/src/main/java/fr/laple"/>
+	<classpathentry kind="src" path="POC/ParseurAnnotation/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

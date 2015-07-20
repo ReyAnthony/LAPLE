@@ -1,20 +1,43 @@
 package fr.laple.jdbc;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Set;
+
+import fr.laple.jdbc.patternDao.dao.AssociateDAO;
+import fr.laple.jdbc.patternDao.dao.DAO;
+import fr.laple.jdbc.patternDao.dao.DicoDAO;
+import fr.laple.jdbc.patternDao.dao.LanguageDAO;
+import fr.laple.jdbc.patternDao.dao.ProfileDAO;
+import fr.laple.jdbc.patternDao.dao.StatisticsDAO;
+import fr.laple.jdbc.patternDao.dao.ToBelongDAO;
+import fr.laple.jdbc.patternDao.table.Associate;
+import fr.laple.jdbc.patternDao.table.Dico;
+import fr.laple.jdbc.patternDao.table.Language;
+import fr.laple.jdbc.patternDao.table.Profile;
+import fr.laple.jdbc.patternDao.table.Statistics;
+import fr.laple.jdbc.patternDao.table.ToBelong;
 
 public class Local implements IDbAccessor{
-	private final String user;
-	private String passwd;
 	
-	
-    public Local(String user, String passwd) throws SQLException, ClassNotFoundException {
-    	this.user=user;
-    	this.passwd=passwd;	
+	Connection conn;
+	private static double allStatByStat=0;
+	private static double allStat=0;
+	private static double lessonStat=0;
+	private static double exerciseStat=0;
+	private static double funzoneLesson=0;
+	private static double dictationLesson=0;
+	private static double funzoneExercise=0;
+	private static double dictationExercise=0;
+	private static double successDicoFL=0; 
+	private static double successDicoDL=0;
+	private static double successDicoFE=0;
+	private static double successDicoDE=0;
+    public Local(Connection conn) throws SQLException, ClassNotFoundException {
+    	this.conn=conn;
     }
     
     
@@ -25,158 +48,260 @@ public class Local implements IDbAccessor{
 	 * @param table String: Name of table in base
 	 * @param condi Array of String: the where condition 
 	 * @return list ArrayList of the result of select
+     * @throws CloneNotSupportedException 
+     * @throws SQLException 
 	 */
     @Override
-	public ArrayList<StringBuilder> get(String[] select, String[] table, String[] condi) {
-		// TODO Auto-generated method stub
-		StringBuilder sb1=new StringBuilder();
-		StringBuilder sb2=new StringBuilder();
-		StringBuilder sb3=new StringBuilder();
-		StringBuilder sb4=new StringBuilder();
-		ArrayList<StringBuilder> result= new ArrayList<StringBuilder>();
-		//on transforme le tableau en chaine séparée par des virgules, afin de
-		// de respecter la syntaxe sql
-		for(String s: select){
-			sb1.append(s + ",");
+	public double[] get(StatBundle bundleStat, SettingBundle bundleSetting) throws SQLException, CloneNotSupportedException {
+    	allStatByStat=0;
+		allStat = 0;
+		lessonStat=0;
+		exerciseStat=0;
+		funzoneLesson=0;
+		dictationLesson=0;
+		funzoneExercise=0;
+		dictationExercise=0;
+		successDicoFL=0;
+		successDicoDL=0;
+		successDicoFE=0;
+		successDicoDE=0;
+		
+		double[] statUser=new double[12];
+		
+		DAO<Profile> profileDao= new ProfileDAO(conn);
+		DAO<Dico> dicoDao= new DicoDAO(conn);
+		DAO<Language> languageDao= new LanguageDAO(conn);
+		DAO<Associate> associateDao= new AssociateDAO(conn);
+		DAO<ToBelong> toBelongDao= new ToBelongDAO(conn);
+		
+		
+		//chargement du profil avec son id
+		Profile profile= profileDao.findByCondition(new Profile(bundleSetting.getEmail(), 
+																bundleSetting.getOldPwd(),
+																bundleSetting.getPseudo()));
+		
+		
+		//Chargement du dico avec son id
+		Dico dico= dicoDao.findByCondition(new Dico(bundleStat.getTypeDico(), bundleStat.getNameDico(), bundleStat.getKeySymbol()));
+				
+		//Chargement de la langue
+		Language language=languageDao.findByCondition(new Language(bundleStat.getLanguage()));
+		Statistics statistics= new Statistics();
+		
+		//Chargement de toutes les stats du profile pour un language donnée
+		Associate associate= associateDao.findByCondition(new Associate(profile, statistics, language));
+		
+		Set<Set<Object>> associateSet=associate.getListPk();
+		ToBelong toBelong= new ToBelong();
+		//Parcours du resultat du chargment de associate
+		for(Set<Object> oPk: associateSet){
+			//Vérification du type table
+			for(Object o: oPk)
+				if(o instanceof Statistics){
+					statistics=(Statistics)o;
+					//Pour chaque statistique, on cherche le dictionnaire associé
+					toBelong= toBelongDao.findByCondition( new ToBelong(dico, statistics,  Timestamp.from(Instant.now()),
+							bundleStat.getTotalSymbol(), bundleStat.getTryNumber()));
+					if(toBelong.getStatistic().getType()==null){
+						System.out.println("NO statistic with params:"+bundleStat);
+						continue;
+					}
+					switch(toBelong.getStatistic().getNameStat()){
+						case "lesson": switch(toBelong.getStatistic().getType()){
+											case "funzone": funzoneLesson=funzoneLesson + ((toBelong.getStatistic().getCurrentNumberEx() / (double)toBelong.getStatistic().getTotalNumberEx()) *100)/2.0;
+															successDicoFL=successDicoFL + (toBelong.getNumber()[1]/(double)toBelong.getNumber()[0])*100;
+															
+															System.out.println(toBelong.getDico().getNameDico()+" "+toBelong.getDico().getKeyDico()+" :"+
+																				"successFunzone="+new BigDecimal(successDicoFL).setScale(2, BigDecimal.ROUND_DOWN)+"%");
+												break;
+											case "dictation": dictationLesson=(dictationLesson + (toBelong.getStatistic().getCurrentNumberEx()/(double) toBelong.getStatistic().getTotalNumberEx()) *100)/2;
+																successDicoDL=successDicoDL + (toBelong.getNumber()[1]/(double)toBelong.getNumber()[0])*100;
+												break;
+											default: System.out.println("error 1");return null;
+										}
+										System.out.println(" dictationLesson="+new BigDecimal(dictationLesson).setScale(2, BigDecimal.ROUND_DOWN).doubleValue()+ "% " +
+												"funzoneLesson="+ new BigDecimal(funzoneLesson).setScale(2, BigDecimal.ROUND_DOWN)+"% " +"");
+							break;	
+						case "exercise": switch(toBelong.getStatistic().getType()){
+											case "funzone": funzoneExercise=(funzoneExercise + ((toBelong.getStatistic().getCurrentNumberEx() / (double)toBelong.getStatistic().getTotalNumberEx()) *100))/2.0;
+															successDicoFE=successDicoFE + (toBelong.getNumber()[1]/(double)toBelong.getNumber()[0])*100;
+												break;
+											case "dictation": dictationExercise=(dictationExercise + (toBelong.getStatistic().getCurrentNumberEx()/(double) toBelong.getStatistic().getTotalNumberEx()) *100)/2;
+															successDicoDE=successDicoDE + (toBelong.getNumber()[1]/(double)toBelong.getNumber()[0])*100;
+												break;
+											default: System.out.println("error 1");return null;
+										}
+										System.out.println(" dictationExercise="+new BigDecimal(dictationExercise).setScale(2, BigDecimal.ROUND_DOWN).doubleValue()+ "% " +
+										"funzoneExercise="+ new BigDecimal(funzoneExercise).setScale(2, BigDecimal.ROUND_DOWN)+"% ");
+									break;
+						}
+				lessonStat=lessonStat + (funzoneLesson + dictationLesson)/2;
+				exerciseStat= exerciseStat + (funzoneExercise + dictationExercise)/2;
+				allStatByStat= allStatByStat + (lessonStat + exerciseStat)/2;
+					System.out.println("allstatByStat="+new BigDecimal(allStatByStat).setScale(2, BigDecimal.ROUND_DOWN).doubleValue()+"% "+
+										"lessonStat="+ new BigDecimal(lessonStat).setScale(2, BigDecimal.ROUND_DOWN).doubleValue() + "% " +
+										"exerciseStat="+new BigDecimal(exerciseStat).setScale(2, BigDecimal.ROUND_DOWN).doubleValue()+ "% ");
+				}
+				allStat=(allStat+allStatByStat)/2.0;
 		}
-		int len=sb1.length();
-		//suppression de la virgule en fin de chaine
-		sb1.delete(len-1, len);
-		for(String t: table){
-			sb2.append(t + ",");
-		}
-		len=sb2.length();
-		sb2.delete(len-1, len);
-		if(condi!=null){
-			for(String c: condi){
-				sb3.append(c);
-			}
-		}
-		try{
-			Statement statement = DbHelper.conn.createStatement();
-		      /* Exécution d'une requête de lecture */
-			ResultSet resultat;
-			if(condi==null){
-				resultat = statement.executeQuery("SELECT " + sb1 + " FROM "
-						+ sb2 + ";" );
-			}
-			else{
-			    resultat = statement.executeQuery("SELECT " + sb1 + " FROM "
-			    								  + sb2 +" WHERE " + sb3 + ";" );
-			}
-			
-		    while ( resultat.next() ) {
-			    for(String s: select){
-			    	sb4.append(resultat.getString(s) + "|");
-			    }
-			    StringBuilder cpy=new StringBuilder();
-			    cpy.append(sb4);
-			    result.add(cpy);
-			    int size=sb4.length();
-			    sb4.delete(0, size);
-		    }
-		}catch (Exception e) {
-			e.printStackTrace();
-		}      
-		return result;
+		System.out.println("allStat="+new BigDecimal(allStat).setScale(2, BigDecimal.ROUND_DOWN)+"%");
+		statUser[0]=allStat;
+		statUser[1]=allStatByStat;
+		statUser[2]=lessonStat;
+		statUser[3]=exerciseStat;
+		statUser[4]=funzoneLesson;
+		statUser[5]=dictationLesson;
+		statUser[6]=funzoneExercise;
+		statUser[7]=dictationExercise;
+		statUser[8]=successDicoFL;
+		statUser[9]=successDicoDL;
+		statUser[10]=successDicoFE;
+		statUser[11]=successDicoDE;
+		return statUser;
 	}
 
-	/**
-	 * Equivalent to INSERT sql
-	 * @param table String: name table in database
-	 * @param colo Array of String: column to be insert
-	 * @param value Array of String: value to insert
-	 * @return true if insert success, false if not
-	 */
+
+
 	@Override
 	public boolean put(String table, String[] colo, String[] value) {
 		// TODO Auto-generated method stub
-		StringBuilder sb1=new StringBuilder();
-		StringBuilder sb2=new StringBuilder();
-		int len=0;
-		for(String c: colo){
-			sb1.append(c + ",");
-		}
-		len=sb1.length();
-		sb1.delete(len-1, len);
-		for(String v: value){
-			sb2.append(v + ",");
-		}
-			len=sb2.length();
-			sb2.delete(len-1, len);
-		try{//System.out.println("INSERT INTO "+table+ " ("+ sb1+ ") VALUES " + "("+sb2+");");
-			Statement statement = DbHelper.conn.createStatement();
-		      /* Exécution d'une requête de lecture */
-			statement.executeUpdate("INSERT INTO "+table+ " ("+ sb1+ ") VALUES " + "("+sb2+");");
-		}catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}      
-		return true;
-	}
-	
-	/**
-	 * Equivalent to UPDATE
-	 * @param table String: name table in database
-	 * @param col Array String: it's SET. Example: {"col1='value1'","col2='value2'"}
-	 * @param value Array of Array String: It's Where. Example: {{"col1 = val1"},{"AND"}, {"col2 = val2"}}
-	 * @return true if update success, false if not
-	 */
-	@Override
-	public boolean put(String table, String[] col, String[][] value) {
-		// TODO Auto-generated method stub
-		StringBuilder sb1=new StringBuilder();
-		StringBuilder sb2=new StringBuilder();
-		int len=0;
-		if(col!=null){
-			for(String c: col){
-				sb1.append(c + ",");
-			}
-			len=sb1.length();
-			sb1.delete(len-1, len);
-		}
-		for(String[] v1: value){
-			for(String v2: v1){
-				sb2.append(v2 + " ");
-			}
-			
-		}
-		try{//System.out.println("UPDATE " + table +" SET " + sb1 + " WHERE " + sb2 +";");
-			Statement statement = DbHelper.conn.createStatement();
-		      /* Exécution d'une requête de lecture */
-			statement.executeUpdate("UPDATE " + table +" SET " + sb1 + " WHERE " + sb2 +";");
-		}catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}      
-		return true;
+		return false;
 	}
 
-	/**
-	 * Delete a line on table in database
-	 * @param table String: Name table in database
-	 * @param condi: Array of Array String: It's Where. Example: {{"col1 = val1"},{"AND"}, {"col2 = val2"}}
-	 * @return true if delete success, false if not
-	 */
+
+
+	@Override
+	public boolean put(String email, String password, String language,
+			String nameStat, String typeStat, String currentSymbol,
+			String libId, String[] tenseStat, String[] tenseBelong,
+			int idProfile, int idStatistic) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
 	@Override
 	public boolean delete(String table, String[][] condi) {
 		// TODO Auto-generated method stub
-		StringBuilder sb1=new StringBuilder();
-		for(String[] c1: condi){
-			for(String c2: c1)
-				sb1.append(c2 + " ");
-		}
-		int len=sb1.length();
-		sb1.delete(len-1, len);
-		try{//System.out.println("DELETE FROM " + table + " WHERE " + sb1 +";");
-			Statement statement = DbHelper.conn.createStatement();
-		      /* Exécution d'une requête de lecture */
-				statement.executeUpdate("DELETE FROM " + table + " WHERE " + sb1 +";");
-		}catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}      
-		return true;
+		return false;
 	}
+
+
+
+	@Override
+	public void get(SettingBundle bundleSetting, StatBundle bundleStat) throws SQLException, CloneNotSupportedException {
+		DAO<Profile> profileDao= new ProfileDAO(conn);
+		Profile profile= profileDao.findByCondition(new Profile(bundleSetting.getEmail(), bundleSetting.getOldPwd(),
+																bundleSetting.getPseudo()));
+		bundleSetting.setEmail(profile.getEmail());
+		bundleSetting.setOldPwd(profile.getMdp());
+		bundleSetting.setPseudo(profile.getPseudo());
+		
+	}
+
+
+
+	@Override
+	public int put(SettingBundle bundleSetting) throws SQLException {
+		DAO<Profile> profileDao= new ProfileDAO(conn);
+		System.out.println((profileDao.update(new Profile(bundleSetting.getEmail(), bundleSetting.getOldPwd(),
+																bundleSetting.getPseudo()))==true)?
+																"Change password ok":"failed change passwords");
+		return 1;
+	}
+
+
+
+	@Override
+	public int put(SettingBundle bundleSetting, StatBundle bundleStat) throws SQLException, CloneNotSupportedException {
+		DAO<Profile> profileDao= new ProfileDAO(conn);
+		DAO<Language> languageDao= new LanguageDAO(conn);
+		DAO<Statistics> statisticsDao= new StatisticsDAO(conn);
+		DAO<Associate> associateDao= new AssociateDAO(conn);
+		DAO<ToBelong> toBelongDao= new ToBelongDAO(conn);
+		
+		//chargement du profil avec son id
+				Profile profile= profileDao.findByCondition(new Profile(bundleSetting.getEmail(), 
+																		bundleSetting.getOldPwd(),
+																		bundleSetting.getPseudo()));
+				
+		//Chargement du dico avec son id
+				DAO<Dico> dicoDao= new DicoDAO(conn);
+				Dico dico= dicoDao.findByCondition(new Dico(bundleStat.getTypeDico(), 
+													bundleStat.getNameDico(), 
+													bundleStat.getKeySymbol()));
+				//System.out.println("---"+dico);
+				
+		//Chargement de la langue indiquée
+		Language language=languageDao.findByCondition(new Language(bundleStat.getLanguage()));
+				
+		
+		int statId= statisticsDao.findLastId().getIdStatistic();
+		ToBelong toBelongVerif = new ToBelong();
+		for(int i=0 ; i<statId; i++){
+			Statistics statTmp=statisticsDao.find(i);
+			//Chargement de la statistique avec param bundleStat
+			toBelongVerif=toBelongDao.findByCondition(new ToBelong(dico, new Statistics(statTmp.getIdStatistic(),
+																bundleStat.getTypeStat(), bundleStat.getNameStat(), 
+																bundleStat.getTotalNumberEx(), bundleStat.getCurrentNumberEx()),
+																Timestamp.from(Instant.now()), bundleStat.getTotalSymbol(), 
+																bundleStat.getTryNumber()));
+				
+			if(toBelongVerif.getListPk().size()==1)
+				break;
+		}
+		System.out.println(toBelongVerif.getListPk());
+		Associate associateVerif= associateDao.find(toBelongVerif.getStatistic().getIdStatistic());
+		//System.out.println(associateVerif);
+		if(toBelongVerif.getListPk().size()==1 && associateVerif.getStatistic().getIdStatistic()!=0){
+			System.out.println((statisticsDao.update(new Statistics(associateVerif.getStatistic().getIdStatistic(),
+												bundleStat.getTypeStat(), bundleStat.getNameStat(),
+												bundleStat.getTotalNumberEx(), bundleStat.getCurrentNumberEx()))==true)?
+														"update sucess":"failed update");
+			Integer[] i=null;
+			Timestamp t=null;
+			for(Set<Object> o: toBelongVerif.getListPk()){
+				Object tmp=(Object)o;
+				if(tmp instanceof Timestamp){
+					t=(Timestamp)tmp;
+					t=t.from(Instant.now());
+					tmp=t;
+				}
+				if(tmp instanceof Integer[]){
+					i=(Integer[])tmp;
+					i[0]=bundleStat.getTotalSymbol();
+					i[1]=bundleStat.getTryNumber();
+					tmp=i;
+				}
+			}
+			
+			System.out.println((toBelongDao.update(toBelongVerif)==true)?"update tobelongadd sucess":"failed update tobelongadd");
+		}
+		else{
+			ToBelong toBelong=toBelongDao.findByCondition(new ToBelong(dico, associateVerif.getStatistic(), Timestamp.from(Instant.now()), 
+					bundleStat.getTotalSymbol(), bundleStat.getTryNumber()));
+			if(toBelong.getListPk().size()==0){
+				System.out.println((statisticsDao.create(new Statistics(bundleStat.getTypeStat(),bundleStat.getNameStat(), 
+						bundleStat.getTotalNumberEx(),bundleStat.getCurrentNumberEx()))==true)?
+						"addStat success":"failed addStat");
+				Statistics lastStat=statisticsDao.findLastId();
+				
+				System.out.println((associateDao.create(new Associate(profile, lastStat, language))==true)?
+									"addAssociate success":"failed addAssociate");
+				//Associate associate= associateDao.findLastId();
+				
+				System.out.println((toBelongDao.create(new ToBelong(dico, lastStat, Timestamp.from(Instant.now()), 
+						bundleStat.getTotalSymbol(), bundleStat.getTryNumber()))==true)?
+									"addBelong success":"failed addToBelong");
+			}
+
+		}
+		return 1;
+		
+	}
+    
+    
+    
     
 }

@@ -2,8 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/private/css/style.css" />
-    <link rel="stylesheet" href="/private/css/formulaire.css" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/formulaire.css" />
       <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
       <script src="bootstrap/js/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.js"></script>
@@ -11,15 +12,14 @@
     
   </head>
 
-  <body class="<html>
-  <head>
-    <title></title>
-  </head>
-  <body>
+
+  <body class="html">
+    <?php require_once('session.php'); 
+          require('bdd.php');
+           ini_set("display_errors", 1);
+    ?>
   
-  </body>
-  </html>">
-    <?php require_once('session.php'); ?>
+   
     <nav class="navbar navbar-default">
       <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
@@ -46,7 +46,8 @@
       <div>
     <div class="container-fluid" id="download">
       <div class="row">
-        <div class="col-lg-2" id="left-menu"><a class="navbar-brand" href="welcome.php">welcome</a></div>
+
+        <div class="col-lg-2" id="left-menu"><a class="navbar-brand" href="index.html">welcome</a></div>
         </div>
         <div class="row">
           <div class="col-lg-2" id="left-menu"><a class="navbar-brand" href="download.php">Download</a></div>
