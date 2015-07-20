@@ -49,5 +49,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.jcraft:jsch:0.1.23" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-utils:1.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-archiver:1.0-alpha-7" level="project" />
+    <orderEntry type="library" name="Maven: android:android:x.x" level="project" />
   </component>
 </module>

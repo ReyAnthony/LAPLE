@@ -1,8 +1,11 @@
 package fr.laple.annot;
 
+
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import sun.net.www.protocol.file.FileURLConnection;
+
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -10,7 +13,10 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.LinkedList;
+import java.net.*;
+import java.util.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  * A goal to generate code.
@@ -18,52 +24,70 @@ import java.util.LinkedList;
  * @goal generate-doc
  * @phase package
  */
-@annot(title = "Test XML",nom = "class",observation = "permet de modifier les elements de la class")
+@Annot(title = "Test XML",nom = "class",observation = "permet de modifier les elements de la class")
 public class Test extends AbstractMojo {
 
-    /**
+    /*
      * @parameter alias="path"
      * @required
      */
-    private String path;
+    //private String path;
+
+    /**
+     * @parameter alias="package"
+     * @required
+     */
+    private String packagePath;
 
 
+    /**
+     * @parameter alias="folderExport"
+     * @required
+     */
+    private String folderExport;
+
+    /**
+     * @parameter alias="takeScreen"
+     * @required
+     */
+    Boolean takeScreenshot;
+
+    /**
+     * @parameter alias="fileAnnotation"
+     * @required
+     */
+    private String fileAnnotation;
+
+    /**
+     * @parameter alias="root_path"
+     * @required
+     */
+    private String rootPath;
 
 
-    @annot(title = "calc", nom = "calculatrice", observation = "permet de calculer plus facilement")
+    /**
+     * @parameter alias="the_r_path"
+     * @required
+     */
+    private String theRpath;
+
+    /**
+     * @parameter alias="begin_path"
+     * @required
+     */
+    private String beginPath;
+
+    HashMap<String,LinkedList<Annot>> hashAnnot = new HashMap<String,LinkedList<Annot>>();
+
+
+    @Annot(title = "calc", nom = "calculatrice", observation = "permet de calculer plus facilement")
     public void calc() {
 
     }
 
-    @annot(title = "name", nom = "fonction nom", observation = "permet de changer le nom")
+    @Annot(title = "name", nom = "fonction nom", observation = "permet de changer le nom")
     public void name() {
 
-    }
-
-    public LinkedList<annot> getAnnotClass(Class aclass) {
-        try {
-            LinkedList<annot> lanot = new LinkedList<annot>();
-            Annotation[] annotation = aclass.getAnnotations();
-            if (annotation.length == 0) {
-                return null;
-            }
-            for (Annotation anno : annotation) {
-                annot annos = (annot) anno;
-                lanot.add(annos);
-            }
-            Method[] met = aclass.getMethods();
-            if (met.length == 0)
-                return lanot;
-            for (Method me : met) {
-                for (Annotation ann : me.getAnnotations()) {
-                        annot annots = (annot) ann;
-                        lanot.add(annots);
-                }
-            }
-            return lanot;
-        } catch (Exception e) {
-            return null;
-        }
     }
 
     public BufferedImage getImage(){
@@ -87,74 +111,13 @@ public class Test extends AbstractMojo {
             System.out.println("err" + err.getMessage());
         }
     }
-    public File[] listeRepertoire(File path, LinkedList<String> allFiles){
-        File[] list = null;
-        try {
-            if (path.isDirectory()) {
-                list = path.listFiles();
-                if (list != null) {
-                    for (int i = 0; i < list.length; i++) {
-                        listeRepertoire(list[i], allFiles);
-                    }
-                } else {
-                    System.err.println(path + " : Erreur de lecture.");
-                }
-            } else {
-                String currentFilePath = path.getAbsolutePath();
-                System.out.println(currentFilePath);
-                allFiles.add(currentFilePath);
-            }
-        }catch(Exception e){
 
-        }finally {
-            return list;
-        }
-
-    }
-    // ajout de wak a finaliser
-    public void walk( String path ) {
-
-        File root = new File( path );
-        File[] list = root.listFiles();
-        System.out.println("Avant return ");
-        if (list == null) return;
-        System.out.println("Apres return");
-        for ( File f : list ) {
-            if ( f.isDirectory() ) {
-                walk( f.getAbsolutePath() );
-                System.out.println( "Dir:" + f.getAbsoluteFile() );
-            }
-            else {
-                System.out.println("IN ELSE");
-                if(f.getAbsoluteFile().toString().contains(".class")){
-                    System.out.println("IN IF");
-                    System.out.println(f.getAbsoluteFile().toString());
-                    String[] tableau =  f.getAbsoluteFile().toString().split("/");
-
-                   String fichier = tableau[tableau.length-1];
-                   System.out.println("Le fichier --> "+fichier);
-                    Class fichierClass = fichier.getClass();
-                    LinkedList<annot> listeAnnot= this.getAnnotClass(fichierClass);
-                    if(listeAnnot==null){
-                            System.out.println("++++++ liste est NULL *****");
-                    }else{
-                        String[] files = fichier.split(".class");
-                        System.out.println("------> file without .class ---> "+files);
-                        this.writeXmlXSL(files[0],listeAnnot);
-                        this.writeImage(files[0]);
-                    }
-                }
-                System.out.println( "File:" + f.getAbsoluteFile() );
-            }
-        }
-    }
-
-    public void writeXmlXSL(String nameFIle,LinkedList<annot> listeAnnot){
+    public void writeXmlXSL(String nameFIle,LinkedList<Annot> listeAnnot,String folderExport){
         String valuesXml = "<?xml version='1.0' encoding = 'UTF-8'?>";
         valuesXml += "<?xml-stylesheet type='text/xsl' href='fichier2.xsl'?>";
         valuesXml += "<Parameters>";
         try {
-            for (annot annote : listeAnnot) {
+            for (Annot annote : listeAnnot) {
                 valuesXml += "<Doc>";
                 valuesXml += "<Etape>" + annote.title() + "</Etape>";
                 valuesXml += "<Name>" + annote.nom() + "</Name>";
@@ -162,22 +125,22 @@ public class Test extends AbstractMojo {
                 valuesXml += "</Doc>";
             }
             valuesXml+="<image>";
-            valuesXml+="/Users/zaafranigabriel/Documents/Java/Serializable/"+nameFIle+".png";
+            valuesXml+=nameFIle+".jpg";
             valuesXml+="</image>";
             valuesXml+="</Parameters>";
 
             valuesXml = valuesXml.replace("'","\"");
-            Test.Write("/Users/zaafranigabriel/Documents/Etudes/" + nameFIle + ".xml", valuesXml);
+            Test.Write(folderExport + nameFIle + ".xml", valuesXml);
         }catch(Exception e){
 
         }
     }
 
-    public void writeImage(String nameFile){
+    public void writeImage(String nameFile,String folderExit){
         BufferedImage img = this.getImage();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try{
-            File outputfile = new File("/Users/zaafranigabriel/Documents/Java/Serializable/"+nameFile+".jpg");
+            File outputfile = new File(folderExit + nameFile + ".jpg");
 
             ImageIO.write(img, "jpg", outputfile);
         }catch(IOException e){
@@ -186,20 +149,87 @@ public class Test extends AbstractMojo {
 
     }
 
-    public void execute() throws MojoExecutionException, MojoFailureException {
-        System.out.println("coucou");
-       // System.out.println(this.getClass().getResource("/target/classes/fr/laple/annot/annot.class").getPath());
-        System.out.println("------>"+this.getClass().getResource(""));
 
-        System.out.println("-------> "+path+" <------");
-        try {
+    public void listerRecursif(File file) {
 
-            Test test = new Test();
-            test.walk(path);
-            System.out.println("Execute FINISH ******************");
-        }catch(Exception e){
-            System.out.println("Erreur");
+        try
+        {
+            for(File f : file.listFiles())
+            {
+                if (f.exists()) {
+
+                    if (f.isFile()) {
+
+                        try {
+
+                            String fqpn = f.getPath().replace(theRpath,"").replace(".class", "").replace("/", ".");
+
+                            URLClassLoader urlcl = null;
+                            urlcl = URLClassLoader.newInstance(new URL[]{new URL("file:"+theRpath)},
+                                    Thread.currentThread().getContextClassLoader());
+
+                            Class<?> clazz = urlcl.loadClass(fqpn);
+                            LinkedList<Annot> listeAnnot = new LinkedList<Annot>();
+                            for (Method m : clazz.getMethods()) {
+                                if (m.isAnnotationPresent(Annot.class)) {
+                                    for (Annotation anno : m.getDeclaredAnnotations()) {
+                                        Annot an = (Annot) anno;
+                                        listeAnnot.add(an);
+                                        this.hashAnnot.put(f.getName(),listeAnnot);
+                                    }
+                                } else {
+
+                                }
+
+                            }
+                        }
+                        catch(Exception e)
+                        {
+                            System.out.println("Erreur "+e.getMessage());
+                        }
+
+                    }
+                    else if (f.isDirectory()) {
+
+                        listerRecursif(f);
+                    }
+                }
+
+            }
         }
+         catch (Exception e) {
+             System.out.println("The error is "+e.getMessage());
+        }
+
+
+    }
+
+    public void executeParsor(){
+        try {
+            beginPath = beginPath.replace("file:","");
+            theRpath = theRpath.replace("file:","");
+            HashMap<String,Annot> hashAnn = new HashMap<String,Annot>();
+            listerRecursif(new File(beginPath));
+            Iterator entries = this.hashAnnot.entrySet().iterator();
+            while(entries.hasNext()){
+                Map.Entry ent = (Map.Entry) entries.next();
+                String key = ent.getKey().toString();
+                LinkedList<Annot> anns = (LinkedList<Annot>)ent.getValue();
+                key=key.replace(".class","");
+                writeXmlXSL(key, anns, folderExport);
+                if(takeScreenshot==true){
+                    writeImage(key,folderExport);
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Error is  "+e.getMessage());
+        }
+
+    }
+
+
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        this.executeParsor();
     }
 
 }

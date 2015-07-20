@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface annot {
+public @interface Annot {
     String title();
     String nom();
     String observation();
