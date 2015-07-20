@@ -4,7 +4,6 @@ package fr.laple.annot;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import sun.net.www.protocol.file.FileURLConnection;
 
 
 import javax.imageio.ImageIO;
@@ -15,8 +14,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.net.*;
 import java.util.*;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 
 /**
  * A goal to generate code.
@@ -24,21 +21,8 @@ import java.util.jar.JarFile;
  * @goal generate-doc
  * @phase package
  */
-@Annot(title = "Test XML",nom = "class",observation = "permet de modifier les elements de la class")
-public class Test extends AbstractMojo {
-
-    /*
-     * @parameter alias="path"
-     * @required
-     */
-    //private String path;
-
-    /**
-     * @parameter alias="package"
-     * @required
-     */
-    private String packagePath;
-
+@Annot(title = "AnnotParserPlugin XML",nom = "class",observation = "permet de modifier les elements de la class")
+public class AnnotParserPlugin extends AbstractMojo {
 
     /**
      * @parameter alias="folderExport"
@@ -53,23 +37,10 @@ public class Test extends AbstractMojo {
     Boolean takeScreenshot;
 
     /**
-     * @parameter alias="fileAnnotation"
-     * @required
-     */
-    private String fileAnnotation;
-
-    /**
      * @parameter alias="root_path"
      * @required
      */
     private String rootPath;
-
-
-    /**
-     * @parameter alias="the_r_path"
-     * @required
-     */
-    private String theRpath;
 
     /**
      * @parameter alias="begin_path"
@@ -114,7 +85,7 @@ public class Test extends AbstractMojo {
 
     public void writeXmlXSL(String nameFIle,LinkedList<Annot> listeAnnot,String folderExport){
         String valuesXml = "<?xml version='1.0' encoding = 'UTF-8'?>";
-        valuesXml += "<?xml-stylesheet type='text/xsl' href='fichier2.xsl'?>";
+        valuesXml += "<?xml-stylesheet type='text/xsl' href='custom.xsl'?>";
         valuesXml += "<Parameters>";
         try {
             for (Annot annote : listeAnnot) {
@@ -130,7 +101,7 @@ public class Test extends AbstractMojo {
             valuesXml+="</Parameters>";
 
             valuesXml = valuesXml.replace("'","\"");
-            Test.Write(folderExport + nameFIle + ".xml", valuesXml);
+            AnnotParserPlugin.Write(folderExport + nameFIle + ".xml", valuesXml);
         }catch(Exception e){
 
         }
@@ -162,16 +133,17 @@ public class Test extends AbstractMojo {
 
                         try {
 
-                            String fqpn = f.getPath().replace(theRpath,"").replace(".class", "").replace("/", ".");
+                            String fqpn = f.getPath().replace(rootPath,"").replace(".class", "").replace("/", ".");
 
                             URLClassLoader urlcl = null;
-                            urlcl = URLClassLoader.newInstance(new URL[]{new URL("file:"+theRpath)},
+                            urlcl = URLClassLoader.newInstance(new URL[]{new URL("file:"+ rootPath)},
                                     Thread.currentThread().getContextClassLoader());
-
                             Class<?> clazz = urlcl.loadClass(fqpn);
                             LinkedList<Annot> listeAnnot = new LinkedList<Annot>();
+                            System.out.println("file found : -> "+f.getName());
                             for (Method m : clazz.getMethods()) {
                                 if (m.isAnnotationPresent(Annot.class)) {
+
                                     for (Annotation anno : m.getDeclaredAnnotations()) {
                                         Annot an = (Annot) anno;
                                         listeAnnot.add(an);
@@ -190,7 +162,6 @@ public class Test extends AbstractMojo {
 
                     }
                     else if (f.isDirectory()) {
-
                         listerRecursif(f);
                     }
                 }
@@ -207,7 +178,7 @@ public class Test extends AbstractMojo {
     public void executeParsor(){
         try {
             beginPath = beginPath.replace("file:","");
-            theRpath = theRpath.replace("file:","");
+            rootPath = rootPath.replace("file:","");
             HashMap<String,Annot> hashAnn = new HashMap<String,Annot>();
             listerRecursif(new File(beginPath));
             Iterator entries = this.hashAnnot.entrySet().iterator();
@@ -229,6 +200,8 @@ public class Test extends AbstractMojo {
 
 
     public void execute() throws MojoExecutionException, MojoFailureException {
+        System.out.println("----> "+rootPath);
+        System.out.println("----> "+beginPath);
         this.executeParsor();
     }
 

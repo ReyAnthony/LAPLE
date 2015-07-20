@@ -27,12 +27,9 @@
                         <artifactId>laple-annot</artifactId>
                         <version>1.0-SNAPSHOT</version>
                         <configuration>
-                            <package>fr.laple.model.exercises.answers</package>
                             <folderExport>/Users/zaafranigabriel/Documents/Etudes/Etude/Java/folderExport/</folderExport>
-                            <fileAnnotation>fr.laple.annot.Annot</fileAnnotation>
                             <takeScreenshot>true</takeScreenshot>
-                            <root_path>file:/Users/zaafranigabriel/Documents/Etudes/Etude/Java/ProjetJavaAnnuel/LAPLENewsProject2/LAPLE5/LAPLE/LAPLE/target/laple-1.0-SNAPSHOT.jar</root_path>
-                            <the_r_path> file:/Users/zaafranigabriel/Documents/Etudes/Etude/Java/ProjetJavaAnnuel/LAPLENewsProject2/LAPLE5/LAPLE/LAPLE/target/classes/</the_r_path>
+                            <root_path> file:/Users/zaafranigabriel/Documents/Etudes/Etude/Java/ProjetJavaAnnuel/LAPLENewsProject2/LAPLE5/LAPLE/LAPLE/target/classes/</root_path>
                             <begin_path>file:/Users/zaafranigabriel/Documents/Etudes/Etude/Java/ProjetJavaAnnuel/LAPLENewsProject2/LAPLE5/LAPLE/LAPLE/target/classes/fr/laple/model/</begin_path>
                         </configuration>
                         <executions>
