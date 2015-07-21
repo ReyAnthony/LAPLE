@@ -1,4 +1,4 @@
-package fr.laple.extensions.plugins.languages.japanese;
+package fr.laple.extensions.plugins.languages;
 
 
 import fr.laple.model.language.SymbolContainer;
@@ -10,6 +10,7 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class parse lessons config files
@@ -48,7 +49,7 @@ public class LessonsJsonParser {
      * @return An array List of Abstract LessonContainer
      * @throws ParserException if there is any error
      */
-    public ArrayList<AbstractLessonContainer> parseForSymbolLessons(String path) throws ParserException {
+    public ArrayList<AbstractLessonContainer> parseForSymbolLessons(String path, List<String> acceptedNames) throws ParserException {
 
         ArrayList<AbstractLessonContainer> lessonContainers = new ArrayList<>();
 
@@ -58,10 +59,9 @@ public class LessonsJsonParser {
             JsonReader jsonReader = Json.createReader(file);
             JsonObject lessonTypes = jsonReader.readObject();
 
-            //only one ..
             for(String type : lessonTypes.keySet())
             {
-                if(type.equals("hiragana") || type.equals("katakana"))
+                if(acceptedNames.contains(type))
                 {
                     JsonObject learningOrder = lessonTypes.getJsonObject(type);
                     JsonArray symbols = learningOrder.getJsonArray("learning_order");
@@ -120,13 +120,13 @@ public class LessonsJsonParser {
      * @return An array List of AbstractLessonContainer
      * @throws ParserException if there is any error
      */
-    public AbstractLessonContainer parseForWordLessons(String path) throws ParserException {
-        WordLessonContainer lessonContainer = new WordLessonContainer("kanji");
+    public AbstractLessonContainer parseForWordLessons(String path, String type) throws ParserException {
+        WordLessonContainer lessonContainer = new WordLessonContainer(type);
 
         try(InputStream file = getClass().getResourceAsStream(path)){
 
             JsonReader jsonReader = Json.createReader(file);
-            JsonArray kanji = jsonReader.readObject().getJsonArray("kanji");
+            JsonArray kanji = jsonReader.readObject().getJsonArray(type);
 
             //only one ..
             for(int i = 0; i < kanji.size(); i++)
@@ -141,7 +141,7 @@ public class LessonsJsonParser {
 
                 for(SymbolContainer sc : symbolContainers)
                 {
-                    if(sc.getType().equals("kanji"))
+                    if(sc.getType().equals(type))
                         containerForFile = sc;
                 }
 
@@ -150,7 +150,7 @@ public class LessonsJsonParser {
                     JsonObject listObject = list.getJsonObject(j);
                     String name = listObject.getString("name");
 
-                    lessons.add(new Lesson("Kanji : "+name, true, containerForFile.getSymbol(name)));
+                    lessons.add(new Lesson(type +": "+name, true, containerForFile.getSymbol(name)));
 
                 }
 
@@ -162,7 +162,7 @@ public class LessonsJsonParser {
         }
         catch(Exception e)
         {
-
+            e.printStackTrace();
             throw new ParserException(path);
         }
 

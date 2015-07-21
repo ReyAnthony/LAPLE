@@ -1,0 +1,24 @@
+{
+    "alphabet_lowercase": [
+        {
+            "userLangTranscript": "a",
+            "symbol": "a"
+        },
+        {
+            "userLangTranscript": "b",
+            "symbol": "б"
+        },
+        {
+            "userLangTranscript": "v",
+            "symbol": "в"
+        },
+        {
+            "userLangTranscript": "r",
+            "symbol": "g"
+        },
+        {
+            "userLangTranscript": "d",
+            "symbol": "д"
+        }
+    ]
+}

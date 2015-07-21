@@ -1,4 +1,4 @@
-package fr.laple.extensions.plugins.languages.japanese;
+package fr.laple.extensions.plugins.languages;
 
 import fr.laple.model.language.Symbol;
 import fr.laple.model.language.SymbolContainer;
@@ -29,7 +29,7 @@ public class LanguageDictionnaryJsonParser {
      * @return An instance of symbolContainer
      * @throws ParserException in case of any issue
      */
-    public SymbolContainer parseFile(String path) throws ParserException {
+    public SymbolContainer parseFile(String path,String pathSound) throws ParserException {
         SymbolContainer container;
 
         try(InputStream file = getClass().getResourceAsStream(path)){
@@ -48,10 +48,7 @@ public class LanguageDictionnaryJsonParser {
                 JsonObject current = root.getJsonObject(i);
                 String userLangTranscript = current .getString("userLangTranscript");
                 String gottenSymbol = current.getString("symbol");
-                Clip sound = loadSound
-                        ("/fr/laple/extensions/languages/japanese/sounds/"
-                                        + userLangTranscript + ".wav");
-
+                Clip sound = loadSound (pathSound + userLangTranscript + ".wav");
                 Symbol symbol = new Symbol(userLangTranscript, gottenSymbol, null, null, sound, null);
                 container.addSymbol(symbol);
             }
@@ -63,6 +60,7 @@ public class LanguageDictionnaryJsonParser {
         }
         catch(Exception e)
         {
+            e.printStackTrace();
             throw new ParserException(e.toString() + (" while loading language file"));
         }
 

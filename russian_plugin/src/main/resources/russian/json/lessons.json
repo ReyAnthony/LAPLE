@@ -1,0 +1,45 @@
+{
+  "alphabet_lowercase": {
+	"learning_order": [
+		"a",
+		"b",
+		"v",
+		"r",
+		"d"
+	]
+  },
+  "alphabet_uppercase": {
+	"learning_order": [
+	  "a",
+	  "b",
+	  "v",
+	  "r",
+	  "d"
+	]
+  },
+  "words": [
+	{
+	  "category": "Household Items",
+	  "list": [
+		{
+		  "name": "someone"
+		},
+		{
+		  "name": "safety"
+		},
+		{
+		  "name": "one"
+		},
+		{
+		  "name": "rain"
+		},
+		{
+		  "name": "to drink"
+		},
+		{
+		  "name": "what"
+		}
+	  ]
+	}
+  ]
+}

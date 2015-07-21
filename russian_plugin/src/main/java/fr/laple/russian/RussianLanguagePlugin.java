@@ -1,5 +1,4 @@
-package fr.laple.extensions.plugins.languages.japanese;
-
+package fr.laple.russian;
 
 import fr.laple.extensions.plugins.Plugins;
 import fr.laple.extensions.plugins.languages.ILanguagePlugin;
@@ -21,16 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is the entry point for a Language plugin
- *
- * @author anthonyrey
+ * Created by anthonyrey on 21/07/2015.
  */
-public class JapaneseLanguagePlugin implements ILanguagePlugin{
-
+public class RussianLanguagePlugin implements ILanguagePlugin {
     private ArrayList<SymbolContainer> symbolContainers;
     private ArrayList<IExerciseMode> exerciseModes;
     private ArrayList<AbstractAnswerMode> exerciseSolvingModes;
     private ArrayList<AbstractLessonContainer> lessonContainers;
+    private File path;
 
     /**
      * Constructor for the plugin :
@@ -47,7 +44,7 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
      *  @see fr.laple.model.lessons.Lesson
      *
      */
-    public JapaneseLanguagePlugin()  {
+    public RussianLanguagePlugin()  {
 
         try {
 
@@ -58,6 +55,7 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
 
         } catch (ParserException e) {
 
+            e.printStackTrace();
             Plugins.pluginError(e.getMessage());
         }
 
@@ -76,33 +74,33 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
 
     @Override
     public String otherCredits() {
-        return "Julien ARENSMA";
+        return "Valentin Rey";
     }
 
     @Override
     public File getPath() {
         //ok now that's pure tweaking ...
-        return new File("Internal to LAPLE");
+        return path;
     }
 
     @Override
     public void setPath(File path) {
-        //no need
+        this.path = path;
     }
 
     @Override
     public boolean isInternal() {
-        return true;
+        return false;
     }
 
     @Override
     public String getName() {
-        return "Japanese";
+        return "Russian";
     }
 
     @Override
     public String getDescription() {
-        return "Japanese language plugin";
+        return "Russian language plugin";
     }
 
     @Override
@@ -157,42 +155,24 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
         exerciseModes.add(new ExModeUserLangTranscriptLang());
     }
 
-    /**
-     * Loads the symbol containers
-     *
-     * @see fr.laple.extensions.plugins.languages.LanguageDictionnaryJsonParser
-     *
-     * @throws ParserException if there is an error
-     */
+
     private void loadSymbolContainers() throws ParserException {
 
         symbolContainers = new ArrayList<>();
         LanguageDictionnaryJsonParser parser  = new LanguageDictionnaryJsonParser();
-        symbolContainers.add(parser.parseFile("/fr/laple/extensions/languages/japanese/hiragana.json",
-                "/fr/laple/extensions/languages/japanese/sounds/"));
-        symbolContainers.add(parser.parseFile("/fr/laple/extensions/languages/japanese/katakana.json",
-                "/fr/laple/extensions/languages/japanese/sounds/"));
-        symbolContainers.add(parser.parseFile("/fr/laple/extensions/languages/japanese/kanji.json",
-                "/fr/laple/extensions/languages/japanese/sounds/"));
+        symbolContainers.add(parser.parseFile("/russian/json/alphabet_lowercase.json", "/russian/json/"));
+        symbolContainers.add(parser.parseFile("/russian/json/words.json", "/russian/json/"));
 
     }
 
-    /**
-     * Loads the lessons
-     *
-     * @see fr.laple.extensions.plugins.languages.LessonsJsonParser
-     *
-     * @throws ParserException
-     */
+
     private void loadLessons() throws ParserException {
 
         LessonsJsonParser parser = new LessonsJsonParser(symbolContainers);
-        List<String> acceptedNames = new ArrayList<>();
-        acceptedNames.add("hiragana");
-        acceptedNames.add("katakana");
-        lessonContainers = parser.parseForSymbolLessons("/fr/laple/extensions/languages/japanese/lessons.json",
-                acceptedNames);
-        lessonContainers.add(parser.parseForWordLessons("/fr/laple/extensions/languages/japanese/lessons.json", "kanji"));
+        List<String> acceptedValues = new ArrayList<>();
+        acceptedValues.add("alphabet_lowercase");
+         lessonContainers = parser.parseForSymbolLessons("/russian/json/lessons.json", acceptedValues);
+         lessonContainers.add(parser.parseForWordLessons("/russian/json/lessons.json", "words"));
 
     }
 
@@ -203,6 +183,4 @@ public class JapaneseLanguagePlugin implements ILanguagePlugin{
     {
         return this.getName();
     }
-
-
 }

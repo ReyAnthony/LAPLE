@@ -1,0 +1,24 @@
+{
+    "words": [
+        {
+            "userLangTranscript": "maison",
+            "symbol": "Дом"
+        },
+        {
+            "userLangTranscript": "appartement",
+            "symbol": "Квартира"
+        },
+        {
+            "userLangTranscript": "table",
+            "symbol": "Стол"
+        },
+        {
+            "userLangTranscript": "chaise",
+            "symbol": "Стул"
+        },
+        {
+            "userLangTranscript": "pièce",
+            "symbol": "Комната"
+        }
+    ]
+}

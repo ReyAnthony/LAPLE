@@ -14,9 +14,8 @@ import java.util.ArrayList;
 public class SpaceLettersPlugin implements IFeaturePlugin {
 
     private File path;
-
     @Override
-    public void instanciateExerciseModes(LapleDataModel lapleDataModel) {
+    public void instanciateExerciseTypes(LapleDataModel lapleDataModel) {
         //no new exercises
     }
 

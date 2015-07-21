@@ -1,4 +1,4 @@
-package fr.laple.extensions.plugins.languages.japanese;
+package fr.laple.extensions.plugins.languages;
 
 /**
  * An exception when parsing fail

@@ -9,6 +9,7 @@ import fr.laple.ztools.tabTools.TabTools;
 
 import javax.sound.sampled.Clip;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -53,6 +54,18 @@ public class LessonController implements ActionListener {
         view.getBackButton().addActionListener(this);
         view.getSoundButton().addActionListener(this);
         view.getDescription().setText("translation : \n "+ this.lesson.getSymbol().getUserLangTranscript());
+        setFontSize();
+    }
+
+    private void setFontSize()
+    {
+        JLabel symbol = view.getSymbol();
+        String txt = symbol.getText();
+        Font f = symbol.getFont().deriveFont((float) 150 / txt.length() );
+        symbol.setFont(f);
+        symbol.setText(txt);
+        symbol.repaint();
+
     }
 
     /**

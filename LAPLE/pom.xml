@@ -76,6 +76,7 @@
               </manifest>
               <manifestEntries>
                 <Japanese>fr.laple.extensions.plugins.languages.japanese.JapaneseLanguagePlugin</Japanese>
+                <Russian>fr.laple.extensions.plugins.languages.russian.RussianLanguagePlugin</Russian>
               </manifestEntries>
               </archive>
               <descriptorRefs>
