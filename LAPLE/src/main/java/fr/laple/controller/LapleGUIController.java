@@ -68,7 +68,7 @@ public class LapleGUIController {
 
         ListableConverter<AbstractLessonContainer> converter = new ListableConverter<>();
         List<IListable> listables = converter.typeToIListable(model.getLessonContainers());
-        ;
+
         ui.add("Lessons",  new ListView(model, listables, false,
                 new RootData(listables, "Select a Lesson category :")));
 

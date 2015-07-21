@@ -1,6 +1,7 @@
 package fr.laple.features.plugin;
 
 import fr.laple.extensions.plugins.features.IFeaturePlugin;
+import fr.laple.features.plugin.view.TestView;
 import fr.laple.model.datamodel.LapleDataModel;
 import fr.laple.model.listable.IListable;
 
@@ -16,7 +17,7 @@ public class SpaceLettersPlugin implements IFeaturePlugin {
     private File path;
     @Override
     public void instanciateExerciseTypes(LapleDataModel lapleDataModel) {
-        //no new exercises
+
     }
 
     @Override
@@ -27,17 +28,17 @@ public class SpaceLettersPlugin implements IFeaturePlugin {
 
     @Override
     public void addNewTabs(JTabbedPane ui, LapleDataModel model) {
-        ui.add("Space Letters", null);
+        ui.add("Language Infos", new TestView(model));
     }
 
     @Override
     public String getName() {
-        return "Space letters";
+        return "Language infos";
     }
 
     @Override
     public String getDescription() {
-        return "A small \"space invader\" like game for LAPLE";
+        return "Prints informations about current language plugin";
     }
 
     @Override
