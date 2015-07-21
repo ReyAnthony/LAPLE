@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by anthonyrey on 14/07/2015.
  */
-public class SpaceLettersPlugin implements IFeaturePlugin {
+public class InformationPlugin implements IFeaturePlugin {
 
     private File path;
     @Override
