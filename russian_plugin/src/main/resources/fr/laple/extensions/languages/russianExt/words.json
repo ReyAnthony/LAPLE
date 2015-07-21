@@ -1,7 +1,7 @@
 {
     "words": [
         {
-            "userLangTranscript": "maison",
+            "userLangTranscript": "house",
             "symbol": "Дом"
         },
         {
@@ -13,11 +13,11 @@
             "symbol": "Стол"
         },
         {
-            "userLangTranscript": "chaise",
+            "userLangTranscript": "chair",
             "symbol": "Стул"
         },
         {
-            "userLangTranscript": "pièce",
+            "userLangTranscript": "room",
             "symbol": "Комната"
         }
     ]

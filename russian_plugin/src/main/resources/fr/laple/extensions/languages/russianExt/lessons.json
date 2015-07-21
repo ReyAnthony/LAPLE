@@ -1,0 +1,34 @@
+{
+  "alphabet_lowercase": {
+	"learning_order": [
+		"a",
+		"b",
+		"v",
+		"r",
+		"d"
+	]
+  },
+  "words": [
+	{
+	  "category": "Household",
+	  "list": [
+		{
+		  "name": "house"
+		},
+		{
+		  "name": "appartement"
+		},
+		{
+		  "name": "table"
+		},
+		{
+		  "name": "chair"
+		},
+		{
+		  "name": "room"
+		}
+
+	  ]
+	}
+  ]
+}

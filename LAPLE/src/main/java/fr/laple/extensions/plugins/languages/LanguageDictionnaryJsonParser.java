@@ -58,12 +58,11 @@ public class LanguageDictionnaryJsonParser {
             }
 
         }
-        catch(Exception e)
+        catch(Exception e )
         {
             e.printStackTrace();
             throw new ParserException(e.toString() + (" while loading language file"));
         }
-
         return container;
     }
 

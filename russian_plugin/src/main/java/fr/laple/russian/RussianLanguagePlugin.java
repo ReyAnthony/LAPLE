@@ -74,7 +74,7 @@ public class RussianLanguagePlugin implements ILanguagePlugin {
 
     @Override
     public String otherCredits() {
-        return "Valentin Rey";
+        return "Valentin REY";
     }
 
     @Override
@@ -90,12 +90,12 @@ public class RussianLanguagePlugin implements ILanguagePlugin {
 
     @Override
     public boolean isInternal() {
-        return false;
+        return true;
     }
 
     @Override
     public String getName() {
-        return "Russian";
+        return "Russian external";
     }
 
     @Override
@@ -160,8 +160,10 @@ public class RussianLanguagePlugin implements ILanguagePlugin {
 
         symbolContainers = new ArrayList<>();
         LanguageDictionnaryJsonParser parser  = new LanguageDictionnaryJsonParser();
-        symbolContainers.add(parser.parseFile("/russian/json/alphabet_lowercase.json", "/russian/json/"));
-        symbolContainers.add(parser.parseFile("/russian/json/words.json", "/russian/json/"));
+        symbolContainers.add(parser.parseFile("/fr/laple/extensions/languages/russianExt/alphabet_lowercase.json",
+                "/fr/laple/extensions/languages/russianExt/sounds/"));
+        symbolContainers.add(parser.parseFile("/fr/laple/extensions/languages/russianExt/words.json",
+                "/fr/laple/extensions/languages/russianExt/sounds/"));
 
     }
 
@@ -171,8 +173,8 @@ public class RussianLanguagePlugin implements ILanguagePlugin {
         LessonsJsonParser parser = new LessonsJsonParser(symbolContainers);
         List<String> acceptedValues = new ArrayList<>();
         acceptedValues.add("alphabet_lowercase");
-         lessonContainers = parser.parseForSymbolLessons("/russian/json/lessons.json", acceptedValues);
-         lessonContainers.add(parser.parseForWordLessons("/russian/json/lessons.json", "words"));
+        lessonContainers = parser.parseForSymbolLessons("/fr/laple/extensions/languages/russianExt/lessons.json", acceptedValues);
+        lessonContainers.add(parser.parseForWordLessons("/fr/laple/extensions/languages/russianExt/lessons.json", "words"));
 
     }
 
