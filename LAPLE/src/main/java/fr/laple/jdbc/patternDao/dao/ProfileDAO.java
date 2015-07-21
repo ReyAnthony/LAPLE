@@ -5,13 +5,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import fr.laple.jdbc.patternDao.table.Profile;
-
+/**
+ * 
+ * @author Christian EBONGUE
+ *comment: This class allow you to do request in database about Profile table
+ * profile table is which describe users
+ */
 public class ProfileDAO extends DAO<Profile>{
-	
+
 	public ProfileDAO(Connection connect){
 		super(connect);
 	}
-
+	/**
+	 * this method create a new obj profile in database.
+	 * Return true if create success
+	 * else false.
+	 * @param obj(Set): profile
+	 * @return boolean
+	 */
 	@Override
 	public boolean create(Profile obj) throws SQLException {
 		return (this.connect.createStatement().executeUpdate("INSERT INTO Profile (email, mdp, pseudo) VALUES('"+obj.getEmail()+
@@ -23,7 +34,13 @@ public class ProfileDAO extends DAO<Profile>{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	/**
+	 * this method update a new obj profile in database.
+	 * Return true if update success
+	 * else false.
+	 * @param obj(Set): obj contents object language, profile, statistics
+	 * @return boolean
+	 **/
 	@Override
 	public boolean update(Profile obj) throws SQLException {
 		return (this.connect.createStatement().executeUpdate("UPDATE Profile SET mdp='"+obj.getNewMdp()+"'  WHERE mdp="+
@@ -45,6 +62,12 @@ public class ProfileDAO extends DAO<Profile>{
 			profile=new Profile(idProfile, result.getString("email"), result.getString("mdp"), result.getString("pseudo"));
 		return profile;
 	}
+	/**
+	 * this method find obj Profile by id in database.
+	 * else false.
+	 * @param id (int): obj contents object language, profile, statistics
+	 * @return obj Assoc
+	 **/
 	@Override
 	public Profile findLastId() throws SQLException{
 		Profile profile= new Profile();
@@ -56,7 +79,12 @@ public class ProfileDAO extends DAO<Profile>{
 		return profile;
 		
 	}
-
+	/**
+	 * this method find last insert obj  in database. obj contents object language, profile, statistics
+	 * else false.
+	 * @param obj(Set): obj contents object language, profile, statistics
+	 * @return obj Associate
+	 **/
 	@Override
 	public Profile findByCondition(Profile obj) throws SQLException {
 		Profile profile= new Profile();

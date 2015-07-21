@@ -12,10 +12,17 @@ import java.util.ArrayList;
  * 
  * @author Christian EBONGUE
  * @category JDBC
- * Comment: This class is static.There are some request to database
+ * Comment: This class is implement by local and web
  */
 public interface  IDbAccessor {
-	
+	/**
+	 * 
+	 * @param stat contents StatBundle
+	 * @param set contents SetBundle
+	 * @return
+	 * @throws SQLException
+	 * @throws CloneNotSupportedException
+	 */
 	double[] get(StatBundle stat, SettingBundle set) throws SQLException, CloneNotSupportedException;
 	//ResultSet get(String email, String password, String[] tenseSql, String language, String nameStat, String typeStat, String typeDico, String currentSymbol) throws UnsupportedEncodingException, MalformedURLException, IOException;
 	boolean put(String table, String[] colo, String[] value);

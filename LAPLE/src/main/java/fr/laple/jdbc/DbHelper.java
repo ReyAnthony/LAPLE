@@ -29,7 +29,7 @@ import fr.laple.jdbc.patternDao.table.ToBelong;
  * 
  * @author Christian EBONGUE
  * @category JDBC
- * Comment: This class update statistic and profile
+ * Comment: This class updates and gets statistic and profile
  *
  */
 public class DbHelper {
@@ -58,8 +58,6 @@ public class DbHelper {
 	/**
 	 * This allow to connect to database. If there is no connexion,
 	 * the connexion will be etablished to local
-	 * @param users String: Users of laple in base
-	 * @param passwds String: password of laple in base
 	 * @exception ClassNotFoundException is up if Driver jdbc not found
 	 * @exception SQLException is up if sql error or any communication to database.
 	 * In particular not connexion to network
@@ -227,11 +225,17 @@ public class DbHelper {
 	
 	
 	
-	/************************stat et setting
+	/************************statistique and  setting*****************/
+	/**
 	 * @throws SQLException 
-	 * @throws CloneNotSupportedException *********************************/
+	 * @throws CloneNotSupportedException 
+	**/
 	
-	
+	/**
+	 * put in bundleSetting  result of getSetting
+	 * @throws SQLException
+	 * @throws CloneNotSupportedException
+	 */
 	public void getSetting() throws SQLException, CloneNotSupportedException{
 		localWeb.get(this.bundleSetting, this.bundleStat);
 	}
@@ -240,8 +244,14 @@ public class DbHelper {
 		localWeb.put(this.bundleSetting);
 	}
 	
-	//pour avoir les stat, on a besoin de charger le profile de l'utilisateur. Ceci nous permettra
-	//entre autre d'obtenir son id pour obtenir la stat lier à son id
+	/**
+	 *  
+	 * @throws UnsupportedEncodingException
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws CloneNotSupportedException
+	 */
 	public void getStat() throws UnsupportedEncodingException, MalformedURLException, IOException, SQLException, CloneNotSupportedException{
 		
 		allStatByStat=new BigDecimal(0.0);
@@ -274,7 +284,12 @@ public class DbHelper {
 	
 	
 	
-	
+	/**
+	 * add new statistic in database
+	 * @return
+	 * @throws SQLException
+	 * @throws CloneNotSupportedException
+	 */
 	
 	public int addStat() throws SQLException, CloneNotSupportedException {
 		localWeb.put(this.bundleSetting, this.bundleStat);

@@ -8,13 +8,24 @@ import fr.laple.jdbc.patternDao.table.Associate;
 import fr.laple.jdbc.patternDao.table.Language;
 import fr.laple.jdbc.patternDao.table.Profile;
 import fr.laple.jdbc.patternDao.table.Statistics;
-
+/**
+ * 
+ * @author Christian Ebongue
+ * comment: This class allow you to do request in database about associate table
+ * associate table is a table result between table statistic, profile, language
+ */
 public class AssociateDAO extends DAO <Associate>{
 
 	public AssociateDAO(Connection connect) {
 		super(connect);
 	}
-
+	/**
+	 * this method create a new obj associate in database. obj contents object language, profile, statistics
+	 * Return true if create success
+	 * else false.
+	 * @param obj(Set): obj contents object language, profile, statistics
+	 * @return boolean
+	 */
 	@Override
 	public boolean create(Associate obj) throws SQLException {
 		Profile profile =new Profile();
@@ -48,12 +59,26 @@ public class AssociateDAO extends DAO <Associate>{
 		return true;
 	}
 
+	/**
+	 * this method delete a line of Associate. obj contents object language, profile, statistics
+	 * Return true if create success
+	 * else false.
+	 * @param obj(Set): obj contents object language, profile, statistics
+	 * @return boolean
+	 */
 	@Override
 	public boolean delete(Associate obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/**
+	 * this method update a new obj associate in database. obj contents object language, profile, statistics
+	 * Return true if create success
+	 * else false.
+	 * @param obj(Set): obj contents object language, profile, statistics
+	 * @return boolean
+	 **/
 	@Override
 	public boolean update(Associate obj) throws SQLException {
 		Profile profile =new Profile();
@@ -86,13 +111,21 @@ public class AssociateDAO extends DAO <Associate>{
 		}
 		return true;
 	}
-
+	
+	
 	@Override
 	public boolean update(Associate obj, String[] condition)
 			throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	/**
+	 * this method find obj associate by id in database. obj contents object language, profile, statistics
+	 * Return true if create success
+	 * else false.
+	 * @param id (int): obj contents object language, profile, statistics
+	 * @return obj Assoc
+	 **/
 
 	@Override
 	public Associate find(int id) throws SQLException, CloneNotSupportedException {
@@ -115,7 +148,13 @@ public class AssociateDAO extends DAO <Associate>{
 		}
 		return associate;
 	}
-
+	/**
+	 * this method find last insert obj associate in database. obj contents object language, profile, statistics
+	 * Return true if create success
+	 * else false.
+	 * @param obj(Set): obj contents object language, profile, statistics
+	 * @return obj Assoc
+	 **/
 	@Override
 	public Associate findLastId() throws SQLException, CloneNotSupportedException {
 		Associate associate= new Associate();
@@ -136,7 +175,12 @@ public class AssociateDAO extends DAO <Associate>{
 		associate=new Associate(profile, statistics, language);
 		return associate;
 	}
-	
+	/**
+	 * this method find last insert obj associate in database. obj contents object language, profile, statistics
+	 * else false.
+	 * @param obj(Set): obj contents object language, profile, statistics
+	 * @return obj Associate
+	 **/
 	@Override
 	public Associate findByCondition(Associate obj) throws SQLException, CloneNotSupportedException {
 		Associate associate= new Associate();
