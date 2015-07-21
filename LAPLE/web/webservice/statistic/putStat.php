@@ -24,7 +24,8 @@ $hasMandatoryParams = isset($params['token'])
                    && isset($params['totalNumberExo'])
                    && isset($params['currentSymbol'])
                    && isset($params['currentNumberExo'])
-                   && isset($params['symbolType'])
+                   && isset($params['name_stat'])
+                   && isset($params['nameDico'])
                    && isset($params['success'])
                    && isset($params['dicoType']);
 
@@ -55,5 +56,5 @@ if(!isset($profile)){ Response::send(4,0); }
 
 $language = ManagerDB::putStat($noChangeSymbol, $language, $profile,$params['completionDate'], $params['typeExo'],
 								$params['totalSymbol'], $params['totalNumberExo'],$params['currentSymbol'], $params['currentNumberExo'], 
-								$params['symbolType'], $params['success'], $params['dicoType']);
+								$params['name_stat'], $params['nameDico'], $params['success'], $params['dicoType']);
 Response::send(0,1);
