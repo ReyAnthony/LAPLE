@@ -15,24 +15,25 @@ if( isset($params['output']) && (strcasecmp($params['output'], "xml") == 0) ){
 // ----  END OUTPUT FORMAT  ----
 
 // ----  REQUIREMENTS  ----
-if( !Method::isValid('DELETE') ){ Response::send(6,0); }
+if( !Method::isValid('POST') ){ Response::send(6,0); }
 $hasMandatoryParams = isset($params['token'])
                    && isset($params['password']);
 if( !$hasMandatoryParams ){ Response::send(1,0); }
 // ----  END REQUIREMENTS  ----
 
 // ----  VERIFICATIONS  ----
-$user = ManagerDB::getUserByToken($params['token']);
-if(!isset($user)){ Response::send(4,0); }
-$passwordOk  = ManagerDB::execute("SELECT idUser FROM user WHERE idUser=? AND password=?", [$user['idUser'],$params['password']])->fetch()[0];
+$profile = ManagerDB::getUserByToken($params['token']);
+if(!isset($profile)){ Response::send(4,0); }
+$passwordOk  = ManagerDB::execute("SELECT id_profile FROM Profile WHERE id_profile=? AND mdp=?", [$profile['id_profile'],$params['password']])->fetch()[0];
+
 if(!isset($passwordOk)){ Response::send(9,0); }
 // ----  END VERIFICATIONS  ----
 
 
 // ----  DELETE TO DO  ----
 // query for user insertion
-$queryD  = "DELETE FROM user WHERE idUser=? AND password=?";
-$valuesD = array($user['idUser'], $params['password']);
+$queryD  = "DELETE FROM Profile WHERE id_profile=? AND mdp=?";
+$valuesD = array($profile['id_profile'], $params['password']);
 
 
 // ----  EXECUTION  ----

@@ -57,9 +57,8 @@
         return empty($results) ? null : $results[0];
     }
     
-     
 
-    /*OK*/static function putStat($noChangeSymbol, $language, $profile, $completionDate, $typeExo, $totalSymbol, $totalNumberEX, $currentSymbol, $currentNumberEx, $symbolType, $success, $dicoType){
+     /*OK*/static function putStat($noChangeSymbol, $language, $profile, $completionDate, $typeExo, $totalSymbol, $totalNumberEX, $currentSymbol, $currentNumberEx, $name_stat, $nameDico, $success, $dicoType){
         
         //On vérifie si le symbole est déjà présent dans le dico
         // Si oui c'est une mise  à jour
@@ -80,6 +79,7 @@
                         AND typeDico = ?";   
             }
             $result1=array();
+            //resultat contenant trynumber et numbersuccess
             $result1=self::execute($query, array($currentSymbol, $dicoType))->fetch(PDO::FETCH_ASSOC);
             unset($query);
             //on met à jour le nombre de try et  de success
@@ -95,9 +95,9 @@
             $pdo = self::init();
             $pdo->beginTransaction();
             try{
-                $query="INSERT INTO Dico (typeDico, tryNumber, numberSuccess) 
-                        VALUES(?, ?, ?)";
-                self::execute($query, array($dicoType, 1, $success));
+                $query="INSERT INTO Dico (typeDico, tryNumber, numberSuccess, nameDico) 
+                        VALUES(?, ?, ?, ?)";
+                self::execute($query, array($dicoType, 1, $success, $nameDico));
                 //on recupère l'id du dico qui sera inséré dans symbole si dicotype est symbole et dans Words si c'est words
                 $lastId=self::init()->lastInsertId();
                
@@ -122,9 +122,10 @@
         unset($query);
         $query=array();
         // on insert dans statistic
-        $query="INSERT INTO Statistics (type, totalNumberEX, currentNumberEx)
-                VALUES(?, ?, ?)";
-        self::execute($query, array($typeExo, $totalNumberEX,$currentNumberEx));
+        $query="INSERT INTO Statistics (type, totalNumberEX, currentNumberEx, name_stat)
+                VALUES(?, ?, ?, ?)";
+        self::execute($query, array($typeExo, $totalNumberEX,$currentNumberEx, $name_stat));
+        //on recupère l'id de stat qui vient d'être insérée
         $lastId2=self::init()->lastInsertId();
         unset($query);
         //on relie statistique et dico
@@ -137,20 +138,67 @@
             self::execute($query, array($lastId2, $result1['idDico'], $completionDate));   
         }
         unset($query);
+        // On vérifie qu'il n'existait pas déjà une association de associate avec la même clé qu'on va inserer
         $query="SELECT idLanguage, id_profile, idStatistic 
                 FROM associate 
                 WHERE idStatistic = ?
                 AND id_profile = ?
                 AND idLanguage = ?";
-        $result=self::execute($query, array($language['idLanguage'], $profile['id_profile'], $lastId2 ))->fetch(PDO::FETCH_ASSOC);
-        if(!isset($result)){
+        $result=self::execute($query, array($lastId2, $profile['id_profile'], $language['idLanguage']))->fetch(PDO::FETCH_ASSOC);
+        if(empty($result)){
              //on relie statistic, language, et l'utilisateur   
             $query="INSERT INTO associate (idStatistic, id_profile, idLanguage)
                     VALUES(?, ?, ?)";
             self::execute($query, array($lastId2, $profile['id_profile'], $language['idLanguage']));
         }
+        else{
+            Response::send(22, 0);
+        }
 
     }
+     
+    /*OK*/static function putDico($noChangeSymbol, $language, $currentSymbol, $nameDico, $dicoType){
+        
+        
+         // si le dico n'existe pas encore insertion
+        if($noChangeSymbol==NULL){
+            $pdo = self::init();
+            $pdo->beginTransaction();
+            try{
+                $query="INSERT INTO Dico (typeDico, tryNumber, numberSuccess, nameDico) 
+                        VALUES(?, ?, ?, ?)";
+                self::execute($query, array($dicoType, 0, 0, $nameDico));
+                //on recupère l'id du dico qui sera inséré dans symbole si dicotype est symbole et dans Words si c'est words
+                $lastId=self::init()->lastInsertId();
+               
+              
+                if('symbol'==strtolower($dicoType)){
+                    $query="INSERT INTO Symbol (idDico, keySymbol)
+                            VALUES(?, ?)";
+                    self::execute($query, array($lastId, $currentSymbol));
+                }
+                else{
+                    $query="INSERT INTO Words (idDico, keyWords)
+                            VALUES(?, ?)";
+                    self::execute($query, array($lastId, $currentSymbol));   
+                }
+                $pdo->commit();
+            }catch(PDOException $e){
+               $pdo->rollBack();
+                die('Erreur : ' . $e->getMessage());
+                Response::send(5,0);
+            }
+         } 
+         else{
+            Response::send(21,0);
+         }
+        unset($query);
+        
+
+    }
+
+
+
     /*OK*/static function getLanguageByUser($idProfile, $limit, $offset){
         $query = "SELECT DISTINCT L.nameLanguage 
                     FROM Language L, associate A, Profile P 
@@ -164,21 +212,18 @@
     /*OK*/static function getAllStat($limit, $offset, $language){
         $query = "SELECT DISTINCT L.idLanguage, nameLanguage,
                                     P.id_profile, pseudo,
-                                    S.idStatistic, type, name_stat, totalNumberEX, currentNumberEx, 
-                                    D.idDico, typeDico, tryNumber,  numberSuccess,
-                                    Sy.idDico, keySymbol,
-                                    W.idDico, keyWords,
+                                    S.idStatistic, type, nameStat, totalNumberEX, currentNumberEx, 
+                                    D.idDico, D.keyDico,typeDico, tryNumber,  numberSuccess,
                                     T.statDate
-                    FROM Language L, Profile P, associate A, Statistics S, Dico D, Symbol Sy, Words W, toBelong T
+                    FROM Language L, Profile P, associate A, Statistics S, Dico D, toBelong T
                     WHERE L.idLanguage = A.idLanguage 
                     AND P.id_profile = A.id_profile
                     AND S.idStatistic= A.idStatistic
                     AND S.idStatistic= T.idStatistic
                     AND D.idDico= T.idDico
-                    AND (D.idDico = Sy.idDico OR D.idDico = W.idDico)
                     AND nameLanguage = ?
                     LIMIT $limit OFFSET $offset";
-        return self::execute($query, [$language])->fetchAll(PDO::FETCH_ASSOC);;
+        return self::execute($query, [$language])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /*OK*/static function getLanguage($limit, $offset){
@@ -197,7 +242,7 @@
     /*OK*/static function connect($email, $password){
         $query  = "SELECT id_profile FROM `Profile` WHERE email=? AND mdp=?";
         $values = array($email, MD5($password));
-
+        echo "mdp=".MD5($password);
         $idUser  = (int)ManagerDB::execute($query, $values)->fetch()[0];
 
         if(!isset($idUser)){Response::send(3,0);}
@@ -231,6 +276,60 @@
         $token = ManagerDB::execute("SELECT token FROM `Session` WHERE id_profile='".$idUser."'")->fetch()[0];
         return $token;
      }
+
+
+
+     // ce sera le contenu du mail, en cas de perte de mot de passe
+     /*OK*/static function update($email, $newPassword, $message, $password=NULL){
+        $token=NULL;
+        //generation du token tant qu'il en existe  deja
+        do{
+                $token = tools::generateToken(); // TODO à coder
+       }while(ManagerDB::execute("SELECT token FROM `Session` WHERE token='".$token."'")->fetch()[0] != null);
+
+        //si le mot de passe n'est pas null, on change l'ancien mot de passe
+        if($password!=NULL){
+            //recherche de l'idUser où le mot passe = à l'ancien mot de passe
+            $query  = "SELECT id_profile FROM `Profile` WHERE email=? AND mdp=?";
+            $values = array($email, $password);
+            $idUser  = ManagerDB::execute($query, $values)->fetch(PDO::FETCH_ASSOC);
+            //echo "<pre>"; print_r($idUser); echo "</pre>"; die();
+            //on met à jour le mot de passe du profil grace à lidUser
+            //echo $email; die();
+            $query  = "UPDATE Profile SET mdp=?
+             WHERE id_profile=? AND email=? AND mdp=?";
+            ManagerDB::execute($query, array(MD5($newPassword), $idUser['id_profile'], $email, $password));
+            //echo self::init()->mysql_affected_rows();
+            //echo MD5($newPassword).' |'.$idUser['id_profile'].' '.$email.'| '.$password.'|-';
+            unset($query);
+            // on met à jour le token
+            $query="UPDATE Session SET token=?
+             WHERE id_profile=?";
+             //echo $token.' |'.$idUser; die('tata');
+            ManagerDB::execute($query, array($token, $idUser['id_profile']));
+        }
+        // coder l'envoie par mail du mot de passe
+        if($password==NULL){
+        /* $query  = "SELECT id_profile FROM `Profile` WHERE email=? AND mdp=?";
+            $values = array($email, MD5($password));
+            $idUser  = (int)ManagerDB::execute($query, $values)->fetch()[0];
+            //on met à jour le mot de passe du profil grace à lidUser
+            $query  = "UPDATE Profile SET mdp=?
+             WHERE id_profile=? AND email=?";
+            self::execute($query, array($idUser['id_profile'], MD5($newPassword),$email)));
+            unset($query);
+            // on met à jour le token
+            $query="UPDATE Session SET token=?
+             WHERE id_profile=?";
+            self::execute($query, array($idUser, $token));*/
+            Response::send(30,0);
+        }
+        unset($query);
+        $query= "SELECT token FROM Session WHERE id_profile= ?"; 
+        $result = ManagerDB::execute($query, [$idUser['id_profile']])->fetch(PDO::FETCH_ASSOC);echo 'test';
+        return $result['token'];
+     }
+
 
 }
 
