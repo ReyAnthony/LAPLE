@@ -179,6 +179,7 @@ public class AnnotParserPlugin extends AbstractMojo {
         try {
             beginPath = beginPath.replace("file:","");
             rootPath = rootPath.replace("file:","");
+            folderExport= folderExport.replace("file:","");
             HashMap<String,Annot> hashAnn = new HashMap<String,Annot>();
             listerRecursif(new File(beginPath));
             Iterator entries = this.hashAnnot.entrySet().iterator();

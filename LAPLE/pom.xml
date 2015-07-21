@@ -51,7 +51,7 @@
         <artifactId>laple-annot</artifactId>
         <version>1.0-SNAPSHOT</version>
         <configuration>
-          <folderExport>/Users/zaafranigabriel/Documents/Etudes/Etude/Java/folderExport/</folderExport>
+          <folderExport>${project.baseUri}docAnnot/</folderExport>
           <takeScreenshot>true</takeScreenshot>
           <root_path> ${project.baseUri}target/classes/</root_path>
           <begin_path>${project.baseUri}target/classes/fr/laple/view/</begin_path>
