@@ -1,6 +1,8 @@
 # LAPLE
 Logiciel d'Apprentissage de Langues Etrangères
 
+The project is usable as-is, but there is a lot to finish. 
+
 To clone the repository locally you have to use the following command : 
 git clone https://github.com/ReyAnthony/LAPLE.git
 
