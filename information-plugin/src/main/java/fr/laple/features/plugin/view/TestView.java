@@ -1,7 +1,6 @@
 package fr.laple.features.plugin.view;
 
 import fr.laple.model.datamodel.LapleDataModel;
-import fr.laple.model.language.SymbolContainer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,25 +14,23 @@ public class TestView extends JPanel{
     {
         this.setLayout(new BorderLayout());
         JTextArea area = new JTextArea();
+        area.setEditable(false);
+        area.setLineWrap(true);
 
         area.append("Types disponibles :");
 
-        for(SymbolContainer sc :  model.getSymbolContainer() )
-        {
+        model.getSymbolContainer().forEach(sc -> {
+
             area.append("\n" + sc.getType());
+            area.append("\n\tsymbols :\n");
 
-            area.append("\nsymbols :");
-            for(String s : sc.getSymbolMap().keySet())
-                 area.append("\n"+s );
+            sc.getSymbolMap().keySet().forEach(s -> area.append("\t"+ s));
+            area.append("\n");
+        });
 
-
-        }
 
         JScrollPane scroll = new JScrollPane(area);
         this.add(scroll, BorderLayout.CENTER);
-
-
-
     }
 
 }

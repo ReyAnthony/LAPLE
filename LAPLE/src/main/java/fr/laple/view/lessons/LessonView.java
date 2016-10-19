@@ -11,10 +11,8 @@ import java.awt.*;
 public class LessonView extends JPanel {
 
     private JLabel symbol;
-    private JButton clearButton;
     private JButton soundButton;
     private JButton backButton;
-    private JButton testButton;
     private JTextArea description;
 
     public LessonView()
@@ -43,14 +41,6 @@ public class LessonView extends JPanel {
         commandPanel.add(soundButton);
         symbolPanel.add(commandPanel, BorderLayout.PAGE_END);
 
-        JPanel drawingPanel = new JPanel();
-        drawingPanel.setLayout(new BorderLayout());
-        drawingPanel.setBackground(Color.WHITE);
-
-        JPanel buttonPanel = new JPanel();
-        clearButton = new JButton("Clear drawing");
-        buttonPanel.add(clearButton);
-        drawingPanel.add(buttonPanel, BorderLayout.PAGE_END);
 
         JPanel descriptionPanel = new JPanel();
         descriptionPanel.setLayout(new BorderLayout());
@@ -62,12 +52,8 @@ public class LessonView extends JPanel {
         JScrollPane scroll = new JScrollPane(descriptionPanel);
         scroll.setHorizontalScrollBar(null);
 
-        JPanel commandPanelDraw = new JPanel();
-        commandPanelDraw.setBorder(BorderFactory.createEmptyBorder(50, 50, 20, 20));
         backButton = new JButton("Back");
-        testButton = new JButton("Test me !");
-        commandPanelDraw.add(backButton);
-        commandPanelDraw.add(testButton);
+        commandPanel.add(backButton);
         descriptionPanel.add(description, BorderLayout.CENTER);
 
 
@@ -77,10 +63,7 @@ public class LessonView extends JPanel {
         layout.setVgap(10);
         centralPanel.setLayout(gLayout);
         centralPanel.add(symbolPanel);
-        centralPanel.add(drawingPanel);
         centralPanel.add(scroll);
-        centralPanel.add(commandPanelDraw);
-
 
         this.add(centralPanel, BorderLayout.CENTER);
 
@@ -90,10 +73,6 @@ public class LessonView extends JPanel {
 
     public JLabel getSymbol() {
         return symbol;
-    }
-
-    public JButton getClearButton() {
-        return clearButton;
     }
 
     public JTextArea getDescription() {
@@ -108,7 +87,4 @@ public class LessonView extends JPanel {
         return backButton;
     }
 
-    public JButton getTestButton() {
-        return testButton;
-    }
 }

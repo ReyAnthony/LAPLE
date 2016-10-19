@@ -48,7 +48,7 @@ public class InformationPlugin implements IFeaturePlugin {
 
     @Override
     public String getVersion() {
-        return "14.06.15.b1";
+        return "18.10.16";
     }
 
     @Override

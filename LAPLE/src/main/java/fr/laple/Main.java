@@ -1,6 +1,6 @@
 package fr.laple;
 
-import fr.laple.controller.startup.LoginPromptController;
+import fr.laple.controller.startup.LanguageSelectionController;
 import fr.laple.view.startup.SplashScreen;
 
 /**
@@ -13,30 +13,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /*
-        try {
-
-            UIManager.setLookAndFeel(
-                    UIManager.getCrossPlatformLookAndFeelClassName());
-        }
-        catch (UnsupportedLookAndFeelException e) {
-            //TODO exception
-        }
-        catch (ClassNotFoundException e) {
-            //TODO exception
-        }
-        catch (InstantiationException e) {
-            //TODO exception
-        }
-        catch (IllegalAccessException e) {
-            //TODO exception
-        }
-        */
-
         Runnable runnable = () -> {
 
             new SplashScreen();
-            new LoginPromptController();
+            new LanguageSelectionController();
         };
         runnable.run();
     }

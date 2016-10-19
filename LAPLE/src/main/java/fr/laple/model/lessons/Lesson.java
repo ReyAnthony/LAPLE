@@ -20,18 +20,15 @@ import javax.swing.*;
 public class Lesson implements IListable {
 
     private String lessonName;
-    private boolean open;
     private Symbol symbol;
 
     /**
      *  Constructor for Lesson class
      * @param lessonName The name of the lesson
-     * @param open If the lesson is available
      * @param symbol The symbol corresponding to the lesson
      */
-    public Lesson(String lessonName,boolean open,Symbol symbol){
+    public Lesson(String lessonName, Symbol symbol){
         this.lessonName = lessonName;
-        this.open = open;
         this.symbol = symbol;
     }
 
@@ -44,11 +41,6 @@ public class Lesson implements IListable {
         return symbol;
     }
 
-    public boolean isOpen() {
-
-        return open;
-    }
-
     public String toString()
     {
         return getLessonName();
@@ -57,7 +49,7 @@ public class Lesson implements IListable {
     @Override
     public boolean isSelectable() {
 
-        return isOpen();
+        return true;
     }
 
     @Override

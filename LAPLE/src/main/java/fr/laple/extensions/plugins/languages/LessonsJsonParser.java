@@ -79,7 +79,7 @@ public class LessonsJsonParser {
                     {
                         String key = symbols.getString(i);
                         //public Lesson(String lessonName,boolean open,Symbol symbol){
-                        lessons.add(new Lesson(type + " : "+key, true, containerForFile.getSymbol(key)));
+                        lessons.add(new Lesson(type + " : "+key, containerForFile.getSymbol(key)));
 
                     }
 
@@ -150,7 +150,7 @@ public class LessonsJsonParser {
                     JsonObject listObject = list.getJsonObject(j);
                     String name = listObject.getString("name");
 
-                    lessons.add(new Lesson(type +": "+name, true, containerForFile.getSymbol(name)));
+                    lessons.add(new Lesson(type +": "+name, containerForFile.getSymbol(name)));
 
                 }
 

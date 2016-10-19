@@ -1,7 +1,5 @@
 package fr.laple.view.staticpanels;
 
-import fr.laple.controller.staticpanels.AboutPanelController;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,7 +12,6 @@ public class AboutPanel extends JPanel  {
 
 
     private JLabel copyrightInfos;
-    private JButton linkToWebsite;
     private JLabel gplLogo;
 
     public AboutPanel()
@@ -24,7 +21,7 @@ public class AboutPanel extends JPanel  {
         this.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
         copyrightInfos = new JLabel("<html><br/> LAPLE, Logiciel d'Apprentissage de Langues Etrangères. <br/><br/>" +
-                "Copyright (c) 2015 <br/>" +
+                "Copyright (c) 2015-2016 <br/>" +
                 "Anthony REY, Christian EBONGUE and Gabriel ZAAFRANI <br/><br/>" +
                 "This program is free software: you can redistribute it and/or modify<br/>" +
                 "it under the terms of the GNU General Public License as published by<br/>" +
@@ -44,7 +41,6 @@ public class AboutPanel extends JPanel  {
 
         ImageIcon image = new ImageIcon(getClass().getResource("/images/gplv3.png"));
         gplLogo = new JLabel(image);
-        linkToWebsite = new JButton("Go to the website");
 
         createUI();
 
@@ -56,10 +52,7 @@ public class AboutPanel extends JPanel  {
 
         JPanel bottom = new JPanel();
         bottom.add(gplLogo);
-        bottom.add(linkToWebsite);
         this.add(bottom, BorderLayout.PAGE_END);
-
-        linkToWebsite.addActionListener(new AboutPanelController(this));
     }
 
 

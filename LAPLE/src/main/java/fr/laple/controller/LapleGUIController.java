@@ -79,9 +79,6 @@ public class LapleGUIController {
         //add tabs from plugins
         model.addNewTabs(ui);
 
-
-        ui.add("Statistics", null);
-
         List<IListable> settings = new ArrayList<>();
         PluginConfigController pcc = new PluginConfigController();
         settings.add(pcc);
